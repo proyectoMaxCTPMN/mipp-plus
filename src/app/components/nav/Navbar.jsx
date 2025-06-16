@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 export default function Navbar(){
     const [pageIndex, setPageIndex] = useState(1)
     let barHeight = pageIndex() * 11.12;
-
+    //Hola carambola
     useEffect({}, [])
     return(
         <div className={style.sidebarContainer}>
