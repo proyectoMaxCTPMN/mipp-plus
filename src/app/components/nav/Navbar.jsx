@@ -2,11 +2,11 @@
 
 import style from './navbar.module.css'
 import Image from 'next/image'
-import { pageIndex, setPageIndex } from '@/app/util/getPageInfo'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Navbar(){
-    let barHeight = getPageIndex() * 11.12;
+    const [pageIndex, setPageIndex] = useState(1)
+    let barHeight = pageIndex() * 11.12;
 
     useEffect({}, [])
     return(
