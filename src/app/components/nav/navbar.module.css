@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+.sidebarContainer >*{
+    font-family: "Merriweather Sans", sans-serif;
+    font-optical-sizing: auto;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    max-width: 5dvw;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.288);
+}
+
+.selectedBar{
+    background-color: #fff;
+    width: 5px;
+    height: 11.112dvh;
+    position: absolute;
+    left: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.sidebarContainer{
+    display: grid;
+    height: 100dvh;
+    width: 5dvw;
+    background-color: #940202;
+    position: absolute;
+    left: 0;
+    grid-template-areas:
+    "logo"
+    "dash"
+    "hist"
+    "soli"
+    "account"
+    "."
+    "."
+    "."
+    "logoff";
+    grid-template-rows: repeat(9,1fr);
+    border-right: 1px solid #c4c4c4;
+}
+
+.subText{
+    color: #fff;
+}
+
+.logo{
+    background-color: white;
+    grid-area: logo;
+    height: 100%;
+    width: 100%;
+    padding: 0.5em;
+    & .logoImage{
+        width: inherit;
+        height: auto;
+    }
+}
+
+.iconImage{
+    width: 50%;
+    height: 50%;
+}
+
+.dashboard{
+    grid-area: dash;
+}
+
+
+
+.history{
+    grid-area: hist;
+}
+
+.soli{
+    grid-area: soli;
+}
+
+.account{
+    grid-area: account;
+}
+
+.logoff{
+    background-color: white;
+    grid-area: logoff;
+}
+
