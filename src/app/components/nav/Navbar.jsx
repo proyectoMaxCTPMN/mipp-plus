@@ -2,13 +2,11 @@
 
 import style from './navbar.module.css'
 import Image from 'next/image'
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 
 export default function Navbar(){
     const [pageIndex, setPageIndex] = useState(1)
-    let barHeight = pageIndex() * 11.12;
-    //Hola carambola
-    useEffect({}, [])
+    let barHeight = pageIndex * 11.12;
     return(
         <div className={style.sidebarContainer}>
             <div className={style.selectedBar} style={{top: `${barHeight}dvh`}}></div>
