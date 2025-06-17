@@ -13,8 +13,8 @@
 
 .selectedBar{
     background-color: #fff;
-    width: 5px;
-    height: 11.112dvh;
+    width: 2px;
+    height: 12.5dvh;
     position: absolute;
     left: 0;
     transition: all 0.2s ease-in-out;
@@ -35,9 +35,8 @@
     "account"
     "."
     "."
-    "."
     "logoff";
-    grid-template-rows: repeat(9,1fr);
+    grid-template-rows: repeat(8,1fr);
     border-right: 1px solid #c4c4c4;
 }
 

@@ -6,7 +6,7 @@ import {useState } from 'react';
 
 export default function Navbar(){
     const [pageIndex, setPageIndex] = useState(1)
-    let barHeight = pageIndex * 11.15;
+    let barHeight = pageIndex * 12.5;
     return(
         <div className={style.sidebarContainer}>
             <div className={style.selectedBar} style={{top: `${barHeight}dvh`}}></div>
