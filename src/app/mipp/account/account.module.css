@@ -28,15 +28,24 @@ body{
     align-items: center;
     justify-content: space-between;
     margin-top: 1.3dvw;
-    font-size: 1.2em;
 }
-.namecontainer, .idcontainer, .emailcontainer, .titlecontainer, .positioncontainer {
-    font-family: "Martel Sans", sans-serif;
+.namecontainer, .idcontainer, .emailcontainer, .titlecontainer, .positioncontainer, .conditioncontainer, .methodcontainer{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-size: 1em; 
     padding: 0.9rem;
+}
+.conditioninputscontainer, .methodinputscontainer{
+    display: flex;
+    flex-direction: row;
+    gap: 8rem;
+    padding-top: 0.4rem;
+}
+.conditioninputscontainer{
+    gap: 7.6rem;
+}
+.conditioninput label, .methodinput label{
+    padding: 0 0 0 0.8rem;
 }
 .namecontainer input, .idcontainer input, .emailcontainer input, .titlecontainer select, .positioncontainer select {
     border: none;
@@ -50,9 +59,10 @@ body{
     width: 23.6dvw;
     font-weight: 400;
 }
-.namecontainer label, .firstlastnamecontainer label, .secondlastnamecontainer label {
+.namecontainer label, .firstlastnamecontainer label, .secondlastnamecontainer label, .idcontainer label, .emailcontainer label, .titlecontainer label, .positioncontainer label, .conditioncontainer label, .methodcontainer label, .currentpasscontainer label, .newpasscontainer label, .confirmpasscontainer label{
     font-family: "Martel Sans", sans-serif;
-    color: #2C2C2C;
+    color: #2c2c2c;
+    font-size: 1.1em;
 }
 .idcontainer input, .emailcontainer input, .titlecontainer select, .positioncontainer select {
     width: 100%;
@@ -66,4 +76,109 @@ body{
     background-repeat: no-repeat;
     background-position: right 0.5rem center;
     background-size: 2.5em;
+}
+.buttonscontainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.9rem;
+    margin-top: 1dvw;
+}
+.buttonscontainer button, .submitpass{
+    background-color: #940202;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 2.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.buttonscontainer button:hover, .submitpass:hover{
+    background-color: #7a0101;
+}
+/*Formulario de cambio de contra*/
+.changepasswordbutton{
+    border: none;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    background-color: #940202;
+    border-radius: 9px;
+    width: 3rem;
+    position: absolute;
+    transition: background 0.2s;
+}
+.changepasswordbutton:hover{
+    background-color: #7a0101;
+}
+.changepasswordbutton img{
+    fill: #fff;
+    padding: 0.5rem;
+}
+.changepasswordtitle{
+    color: #940202;
+    padding-top: 0.4rem;
+}
+.currentpasscontainer, .newpasscontainer, .confirmpasscontainer{
+    margin-bottom: 1.2rem;
+    width: 42.5rem;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+.currentpasscontainer{
+    margin-top: 2.8dvw;
+}
+.currentpasscontainer label, .newpasscontainer label, .confirmpasscontainer label{
+    font-size: 1.3em;
+}
+.passwordinputcontainer{
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+    font-size: .9em;
+    color: #2C2C2C;
+    background: #fff;
+    box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
+    margin-top: 0.5rem;
+    font-weight: 400;
+    padding: 0.2rem 0.7rem;
+}
+.passwordinputcontainer input{
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 1.1rem;
+    background: transparent;
+    padding: 0.7rem 0;
+}
+.passwordicon{
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+.passwordicon img{
+    width: 2rem;
+}
+.newpasstext{
+    color: #7C7C7C;
+    text-align: left;
+    margin-top: 1.5rem;
+}
+.passrules{
+    list-style: none;
+}
+.passrules li{
+    padding: 0.2rem 0;
+}
+.passrules li::before{
+    content: "→ ";
+    color: #7C7C7C;
+    font-weight: bold;
+    margin-right: 0.2em;
+}
+.submitpass{
+    margin-top: 1.5rem;
 }
