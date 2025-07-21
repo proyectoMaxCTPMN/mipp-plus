@@ -19,7 +19,8 @@
     "."
     "logoff";
     grid-template-rows: repeat(8,1fr);
-    border-right: 1px solid #ffffff;
+    border-right: 1px solid #b6b6b6;
+
     
 }
 
@@ -113,12 +114,14 @@
 .logoff{
     background-color: rgb(255, 255, 255);
     grid-area: logoff;
+    border-right: 1px solid #b6b6b6;
 }
 
 
 
 
 .solicitudeSideBar{
+    font-family: "Merriweather Sans", sans-serif;
     display: grid;
     height: 100dvh;
     width: 9dvw;
@@ -126,6 +129,7 @@
     position: absolute;
     z-index: 4;
     border-right: 1px solid #c4c4c4;
+    grid-template-rows: repeat(8,1fr);
     grid-template-areas: 
     "logoSpace"
     "SSSContent"
@@ -136,9 +140,11 @@
     "SSSContent"
     "SSSContent";
     transition: left 0.2s ease-in-out;
+    
 }
 
 .sidebarContainer >*{
+    max-height: 12.5dvh;
     font-family: "Merriweather Sans", sans-serif;
     font-optical-sizing: auto;
     display: flex;
@@ -153,6 +159,17 @@
     background-color: #fff;
 }
 
-.SSSContent{
-    
+.SSScontent{
+    display: flex;
+    place-content: center;
+    place-items: center;
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.288);
+    transition: all 0.2s ease-in-out;
+    font-size: 0.91dvw;
+        &:hover{
+            cursor: pointer;
+            background-color: #6d0000;
+        }
 }
