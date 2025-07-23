@@ -21,7 +21,7 @@ body{
     align-items: center;     
     border: 1px solid #E9E9E9;
     box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
-    padding: 2dvw;
+    padding: 2dvw 4dvw;
     border-radius: 5px;
 }
 .cardname{
@@ -40,10 +40,7 @@ body{
     margin-top: 1.6rem;
     margin-left: 0.3rem;
 }
-.form_container{
-    width: 80%;
-    margin: 0 auto;
-}
+
 .form_container h1{
     color: #434343;
     -webkit-text-stroke: 1px #000; /* Para Chrome, Safari, Edge */
@@ -62,12 +59,12 @@ body{
 }
 .form_row{
     display: flex;
-    gap: 8rem;
+    justify-content: space-between;
 }
-/*.inputdate_container{
+.inputdate_container{
     position: relative;
-    display: inline-block;
-}*/
+    display: flex;  
+}
 .inputdate_container label{
     font-weight: 600;
     margin-right: 1rem;
@@ -83,6 +80,8 @@ body{
     padding: 0.2rem 0.2rem;
     padding-right: 1.5rem;
     box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
+    position: relative;
+    bottom: .3rem;
 }
 .inputdate_container input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
@@ -94,6 +93,14 @@ body{
 }
 .inputdate_calendar{
     position: absolute;
-    pointer-events: none; /* para que el input siga siendo clickeable */
-    right: 1rem;
+    right: 0.4rem;
+    bottom: .5rem;
+}
+.inputradio_container{
+    display: flex;
+    gap: 1.8rem;
+}
+.inputradio_container input{
+    accent-color: #940202;
+    margin-right: .6rem;
 }

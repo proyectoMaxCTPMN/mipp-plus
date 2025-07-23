@@ -77,6 +77,9 @@ body{
     background-position: right 0.5rem center;
     background-size: 2.5em;
 }
+.conditioninput input,.methodinput input{
+    accent-color: #940202;
+}
 .buttonscontainer{
     display: flex;
     justify-content: space-between;
