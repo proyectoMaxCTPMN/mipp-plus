@@ -66,6 +66,7 @@ export default function Navbar(){
     const [solicitudeShow, setSolicitudeShow] = useState(false)
     const [optionsArray, setOptionsArray] = useState(solicitudeArray);
     const [width, setWitdth] = useState(0);
+    const [gotWidth, setGotWidth] = useState(false)
 
     const [mobileHist, setMobileHist] = useState(false)
     const [mobileSoli, setMobileSoli] = useState(false)
@@ -73,7 +74,9 @@ export default function Navbar(){
     useEffect(() => {
         const updateWidth = () => setWitdth(window.innerWidth);
         updateWidth(); // obtener el ancho inicial
+        setGotWidth(true)
         window.addEventListener("resize", updateWidth);
+
 
         return () => window.removeEventListener("resize", updateWidth);
     }, []);
@@ -109,6 +112,10 @@ export default function Navbar(){
     }, [componentRef]);
 
     const setBothMobile = (bool) => {setMobileHist(bool); setMobileSoli(bool)};
+
+    if (!gotWidth) {
+        return (<></>)
+    }
 
     return(
         <div ref={componentRef}>

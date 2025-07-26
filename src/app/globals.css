@@ -19,3 +19,16 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.loadingWheel{
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+
+.wheelGif{
+  width: 10dvw;
+  height: auto;
+}

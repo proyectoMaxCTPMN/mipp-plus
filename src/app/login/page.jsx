@@ -1,7 +1,41 @@
+'use client'
 import Image from 'next/image'
 import style from './login.module.css'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+
 
 export default function Login(){
+    const router = useRouter()
+    const [loginData, setLoginData] = useState({
+        id: '',
+        password:'',
+    })
+
+    const handleLoginChange = (event) => {
+        const {name, value} = event.target;
+        setLoginData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    }
+
+    const handleSubmit = async () => {
+        const response = await fetch(`/api/loginAuth`, {
+            method: "POST",
+            body: JSON.stringify({id: loginData.id, password: loginData.password})
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+            router.push(data.redirectUrl)
+        }else{
+            //Hacer algo para cuando no hizo bien la contraseña
+        }
+    }
+
+
 
     return(
         <div className={style.container}>
@@ -13,8 +47,22 @@ export default function Login(){
                 </div>
 
                 <div className={style.form}>
-                    <input type="text" className={style.formId} placeholder='Identificación' />
-                    <input type="password" className={style.formPsw} placeholder='Contraseña'/>
+                    <input
+                        name='id'
+                        type="text" 
+                        className={style.formId} 
+                        placeholder='Identificación' 
+                        onChange={handleLoginChange}
+                        value={loginData.username}
+                    />
+                    <input 
+                        type="password" 
+                        name='password'
+                        className={style.formPsw} 
+                        placeholder='Contraseña'
+                        onChange={handleLoginChange}
+                        value={loginData.password}
+                    />
                 </div>
 
                 <div className={style.bottom}>
@@ -26,7 +74,7 @@ export default function Login(){
                     <p>¿Olvido su contraseña?</p>
                 </div>
 
-                <button type="button" className={style.loginButton}>Iniciar Sesión</button>
+                <button type="button" className={style.loginButton} onClick={handleSubmit}>Iniciar Sesión</button>
             </main>
             <p className={style.footerText}>"Lo pequeño es algo más que un aso en el camino. Es un destino en sí mismo"</p>
             
