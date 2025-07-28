@@ -27,7 +27,7 @@ const positionOptions = {
 export default function Dashboard(){
     const [selectedTitle, setSelectedTitle] = useState(''); {/*Detectar titulo elegido en el formulario*/}
     const [modalidad, setModalidad] = useState(''); {/*Completado automatico de modalidad de pago*/}
-    const [showPasswordForm, setShowPasswordForm] = useState(true); {/*Cambiar ventana*/}
+    const [showPasswordForm, setShowPasswordForm] = useState(false); {/*Cambiar ventana*/}
     const [showCurrent, setShowCurrent] = useState(false); {/*Mostrar texto o no en la contrase;a*/}
     const [showNew, setShowNew] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -50,7 +50,7 @@ export default function Dashboard(){
     
     const cargos = positionOptions[selectedTitle] || positionOptions.default;
     return(
-        <>
+        <div className={style.body}>
         <div className={style.cardcontainer}>
             
             {!showPasswordForm ? (
@@ -181,6 +181,6 @@ export default function Dashboard(){
                 </>
             )}
         </div>
-        </>
+        </div>
     )
 }
