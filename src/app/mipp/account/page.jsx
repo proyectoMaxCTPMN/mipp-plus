@@ -50,7 +50,7 @@ export default function Dashboard(){
     
     const cargos = positionOptions[selectedTitle] || positionOptions.default;
     return(
-        <>
+        <div className={style.body}>
         <div className={style.cardcontainer}>
             
             {!showPasswordForm ? (
@@ -181,6 +181,6 @@ export default function Dashboard(){
                 </>
             )}
         </div>
-        </>
+        </div>
     )
 }
