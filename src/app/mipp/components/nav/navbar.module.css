@@ -4,9 +4,11 @@
     display: grid;
     height: 100dvh;
     width: 5dvw;
+    max-width: 5dvw !important;
     background-color: #940202;
-    position: absolute;
+    position: fixed;
     left: 0;
+    top:0;
     z-index: 5;
     grid-template-areas:
     "logo"
@@ -18,18 +20,24 @@
     "."
     "logoff";
     grid-template-rows: repeat(8,1fr);
-    border-right: 1px solid #c4c4c4;
+    border-right: 1px solid #b6b6b6;
+
+    
 }
 
-.sidebarContainer >*{
+.sidebarContainer > *{
     font-family: "Merriweather Sans", sans-serif;
     font-optical-sizing: auto;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     place-content: center;
     place-items: center;
+    width: 5dvw;
     max-width: 5dvw;
     border-bottom: 1px solid rgba(255, 255, 255, 0.288);
+    max-height: 12.5dvh;
+    
 }
 
 .selectedBar{
@@ -66,14 +74,21 @@
 }
 
 .logo{
-    background-color: white;
+    font-size: 0;
+    object-fit: contain;
     grid-area: logo;
     height: 100%;
-
+    background-color: #fff;
+    max-height: 12.5dvh;
+    max-width: 5dvw;
     padding: 0.5em;
+    position: relative;
     & .logoImage{
-        width: inherit;
-        height: auto;
+        height: 100%;
+        object-fit: contain;
+        position: absolute;
+        top: 0;
+        transition: left 0.4s ease-in-out;
     }
 }
 
@@ -98,25 +113,40 @@
 }
 
 .logoff{
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     grid-area: logoff;
+    border-right: 1px solid #b6b6b6;
 }
 
 
 
 
 .solicitudeSideBar{
+    font-family: "Merriweather Sans", sans-serif;
     display: grid;
     height: 100dvh;
     width: 9dvw;
+    top: 0;
     background-color: #940202;
-    position: absolute;
+    position: fixed;
     z-index: 4;
-    grid-template-rows: repeat(4,1fr);
     border-right: 1px solid #c4c4c4;
+    grid-template-rows: repeat(8,1fr);
+    grid-template-areas: 
+    "logoSpace"
+    "SSSContent"
+    "SSSContent"
+    "SSSContent"
+    "SSSContent"
+    "SSSContent"
+    "SSSContent"
+    "SSSContent";
+    transition: left 0.2s ease-in-out;
+    
 }
 
 .sidebarContainer >*{
+    max-height: 12.5dvh;
     font-family: "Merriweather Sans", sans-serif;
     font-optical-sizing: auto;
     display: flex;
@@ -125,4 +155,23 @@
     place-items: center;
     max-width: 5dvw;
     border-bottom: 1px solid rgba(255, 255, 255, 0.288);
+}
+
+.logoSpace{
+    background-color: #fff;
+}
+
+.SSScontent{
+    display: flex;
+    place-content: center;
+    place-items: center;
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.288);
+    transition: all 0.2s ease-in-out;
+    font-size: 0.91dvw;
+        &:hover{
+            cursor: pointer;
+            background-color: #6d0000;
+        }
 }
