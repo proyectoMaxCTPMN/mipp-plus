@@ -116,6 +116,7 @@
     background-color: rgb(255, 255, 255);
     grid-area: logoff;
     border-right: 1px solid #b6b6b6;
+    cursor: pointer;
 }
 
 
