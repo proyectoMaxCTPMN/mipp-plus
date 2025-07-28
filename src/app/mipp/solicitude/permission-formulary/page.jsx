@@ -28,6 +28,7 @@ useEffect(() => {
     };
 
     return(
+        <div className={style.body}>
         <div className={style.container}>
             <div className={style.cardname}>
                 {/*Aquí el nombre de la persona que se conseguría de la sesión activa*/}Jose Leon Avendaño
@@ -58,6 +59,7 @@ useEffect(() => {
                     </form>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
