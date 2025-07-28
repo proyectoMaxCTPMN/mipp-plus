@@ -1,8 +1,12 @@
 'use client'
+import style from './dashboard.module.css'
+
 
 export default function Dashboard(){
     
     return(
-         <h1 style={{position: "absolute", left: "5em", color: "#000"}} >hola</h1>
+         <div className={style.container}>
+            
+         </div>
     )
 }
