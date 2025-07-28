@@ -6,7 +6,7 @@
     width: 5dvw;
     max-width: 5dvw !important;
     background-color: #940202;
-    position: absolute;
+    position: fixed;
     left: 0;
     z-index: 5;
     grid-template-areas:
@@ -126,7 +126,7 @@
     height: 100dvh;
     width: 9dvw;
     background-color: #940202;
-    position: absolute;
+    position: fixed;
     z-index: 4;
     border-right: 1px solid #c4c4c4;
     grid-template-rows: repeat(8,1fr);

@@ -4,6 +4,7 @@ import "../globals.css";
 import { useMounted } from "../hooks/useMounted";
 import Navbar from './components/nav/Navbar'
 import Image from 'next/image'
+import {PopUpContainer} from "./components/popup/Popup";
 
 
 export default function MippLayout({ children }) {
@@ -26,6 +27,7 @@ export default function MippLayout({ children }) {
   return (
     <>
       <Navbar></Navbar>
+      <PopUpContainer />
       {children}
     </>
   );

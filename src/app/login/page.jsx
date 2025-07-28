@@ -3,35 +3,44 @@ import Image from 'next/image'
 import style from './login.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify';
 
 
 export default function Login(){
     const router = useRouter()
+    const [viewPsw, setViewPsw] = useState(false)
     const [loginData, setLoginData] = useState({
         id: '',
         password:'',
+        is_remember: false,
     })
 
     const handleLoginChange = (event) => {
-        const {name, value} = event.target;
+        
+        const { name, value, type, checked } = event.target;
         setLoginData(prev => ({
             ...prev,
-            [name]: value
+            [name]: type === 'checkbox' ? checked : value
         }));
+        
     }
 
     const handleSubmit = async () => {
         const response = await fetch(`/api/loginAuth`, {
             method: "POST",
-            body: JSON.stringify({id: loginData.id, password: loginData.password})
+            body: JSON.stringify({id: loginData.id, password: loginData.password, is_remember: loginData.is_remember})
         })
 
         const data = await response.json()
 
+        console.log(response)
+
         if (response.ok) {
+            toast.success("Accedido exitosamente!")
             router.push(data.redirectUrl)
         }else{
-            //Hacer algo para cuando no hizo bien la contraseña
+            toast.error("Usuario o contraseña incorrectos...")
+            
         }
     }
 
@@ -55,19 +64,32 @@ export default function Login(){
                         onChange={handleLoginChange}
                         value={loginData.username}
                     />
-                    <input 
-                        type="password" 
-                        name='password'
-                        className={style.formPsw} 
-                        placeholder='Contraseña'
-                        onChange={handleLoginChange}
-                        value={loginData.password}
-                    />
+
+                    <div className={style.passwordInput}>
+                        <input 
+                            type={viewPsw ? "text" : "password"} 
+                            name='password'
+                            className={style.formPsw} 
+                            placeholder='Contraseña'
+                            onChange={handleLoginChange}
+                            value={loginData.password}
+                        />
+
+                        <Image 
+                            src={ viewPsw ? "/eye-closed.svg" : "/eye-open.svg"} 
+                            width={30} 
+                            height={30} 
+                            alt='Logo de MIPP+' 
+                            className={style.eye}
+                            onClick={() => setViewPsw(!viewPsw)}
+                        />
+                    </div>
+
                 </div>
 
                 <div className={style.bottom}>
                     <div className={style.checkbox}>
-                        <input type="checkbox" name="remember" id="remember" className={style.checkboxInput} />
+                        <input type="checkbox" name="is_remember" id="is_remember" className={style.checkboxInput} onChange={handleLoginChange} value={loginData.is_remember}/>
                         <label htmlFor="remember" className={style.checkboxLabel}>Recuérdeme</label>
                     </div>
 
@@ -78,6 +100,7 @@ export default function Login(){
             </main>
             <p className={style.footerText}>"Lo pequeño es algo más que un aso en el camino. Es un destino en sí mismo"</p>
             
+
         </div>
     )
 }
