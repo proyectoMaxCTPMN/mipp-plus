@@ -8,6 +8,7 @@
     background-color: #940202;
     position: fixed;
     left: 0;
+    top:0;
     z-index: 5;
     grid-template-areas:
     "logo"
@@ -125,6 +126,7 @@
     display: grid;
     height: 100dvh;
     width: 9dvw;
+    top: 0;
     background-color: #940202;
     position: fixed;
     z-index: 4;
