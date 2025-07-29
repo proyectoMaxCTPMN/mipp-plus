@@ -5,6 +5,7 @@ import stylesCellphone from './navbarCellphone.module.css';
 import Image from 'next/image'
 import {useState, useRef, useEffect } from 'react';
 import { redirect } from 'next/navigation'
+import { logout } from '@/app/utils/auth';
 
 
 
@@ -60,6 +61,7 @@ const historyArray = [
 
 
 export default function Navbar(){
+    
     const [hoverIndex, setHoverIndex] = useState(0)
     const [pageIndex, setPageIndex] = useState(1)
     //Solicitude Sidebar State
@@ -80,6 +82,10 @@ export default function Navbar(){
 
         return () => window.removeEventListener("resize", updateWidth);
     }, []);
+
+    const handleLogout = async () => {
+        await logout()
+    }
 
     const isMobile = width > 480 ? false : true;
     const style = isMobile ? stylesCellphone : stylesDesktop;
@@ -156,7 +162,7 @@ export default function Navbar(){
                             <p className={style.subText}>Cuenta</p>
                         </div>
 
-                        <div className={style.logoff}>
+                        <div className={style.logoff} onClick={handleLogout}>
                             <Image src={"/menuIcons/logoff.svg"} height={20} width={20} alt='Logo' className={style.iconImage}/>
                             <p className={style.subText} style={{color: "#940202"}}>Salir</p>
                         </div>
@@ -213,7 +219,7 @@ export default function Navbar(){
                             <Image src={"/menuIcons/mobile/account.svg"} height={20} width={20} alt='Account' className={style.iconImage}/>
                         </div>
 
-                        <div className={style.logoff}>
+                        <div className={style.logoff} onClick={handleLogout}>
                             <Image src={"/menuIcons/mobile/logoff.svg"} height={20} width={20} alt='Logoff' className={style.iconImage}/>
 
                         </div>

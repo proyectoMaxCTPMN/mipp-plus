@@ -115,6 +115,8 @@ export async function logout() {
     .from('sessions')
     .delete()
     .eq('id', sessionId)
+
+    console.error(error)
   }
 
   cookieStore.delete("session_id")
