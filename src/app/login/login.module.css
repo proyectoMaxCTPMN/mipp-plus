@@ -15,21 +15,23 @@
 }
 
 .loginBox{
-    width: 32em;
-    height: 35.5em;
+    font-size: 8px;
+    width: auto;
+    height: auto;
+    padding: 4em;
     background-color: #fff;
-    padding: 1em 3em;
     outline: 1px solid #CFCFCF;
     box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 0.452);
     display: flex;
     flex-direction: column;
-    place-content: space-around;
-    gap: 0.3em;
+    place-content: space-between;
+    gap: 1em;
+    border-radius: 10px;
 }
 
 .logo{
     place-self: center;
-    width: 13em;
+    width: 20em;
     height: auto;
 }
 
@@ -42,6 +44,7 @@
 .headerH1{
     width: max-content;
     height: max-content;
+    font-size: 4em;
 }
 
 .headerP{
@@ -49,6 +52,7 @@
     width: max-content;
     height: max-content;
     color: #00000070;
+    font-size: 2em;
 }
 
 
@@ -58,6 +62,7 @@
     gap: 1em;
     margin-bottom: 1em;
     width: 100%;
+    font-size: 2em;
 }
 
 .passwordInput{
@@ -75,10 +80,11 @@
     top: 50%;
     transform: translate(0, -50%);
     cursor: pointer;
+    width: 1.5em;
 }
 
 .formId, .formPsw{
-    padding: 0.7em;
+    padding: 0.5em;
     outline: 1px solid #CFCFCF;
     border-radius: 3px;
     border: none;
@@ -90,6 +96,7 @@
     flex-direction: row;
     place-content: space-between;
     margin-top: -1em;
+    font-size: 2em;
 }
 
 .checkbox{
@@ -100,7 +107,7 @@
 }
 
 .checkboxInput{
-    width: 20px;
+    width: 1.5em;
 }
 
 .checkboxLabel{
@@ -114,13 +121,39 @@
     background-color: #940202;
     color: #fff;
     margin-top: 1em;
-    font-size: 20px;
+    font-size: 2em;
     border-radius: 15px;
     cursor: pointer;
 }
 
 .footerText{
     position: absolute;
-    bottom: 1em;
+    bottom: 1.5%;
+    text-align: center;
+}
 
+@media (min-width: 320px) and (max-width: 480px){
+    .footerText{
+        display: none;
+    }
+    
+    .loginBox{
+        width: 100%;
+        height: 100%;
+        place-items: center;
+        place-content: center;
+        gap: 1.5%;
+    }
+
+    .headerH1{
+        font-size: 24px;
+        
+    }
+
+    .bottom{
+        flex-direction: column;
+        place-content: center;
+        text-align: center;
+        gap: 1em;
+    }
 }
