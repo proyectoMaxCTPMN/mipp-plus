@@ -2,14 +2,13 @@
     display: flex;
     flex-direction: row;
     padding: 0.8em;
-    height: 9dvh;
-    width: 90dvw;
+    height: 8dvh;
+    width: 100dvw;
     background-color: #940202;
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
-    bottom: 5dvh;
-    border-radius: 2em;
+    bottom: 0;
     font-family: "Merriweather Sans", sans-serif;
     place-content: space-between;
     
