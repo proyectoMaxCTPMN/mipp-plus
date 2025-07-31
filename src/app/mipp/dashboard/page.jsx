@@ -7,7 +7,6 @@ import RecentHistory from './RecentHistory';
 export default async function Dashboard(){
     const userId = await getCurrentUser();
     const fullName = await getFullName(userId);
-    const title = await getTitle(userId)
 
 
     return(
