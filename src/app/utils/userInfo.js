@@ -88,6 +88,7 @@ export async function getTitle(userId) {
     let { data: user, error } = await supabase
     .from('users')
     .select(`
+        title,
         titles (title)
     `)
     .eq('identification', userId)
@@ -98,10 +99,10 @@ export async function getTitle(userId) {
     }
 
     const data = {
+        title_id: user[0].title,
         title: user[0].titles.title,
     }
     
-
 
     return data
 }
