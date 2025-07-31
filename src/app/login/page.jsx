@@ -36,7 +36,6 @@ export default function Login(){
         console.log(response)
 
         if (response.ok) {
-            toast.success("Accedido exitosamente!")
             router.push(data.redirectUrl)
         }else{
             toast.error("Usuario o contraseña incorrectos...")
@@ -44,10 +43,16 @@ export default function Login(){
         }
     }
 
+    const handleKeyDown = async (event) => {
+        if (event.key === 'Enter') {
+        await handleSubmit()
+        }
+    }
+
 
 
     return(
-        <div className={style.container}>
+        <div className={style.container} onKeyDown={async (e) => await handleKeyDown(e)}>
             <main className={style.loginBox}>
                 <Image src={"/logo-extended.svg"} width={30} height={30} alt='Logo de MIPP+' className={style.logo}/>
                 <div className={style.header}>
