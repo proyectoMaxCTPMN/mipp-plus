@@ -1,8 +1,21 @@
-'use client'
+import { getCurrentUser } from '@/app/utils/auth'
+import style from './dashboard.module.css'
+import { getFullName } from '@/app/utils/userInfo';
+import RecentHistory from './RecentHistory';
 
-export default function Dashboard(){
-    
+
+export default async function Dashboard(){
+    const userId = await getCurrentUser();
+    const fullName = await getFullName(userId);
+
+
     return(
-         <h1 style={{position: "absolute", left: "5em", color: "#000"}} >hola</h1>
+         <div className={style.container}>
+            <div className={style.dashboardContainer}>
+                <h1>Inicio</h1>
+                <h1>Bienvenid@ {fullName}</h1>
+                <RecentHistory />
+            </div>
+         </div>
     )
 }
