@@ -82,25 +82,26 @@ export async function getAllInfo(userId) {
     return data
 }
 
-export async function title(userId) {
+export async function getTitle(userId) {
     const supabase = await createSupabase()
 
     let { data: user, error } = await supabase
     .from('users')
     .select(`
-        titles (title),
+        titles (title)
     `)
     .eq('identification', userId)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
 
     const data = {
         title: user[0].titles.title,
     }
     
-    if (error) {
-      console.log(JSON.stringify(data))
-      console.error("No se pudo obtener el registro" + JSON.stringify(error))
-      return
-    }
+
 
     return data
 }

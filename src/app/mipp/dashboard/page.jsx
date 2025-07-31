@@ -1,6 +1,6 @@
 import { getCurrentUser } from '@/app/utils/auth'
 import style from './dashboard.module.css'
-import { getFullName } from '@/app/utils/userInfo';
+import { getFullName, getTitle } from '@/app/utils/userInfo';
 import RecentHistory from './RecentHistory';
 
 
