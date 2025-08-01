@@ -8,6 +8,8 @@ import { useRef, useState, useEffect } from 'react'
 export default function Dashboard(){
 const [fecha, setFecha] = useState('');
 const inputRef = useRef(null);
+const [selectedreason, setSelectedreason] = useState('');
+
 useEffect(() => {
         const hoy = new Date(); // Obtener la fecha actual y Sumar 3 días a la fecha actual
         hoy.setDate(hoy.getDate() + 3);
@@ -55,6 +57,93 @@ useEffect(() => {
                                     Media Jornada
                                 </label>
                             </div>
+                        </div>
+                        <div className={style.hourcontainer}>
+                            <span>Hora: Desde las</span>
+                            <select name="starthour" id="starthour">
+                                <option value="">7:00</option>
+                                <option value="">7:40</option>
+                                <option value="">8:20</option>
+                                <option value="">9:00</option>
+                                <option value="">9:20</option>
+                                <option value="">10:00</option>
+                                <option value="">10:40</option>
+                                <option value="">11:20</option>
+                                <option value="">12:10</option>
+                                <option value="">12:50</option>
+                                <option value="">1:30</option>
+                                <option value="">2:10</option>
+                                <option value="">2:30</option>
+                                <option value="">3:10</option>
+                                <option value="">3:50</option>
+                                <option value="">4:30</option>
+                            </select>
+                            <span>hasta las</span>
+                            <select name="starthour" id="starthour">
+                                <option value="">7:40</option>
+                                <option value="">8:20</option>
+                                <option value="">9:00</option>
+                                <option value="">9:20</option>
+                                <option value="">10:00</option>
+                                <option value="">10:40</option>
+                                <option value="">11:20</option>
+                                <option value="">12:10</option>
+                                <option value="">12:50</option>
+                                <option value="">1:30</option>
+                                <option value="">2:10</option>
+                                <option value="">2:30</option>
+                                <option value="">3:10</option>
+                                <option value="">3:50</option>
+                                <option value="">4:30</option>
+                            </select>
+                        </div>
+                        <div className={style.absencescontainer}>
+                            <span>Se ausentará: </span>
+                            <input type="text" name="" id="" className={style.absencesinput}/>
+                            <span>Lecciones</span>
+                            <input type="text" name="" id="" className={style.absencesinput}/>
+                            <span>Cantidad Horas</span>
+                        </div>
+                        <div className={style.reasoncontainer}>
+                            <span>Motivo:</span>
+                            <select name="reasons" id="reasons" value={selectedreason} onChange={e => setSelectedreason(e.target.value)}>
+                                <option value="">Elija el motivo</option>
+                                <option value="1">Cita Médica</option>
+                                <option value="2">Convocatoria asamblea</option>
+                                <option value="3">Asuntos personales</option>
+                            </select>
+                            {selectedreason === "2" &&(
+                                <div className={style.typeconvocatorycontainer}>
+                                <span>Tipo de Convocatoria:</span>
+                                <label>
+                                    <input type="radio" name="convocatory"/>
+                                    Sindical
+                                </label>
+                                <label>
+                                    <input type="radio" name="convocatory" />
+                                    Regional
+                                </label>
+                                <label>
+                                    <input type="radio" name="convocatory" />
+                                    Nacional
+                                </label>
+                            </div>
+                            )}
+                        </div>
+                        {selectedreason === "3" &&(
+                            <div className={style.explanationcontainer}>
+                                <span>Explique:</span>  
+                                <textarea name="explanation" id="explanation" className={style.explanation}>
+                                </textarea>
+                            </div>
+                        )}
+                        <div className={style.evidence}>
+                            <span>Adjunte comprobante o evidencia:</span>
+                            <input type="file" name="" id="" />
+                        </div>
+                        <div className={style.buttonscontainer}>
+                            <button type="button">Cancelar</button>
+                            <button type="submit">Enviar</button>
                         </div>
                     </form>
                 </div>

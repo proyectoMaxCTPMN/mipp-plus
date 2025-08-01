@@ -56,7 +56,7 @@ export default function Dashboard(){
             {!showPasswordForm ? (
                 <>
                 <h1>Mi perfil</h1>
-                <form>
+                <form className={style.accountform}>
                 <div className={style.nameformcontainer}>
                     <div className={style.namecontainer}>
                         <label htmlFor="name">Nombre:</label>

@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 5dvw;
 }
 .cardcontainer{
     font-family: "Martel Sans", sans-serif;
@@ -22,10 +23,12 @@
     color: #940202;
     font-weight: 700;
 }
+.accountform{
+    width: 100%;
+}
 .nameformcontainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3,2fr);
     margin-top: 1.3dvw;
 }
 .namecontainer, .idcontainer, .emailcontainer, .titlecontainer, .positioncontainer, .conditioncontainer, .methodcontainer{
@@ -58,6 +61,9 @@
     width: 23.6dvw;
     font-weight: 400;
 }
+.namecontainer input{
+    width: 100%;
+}
 .namecontainer label, .firstlastnamecontainer label, .secondlastnamecontainer label, .idcontainer label, .emailcontainer label, .titlecontainer label, .positioncontainer label, .conditioncontainer label, .methodcontainer label, .currentpasscontainer label, .newpasscontainer label, .confirmpasscontainer label{
     font-family: "Martel Sans", sans-serif;
     color: #2c2c2c;
@@ -83,7 +89,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0.9rem;
-    margin-top: 1dvw;
+    margin-top: .6dvw;
 }
 .buttonscontainer button, .submitpass{
     background-color: #940202;
