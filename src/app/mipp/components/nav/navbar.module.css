@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+
 .sidebarContainer{
     display: grid;
     height: 100dvh;
     width: 5dvw;
     max-width: 5dvw !important;
-    background-color: #940202;
+    background-color: var(--primary);
     position: fixed;
     left: 0;
     top:0;
@@ -128,7 +129,7 @@
     height: 100dvh;
     width: 9dvw;
     top: 0;
-    background-color: #940202;
+    background-color: var(--primary);
     position: fixed;
     z-index: 4;
     border-right: 1px solid #c4c4c4;

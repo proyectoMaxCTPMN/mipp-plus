@@ -10,7 +10,7 @@ async function createSupabase(){
   return supabase
 }
 
-export async function createSession(userId, is_remember) {
+export async function createSession(userId, is_remember, system_color) {
     const supabase = await createSupabase()
     const sessionId = `session_${Date.now()}`
 
@@ -39,6 +39,13 @@ export async function createSession(userId, is_remember) {
     const cookieStore = await cookies()
     cookieStore.set("session_id", sessionId, {
         httpOnly: true, // Importante: no accesible desde JavaScript del cliente
+        secure: false,
+        sameSite: "strict",
+        expires: expiresAt,
+    })
+
+    cookieStore.set("system_color", system_color, {
+        httpOnly: false, // Importante: no accesible desde JavaScript del cliente
         secure: false,
         sameSite: "strict",
         expires: expiresAt,
@@ -80,6 +87,8 @@ export async function requireAuth() {
   return user
 }
 
+/*
+
 export async function requireAdmin() {
   const supabase = await createSupabase()
   const user = await requireAuth()
@@ -97,6 +106,8 @@ export async function requireAdmin() {
   }
   return user
 }
+
+*/
 
 /*
 export async function hasPermission(permission) {
@@ -120,5 +131,6 @@ export async function logout() {
   }
 
   cookieStore.delete("session_id")
+  cookieStore.delete("system_color")
   redirect("/login")
 }

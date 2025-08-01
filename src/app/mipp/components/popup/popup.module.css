@@ -20,7 +20,7 @@
 }
 
 .popupHeader{
-    background-color: #940202;
+    background-color: var(--primary);
     width: 100%;
     height: 15%;
     border-radius: 10px 10px 0 0;

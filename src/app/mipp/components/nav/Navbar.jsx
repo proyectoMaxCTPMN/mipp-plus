@@ -133,7 +133,7 @@ export default function Navbar(){
                         <div className={style.logo} style={solicitudeShow ? {width: "12dvw", placeContent: "start"} : {width: "5dvw", placeContent: "center"} }>
                             <Image 
                                 style={solicitudeShow ? {width: "9dvw", left: "30%"} : {width: "5dvw", left: "0"}}
-                                src={solicitudeShow ? "/logo-extended.svg" : "/logo-short.svg"} 
+                                src={solicitudeShow ? "/logo/red/logo-extended.svg" : "/logo/red/logo-short.svg"} 
                                 height={20} 
                                 width={20} 
                                 alt='Logo' 
