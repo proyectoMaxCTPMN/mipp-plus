@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { requireAdmin, requireAuth } from './app/utils/auth';
 
 
+
 export async function middleware(request) {
     const user = await requireAuth()
     const authCookie = request.cookies.get('session_id');

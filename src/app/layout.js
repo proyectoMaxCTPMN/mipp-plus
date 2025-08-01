@@ -1,3 +1,5 @@
+
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { ToastContainer } from 'react-toastify';
 
@@ -8,10 +10,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body>
-        {children}
-        <ToastContainer position="bottom-right" />
+        <ThemeProvider>
+          {children}
+          <ToastContainer position="bottom-right" />
+        </ThemeProvider>
       </body>
     </html>
   );
