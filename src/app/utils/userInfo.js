@@ -15,7 +15,7 @@ export async function getFullName(userId) {
     let { data: user, error } = await supabase
     .from('users')
     .select('first_name, last_name, second_last_name')
-    .eq('identification', userId)
+    .eq('id', userId)
     
     if (error) {
       console.log(JSON.stringify(data))
@@ -23,7 +23,14 @@ export async function getFullName(userId) {
       return
     }
 
-    return user[0].first_name + " " + user[0].last_name + " " + user[0].second_last_name
+    const data = {
+      first_name: user[0].first_name, 
+      last_name: user[0].last_name,
+      second_last_name: user[0].second_last_name,
+      full_name: user[0].first_name + " " + user[0].last_name + " " + user[0].second_last_name
+    }
+
+    return data
 }
 
 export async function getPosition(userId) {
@@ -32,7 +39,7 @@ export async function getPosition(userId) {
     let { data: user, error } = await supabase
     .from('users')
     .select('positions(position)')
-    .eq('identification', userId)
+    .eq('id', userId)
 
     const position= user[0].positions.position
     
@@ -57,11 +64,17 @@ export async function getAllInfo(userId) {
         email,
         phone,
         positions (position),
+        position,
         titles (title),
+        title,
         has_ownership
     `)
-    .eq('identification', userId)
+    .eq('id', userId)
 
+      if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
     const data = {
         first_name: user[0].first_name,
         last_name: user[0].last_name,
@@ -69,15 +82,14 @@ export async function getAllInfo(userId) {
         email: user[0].email,
         phone: user[0].phone,
         position: user[0].positions.position,
+        position_id: user[0].position,
         title: user[0].titles.title,
-        has_ownership: user[0].has_ownership
+        title_id:user[0].title,
+        has_ownership: user[0].has_ownership,
+        paid_in_lessons: user[0].positions.paid_in_lessons
     }
     
-    if (error) {
-      console.log(JSON.stringify(data))
-      console.error("No se pudo obtener el registro" + JSON.stringify(error))
-      return
-    }
+    
 
     return data
 }
@@ -91,7 +103,7 @@ export async function getTitle(userId) {
         title,
         titles (title)
     `)
-    .eq('identification', userId)
+    .eq('id', userId)
 
     if (error) {
       console.error("No se pudo obtener el registro" + JSON.stringify(error))
