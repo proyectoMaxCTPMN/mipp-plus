@@ -31,13 +31,16 @@
     grid-template-columns: repeat(3,2fr);
     margin-top: 1.3dvw;
 }
-.namecontainer, .idcontainer, .emailcontainer, .titlecontainer, .positioncontainer, .conditioncontainer, .methodcontainer{
+.namecontainer, .idcontainer, .emailcontainer, .titlecontainer, .positioncontainer, .conditioncontainer{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 0.9rem;
 }
-.conditioninputscontainer, .methodinputscontainer{
+.methodcontainer label span{
+    margin-left: .2rem;
+}
+.conditioninputscontainer{
     display: flex;
     flex-direction: row;
     gap: 8rem;
@@ -64,7 +67,7 @@
 .namecontainer input{
     width: 100%;
 }
-.namecontainer label, .firstlastnamecontainer label, .secondlastnamecontainer label, .idcontainer label, .emailcontainer label, .titlecontainer label, .positioncontainer label, .conditioncontainer label, .methodcontainer label, .currentpasscontainer label, .newpasscontainer label, .confirmpasscontainer label{
+.namecontainer label, .firstlastnamecontainer label, .secondlastnamecontainer label, .idcontainer label, .emailcontainer label, .titlecontainer label, .positioncontainer label, .conditioncontainer label, .methodcontainer, .currentpasscontainer label, .newpasscontainer label, .confirmpasscontainer label{
     font-family: "Martel Sans", sans-serif;
     color: #2c2c2c;
     font-size: 1.1em;
@@ -82,7 +85,13 @@
     background-position: right 0.5rem center;
     background-size: 2.5em;
 }
-.conditioninput input,.methodinput input{
+.methodcontainer{
+    padding: 0.9rem;
+    display: flex;
+    align-items: flex-start;
+    color: #7C7C7C;
+}
+.conditioninput input{
     accent-color: #940202;
 }
 .buttonscontainer{
@@ -105,6 +114,7 @@
 .buttonscontainer button:hover, .submitpass:hover{
     background-color: #7a0101;
 }
+
 /*Formulario de cambio de contra*/
 .changepasswordbutton{
     border: none;
