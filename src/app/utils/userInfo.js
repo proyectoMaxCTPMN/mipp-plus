@@ -118,3 +118,21 @@ export async function getTitle(userId) {
 
     return data
 }
+
+export async function getSystemColor(userId) {
+    const supabase = await createSupabase()
+
+    let { data: user, error } = await supabase
+    .from('users')
+    .select(`
+        system_color
+    `)
+    .eq('id', userId)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return user[0].system_color
+}
