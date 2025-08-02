@@ -180,6 +180,6 @@
     font-size: 0.91dvw;
         &:hover{
             cursor: pointer;
-            background-color: #6d0000;
+            background-color: var(--primary-selected);
         }
 }
