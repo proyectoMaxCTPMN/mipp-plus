@@ -1,0 +1,130 @@
+.body{
+    background-color: #E8E8E8;
+    min-height: 100vh;
+    font-family: "Martel Sans", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5dvw;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.cardcontainer{
+    background-color: #ffffff;
+    border: 1px solid #E9E9E9;
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+    padding: 2dvw 4dvw;
+    border-radius: 5px;
+}
+.cardname{
+    background-color: #940202;
+    color: #ffffff;
+    padding: 0.8rem 2rem;
+    border-radius: 6px;
+    width: max-content;
+    position: relative;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+.cardheaderimg{
+    width: 58rem;
+    height: 5rem;
+    margin-top: 1.6rem;
+    margin-left: 0.3rem;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.form_container h1{
+    color: #434343;
+    -webkit-text-stroke: 1px #000; /* Para Chrome, Safari, Edge */
+    text-stroke: 1px #000;         /* Para otros navegadores (soporte limitado) */
+    font-size: 1.9rem;
+    padding: 1.3rem 0;
+    text-align: center;
+}
+
+.form_container p{
+    text-align:justify;
+}
+.form_container p span, .justificationcontainer span{
+    font-weight: 600;
+}
+.form{
+    margin-top: 1.3rem;
+}
+.form_row{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.justificationcontainer, .absent_timecontainer{
+    display: flex;
+}
+.justificationcontainer select, .inputdatecontainer input{
+    font-family: 'Karla',sans-serif;
+    border: none;
+    outline: 1px solid #ccc;
+    font-size: 1rem;
+    background: #fff;
+    padding: 0.2rem 0.2rem;
+    padding-right: 1.5rem;
+    box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
+    position: relative;
+    bottom: .3rem;
+}
+.justificationcontainer select{
+    appearance: none; /* Quita la flecha por defecto */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='darkred' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right -.5em center;
+    background-size: 2.5em;
+    margin: 0 .6em;
+    position: relative;
+    width: 10rem;
+}
+.inputdatecontainer{
+    position: relative;
+    display: flex;  
+}
+.inputdatecontainer label{
+    font-weight: 600;
+    margin-right: .5rem;
+}
+.inputdatecontainer input{
+    font-weight: bold;
+    color: #940202c5;
+}
+.inputdatecontainer input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    display: none;
+}
+.inputdatecontainer input[type="date"]::-moz-calendar-picker-indicator { /*otros navegadores*/
+    opacity: 0;
+    display: none;
+}
+.inputdate_calendar{
+    position: absolute;
+    right: 0.4rem;
+    bottom: .5rem;
+}
+.isThere_attachement, .absent_timecontainer input{
+    margin: .8em 0;
+    display: flex;
+    gap: .8rem;
+}
+
+.isThere_attachement input, .absent_timecontainer input{
+    accent-color: #940202;
+    margin-right: .6rem;
+}
+
+.reasoncontainer{
+    margin: .8em 0;
+}

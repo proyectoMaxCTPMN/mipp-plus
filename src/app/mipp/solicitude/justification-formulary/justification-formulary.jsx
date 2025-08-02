@@ -34,7 +34,7 @@ const [hasAttachment, setHasAttachment] = useState(false);
                             <div className={style.justificationcontainer}>
                                 <span>JUSTIFICO:</span>
                                 <select name="" id="">
-                                    <option value="">Elija el motivo</option>
+                                    <option value="">Elija el tipo</option>
                                     <option value="1">Ausencia</option>
                                     <option value="2">Tardía</option>
                                 </select>
@@ -59,11 +59,11 @@ const [hasAttachment, setHasAttachment] = useState(false);
                         <div className={style.form_row}>
                             <div className={style.absent_timecontainer}>
                                 <label>
-                                    <input type="radio" name=""/>
+                                    <input type="radio" name="absent_time"/>
                                     Jornada Laboral Completa 
                                 </label>
                                 <label>
-                                    <input type="radio" name="" />
+                                    <input type="radio" name="absent_time" />
                                     Media Jornada
                                 </label>
                             </div>
@@ -97,6 +97,11 @@ const [hasAttachment, setHasAttachment] = useState(false);
                             <input type="file" name="" id="" />
                         </div>
                         )}
+                        <div className={style.explanationcontainer}>
+                                <span>Comentarios:</span>  
+                                <textarea name="explanation" id="explanation" className={style.explanation}>
+                                </textarea>
+                            </div>
                     </form>
                 </div>
             </div>

@@ -55,7 +55,7 @@
     font-weight: 600;
 }
 .form{
-    margin-top: 1.3rem;
+    margin-top: 1.2rem;
 }
 .form_row{
     display: flex;
@@ -119,8 +119,8 @@
     position: relative;
     top: .04em;
 }
-.hourcontainer , .absencescontainer, .explanationcontainer, .explanation, .evidence, .buttonscontainer{
-    margin-top: 1.8rem;
+.hourcontainer , .absencescontainer, .explanationcontainer, .explanation, .evidence, .buttonscontainer, .reasoncontainer{ /*Espaciado entre filas en el form*/
+    margin-top: 1.3rem;
 }
 .absencescontainer input {
     width: 30px;
@@ -132,7 +132,6 @@
     margin: 0 .3rem;
 }
 .reasoncontainer{
-    margin-top: 1.8rem;
     display: flex;
 }
 .typeconvocatorycontainer{
@@ -152,7 +151,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.8em;
+    gap: 0.6em;
 }
 .evidence input{
     flex: 1;
