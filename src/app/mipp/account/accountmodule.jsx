@@ -1,52 +1,14 @@
 'use client'
+import { toast } from 'react-toastify';
 import Navbar from '../components/nav/Navbar'
 import style from './account.module.css'
 import {useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-/*const positionOptions = {
-    1: [
-        { value: 'Secretaria', label: 'Secretaría' },
-        { value: 'Guarda', label: 'Guarda de seguridad' },
-        { value: 'Conserje', label: 'Conserje' },
-        { value: 'Cocinera', label: 'Cocinero/Cocinera'},
-        { value: 'Mantenimiento', label: 'Personal de mantenimiento' },
-        { value: 'Otros', label: 'Otro' }
-    ],
-    2: [
-        { value: 'Academico', label: 'Docente Académico' },
-        { value: 'Tecnico', label: 'Docente Técnico' }
-    ],
-    3: [
-        { value: 'cargoD', label: 'e' }
-    ],
-    default: [
-        { value: '', label: 'Seleccione una opción' }
-    ]
-};*/
 
-const positionOptions = {
-    1: [
-        { value: '1', label: 'Secretaría' },
-        { value: '2', label: 'Guarda de seguridad' },
-        { value: '3', label: 'Conserje' },
-        { value: '4', label: 'Cocinero/Cocinera'},
-        { value: '5', label: 'Personal de mantenimiento' },
-        { value: '6', label: 'Otro' }
-    ],
-    2: [
-        { value: '7', label: 'Docente Académico' },
-        { value: '8', label: 'Docente Técnico' }
-    ],
-    3: [
-        { value: '9', label: 'e' }
-    ],
-    default: [
-        { value: '', label: 'Seleccione una opción' }
-    ]
-};
-export default function Accountpage({userId_parameter, allInfo_parameter}){
-    const [selectedTitle, setSelectedTitle] = useState(allInfo_parameter.title); {/*Detectar titulo elegido en el formulario*/}
-    const [modalidad, setModalidad] = useState(''); {/*Completado automatico de modalidad de pago*/}
+export default function Accountpage({userId_parameter, allInfo_parameter, titles_parameter, positions_parameter}){
+    const router = useRouter()
+    const [selectedTitle, setSelectedTitle] = useState(allInfo_parameter.title_id); {/*Detectar titulo elegido en el formulario*/}
     const [showPasswordForm, setShowPasswordForm] = useState(false); {/*Cambiar ventana*/}
     const [showCurrent, setShowCurrent] = useState(false); {/*Mostrar texto o no en la contrase;a*/}
     const [showNew, setShowNew] = useState(false);
@@ -54,41 +16,45 @@ export default function Accountpage({userId_parameter, allInfo_parameter}){
     const [formData, setFormData] = useState(allInfo_parameter);
 
     const handleInputChange = (event) => {
-        
         const { name, value, type, checked } = event.target;
         setFormData(prev => ({
             ...prev,
             [name]: type === 'checkbox' ? checked : value
         }));
-        
     }
 
     const ChangeOwnership = (value) => {
         setFormData(prev => ({
             ...prev,
-            has_ownership:value
+            has_ownership: value
         }));
     }
-
 
     const handleTitleChange = (e) => {
         const value = e.target.value;
         setSelectedTitle(value);
         handleInputChange(e)
-
-        switch(value){
-            case "1":
-                setModalidad("Horas");
-                break;
-            case "2":
-                setModalidad("Lecciones");
-                break;
-            default:
-                setModalidad("");
-        }
     };
-    
-    const cargos = positionOptions[selectedTitle] || positionOptions.default;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const response = await fetch(`/api/updateAccount`, {
+            method: "POST",
+            body: JSON.stringify({userID: userId_parameter, formData: formData})
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+            toast.success("Datos actualizados exitosamente...!")
+            router.refresh()
+        }else{
+            toast.error("Hubo un error al actualizar los datos")
+            console.error(data)
+            
+        }
+    }
+
     return(
         <div className={style.body}>
         <div className={style.cardcontainer}>
@@ -96,7 +62,7 @@ export default function Accountpage({userId_parameter, allInfo_parameter}){
             {!showPasswordForm ? (
                 <>
                 <h1>Mi perfil</h1>
-                <form className={style.accountform}>
+                <form className={style.accountform} onSubmit={handleSubmit}>
                 <div className={style.nameformcontainer}>
                     <div className={style.namecontainer}>
                         <label htmlFor="name">Nombre:</label>
@@ -123,30 +89,35 @@ export default function Accountpage({userId_parameter, allInfo_parameter}){
                     <label htmlFor="title">Título:</label>
                     <select id="title" name="title_id" className={style.selectestilo} value={selectedTitle} onChange={handleTitleChange}>
                         <option value="">Seleccione una opción</option>
-                        <option value="1">Título 1</option>
-                        <option value="2">Título 2 - Docente</option>
-                        <option value="3">Título 2 - Administrativo</option>
+                        {titles_parameter && titles_parameter.map((title) => (
+                            
+                            <option key={title.id} value={title.id}>{title.title}</option>
+                        ))}
                     </select>
                 </div>
                 <div className={style.positioncontainer}>
                     <label htmlFor="position">Cargo:</label>
-                    <select name="position_id" id="position" value={formData.position_id} onChange={handleInputChange}>
+                    <select name="position_id" id="position" value={formData.position_id} onChange={handleInputChange} disabled={!selectedTitle}>
                         <option value="">Seleccione una opción</option>
-                        {cargos.map((cargo) => (
-                            <option key={cargo.value} value ={cargo.value}>{cargo.label}</option>
+
+                        {positions_parameter && positions_parameter.map((position) => (
+                            (position.id != 1 && position.title_id == selectedTitle) && (
+                                <option key={position.id} value ={position.id}>{position.position}</option>
+                            ) 
                         ))}
+
                     </select>
                 </div>
-                {selectedTitle === "2" &&(
+                {selectedTitle == 2 &&(
                     <div className={style.conditioncontainer}>
                     <label>Condición:</label>
                     <div className={style.conditioninputscontainer}>
                         <div className={style.conditioninput}>
-                            <input type="radio" name="has_ownership" id="Propietario" onChange={()=> ChangeOwnership(true)}/>
+                            <input type="radio" name="has_ownership" id="Propietario" onChange={()=> ChangeOwnership(true)} defaultChecked={allInfo_parameter.has_ownership == true}/>
                             <label htmlFor="Propietario">Propietario</label>
                         </div>
                         <div className={style.conditioninput}>
-                            <input type="radio" name="has_ownership" id="Interino" onChange={()=> ChangeOwnership(false)}/>
+                            <input type="radio" name="has_ownership" id="Interino" onChange={()=> ChangeOwnership(false)} defaultChecked={allInfo_parameter.has_ownership == false}/>
                             <label htmlFor="Interino">Interino</label>
                         </div>
                     </div>
@@ -157,7 +128,7 @@ export default function Accountpage({userId_parameter, allInfo_parameter}){
                 </div>
                 <div className={style.buttonscontainer}>
                     <button type = "button" onClick={() => setShowPasswordForm(true)}>Cambiar Contraseña</button>
-                    <button type="submit">Guardar cambios</button>
+                    <button type="submit" >Guardar cambios</button>
                 </div>
             </form>
             </>

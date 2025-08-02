@@ -21,7 +21,7 @@
     border-radius: 5px;
 }
 .cardname{
-    background-color: #940202;
+    background-color: var(--primary);
     color: #ffffff;
     padding: 0.8rem 2rem;
     border-radius: 6px;
@@ -83,7 +83,7 @@
 }
 .inputdate_container input{
     font-weight: bold;
-    color: #940202c5;
+    color: var(--primary)c5;
 }
 .inputdate_container input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
@@ -103,7 +103,7 @@
     gap: 1.8rem;
 }
 .inputradio_container input, .typeconvocatorycontainer input{
-    accent-color: #940202;
+    accent-color: var(--primary);
     margin-right: .6rem;
 }
 .hourcontainer select, .reasoncontainer select{
@@ -169,7 +169,7 @@
     justify-content: flex-end;
 }
 .buttonscontainer button{
-    background-color: #940202;
+    background-color: var(--primary);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -180,5 +180,5 @@
     transition: background 0.2s;
 }
 .buttonscontainer button:hover, .submitpass:hover{
-    background-color: #7a0101;
+    background-color: var(--primary-selected);
 }

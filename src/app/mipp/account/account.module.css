@@ -20,7 +20,7 @@
 }
 .cardcontainer h1 {
     font-size: 2em;
-    color: #940202;
+    color: var(--primary);
     font-weight: 700;
 }
 .accountform{
@@ -92,7 +92,7 @@
     color: #7C7C7C;
 }
 .conditioninput input{
-    accent-color: #940202;
+    accent-color: var(--primary);
 }
 .buttonscontainer{
     display: flex;
@@ -101,7 +101,7 @@
     margin-top: .6dvw;
 }
 .buttonscontainer button, .submitpass{
-    background-color: #940202;
+    background-color: var(--primary);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -112,7 +112,7 @@
     transition: background 0.2s;
 }
 .buttonscontainer button:hover, .submitpass:hover{
-    background-color: #7a0101;
+    background-color: var(--primary-selected);
 }
 
 /*Formulario de cambio de contra*/
@@ -121,21 +121,21 @@
     cursor: pointer;
     outline: none;
     display: flex;
-    background-color: #940202;
+    background-color: var(--primary);
     border-radius: 9px;
     width: 3rem;
     position: absolute;
     transition: background 0.2s;
 }
 .changepasswordbutton:hover{
-    background-color: #7a0101;
+    background-color: var(--primary-selected);
 }
 .changepasswordbutton img{
     fill: #fff;
     padding: 0.5rem;
 }
 .changepasswordtitle{
-    color: #940202;
+    color: var(--primary);
     padding-top: 0.4rem;
 }
 .currentpasscontainer, .newpasscontainer, .confirmpasscontainer{

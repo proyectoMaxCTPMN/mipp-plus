@@ -63,7 +63,7 @@ export async function getAllInfo(userId) {
         second_last_name,
         email,
         phone,
-        positions (position),
+        positions (position, paid_in_lessons),
         position,
         titles (title),
         title,

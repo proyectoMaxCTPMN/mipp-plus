@@ -40,10 +40,10 @@
   --primary-disabled: #f0bd70;
 }
 
-[data-theme='orange'] {
-  --primary: #dd9d3d;
-  --primary-selected: #cf871b;
-  --primary-disabled: #f0bd70;
+[data-theme='beige'] {
+  --primary: #c09e80;
+  --primary-selected: #a07856;
+  --primary-disabled: #d6b89d;
 }
 
 html,
