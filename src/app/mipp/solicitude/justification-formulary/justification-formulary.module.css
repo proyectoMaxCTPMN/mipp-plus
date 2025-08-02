@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 .body{
     background-color: #E8E8E8;
     min-height: 100vh;
@@ -8,11 +7,13 @@
     align-items: center;
     margin-left: 5dvw;
 }
+
 .container{
     display: flex;
     flex-direction: column;
     width: 80%;
 }
+
 .cardcontainer{
     background-color: #ffffff;
     border: 1px solid #E9E9E9;
@@ -20,6 +21,7 @@
     padding: 2dvw 4dvw;
     border-radius: 5px;
 }
+
 .cardname{
     background-color: #940202;
     color: #ffffff;
@@ -30,6 +32,7 @@
     top: 1.5rem;
     right: 1.5rem;
 }
+
 .cardheaderimg{
     width: 58rem;
     height: 5rem;
@@ -48,28 +51,30 @@
     padding: 1.3rem 0;
     text-align: center;
 }
+
 .form_container p{
     text-align:justify;
 }
-.form_container p span{
+
+.form_container p span, .justificationcontainer span{
     font-weight: 600;
 }
+
 .form{
-    margin-top: 1.2rem;
+    margin-top: 1.3rem;
 }
+
 .form_row{
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
-.inputdate_container{
-    position: relative;
-    display: flex;  
+
+.justificationcontainer, .absent_timecontainer{
+    display: flex;
 }
-.inputdate_container label{
-    font-weight: 600;
-    margin-right: 1rem;
-}
-.inputdate_container input, .hourcontainer select, .reasoncontainer select, .explanation{
+
+.justificationcontainer select, .inputdatecontainer input, .reasoncontainer select, .explanation{ /*Estilo general inputs*/
     font-family: 'Karla',sans-serif;
     border: none;
     outline: 1px solid #ccc;
@@ -81,46 +86,76 @@
     position: relative;
     bottom: .3rem;
 }
-.inputdate_container input{
-    font-weight: bold;
-    color: #940202c5;
-}
-.inputdate_container input[type="date"]::-webkit-calendar-picker-indicator {
-    opacity: 0;
-    display: none;
-}
-.inputdate_container input[type="date"]::-moz-calendar-picker-indicator { /*otros navegadores*/
-    opacity: 0;
-    display: none;
-}
-.inputdate_calendar{
-    position: absolute;
-    right: 0.4rem;
-    bottom: .5rem;
-}
-.inputradio_container{
-    display: flex;
-    gap: 1.8rem;
-}
-.inputradio_container input, .typeconvocatorycontainer input{
-    accent-color: #940202;
-    margin-right: .6rem;
-}
-.hourcontainer select, .reasoncontainer select{
+
+.justificationcontainer select, .reasoncontainer select{ /*Estilo general selects*/
     appearance: none; /* Quita la flecha por defecto */
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg fill='darkred' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     background-repeat: no-repeat;
-    background-position: left 2rem center;
+    background-position: right -.5em center;
     background-size: 2.5em;
-    font-weight: 600;
     margin: 0 .6em;
     position: relative;
-    top: .04em;
 }
-.hourcontainer , .absencescontainer, .explanationcontainer, .explanation, .evidence, .buttonscontainer, .reasoncontainer{ /*Espaciado entre filas en el form*/
-    margin-top: 1.3rem;
+
+.inputdatecontainer{
+    position: relative;
+    display: flex;  
+}
+
+.inputdatecontainer label{
+    font-weight: 600;
+    margin-right: .5rem;
+}
+
+.inputdatecontainer input{
+    font-weight: bold;
+    color: #940202c5;
+}
+
+.inputdatecontainer input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    display: none;
+}
+
+.inputdatecontainer input[type="date"]::-moz-calendar-picker-indicator { /*otros navegadores*/
+    opacity: 0;
+    display: none;
+}
+
+.inputdate_calendar{
+    position: absolute;
+    right: 0.4rem;
+    bottom: .5rem;
+}
+
+.absent_timecontainer{
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    place-items: center;
+    gap: 1.5rem;
+}
+
+.isThere_attachement, .absent_timecontainer input{
+    margin: .8em 0;
+    display: flex;
+    gap: .8rem;
+}
+
+.isThere_attachement input, .absent_timecontainer input{
+    accent-color: #940202;
+}
+.isThere_attachement input{
+    margin-right: 5px;
+}
+.absent_time_inputcontainer{
+    gap: 5px;
+    display: flex;
+    flex-direction: row;
+    vertical-align: baseline;
+    place-items: baseline;
 }
 .absencescontainer input {
     width: 30px;
@@ -131,28 +166,21 @@
     outline: none;
     margin: 0 .3rem;
 }
-.reasoncontainer{
-    display: flex;
-}
-.typeconvocatorycontainer{
-    margin-left: 3dvw;
-    display: flex;
-    gap: .8em;
+
+.reasoncontainer, .explanationcontainer{
+    margin: .8em 0;
 }
 .reasoncontainer select{
-    font-weight: 500;
-    background-position: right -.5rem center;
+    top: .1em;
 }
-.explanation{
-    width: 100%;
-    margin-top: 1em;
-}
+
 .evidence{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.6em;
 }
+
 .evidence input{
     flex: 1;
     margin-left: 0;
@@ -163,22 +191,7 @@
     width: 40%;
 }
 
-.buttonscontainer{
-    display: flex;
-    gap: 2.5em;
-    justify-content: flex-end;
-}
-.buttonscontainer button{
-    background-color: #940202;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.7rem 2.8rem;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.buttonscontainer button:hover, .submitpass:hover{
-    background-color: #7a0101;
+.explanation{
+    width: 100%;
+    margin-top: .8em;
 }
