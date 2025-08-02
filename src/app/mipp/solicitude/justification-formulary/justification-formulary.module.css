@@ -7,11 +7,13 @@
     align-items: center;
     margin-left: 5dvw;
 }
+
 .container{
     display: flex;
     flex-direction: column;
     width: 80%;
 }
+
 .cardcontainer{
     background-color: #ffffff;
     border: 1px solid #E9E9E9;
@@ -19,6 +21,7 @@
     padding: 2dvw 4dvw;
     border-radius: 5px;
 }
+
 .cardname{
     background-color: #940202;
     color: #ffffff;
@@ -29,6 +32,7 @@
     top: 1.5rem;
     right: 1.5rem;
 }
+
 .cardheaderimg{
     width: 58rem;
     height: 5rem;
@@ -51,20 +55,25 @@
 .form_container p{
     text-align:justify;
 }
+
 .form_container p span, .justificationcontainer span{
     font-weight: 600;
 }
+
 .form{
     margin-top: 1.3rem;
 }
+
 .form_row{
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
+
 .justificationcontainer, .absent_timecontainer{
     display: flex;
 }
+
 .justificationcontainer select, .inputdatecontainer input{
     font-family: 'Karla',sans-serif;
     border: none;
@@ -77,6 +86,7 @@
     position: relative;
     bottom: .3rem;
 }
+
 .justificationcontainer select{
     appearance: none; /* Quita la flecha por defecto */
     -webkit-appearance: none;
@@ -87,33 +97,47 @@
     background-size: 2.5em;
     margin: 0 .6em;
     position: relative;
-    width: 10rem;
 }
+
 .inputdatecontainer{
     position: relative;
     display: flex;  
 }
+
 .inputdatecontainer label{
     font-weight: 600;
     margin-right: .5rem;
 }
+
 .inputdatecontainer input{
     font-weight: bold;
     color: #940202c5;
 }
+
 .inputdatecontainer input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
     display: none;
 }
+
 .inputdatecontainer input[type="date"]::-moz-calendar-picker-indicator { /*otros navegadores*/
     opacity: 0;
     display: none;
 }
+
 .inputdate_calendar{
     position: absolute;
     right: 0.4rem;
     bottom: .5rem;
 }
+
+.absent_timecontainer{
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    place-items: center;
+    gap: 1.5rem;
+}
+
 .isThere_attachement, .absent_timecontainer input{
     margin: .8em 0;
     display: flex;
@@ -122,7 +146,14 @@
 
 .isThere_attachement input, .absent_timecontainer input{
     accent-color: #940202;
-    margin-right: .6rem;
+}
+
+.absent_time_inputcontainer{
+    gap: 5px;
+    display: flex;
+    flex-direction: row;
+    vertical-align: baseline;
+    place-items: baseline;
 }
 
 .reasoncontainer{
