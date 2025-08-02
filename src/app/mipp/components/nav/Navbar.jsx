@@ -15,13 +15,13 @@ const solicitudeArray = [
     {
         "id": 0,
         "text": "Solicitud permiso de salida, tardía o ausencia", 
-        "link": "/mipp/dashboard",
+        "link": "/mipp/solicitude/permission-formulary",
         "icon": "/menuIcons/mobile/new-soli.svg"
     },
     {
         "id": 1,
         "text": "Justificación permiso de salida, tardía o ausencia",
-        "link": "/mipp/dashboard",
+        "link": "/mipp/solicitude/justification-formulary",
         "icon": "/menuIcons/mobile/soli-justify.svg"
     },
     {

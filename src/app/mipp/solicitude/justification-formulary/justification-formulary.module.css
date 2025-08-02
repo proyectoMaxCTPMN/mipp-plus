@@ -74,7 +74,7 @@
     display: flex;
 }
 
-.justificationcontainer select, .inputdatecontainer input{
+.justificationcontainer select, .inputdatecontainer input, .reasoncontainer select, .explanation{ /*Estilo general inputs*/
     font-family: 'Karla',sans-serif;
     border: none;
     outline: 1px solid #ccc;
@@ -87,7 +87,7 @@
     bottom: .3rem;
 }
 
-.justificationcontainer select{
+.justificationcontainer select, .reasoncontainer select{ /*Estilo general selects*/
     appearance: none; /* Quita la flecha por defecto */
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -147,7 +147,9 @@
 .isThere_attachement input, .absent_timecontainer input{
     accent-color: #940202;
 }
-
+.isThere_attachement input{
+    margin-right: 5px;
+}
 .absent_time_inputcontainer{
     gap: 5px;
     display: flex;
@@ -155,7 +157,41 @@
     vertical-align: baseline;
     place-items: baseline;
 }
+.absencescontainer input {
+    width: 30px;
+    border: none;
+    border-bottom: 2px solid #222;
+    text-align: center;
+    background: transparent;
+    outline: none;
+    margin: 0 .3rem;
+}
 
-.reasoncontainer{
+.reasoncontainer, .explanationcontainer{
     margin: .8em 0;
+}
+.reasoncontainer select{
+    top: .1em;
+}
+
+.evidence{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6em;
+}
+
+.evidence input{
+    flex: 1;
+    margin-left: 0;
+    outline: 1px solid #ccc;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    background: #fff;
+    width: 40%;
+}
+
+.explanation{
+    width: 100%;
+    margin-top: .8em;
 }
