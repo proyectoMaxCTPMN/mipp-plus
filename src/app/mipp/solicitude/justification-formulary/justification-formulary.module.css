@@ -23,7 +23,7 @@
 }
 
 .cardname{
-    background-color: #940202;
+    background-color: var(--primary);
     color: #ffffff;
     padding: 0.8rem 2rem;
     border-radius: 6px;
@@ -111,7 +111,7 @@
 
 .inputdatecontainer input{
     font-weight: bold;
-    color: #940202c5;
+    color: var(--primary)c5;
 }
 
 .inputdatecontainer input[type="date"]::-webkit-calendar-picker-indicator {
@@ -145,7 +145,7 @@
 }
 
 .isThere_attachement input, .absent_timecontainer input{
-    accent-color: #940202;
+    accent-color: var(--primary);
 }
 .isThere_attachement input{
     margin-right: 5px;
