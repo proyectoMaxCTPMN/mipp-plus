@@ -133,7 +133,7 @@ export default function Navbar(){
                         <div className={style.logo} style={solicitudeShow ? {width: "12dvw", placeContent: "start"} : {width: "5dvw", placeContent: "center"} }>
                             <Image 
                                 style={solicitudeShow ? {width: "9dvw", left: "30%"} : {width: "5dvw", left: "0"}}
-                                src={solicitudeShow ? "/logo/red/logo-extended.svg" : "/logo/red/logo-short.svg"} 
+                                src={solicitudeShow ? "/logo/logo-extended.svg" : "/logo/logo-short.svg"} 
                                 height={20} 
                                 width={20} 
                                 alt='Logo' 
@@ -163,8 +163,8 @@ export default function Navbar(){
                         </div>
 
                         <div className={style.logoff} onClick={handleLogout}>
-                            <Image src={"/menuIcons/logoff.svg"} height={20} width={20} alt='Logo' className={style.iconImage}/>
-                            <p className={style.subText} style={{color: "#940202"}}>Salir</p>
+                            <Image src={"/menuIcons/logoff.svg"} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
+                            <p className={style.logOffText}>Salir</p>
                         </div>
 
                         

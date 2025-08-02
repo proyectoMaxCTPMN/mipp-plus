@@ -4,7 +4,7 @@
     padding: 0.8em;
     height: 8dvh;
     width: 100dvw;
-    background-color: #940202;
+    background-color: var(--primary);
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
@@ -44,7 +44,7 @@
 
 
 .mobileHistItem{
-    background-color: #940202;
+    background-color: var(--primary);
     border-radius: 100%;
     padding: 5px;
     width: 13dvw;
@@ -76,7 +76,7 @@
 
 
 .mobileSoliItem{
-    background-color: #940202;
+    background-color: var(--primary);
     border-radius: 100%;
     padding: 5px;
     width: 13dvw;

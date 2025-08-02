@@ -56,10 +56,16 @@
     font-size: 1dvw;
 }
 
-.iconImage{
+.iconImage, .logOffLogo{
     width: 50%;
     height: 50%;
 }
+
+.logOffText{
+    color: #fff;
+    font-size: 1dvw;
+}
+
 
 @media only screen and (max-width: 1050px) {
 
@@ -114,7 +120,7 @@
 }
 
 .logoff{
-    background-color: rgb(255, 255, 255);
+    background-color: var(--primary-disabled);
     grid-area: logoff;
     border-right: 1px solid #b6b6b6;
     cursor: pointer;
