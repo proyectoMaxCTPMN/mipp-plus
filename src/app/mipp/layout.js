@@ -3,7 +3,6 @@
 import "../globals.css";
 import { useMounted } from "../hooks/useMounted";
 import Navbar from './components/nav/Navbar'
-import Image from 'next/image'
 import {PopUpContainer} from "./components/popup/Popup";
 import { useTheme } from "next-themes";
 import { useEffect } from "react";
@@ -22,16 +21,10 @@ export default function MippLayout({children }) {
 
     if (!mounted) {
         return (
-        <div className="loadingWheel">
-            <Image 
-                src={"/loading-wheel.gif"} 
-                height={20} 
-                width={20} 
-                alt='Logo' 
-                className="wheelGif"
-                unoptimized
-            />
-        </div>  
+            <div className="loaderContainer">
+                <span className="loader"></span>
+            </div>
+            
         );
     }
 
