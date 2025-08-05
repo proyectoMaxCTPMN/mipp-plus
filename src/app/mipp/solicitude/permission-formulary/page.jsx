@@ -12,7 +12,7 @@ export default async function Permission_Formulary(){
         <>
         {
             (fullName && title && position) && (
-                <Permission_Formulary_Page fullName_parameter={fullName} title_parameter={title} position_parameter={position}/>
+                <Permission_Formulary_Page userId_parameter={userId} fullName_parameter={fullName} title_parameter={title} position_parameter={position}/>
             )
         }
         </>

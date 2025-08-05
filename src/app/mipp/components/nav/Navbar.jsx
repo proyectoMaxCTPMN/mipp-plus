@@ -42,7 +42,7 @@ const historyArray = [
     {
         "id": 0,
         "text": "Solicitudes, justificaciones de ausencias y tardías", 
-        "link": "/mipp/dashboard",
+        "link": "/mipp/history/solicitude-history",
         "icon": "/menuIcons/mobile/user-clock.svg"
     },
     {
