@@ -27,7 +27,7 @@ const solicitudeArray = [
     {
         "id": 2,
         "text": "Justificación omisión de marca", 
-        "link": "/mipp/dasboard",
+        "link": "/mipp/solicitude/omission-formulary",
         "icon": "/menuIcons/mobile/fingerprint.svg"
     },
     {

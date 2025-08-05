@@ -122,6 +122,10 @@ const [hasAttachment, setHasAttachment] = useState(false);
                             </textarea>
                         </div>
 
+                        <div className={style.buttonscontainer}>
+                            <button type="button">Cancelar</button>
+                            <button type="submit">Enviar</button>
+                        </div>
                     </form>
 
 
