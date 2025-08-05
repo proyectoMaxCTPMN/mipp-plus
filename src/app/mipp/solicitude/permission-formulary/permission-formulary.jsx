@@ -13,7 +13,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
     const inputRef = useRef(null);
     const [formData, setFormData] = useState({
         userId: userId_parameter,
-        request_date: '',
+        absence_date: '',
         is_whole_day: false,
         from_hour: '',
         to_hour: '',
@@ -80,7 +80,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
         hoy.setDate(hoy.getDate() + 3);
         setFormData(prev => ({
             ...prev,
-            request_date: hoy
+            absence_date: hoy.toISOString()
         }));
         const yyyy = hoy.getFullYear();
         const mm = String(hoy.getMonth() + 1).padStart(2, '0');
@@ -105,7 +105,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
 
                             <div className={style.inputdate_container}>
                                 <label>PERMISO PARA AUSENTARSE EN LA FECHA:</label>
-                                <input type="date" name="request_date" defaultValue={fecha} ref={inputRef} min={fecha} onChange={handleInputChange}/>
+                                <input type="date" name="absence_date" defaultValue={fecha} ref={inputRef} min={fecha} onChange={handleInputChange}/>
                                 <span onClick={handleCalendarClick}><Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar} onChange={handleInputChange}></Image></span>
                             </div>
 

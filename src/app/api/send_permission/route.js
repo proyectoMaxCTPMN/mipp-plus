@@ -12,7 +12,7 @@ export async function POST(request) {
     const evidence_file = formData.get('evidence_file')
 
     const userId = formData.get('userId')
-    const request_date = formData.get('request_date')
+    const absence_date = formData.get('absence_date')
     const is_whole_day = formData.get('is_whole_day')
     const from_hour = formData.get('from_hour')
     const to_hour = formData.get('to_hour')
@@ -20,6 +20,7 @@ export async function POST(request) {
     const reason = formData.get('reason')
     const assembly_type = formData.get('assembly_type')
     const personal_reason = formData.get('personal_reason')
+
 
     let evidence_file_path = null;
     let evidence_file_url = null;
@@ -72,14 +73,14 @@ export async function POST(request) {
 
     const toSend = { 
       user_id: userId,
-      request_date: request_date,
+      absence_date: absence_date,
       is_whole_day: is_whole_day,
       from_hour: from_hour == '' ? "7:00" : from_hour,
       to_hour: to_hour == '' ? "7:40" : to_hour,
       absent_time: absent_time,
       reason: reason,
       assembly_type: assembly_type == 'null' ? null : assembly_type,
-      personal_reason: personal_reason = 'null' ? null : personal_reason,
+      personal_reason: personal_reason == 'null' ? null : personal_reason,
       evidence_file_url: evidence_file_url
     }
 

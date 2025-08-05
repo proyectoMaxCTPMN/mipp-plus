@@ -1,0 +1,30 @@
+.container{
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    gap: 32px;
+}
+
+.notFoundImg{
+    width: 10dvw;
+    height: auto;
+}
+
+.notFoundH1{
+    font-size: 32px;
+}
+
+.notFoundLink{
+    font-size: 24px;
+    background-color: var(--primary);
+    color: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    &:hover{
+        background-color: var(--primary-selected);  
+    }
+}
