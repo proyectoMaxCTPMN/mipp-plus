@@ -1,4 +1,3 @@
-import style from './permission-formulary.module.css'
 import Permission_Formulary_Page from './permission-formulary'
 import { getCurrentUser } from '@/app/utils/auth'
 import { getFullName, getPosition, getTitle } from '@/app/utils/userInfo'

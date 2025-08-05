@@ -27,13 +27,13 @@ const solicitudeArray = [
     {
         "id": 2,
         "text": "Justificación omisión de marca", 
-        "link": "/mipp/dasboard",
+        "link": "/mipp/solicitude/omission-formulary",
         "icon": "/menuIcons/mobile/fingerprint.svg"
     },
     {
         "id": 3,
         "text": "Reporte en infraestructura",
-        "link": "/mipp/dashboard",
+        "link": "/mipp/solicitude/infra-formulary",
         "icon": "/menuIcons/mobile/infra-broken.svg"
     }
 ]

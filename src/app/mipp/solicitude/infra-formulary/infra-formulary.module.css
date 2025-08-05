@@ -1,3 +1,5 @@
+/*#region Estilo General*/
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 .body{
     background-color: #E8E8E8;
     min-height: 100vh;
@@ -7,13 +9,11 @@
     align-items: center;
     margin-left: 5dvw;
 }
-
 .container{
     display: flex;
     flex-direction: column;
     width: 80%;
 }
-
 .cardcontainer{
     background-color: #ffffff;
     border: 1px solid #E9E9E9;
@@ -21,7 +21,6 @@
     padding: 2dvw 4dvw;
     border-radius: 5px;
 }
-
 .cardname{
     background-color: var(--primary);
     color: #ffffff;
@@ -32,7 +31,6 @@
     top: 1.5rem;
     right: 1.5rem;
 }
-
 .cardheaderimg{
     width: 58rem;
     height: 5rem;
@@ -51,149 +49,88 @@
     padding: 1.3rem 0;
     text-align: center;
 }
-
 .form_container p{
     text-align:justify;
 }
-
-.form_container p span, .justificationcontainer span{
+.form_container p span{
     font-weight: 600;
 }
-
-.form{
+.form, .locationcontainer, .exactlocationcontainer, .reportcontainer, .evidencecontainer, .buttonscontainer{
     margin-top: 1.3rem;
 }
+/*#endregion*/
+.form_container{
+    width: 70%;
+    margin: 0 auto;
+}
 
-.form_row{
+.locationcontainer{
+    display: flex;
+    gap: 1rem;
+}
+.locationcontainer input{
+    accent-color: var(--primary);
+    margin-right: .3rem;
+}
+
+.exactlocationcontainer{
     display: flex;
     justify-content: space-between;
-    width: 100%;
 }
 
-.justificationcontainer, .absent_timecontainer{
+.building, .floor, .classroom{
     display: flex;
+    gap: .6rem;
 }
 
-.justificationcontainer select, .inputdatecontainer input, .reasoncontainer select, .explanation{ /*Estilo general inputs*/
+.building select, .floor select, .classroom input, .report{ /*Estilo general inputs*/
     font-family: 'Karla',sans-serif;
     border: none;
     outline: 1px solid #ccc;
     font-size: 1rem;
     background: #fff;
     padding: 0.2rem 0.2rem;
-    padding-right: 1.5rem;
     box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
     position: relative;
     bottom: .3rem;
 }
-
-.justificationcontainer select, .reasoncontainer select{ /*Estilo general selects*/
+.building select, .floor select{
     appearance: none; /* Quita la flecha por defecto */
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg fill='darkred' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     background-repeat: no-repeat;
-    background-position: right -.5em center;
+    background-position: right -.3rem center;
     background-size: 2.5em;
+    font-weight: 600;
     margin: 0 .6em;
     position: relative;
+    width: 5rem;
 }
-
-.inputdatecontainer{
-    position: relative;
-    display: flex;  
-}
-
-.inputdatecontainer label{
-    font-weight: 600;
-    margin-right: .5rem;
-}
-
-.inputdatecontainer input{
-    font-weight: bold;
-    color: var(--primary)c5;
-}
-
-.inputdatecontainer input[type="date"]::-webkit-calendar-picker-indicator {
-    opacity: 0;
-    display: none;
-}
-
-.inputdatecontainer input[type="date"]::-moz-calendar-picker-indicator { /*otros navegadores*/
-    opacity: 0;
-    display: none;
-}
-
-.inputdate_calendar{
-    position: absolute;
-    right: 0.4rem;
-    bottom: .5rem;
-}
-
-.absent_timecontainer{
+.reportcontainer{
     display: flex;
-    flex-direction: row;
-    place-content: center;
-    place-items: center;
-    gap: 1.5rem;
+    flex-direction: column;
+    gap: .3rem;
+}
+.report{
+    width: 100%;
+    bottom: 0;
 }
 
-.isThere_attachement, .absent_timecontainer input{
-    margin: .8em 0;
-    display: flex;
-    gap: .8rem;
-}
-
-.isThere_attachement input, .absent_timecontainer input{
-    accent-color: var(--primary);
-}
-.isThere_attachement input{
-    margin-right: 5px;
-}
-.absent_time_inputcontainer{
-    gap: 5px;
-    display: flex;
-    flex-direction: row;
-    vertical-align: baseline;
-    place-items: baseline;
-}
-.absencescontainer input {
-    width: 30px;
-    border: none;
-    border-bottom: 2px solid #222;
-    text-align: center;
-    background: transparent;
-    outline: none;
-    margin: 0 .3rem;
-}
-
-.reasoncontainer, .explanationcontainer{
-    margin: .8em 0;
-}
-.reasoncontainer select{
-    top: .1em;
-}
-
-.evidence{
+.evidencecontainer{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.6em;
 }
-
-.evidence input{
+.evidencecontainer input{
     flex: 1;
     margin-left: 0;
     outline: 1px solid #ccc;
     padding: 0.3em 0.6em;
     border-radius: 4px;
     background: #fff;
-    width: 40%;
-}
-
-.explanation{
     width: 100%;
-    margin-top: .8em;
 }
 
 .buttonscontainer{
