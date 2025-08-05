@@ -53,6 +53,7 @@ export default function Login(){
 
     return(
         <div className={style.container} onKeyDown={async (e) => await handleKeyDown(e)}>
+            
             <main className={style.loginBox}>
                 <Image src={"/logo/logo-extended.svg"} width={30} height={30} alt='Logo de MIPP+' className={style.logo}/>
                 <div className={style.header}>
