@@ -195,3 +195,23 @@
     width: 100%;
     margin-top: .8em;
 }
+
+.buttonscontainer{
+    display: flex;
+    gap: 2.5em;
+    justify-content: flex-end;
+}
+.buttonscontainer button{
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 2.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.buttonscontainer button:hover, .submitpass:hover{
+    background-color: var(--primary-selected);
+}

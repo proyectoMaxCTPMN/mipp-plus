@@ -33,7 +33,7 @@ const solicitudeArray = [
     {
         "id": 3,
         "text": "Reporte en infraestructura",
-        "link": "/mipp/dashboard",
+        "link": "/mipp/solicitude/infra-formulary",
         "icon": "/menuIcons/mobile/infra-broken.svg"
     }
 ]

@@ -1,6 +1,5 @@
-/* #region Estilo general del formulario*/
+/*#region Estilo General*/
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
-
 .body{
     background-color: #E8E8E8;
     min-height: 100vh;
@@ -41,6 +40,7 @@
     left: 50%;
     transform: translate(-50%);
 }
+
 .form_container h1{
     color: #434343;
     -webkit-text-stroke: 1px #000; /* Para Chrome, Safari, Edge */
@@ -49,71 +49,91 @@
     padding: 1.3rem 0;
     text-align: center;
 }
-/* #endregion Estilo general del formulario*/
+.form_container p{
+    text-align:justify;
+}
+.form_container p span{
+    font-weight: 600;
+}
+.form, .locationcontainer, .exactlocationcontainer, .reportcontainer, .evidencecontainer, .buttonscontainer{
+    margin-top: 1.3rem;
+}
+/*#endregion*/
 .form_container{
-    width: max-content;
+    width: 70%;
     margin: 0 auto;
 }
 
-.inputdatecontainer input, .justification{ /*Estilo general inputs*/
+.locationcontainer{
+    display: flex;
+    gap: 1rem;
+}
+.locationcontainer input{
+    accent-color: var(--primary);
+    margin-right: .3rem;
+}
+
+.exactlocationcontainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.building, .floor, .classroom{
+    display: flex;
+    gap: .6rem;
+}
+
+.building select, .floor select, .classroom input, .report{ /*Estilo general inputs*/
     font-family: 'Karla',sans-serif;
     border: none;
     outline: 1px solid #ccc;
     font-size: 1rem;
     background: #fff;
     padding: 0.2rem 0.2rem;
-    padding-right: 1.5rem;
     box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
     position: relative;
+    bottom: .3rem;
 }
-
-.inputdatecontainer label{
+.building select, .floor select{
+    appearance: none; /* Quita la flecha por defecto */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='darkred' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right -.3rem center;
+    background-size: 2.5em;
     font-weight: 600;
-    margin-right: .5rem;
-}
-
-.inputdatecontainer input{
-    font-weight: bold;
-    color: var(--primary)c5;
-}
-
-.inputdatecontainer input[type="date"]::-webkit-calendar-picker-indicator {
-    opacity: 0;
-    display: none;
-}
-
-.inputdatecontainer input[type="date"]::-moz-calendar-picker-indicator { /*otros navegadores*/
-    opacity: 0;
-    display: none;
-}
-.inputdate_calendar{
+    margin: 0 .6em;
     position: relative;
-    top: .3rem;
-    right: 1.5em;
+    width: 5rem;
 }
-
-.reasonofomissioncontainer{
-    margin-top: 1.2rem;
+.reportcontainer{
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    gap: .3rem;
 }
-.reasonofomissioncontainer input{
-    accent-color: var(--primary);
-    margin-right: .3rem;
-}
-.reasonofomissioncontainer span{
-    margin-left: .8rem;
-}
-
-.justificationcontainer, .buttonscontainer{
-    margin-top: 1.2rem;
-}
-.justification{
+.report{
     width: 100%;
-    margin-top: .8em;
+    bottom: 0;
 }
-.buttonscontainer{
 
+.evidencecontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6em;
+}
+.evidencecontainer input{
+    flex: 1;
+    margin-left: 0;
+    outline: 1px solid #ccc;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    background: #fff;
+    width: 100%;
+}
+
+.buttonscontainer{
     display: flex;
     gap: 2.5em;
     justify-content: flex-end;

@@ -3,9 +3,20 @@
 import Navbar from '../../components/nav/Navbar'
 import style from './omission-formulary.module.css'
 import Image from 'next/image'
+import { useRef, useState, useEffect } from 'react'
 
+export default function Omission_Formulary_Page({fullName_parameter}){
+const [fecha, setFecha] = useState('')
+const inputRef = useRef(null);
 
-export default function Omission_Formulary_Page({fullName_parameter, title_parameter, position_parameter}){
+    useEffect(() => {
+            const hoy = new Date(); // Obtener la fecha actual y Sumar 3 días a la fecha actual
+            hoy.setDate(hoy.getDate());
+            const yyyy = hoy.getFullYear();
+            const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+            const dd = String(hoy.getDate()).padStart(2, '0');
+            setFecha(`${yyyy}-${mm}-${dd}`);
+        }, []);
 
     const handleCalendarClick = () => {
         if (inputRef.current) {
@@ -29,7 +40,7 @@ export default function Omission_Formulary_Page({fullName_parameter, title_param
                     <form className={style.form}>
                         <div className={style.inputdatecontainer}>
                                 <label>Fecha:</label>
-                                <input type="date" name="" id=""/>
+                                <input type="date" name="" id="" defaultValue={fecha} ref={inputRef} min={fecha}/>
                                 <span onClick={handleCalendarClick}><Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image></span>
                         </div>
                         <div className={style.reasonofomissioncontainer}>
@@ -45,15 +56,21 @@ export default function Omission_Formulary_Page({fullName_parameter, title_param
                                 <input type="radio" name="reasonofomission"/>
                                 Todo el día
                             </label>
-                            <label>
+                            <span>
+                                <label>
                                 <input type="radio" name="reasonofomission"/>
                                 Salida anticipada
                             </label>
+                            </span>
                         </div>
                         <div className={style.justificationcontainer}>
                             <span>Justificación:</span>  
                             <textarea name="justification" id="justification" className={style.justification}>
                             </textarea>
+                        </div>
+                        <div className={style.buttonscontainer}>
+                            <button type="button">Cancelar</button>
+                            <button type="submit">Enviar</button>
                         </div>
                     </form>
                 </div>
