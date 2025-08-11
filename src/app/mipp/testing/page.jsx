@@ -36,7 +36,7 @@ export default function Probando(){
             
 
             {/* Popup de personal */}
-            <div className={style.contenedor_enviado}>
+            <div className={style.contenedor_personal}>
                 <div className={style.minih_personal}>
                     <Image src={"/menuIcons/X.svg"} width={30} height={30} alt='' className={style.X}/>
                 </div>
@@ -50,6 +50,19 @@ export default function Probando(){
             </div>
             
             {/* Popup de pregunta */}
+            <div className={style.contenedor_pregunta}>
+                <div className={style.minih_pregunta}>
+                    <h1>Aviso</h1>
+                </div>
+                <div className={style.pregunta}>
+                    <p>¿Está seguro de enviar la justificación?</p>
+                    <div className={style.pregunta_button}>
+                        <button>Cancelar</button>
+                        <button>Confirmar</button>
+                    </div>
+                    <p className={style.preview}>Vista previa</p>
+                </div>
+            </div>
 
         </div>
 
