@@ -84,7 +84,6 @@ const othersArray = [
 
 
 export default function NavbarClient({userRoles_parameter}) {
-    console.log(userRoles_parameter)
     const mounted = useMounted()
     const router = useRouter()
     const [hoverIndex, setHoverIndex] = useState()
