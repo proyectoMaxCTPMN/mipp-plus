@@ -25,7 +25,7 @@ function getTimeLeft(expired_date) {
     if (diffHours > 0) result += ` ${diffHours}h `;
     if (diffDays === 0 && diffHours === 0 && diffMinutes > 0) result += `${diffMinutes} min`;
     if (!result) result = "> 1min";
-    return (<p className={style.notExpiredText}>{result.trim()}</p>);
+    return (<span className={style.notExpiredText}>{result.trim()}</span>);
 }
 
 

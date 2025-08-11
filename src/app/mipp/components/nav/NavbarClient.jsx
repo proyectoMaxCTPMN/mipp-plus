@@ -80,6 +80,12 @@ const othersArray = [
         "link": "/mipp/manage/infra",
         "icon": "/menuIcons/mobile/infra-broken.svg"
     },
+    {
+        "id": 3,
+        "text": "Todos los documentos", 
+        "link": "/mipp/manage/dashboard",
+        "icon": "/menuIcons/mobile/infra-broken.svg"
+    },
 ]
 
 
