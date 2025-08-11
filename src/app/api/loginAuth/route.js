@@ -15,10 +15,19 @@ export async function POST(request) {
         console.error("error" + error)
     }else{
         if (users.length > 0) {
-          const sessionId = await createSession(id, is_remember, users[0].system_color)
 
-          return NextResponse.json({redirectUrl: "/mipp/dashboard", sessionId}, {status: 200});
+          if (users[0].is_pswchange) {
+            console.log("User needs to change password")
+            return NextResponse.json({redirectUrl: `/new_user?id=${users[0].id}`}, {status: 200});
+          } else {
+            console.log("User authenticated successfully")
+            const sessionId = await createSession(id, is_remember, users[0].system_color)
+            return NextResponse.json({redirectUrl: "/mipp/dashboard", sessionId}, {status: 200});
+          }
+
+
         }else {
+          console.log("User not found or password incorrect")
           return NextResponse.json({msg: "not allowed"}, {status: 401})
         }
     }

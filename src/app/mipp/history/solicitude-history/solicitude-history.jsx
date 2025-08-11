@@ -122,7 +122,7 @@ export default function SolicitudeHistory({userAbsence_parameter}){
                                                         absence.is_approved && 
                                                         <>
                                                             <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' />
-                                                            {getTimeLeft(absence.expire_date)}
+                                                            <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
                                                         </>
                                                     }
 

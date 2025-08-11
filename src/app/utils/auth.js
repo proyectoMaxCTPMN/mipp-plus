@@ -87,27 +87,41 @@ export async function requireAuth() {
   return user
 }
 
-/*
 
-export async function requireAdmin() {
+export async function getRoles(user) {
   const supabase = await createSupabase()
-  const user = await requireAuth()
+
+  const { data, error } = await supabase
+  .from('roles')
+  .select("basic_user, read_documents, manage_documents, manage_read_reports, create_users, root")
+  .eq("user_id", user)
+
+  if (error) {
+    console.error("Error fetching roles:", error)
+    return null
+  }
+  
+  const roles = data[0]
+
+  return roles
+}
+
+export async function getIsPswChange(user) {
+  const supabase = await createSupabase()
 
   const { data, error } = await supabase
   .from('users')
-  .select("roles(role)")
+  .select("is_pswchange")
   .eq("id", user)
-  
-  const role= data[0].roles.role
 
-  
-  if (role !== "admin" || role !== "ROOT") {
-    redirect("/unauthorized")
+  if (error) {
+    console.error("Error fetching psw change:", error)
+    return null
   }
-  return user
+
+  return data[0]?.is_pswchange
 }
 
-*/
 
 /*
 export async function hasPermission(permission) {

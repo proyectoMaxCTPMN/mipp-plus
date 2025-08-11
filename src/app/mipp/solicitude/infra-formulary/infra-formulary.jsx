@@ -1,6 +1,6 @@
 'use client'
 
-import Navbar from '../../components/nav/Navbar'
+import Navbar from '../../components/nav/NavbarClient'
 import style from './infra-formulary.module.css'
 import Image from 'next/image'
 import { useState } from 'react';
