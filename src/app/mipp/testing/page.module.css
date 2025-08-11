@@ -207,6 +207,7 @@
 
 /* #endregion Popup de personal */
 
+/* #region Popup de pregunta */
 .pregunta .preview{
     color: #1D2958;
     text-decoration: underline;
@@ -275,3 +276,4 @@
     background-color: var(--primary-selected);
 }
 
+/* #endregion Popup de pregunta */
