@@ -24,19 +24,19 @@
     height: 100%;
 }
 
-.soliCard, .justiCard, .reportCard{
-    width: 30%;
+.soliCard, .justiCard, .reportCard, .omiCard{
+    width: 23.5%;
     height: 100%;
 
 }
 
-.soliContent, .justiContent, .reportContent{
+.soliContent, .justiContent, .reportContent, .omiContent{
     width: 100%;
     height: 93%;
     border: 1px solid rgba(0, 0, 0, 0.33);
 }
 
-.soliFooter, .justiFooter, .reportFooter{
+.soliFooter, .justiFooter, .reportFooter, .omiFooter{
     width: 100%;
     height: 7%;
     background-color: var(--primary);
@@ -46,8 +46,11 @@
     place-items: center;
     text-align: center;
     gap: 1em;
+    cursor: pointer;
 }
-
+.soliFooter:hover, .justiFooter:hover, .reportFooter:hover, .omiFooter:hover{
+    background-color: var(--primary-selected);
+} 
 .footerText{
     font-size: 1.3dvw;
     color: #fff;
@@ -59,4 +62,15 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+.null_informationcontainer p{
+    color: #616161;
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+.nullicon{
+    width: 6rem;
+    height: auto;
 }
