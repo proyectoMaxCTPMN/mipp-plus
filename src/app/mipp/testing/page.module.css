@@ -1,0 +1,209 @@
+.body{
+    background-color: #E8E8E8;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5dvw;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* #region Popup de aviso */
+
+.aviso{
+    background-color: #F5F5F5;
+    width: 20dvw;
+    height: 20dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aviso p{
+    width: 60%;
+    text-align: center;
+    font-family: "Martel Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    padding-bottom: 25px;
+}
+
+.minih_aviso{
+    background-color: var(--primary);
+    width: 20dvw;
+}
+
+.minih_aviso h1{
+    text-align: center;
+    color: #fff;
+    font-family: "Martel Sans", sans-serif;
+    font-size: 24px;
+    padding: 8px;
+}
+
+.options_button{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.options_button button {
+    margin: 0 10px;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--primary);
+    color: #fff;
+    cursor: pointer;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.options_button button:hover {
+    background-color: var(--primary-selected);
+}
+
+/* #endregion Popup de aviso */
+
+/* #region Popup de enviado */
+.minih_enviado{
+    background-color: var(--primary);
+    width: 20dvw;
+    position: relative;
+    height: 45px;
+}
+
+.enviado{
+    background-color: #F5F5F5;
+    width: 20dvw;
+    height: 20dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.enviado p{
+    width: 60%;
+    text-align: center;
+    font-family: "Martel Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+   
+}
+
+.solicitude_button{
+    text-align: center;
+    
+}
+
+.solicitude_button button{
+    margin-bottom: 15px;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--primary);
+    color: #fff;
+    cursor: pointer;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.solicitude_button button:hover {
+    background-color: var(--primary-selected);
+}
+
+.happy_face{
+    width: 20dvw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.X{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+}
+
+/* #endregion Popup de enviado */
+
+/* #region Popup de personal */
+
+.minih_personal{
+    background-color: var(--primary);
+    width: 20dvw;
+    position: relative;
+    height: 45px;
+}
+
+.personal{
+    background-color: #F5F5F5;
+    width: 20dvw;
+    height: 20dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.personal p{
+    width: 90%;
+    text-align: center;
+    font-family: "Martel Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+   
+}
+
+.ok_button{
+    text-align: center;
+    
+}
+
+.ok_button button{
+    margin-bottom: 25px;
+    padding: 6px 25px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--primary);
+    color: #fff;
+    cursor: pointer;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.ok_button button:hover {
+    background-color: var(--primary-selected);
+}
+
+.info_icon{
+    width: 15dvw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.X{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+}
+
+/* #endregion Popup de personal */
+
