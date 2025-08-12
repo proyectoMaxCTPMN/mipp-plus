@@ -3,6 +3,29 @@ import Link from 'next/link'
 import style from './dashboard.module.css'
 import Image from 'next/image'
 
+function getTimeLeft(expired_date) {
+    const now = new Date();
+    const expire = new Date(expired_date);
+
+    // Format both dates for display
+    const nowStr = now.toLocaleDateString('es-CR');
+    const expireStr = expire.toLocaleDateString('es-CR');
+
+    const diffMs = expire - now;
+
+    if (diffMs <= 0) return (<p className={style.isExpiredText}>0d 0min</p>);
+
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = "";
+    if (diffDays > 0) result += `${diffDays}d`;
+    if (diffHours > 0) result += ` ${diffHours}h `;
+    if (diffDays === 0 && diffHours === 0 && diffMinutes > 0) result += `${diffMinutes} min`;
+    if (!result) result = "> 1min";
+    return (<p className={style.notExpiredText}>{result.trim()}</p>);
+}
 
 export default function RecentHistory({AllDocuments_parameter}){
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
@@ -20,22 +43,23 @@ export default function RecentHistory({AllDocuments_parameter}){
                                 <div className={style.information_lowerpart}>
                                     <p>
                                         {
-                                            absence.is_pending && <p className={style.pendingText}>Pendiente</p>
+                                            absence.is_pending && <p className={style.pendingText} style={{color: '#DEAA00'}}>Pendiente</p>
                                         }
                                         {
-                                            absence.is_approved && <p className={style.approvedText}>Aprobado</p>
+                                            absence.is_approved && <p className={style.approvedText} style={{color: '#0B8300'}}>Aprobado</p>
                                         }
                                         {
-                                            absence.is_denied && <p className={style.deniedText}>Denegado</p>
+                                            absence.is_denied && <p className={style.deniedText} style={{color: '#940202'}}>Denegado</p>
                                         }
                                     </p>
                                     <span>
                                         {
                                             absence.is_approved && 
-                                            <>
-                                                <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' />
+                                            <div className={style.clockcontainer}>
+                                                <p>Just.:</p>
+                                                <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' className={style.clockicon}/>
                                                 <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
-                                            </>
+                                            </div>
                                         }
                                     </span>
                                 </div>
