@@ -23,7 +23,7 @@ const solicitudeArray = [
     {
         "id": 1,
         "text": "Justificación permiso de salida, tardía o ausencia",
-        "link": "/mipp/solicitude/justification-formulary",
+        "link": "/mipp/solicitude/justification-formulary/menu",
         "icon": "/menuIcons/mobile/soli-justify.svg"
     },
     {

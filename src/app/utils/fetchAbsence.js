@@ -24,6 +24,7 @@ export async function getAllAbsence() {
     return data
 }
 
+
 export async function getUserAbsence(userId) {
     const supabase = await createSupabase()
 
@@ -31,6 +32,24 @@ export async function getUserAbsence(userId) {
     .from('absence_requests')
     .select('')
     .eq('user_id', userId)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
+
+export async function getUserAbsence_soli(userId) {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('absence_requests')
+    .select('id, absence_date, reason')
+    .eq('user_id', userId)
+    .eq('is_approved', true)
+    .eq('is_expired', false)
 
     if (error) {
       console.error("No se pudo obtener el registro" + JSON.stringify(error))

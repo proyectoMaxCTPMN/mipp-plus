@@ -14,7 +14,7 @@ function getTimeLeft(expired_date) {
 
     const diffMs = expire - now;
 
-    if (diffMs <= 0) return (<p className={style.isExpiredText}>0d 0min</p>);
+    if (diffMs <= 0) return (<span className={style.isExpiredText}>0d 0min</span>);
 
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
