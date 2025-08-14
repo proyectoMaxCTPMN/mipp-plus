@@ -186,6 +186,7 @@ export default function NavbarClient({userRoles_parameter}) {
                                 alt='Logo' 
                                 className={style.logoImage}
                                 unoptimized
+                                priority
                             />
                         </div>
 

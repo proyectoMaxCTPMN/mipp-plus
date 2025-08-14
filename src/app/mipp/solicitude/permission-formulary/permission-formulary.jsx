@@ -25,13 +25,12 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
     })
 
     const handleSubmit = async (e) => {
-
+        e.preventDefault();
         const data = new FormData()
         Object.entries(formData).forEach(([key, value]) => {
             data.append(key, value)
         })
 
-        e.preventDefault();
         const response = await fetch(`/api/send_permission`, {
             method: "POST",
             body: data
