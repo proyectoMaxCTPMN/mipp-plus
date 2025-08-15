@@ -54,18 +54,29 @@ export default function RecentHistory({AllDocuments_parameter}){
                                     </p>
                                     <span>
                                         {
-                                            absence.is_approved && 
+                                            absence.is_approved ? 
                                             <div className={style.clockcontainer}>
                                                 <p>Just.:</p>
                                                 <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' className={style.clockicon}/>
                                                 <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
                                             </div>
+                                            :(
+                                                <div className={style.clockcontainer}>
+                                                <p>N/A</p>
+                                                </div>
+                                            )
                                         }
                                     </span>
                                 </div>
-
+                                <div className={style.hovercontainer}>
+                                    <div className={style.hover_informationcontainer}>
+                                        <span className={style.verMasText}>Ver Más</span>
+                                        <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
+                                    </div>
+                                </div>
                             </div>
                         ))
+                        
                     :(
                         
                         <div className={style.null_informationcontainer}>
@@ -82,32 +93,17 @@ export default function RecentHistory({AllDocuments_parameter}){
                     </div>
                 </Link>
             </div>
-
-            <div className={style.justiCard}>
-                <div className={style.justiContent} style={AllDocuments_parameter.justi.length <= 0 ? {display: 'flex',alignItems: 'center', justifyContent: 'center'} : {}}>
-                    {!AllDocuments_parameter.justi.length <= 0 ? 
-                        <></>
-                    :(
-                        
-                        <div className={style.null_informationcontainer}>
-                            <p>Sin solicitudes recientes</p>
-                            <Image src={"/null.svg"} width={30} height={30} alt='null_icon' className={style.nullicon}></Image>
-                        </div>
-                    )}
-                </div>
-                <Link href="/mipp/solicitude/justification-formulary">
-                <div className={style.justiFooter}>
-                    <p className={style.footerText}>Nueva Justificación de Ausencia</p>
-                    <Image src={"/plus.svg"} width={30} height={30} alt='plus' className={style.plus}/>
-                </div>
-                </Link>
-            </div>
-
             <div className={style.omiCard}>
                 <div className={style.omiContent} style={AllDocuments_parameter.omissions.length <= 0 ? {display: 'flex',alignItems: 'center', justifyContent: 'center'} : {}}>
                     {!AllDocuments_parameter.omissions.length <= 0 ? 
                         <div className={style.informationcontainer}>
 
+                            <div className={style.hovercontainer}>
+                                    <div className={style.hover_informationcontainer}>
+                                        <span className={style.verMasText}>Ver Más</span>
+                                        <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
+                                    </div>
+                                </div>
                         </div>
                     :(
                         

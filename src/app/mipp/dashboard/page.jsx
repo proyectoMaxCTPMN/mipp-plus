@@ -8,7 +8,7 @@ export default async function Dashboard(){
     const userId = await getCurrentUser();
     const fullName = await getFullName(userId);
     const AllDocuments = await getAllDocumentsUser(userId)
-    console.log(AllDocuments.absences)
+    console.log(AllDocuments.omissions)
     return(
          <div className={style.container}>
             <div className={style.dashboardContainer}>
