@@ -5,7 +5,7 @@ import { getUserFullName } from '@/app/utils/userFetch';
 
 export default async function Dashboard(){
     const userId = await getCurrentUser();
-    const fullName = await getFullName(userId);
+    const fullName = await getUserFullName(userId);
 
 
     return(
