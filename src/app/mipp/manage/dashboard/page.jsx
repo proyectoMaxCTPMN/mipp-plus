@@ -1,6 +1,6 @@
 import style from './manage-dashboard.module.css'
 import ManageDashboard from './manage-dashboard';
-import { getPreviewData } from '@/app/utils/dataInfo';
+import { getPreviewData } from '@/app/utils/allFetch';
 
 export default async function Page(){
     const allDocs = await getPreviewData()

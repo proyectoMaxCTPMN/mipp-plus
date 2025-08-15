@@ -1,13 +1,13 @@
 import Permission_Formulary_Page from './permission-formulary'
 import { getCurrentUser } from '@/app/utils/auth'
-import { getFullName, getPosition, getTitle } from '@/app/utils/userInfo'
+import { getUserFullName, getUserPosition, getUserTitle } from '@/app/utils/userFetch'
 
 
 export default async function Permission_Formulary(){
     const userId = await getCurrentUser()
-    const fullName = await getFullName(userId)
-    const title = await getTitle(userId)
-    const position = await getPosition(userId)
+    const fullName = await getUserFullName(userId)
+    const title = await getUserPosition(userId)
+    const position = await getUserTitle(userId)
     return(
         <>
         {

@@ -1,10 +1,10 @@
-import { getCurrentUser } from '@/app/utils/auth'
-import { getFullName} from '@/app/utils/userInfo'
 import Infra_Formulary_Page from './infra-formulary'
+import { getCurrentUser } from '@/app/utils/auth'
+import { getUserFullName } from '@/app/utils/userFetch'
 
 export default async function Infra_Formulary(){
     const userId = await getCurrentUser()
-    const fullName = await getFullName(userId)
+    const fullName = await getUserFullName(userId)
     return(
         <>
         {

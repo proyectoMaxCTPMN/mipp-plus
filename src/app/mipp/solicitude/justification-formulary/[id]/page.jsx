@@ -1,28 +1,23 @@
 import Justification_Formulary_Page from './justification-formulary'
-import { getCurrentUser } from '@/app/utils/auth'
-import { getProhibitedIds, getUserAbsence_id } from '@/app/utils/fetchAbsence'
-import { getFullName, getPosition, getTitle} from '@/app/utils/userInfo'
 import { redirect } from 'next/navigation'
+import { getUserAbsence_id, getUserFullName, getUserPosition, getUserProhibitedIds, getUserTitle } from '@/app/utils/userFetch';
+import { getCurrentUser } from '@/app/utils/auth';
 
 export default async function Justification_Formulary({params}){
     
     const userId = await getCurrentUser()
-    const prohibitedIds = await getProhibitedIds(userId);
+    const prohibitedIds = await getUserProhibitedIds(userId);
     const {id} = await params;
 
     if (typeof prohibitedIds.find(element => element == id) != undefined) {
         redirect('/') 
     }
 
-    
-    
-    const fullName = await getFullName(userId)
-    const position = await getPosition(userId)
-    const title = await getTitle(userId)
+    const fullName = await getUserFullName(userId)
+    const position = await getUserPosition(userId)
+    const title = await getUserTitle(userId)
     const absenceData = await getUserAbsence_id(userId, id)
     
-    
-
     if (!absenceData ) {
        redirect('/') 
     }

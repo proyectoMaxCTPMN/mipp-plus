@@ -1,7 +1,7 @@
-import { getCurrentUser } from '@/app/utils/auth'
 import style from './soliHistory.module.css'
 import SolicitudeHistory from './solicitude-history';
-import { getUserAbsence } from '@/app/utils/fetchAbsence';
+import { getUserAbsence } from '@/app/utils/userFetch';
+import { getCurrentUser } from '@/app/utils/auth';
 
 export default async function Page(){
     const userId = await getCurrentUser();

@@ -1,0 +1,278 @@
+"use server"
+
+import { cookies } from "next/headers"
+import { createClient } from './supabase/server'
+
+async function createSupabase(){
+  const cookieStore = await cookies()
+  const supabase = createClient(cookieStore)
+  return supabase
+}
+
+export async function getUserFullName(userId) {
+    const supabase = await createSupabase()
+
+    let { data: user, error } = await supabase
+    .from('users')
+    .select('first_name, last_name, second_last_name')
+    .eq('id', userId)
+    
+    if (error) {
+      console.log(JSON.stringify(data))
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    const data = {
+      first_name: user[0].first_name, 
+      last_name: user[0].last_name,
+      second_last_name: user[0].second_last_name,
+      full_name: user[0].first_name + " " + user[0].last_name + " " + user[0].second_last_name
+    }
+
+    return data
+}
+
+export async function getUserPosition(userId) {
+    const supabase = await createSupabase()
+
+    let { data: user, error } = await supabase
+    .from('users')
+    .select('positions(position)')
+    .eq('id', userId)
+
+    const position= user[0].positions.position
+    
+    if (error) {
+      console.log(JSON.stringify(data))
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return position[0]
+}
+
+export async function getUserAllInfo(userId) {
+    const supabase = await createSupabase()
+
+    let { data: user, error } = await supabase
+    .from('users')
+    .select(`
+        first_name,
+        last_name,
+        second_last_name,
+        email,
+        phone,
+        positions (position, paid_in_lessons),
+        position,
+        titles (title),
+        title,
+        has_ownership
+    `)
+    .eq('id', userId)
+
+      if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+    const data = {
+        first_name: user[0].first_name,
+        last_name: user[0].last_name,
+        second_last_name: user[0].second_last_name,
+        email: user[0].email,
+        phone: user[0].phone,
+        position: user[0].positions.position,
+        position_id: user[0].position,
+        title: user[0].titles.title,
+        title_id:user[0].title,
+        has_ownership: user[0].has_ownership,
+        paid_in_lessons: user[0].positions.paid_in_lessons
+    }
+    
+    
+
+    return data
+}
+
+export async function getUserTitle(userId) {
+    const supabase = await createSupabase()
+
+    let { data: user, error } = await supabase
+    .from('users')
+    .select(`
+        title,
+        titles (title)
+    `)
+    .eq('id', userId)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    const data = {
+        title_id: user[0].title,
+        title: user[0].titles.title,
+    }
+    
+
+    return data
+}
+
+export async function getUserSystemColor(userId) {
+    const supabase = await createSupabase()
+
+    let { data: user, error } = await supabase
+    .from('users')
+    .select(`
+        system_color
+    `)
+    .eq('id', userId)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return user[0].system_color
+}
+
+export async function getUserAllDocuments(userId) {
+    const supabase = await createSupabase()
+
+    let { data: absences, error_absences } = await supabase
+    .from('absence_requests')
+    .select('')
+    .eq('user_id', userId)
+
+    if (error_absences) {
+      console.error("No se pudo obtener el registro de ausencias" + JSON.stringify(error))
+      return
+    }
+
+    let { data: infra, error_infra } = await supabase
+    .from('infraestructure_reports')
+    .select('')
+    .eq('user_id', userId)
+
+    if (error_infra) {
+      console.error("No se pudo obtener el registro de reportes de infra" + JSON.stringify(error))
+      return
+    }
+
+    let { data: justi, error_justi } = await supabase
+    .from('justifications')
+    .select('user_id', userId)
+
+    if (error_justi) {
+      console.error("No se pudo obtener el registro de justificaciones" + JSON.stringify(error))
+      return
+    }
+
+    let { data: omissions, error_omission } = await supabase
+    .from('justifications')
+    .select('')
+    .eq('user_id', userId)
+
+    if (error_omission) {
+      console.error("No se pudo obtener el registro de omisiones de marca" + JSON.stringify(error))
+      return
+    }
+
+    return {infra, absences, justi, omissions}
+}
+
+export async function getUserAbsence(userId) {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('absence_requests')
+    .select('')
+    .eq('user_id', userId)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
+
+export async function getUserAbsence_soli(userId) {
+    const supabase = await createSupabase()
+
+    const linkedResponse = await supabase
+    .from('justi_and_req')
+    .select()
+    .eq('user_id', userId)
+
+    let prohibited_ids = [];
+    linkedResponse.data.map(row => prohibited_ids.push(row.request_id))
+
+    let absenceResponse = await supabase
+    .from('absence_requests')
+    .select('id, absence_date, reason')
+    .eq('user_id', userId)
+    .eq('is_approved', true)
+    .eq('is_expired', false)
+    .not("id", "in", "(" + prohibited_ids + ")")
+
+    if (absenceResponse.error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(absenceResponse.error))
+      return
+    }
+
+    return absenceResponse.data
+}
+
+export async function getUserProhibitedIds(userId) {
+    const supabase = await createSupabase()
+
+    const linkedResponse = await supabase
+    .from('justi_and_req')
+    .select()
+    .eq('user_id', userId)
+
+    let prohibited_ids = [];
+    linkedResponse.data.map(row => prohibited_ids.push(row.request_id))
+
+
+    return prohibited_ids
+}
+
+export async function getUserAbsence_id(userId, id) {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('absence_requests')
+    .select('')
+    .eq('user_id', userId)
+    .eq('is_approved', true)
+    .eq('is_expired', false)
+    .eq('id', id)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
+
+export async function getUserRoles(userId) {
+  const supabase = await createSupabase()
+
+  const { data, error } = await supabase
+  .from('roles')
+  .select("basic_user, read_documents, manage_documents, manage_read_reports, create_users, root")
+  .eq("user_id", userId)
+
+  if (error) {
+    console.error("Error fetching roles:", error)
+    return null
+  }
+  
+  const roles = data[0]
+
+  return roles
+}

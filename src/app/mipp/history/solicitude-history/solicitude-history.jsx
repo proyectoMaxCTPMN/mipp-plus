@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image';
 import style from './soliHistory.module.css'
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 function getTimeLeft(expired_date) {

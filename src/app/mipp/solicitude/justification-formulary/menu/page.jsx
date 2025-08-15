@@ -1,6 +1,8 @@
-import { getCurrentUser } from "@/app/utils/auth";
+
+
 import JustiMenu from "./Justi_Menu";
-import { getUserAbsence_soli } from "@/app/utils/fetchAbsence";
+import { getUserAbsence_soli } from "@/app/utils/userFetch";
+import { getCurrentUser } from "@/app/utils/auth";
 
 export default async function Page(){
     const userId = await getCurrentUser()

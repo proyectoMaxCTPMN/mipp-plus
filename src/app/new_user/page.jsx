@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import LoadingSkeleton from "../mipp/components/LoadingSkeleton";
 import { getIsPswChange } from "../utils/auth";
-import { getPositions, getTitles } from "../utils/dataInfo";
 import NewUser from "./new_user";
+import { getPositions, getTitles } from "../utils/allFetch";
 
 
 export default async function Page({searchParams}) {
