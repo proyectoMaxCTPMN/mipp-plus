@@ -1,14 +1,16 @@
 'use client'
 
 import "../globals.css";
-import { useMounted } from "../hooks/useMounted";
+import LoadingSkeleton from "./components/LoadingSkeleton";
 import Navbar from './components/nav/NavbarClient'
+import Cookies from "js-cookie";
+import { useMounted } from "../hooks/useMounted";
 import {PopUpContainer} from "./components/popup/Popup";
 import { useTheme } from "next-themes";
 import { Suspense, useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import LoadingSkeleton from "./components/LoadingSkeleton";
-import { getCurrentUser, getRoles } from "../utils/auth";
+import { getCurrentUser } from "../utils/auth";
+import { getUserRoles } from "../utils/userFetch";
+
 
 
 
@@ -26,7 +28,7 @@ export default function MippLayout({children}) {
 
         const fetchUserRoles = async () => {
             const userId = await getCurrentUser();
-            const roles = await getRoles(userId);
+            const roles = await getUserRoles(userId);
             setUserRoles(roles);
         }
         fetchUserRoles();

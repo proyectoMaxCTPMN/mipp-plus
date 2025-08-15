@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { getRoles, requireAuth } from './app/utils/auth';
-
+import { requireAuth } from './app/utils/auth';
+import { getUserRoles } from './app/utils/userFetch';
 
 
 export async function middleware(request) {
     const user = await requireAuth()
     const authCookie = request.cookies.get('session_id');
-    const roles = await getRoles(user);
+    const roles = await getUserRoles(user);
 
     // Si la cookie o la sesion no existe, redirige a la página de login
     if (!authCookie || !user) {

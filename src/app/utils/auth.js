@@ -87,25 +87,6 @@ export async function requireAuth() {
   return user
 }
 
-
-export async function getRoles(user) {
-  const supabase = await createSupabase()
-
-  const { data, error } = await supabase
-  .from('roles')
-  .select("basic_user, read_documents, manage_documents, manage_read_reports, create_users, root")
-  .eq("user_id", user)
-
-  if (error) {
-    console.error("Error fetching roles:", error)
-    return null
-  }
-  
-  const roles = data[0]
-
-  return roles
-}
-
 export async function getIsPswChange(user) {
   const supabase = await createSupabase()
 
@@ -121,14 +102,6 @@ export async function getIsPswChange(user) {
 
   return data[0]?.is_pswchange
 }
-
-
-/*
-export async function hasPermission(permission) {
-  const user = await getCurrentUser()
-  return user?.permissions.includes(permission) || false
-}
-*/
 
 export async function logout() {
   const supabase = await createSupabase()
