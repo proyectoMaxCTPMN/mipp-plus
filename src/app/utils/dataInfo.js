@@ -39,46 +39,64 @@ export async function getTitles() {
     return data
 }
 
-export async function getAllDocuments() {
-    const supabase = await createSupabase()
+export async function getPreviewData() {
+    const supabase = await createSupabase();
 
-    let { data: absences, error_absences } = await supabase
-    .from('absence_requests')
-    .select('')
+    // Helper function to handle queries
+    const fetchData = async (table, select, label, type) => {
+      let { data, error } = await supabase.from(table).select(select);
 
-    if (error_absences) {
-      console.error("No se pudo obtener el registro de ausencias" + JSON.stringify(error))
-      return
-    }
+      if (error) {
+        console.error(`No se pudo obtener el registro de ${type}:`, error);
+        return [];
+      }
 
-    let { data: infra, error_infra } = await supabase
-    .from('infraestructure_reports')
-    .select('')
+      // Map to unified format
+      return data.map((item, index) => ({
+        type,
+        label,
+        data: item,
+        date: item?.request_date || item?.report_date || item?.justification_date || item?.omission_date
+      }));
+    };
 
-    if (error_infra) {
-      console.error("No se pudo obtener el registro de reportes de infra" + JSON.stringify(error))
-      return
-    }
+    // Fetch all data
+    const absences = await fetchData(
+      "absence_requests",
+      "id, request_date, is_pending, is_denied, is_approved, is_justified, user_id(id, first_name, last_name)",
+      "Solicitud de Aus/Tar/Sal",
+      "absence"
+    );
 
-    let { data: justi, error_justi } = await supabase
-    .from('justifications')
-    .select('')
+    const infra = await fetchData(
+      "infraestructure_reports",
+      "id, report_date, report_place, is_revised, user_id(id, first_name, last_name)",
+      "Reporte de Infraestructura",
+      "infra"
+    );
 
-    if (error_justi) {
-      console.error("No se pudo obtener el registro de justificaciones" + JSON.stringify(error))
-      return
-    }
+    const justifications = await fetchData(
+      "justifications",
+      "id, justification_date, has_response, justification_response_state, user_id(id, first_name, last_name)",
+      "Justificacion de Aus/Tar",
+      "justi"
+    );
 
-    let { data: omissions, error_omission } = await supabase
-    .from('justifications')
-    .select('')
+    const omissions = await fetchData(
+      "mark_omissions",
+      "id, omission_date, user_id(id, first_name, last_name)",
+      "Omision de Marca",
+      "omission"
+    );
 
-    if (error_omission) {
-      console.error("No se pudo obtener el registro de omisiones de marca" + JSON.stringify(error))
-      return
-    }
+    // Merge everything
+    const unifiedData = [
+      ...absences,
+      ...infra,
+      ...justifications,
+      ...omissions
+    ];
 
-    
+    return unifiedData;
 
-    return {infra, absences, justi, omissions}
 }

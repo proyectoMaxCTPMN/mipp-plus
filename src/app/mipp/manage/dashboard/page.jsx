@@ -1,9 +1,10 @@
-import style from './soliHistory.module.css'
+import style from './manage-dashboard.module.css'
 import ManageDashboard from './manage-dashboard';
-import { getAllDocuments } from '@/app/utils/dataInfo';
+import { getPreviewData } from '@/app/utils/dataInfo';
 
 export default async function Page(){
-    const allDocs = await getAllDocuments()
+    const allDocs = await getPreviewData()
+    console.log(allDocs)
     return(
          <div className={style.container}>
             <div className={style.historyContainer}>

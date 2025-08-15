@@ -12,7 +12,7 @@ export default async function Omission_Formulary(){
         <>
         {
             fullName && (
-                <Omission_Formulary_Page fullName_parameter={fullName}/>
+                <Omission_Formulary_Page fullName_parameter={fullName} userId_parameter={userId}/>
             )
         }
         </>

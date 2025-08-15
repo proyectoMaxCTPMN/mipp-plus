@@ -23,7 +23,7 @@ const solicitudeArray = [
     {
         "id": 1,
         "text": "Justificación permiso de salida, tardía o ausencia",
-        "link": "/mipp/solicitude/justification-formulary",
+        "link": "/mipp/solicitude/justification-formulary/menu",
         "icon": "/menuIcons/mobile/soli-justify.svg"
     },
     {
@@ -78,6 +78,12 @@ const othersArray = [
         "id": 2,
         "text": "Reportes de Infraestructura", 
         "link": "/mipp/manage/infra",
+        "icon": "/menuIcons/mobile/infra-broken.svg"
+    },
+    {
+        "id": 3,
+        "text": "Todos los documentos", 
+        "link": "/mipp/manage/dashboard",
         "icon": "/menuIcons/mobile/infra-broken.svg"
     },
 ]
@@ -180,6 +186,7 @@ export default function NavbarClient({userRoles_parameter}) {
                                 alt='Logo' 
                                 className={style.logoImage}
                                 unoptimized
+                                priority
                             />
                         </div>
 
