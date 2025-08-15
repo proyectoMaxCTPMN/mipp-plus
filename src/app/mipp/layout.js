@@ -1,38 +1,58 @@
 'use client'
 
 import "../globals.css";
+import LoadingSkeleton from "./components/LoadingSkeleton";
+import Navbar from './components/nav/NavbarClient'
+import Cookies from "js-cookie";
 import { useMounted } from "../hooks/useMounted";
-import Navbar from './components/nav/Navbar'
 import {PopUpContainer} from "./components/popup/Popup";
 import { useTheme } from "next-themes";
-import { useEffect } from "react";
-import Cookies from "js-cookie";
+import { Suspense, useEffect, useState } from "react";
+import { getCurrentUser } from "../utils/auth";
+import { getUserRoles } from "../utils/userFetch";
 
-export default function MippLayout({children }) {
+
+
+
+
+export default function MippLayout({children}) {
     const mounted = useMounted()
     const {theme, setTheme} = useTheme()
 
+    const [userRoles, setUserRoles] = useState(null);
+
     useEffect(() => {
         const cookie = Cookies.get('system_color')
-        console.log(cookie)
         setTheme(cookie)
+        
+
+        const fetchUserRoles = async () => {
+            const userId = await getCurrentUser();
+            const roles = await getUserRoles(userId);
+            setUserRoles(roles);
+        }
+        fetchUserRoles();
+
+        return
     }, [])
 
 
-    if (!mounted) {
+    if (!mounted || !userRoles) {
         return (
-            <div className="loaderContainer">
-                <span className="loader"></span>
-            </div>
-            
+            <LoadingSkeleton />
         );
     }
 
     return (
         <>
-            <Navbar />
+            <Navbar userRoles_parameter={userRoles}/>
             <PopUpContainer />
-            {children}
+            <Suspense fallback={                
+                <LoadingSkeleton />
+            }
+            >
+                {children}
+            </Suspense>
         </>
     );
 }

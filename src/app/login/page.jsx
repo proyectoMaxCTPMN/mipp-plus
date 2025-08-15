@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import style from './login.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify';
 
@@ -14,6 +14,11 @@ export default function Login(){
         password:'',
         is_remember: false,
     })
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        router.prefetch('/mipp/dashboard')
+    }, [])
 
     const handleLoginChange = (event) => {
         
@@ -26,6 +31,7 @@ export default function Login(){
     }
 
     const handleSubmit = async () => {
+        setIsLoading(true)
         const response = await fetch(`/api/loginAuth`, {
             method: "POST",
             body: JSON.stringify({id: loginData.id, password: loginData.password, is_remember: loginData.is_remember})
@@ -36,8 +42,10 @@ export default function Login(){
         console.log(response)
 
         if (response.ok) {
+            setIsLoading(false)
             router.push(data.redirectUrl)
         }else{
+            setIsLoading(false)
             toast.error("Usuario o contraseña incorrectos...")
             
         }
@@ -69,6 +77,7 @@ export default function Login(){
                         placeholder='Identificación' 
                         onChange={handleLoginChange}
                         value={loginData.username}
+                        autoComplete='username'
                     />
 
                     <div className={style.passwordInput}>
@@ -79,6 +88,7 @@ export default function Login(){
                             placeholder='Contraseña'
                             onChange={handleLoginChange}
                             value={loginData.password}
+                            autoComplete='current-password'
                         />
 
                         <Image 
@@ -102,7 +112,9 @@ export default function Login(){
                     <p>¿Olvido su contraseña?</p>
                 </div>
 
-                <button type="button" className={style.loginButton} onClick={handleSubmit}>Iniciar Sesión</button>
+                <button type="button" className={style.loginButton} onClick={handleSubmit}>
+                    {isLoading ? "Cargando..." : "Iniciar sesión"}
+                </button>
             </main>
             <p className={style.footerText}>"Lo pequeño es algo más que un aso en el camino. Es un destino en sí mismo"</p>
             

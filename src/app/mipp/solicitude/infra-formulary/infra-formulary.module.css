@@ -104,8 +104,8 @@
     background-size: 2.5em;
     font-weight: 600;
     margin: 0 .6em;
-    position: relative;
-    width: 5rem;
+    padding-right: 2.5rem;
+    width: auto;
 }
 .reportcontainer{
     display: flex;

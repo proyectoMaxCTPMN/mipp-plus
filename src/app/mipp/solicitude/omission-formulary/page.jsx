@@ -1,18 +1,20 @@
+
 import Omission_Formulary_Page from './omission-formulary'
+import { getUserFullName, getUserPosition, getUserTitle } from '@/app/utils/userFetch'
 import { getCurrentUser } from '@/app/utils/auth'
-import { getFullName, getPosition, getTitle} from '@/app/utils/userInfo'
+
 
 export default async function Omission_Formulary(){
     const userId = await getCurrentUser()
-    const fullName = await getFullName(userId)
-    const position = await getPosition(userId)
-    const title = await getTitle(userId)
+    const fullName = await getUserFullName(userId)
+    const position = await getUserPosition(userId)
+    const title = await getUserTitle(userId)
 
     return(
         <>
         {
             fullName && (
-                <Omission_Formulary_Page fullName_parameter={fullName}/>
+                <Omission_Formulary_Page fullName_parameter={fullName} userId_parameter={userId}/>
             )
         }
         </>

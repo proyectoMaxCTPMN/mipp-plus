@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+.container{
+    width: 100dvw;
+    padding-left: 5dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    place-content: center;
+    place-items: center;
+}
+
+.container *{
+    font-family: "Karla", sans-serif;
+}
+
+.justiContainer{
+    min-width: 700px;
+    width: 45%;
+    height: 25%;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -webkit-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    font-size: 16px;
+    place-content: space-between;
+}
+
+.justiTitle{
+    font-size: 2rem;
+    text-align: center;
+}
+
+.justiLabel{
+    font-size: 1rem;
+    color: #2C2C2C;
+}
+
+.justiBtn{
+    font-size: 1.2rem;
+    border: none;
+    background-color: var(--primary);
+    color: #fff;
+    width: 70%;
+    place-self: center;
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 5px 5px 0px rgba(0,0,0,0.33);
+    -webkit-box-shadow: 0 5px 5px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0 5px 5px 0px rgba(0,0,0,0.33);
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover{
+        background-color: var(--primary-selected);
+        cursor: pointer;
+    }
+}
+
+.justiSelect{
+    font-size: 1rem;
+}
+
+.newContainer{
+    min-width: 700px;
+    width: 45%;
+    height: 5%;
+    background-color: var(--primary);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -webkit-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+    display: flex;
+    place-content: center;
+    place-items: center;
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover{
+        background-color: var(--primary-selected);
+        cursor: pointer;
+    }
+}
+
+

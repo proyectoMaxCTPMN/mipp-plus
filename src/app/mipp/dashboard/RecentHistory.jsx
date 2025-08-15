@@ -1,12 +1,9 @@
 'use client'
-import { useTheme } from 'next-themes';
 import style from './dashboard.module.css'
 import Image from 'next/image'
-import { useEffect } from 'react';
+
 
 export default function RecentHistory(){
-
-  
     return(
         <div className={style.cardsContainer}>
             <div className={style.soliCard}>

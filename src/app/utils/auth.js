@@ -87,34 +87,21 @@ export async function requireAuth() {
   return user
 }
 
-/*
-
-export async function requireAdmin() {
+export async function getIsPswChange(user) {
   const supabase = await createSupabase()
-  const user = await requireAuth()
 
   const { data, error } = await supabase
   .from('users')
-  .select("roles(role)")
+  .select("is_pswchange")
   .eq("id", user)
-  
-  const role= data[0].roles.role
 
-  
-  if (role !== "admin" || role !== "ROOT") {
-    redirect("/unauthorized")
+  if (error) {
+    console.error("Error fetching psw change:", error)
+    return null
   }
-  return user
-}
 
-*/
-
-/*
-export async function hasPermission(permission) {
-  const user = await getCurrentUser()
-  return user?.permissions.includes(permission) || false
+  return data[0]?.is_pswchange
 }
-*/
 
 export async function logout() {
   const supabase = await createSupabase()

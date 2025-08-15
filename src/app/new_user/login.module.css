@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
+
+.container{
+  background-color: #E8E8E8;
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+}
+
+.container *{
+  font-family: "Martel Sans", sans-serif;
+}
+
+.loginBox{
+    font-size: 8px;
+    width: auto;
+    height: auto;
+    padding: 4em;
+    background-color: #fff;
+    outline: 1px solid #CFCFCF;
+    box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 0.452);
+    display: flex;
+    flex-direction: column;
+    place-content: space-between;
+    gap: 1em;
+    border-radius: 10px;
+}
+
+.logo{
+    place-self: center;
+    width: 20em;
+    height: auto;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    gap: -3em;
+}
+
+.headerH1{
+    width: max-content;
+    height: max-content;
+    font-size: 4em;
+}
+
+.headerP{
+    margin-top: -10px;
+    width: max-content;
+    height: max-content;
+    color: #00000070;
+    font-size: 2em;
+}
+
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 1em;
+    width: 100%;
+    font-size: 2em;
+}
+
+.passwordInput{
+    width: 100%;
+    position: relative;
+}
+
+.formPsw{
+    width: 100%;
+}
+
+.eye{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    width: 1.5em;
+}
+
+.formId, .formPsw, .formInput, .formSelect, .ownershipContainer{
+    padding: 0.5em;
+    outline: 1px solid #CFCFCF;
+    border-radius: 3px;
+    min-width: 400px;
+    width: 40dvw;
+    border: none;
+}
+
+.ownershipContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+}
+
+
+
+.loginButton{
+    padding: 0.5em 5em;
+    place-self: center;
+    border: none;
+    background-color: #940202;
+    color: #fff;
+    margin-top: 1em;
+    font-size: 2em;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.buttonText{
+    width: 100%;
+}
+
+@media (min-width: 320px) and (max-width: 480px){
+    .formId, .formPsw, .formInput, .formSelect, .ownershipContainer{
+        min-width: 100%;
+    }
+    
+    .loginBox{
+        width: 100%;
+        height: 100%;
+        place-items: center;
+        place-content: center;
+        gap: 1.5%;
+    }
+
+    .headerH1{
+        font-size: 24px;
+        
+    }
+
+}

@@ -1,10 +1,8 @@
 'use client'
 import { toast } from 'react-toastify';
-import Navbar from '../components/nav/Navbar'
 import style from './account.module.css'
 import {useState } from 'react';
 import { useRouter } from 'next/navigation';
-
 
 export default function Accountpage({userId_parameter, allInfo_parameter, titles_parameter, positions_parameter}){
     const router = useRouter()

@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image';
 import style from './soliHistory.module.css'
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 function getTimeLeft(expired_date) {
@@ -14,7 +14,7 @@ function getTimeLeft(expired_date) {
 
     const diffMs = expire - now;
 
-    if (diffMs <= 0) return (<p className={style.isExpiredText}>0d 0min</p>);
+    if (diffMs <= 0) return (<span className={style.isExpiredText}>0d 0min</span>);
 
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -25,7 +25,7 @@ function getTimeLeft(expired_date) {
     if (diffHours > 0) result += ` ${diffHours}h `;
     if (diffDays === 0 && diffHours === 0 && diffMinutes > 0) result += `${diffMinutes} min`;
     if (!result) result = "> 1min";
-    return (<p className={style.notExpiredText}>{result.trim()}</p>);
+    return (<span className={style.notExpiredText}>{result.trim()}</span>);
 }
 
 
@@ -122,7 +122,7 @@ export default function SolicitudeHistory({userAbsence_parameter}){
                                                         absence.is_approved && 
                                                         <>
                                                             <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' />
-                                                            {getTimeLeft(absence.expire_date)}
+                                                            <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
                                                         </>
                                                     }
 

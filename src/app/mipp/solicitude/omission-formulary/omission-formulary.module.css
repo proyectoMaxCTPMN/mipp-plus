@@ -92,6 +92,23 @@
     right: 1.5em;
 }
 
+.timeContainer{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+}
+
+.hourSelect{
+    font-family: 'Karla',sans-serif;
+    border: none;
+    font-size: 1rem;
+    background: #fff;
+    padding: 0.2rem 0.2rem;
+    padding-right: 1.5rem;
+    box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
+}
+
 .reasonofomissioncontainer{
     margin-top: 1.2rem;
     display: flex;

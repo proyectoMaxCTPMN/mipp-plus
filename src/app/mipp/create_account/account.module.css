@@ -1,0 +1,84 @@
+.body{
+    background-color: #E8E8E8;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5dvw;
+}
+
+.cardcontainer{
+    font-family: "Martel Sans", sans-serif;
+    background-color: #ffffff;
+    text-align: center;
+    width: 80%;
+    justify-content: center; 
+    align-items: center;     
+    border: 1px solid #E9E9E9;
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+    padding: 2dvw;
+    border-radius: 5px;
+}
+
+.cardcontainer h1 {
+    font-size: 2em;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.accountform{
+    width: 100%;
+}
+
+.idcontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.9rem;
+}
+
+.idcontainer input{
+    border: none;
+    outline: none;
+    font-size: .9em;
+    color: #2C2C2C;
+    background: #fff;
+    padding: 0.6rem 0.2rem;
+    box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
+    margin-top: 0.5rem;
+    width: 23.6dvw;
+    font-weight: 400;
+}
+
+.idcontainer label{
+    font-family: "Martel Sans", sans-serif;
+    color: #2c2c2c;
+    font-size: 1.1em;
+}
+
+.idcontainer input{
+    width: 100%;
+}
+
+.buttonscontainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.9rem;
+    margin-top: .6dvw;
+}
+
+.buttonscontainer button{
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 2.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.buttonscontainer button:hover{
+    background-color: var(--primary-selected);
+}
