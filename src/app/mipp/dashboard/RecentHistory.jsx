@@ -13,7 +13,7 @@ function getTimeLeft(expired_date) {
 
     const diffMs = expire - now;
 
-    if (diffMs <= 0) return (<p className={style.isExpiredText}>0d 0min</p>);
+    if (diffMs <= 0) return (<span className={style.isExpiredText}>0d 0min</span>);
 
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -24,18 +24,19 @@ function getTimeLeft(expired_date) {
     if (diffHours > 0) result += ` ${diffHours}h `;
     if (diffDays === 0 && diffHours === 0 && diffMinutes > 0) result += `${diffMinutes} min`;
     if (!result) result = "> 1min";
-    return (<p className={style.notExpiredText}>{result.trim()}</p>);
+    return (<span className={style.notExpiredText}>{result.trim()}</span>);
 }
 
 export default function RecentHistory({AllDocuments_parameter}){
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
+    console.log(AllDocuments_parameter)
     return(
         <div className={style.cardsContainer}>
             <div className={style.soliCard}>
                 <div className={style.soliContent} style={AllDocuments_parameter.absences.length <= 0 ? {display: 'flex',alignItems: 'center', justifyContent: 'center'} : {}}>
                     {!AllDocuments_parameter.absences.length <= 0 ? 
                         AllDocuments_parameter.absences.map((absence)=>(
-                            <div className={style.informationcontainer}>
+                            <div className={style.informationcontainer} key={absence.id}>
                                 <div className={style.information_upperpart}>
                                     <p>{reasons[absence.reason]}</p>
                                     <span>{new Date(absence.request_date).toLocaleDateString('es-CR')}</span>
@@ -43,13 +44,13 @@ export default function RecentHistory({AllDocuments_parameter}){
                                 <div className={style.information_lowerpart}>
                                     <p>
                                         {
-                                            absence.is_pending && <p className={style.pendingText} style={{color: '#DEAA00'}}>Pendiente</p>
+                                            absence.is_pending && <span className={style.pendingText} style={{color: '#DEAA00'}}>Pendiente</span>
                                         }
                                         {
-                                            absence.is_approved && <p className={style.approvedText} style={{color: '#0B8300'}}>Aprobado</p>
+                                            absence.is_approved && <span className={style.approvedText} style={{color: '#0B8300'}}>Aprobado</span>
                                         }
                                         {
-                                            absence.is_denied && <p className={style.deniedText} style={{color: '#940202'}}>Denegado</p>
+                                            absence.is_denied && <span className={style.deniedText} style={{color: '#940202'}}>Denegado</span>
                                         }
                                     </p>
                                     <span>
