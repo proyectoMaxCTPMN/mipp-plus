@@ -170,7 +170,7 @@ export async function getUserAllDocuments(userId) {
     }
 
     let { data: omissions, error_omission } = await supabase
-    .from('justifications')
+    .from('mark_omissions')
     .select('')
     .eq('user_id', userId)
 
