@@ -3,11 +3,15 @@ import Image from 'next/image';
 import style from './soliHistory.module.css'
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 function getTimeLeft(expired_date) {
+
     const now = new Date();
     const expire = new Date(expired_date);
+    expire.setHours(16)
+    expire.setMinutes(30)
 
     const diffMs = expire - now;
 
@@ -27,15 +31,19 @@ function getTimeLeft(expired_date) {
 
 
 
-export default function SolicitudeHistory({userAbsence_parameter}){
+export default function SolicitudeHistory({userAbsence_parameter, justifiedRequests_parameter}){
+    const router = useRouter()
     const [data, setData] = useState(userAbsence_parameter)
     const [search, setSearch] = useState('')
-
     const [dataLength, setDataLength] = useState(-1)
 
     const handleSearch = (e) => {
         const {value} = e.target;
         setSearch(value)
+    }
+
+    const redirectJustify = (id) => {
+        router.push(`/mipp/solicitude/justification-formulary/${id}`)
     }
 
 
@@ -93,7 +101,7 @@ export default function SolicitudeHistory({userAbsence_parameter}){
 
                                                 <div className={style.date}>
                                                     <p className={style.dateText}>
-                                                        {new Date(absence.request_date).toLocaleDateString('es-CR')}
+                                                        {new Date(absence.absence_date).toLocaleDateString('es-CR')}
                                                     </p>
                                                 </div>
 
@@ -116,7 +124,7 @@ export default function SolicitudeHistory({userAbsence_parameter}){
 
                                                 <div className={style.timeLeft}>
                                                     {
-                                                        absence.is_approved && 
+                                                        (absence.is_approved && !absence.is_justified) && 
                                                         <>
                                                             <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' />
                                                             <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
@@ -139,11 +147,11 @@ export default function SolicitudeHistory({userAbsence_parameter}){
                                                     </div>
                                                     </Link>
                                                     {
-                                                        (absence.is_approved && !absence.is_justified) &&
+                                                        (absence.is_approved && !absence.is_justified && !absence.is_expired) &&
                                                         (
                                                             <div className={style.justiContainer}>
                                                                 <Image src={"/goToJust.svg"} width={20} height={20} alt='go to icon' />
-                                                                <p className={style.goToJustifyText}>Justificar</p>
+                                                                <p className={style.goToJustifyText} onClick={() => redirectJustify(absence.id)}>Justificar</p>
                                                             </div>
                                                         )
 

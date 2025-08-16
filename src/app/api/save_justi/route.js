@@ -92,7 +92,7 @@ export async function POST(request) {
     .select()
 
     if (justiReponse.error) {
-        console.error("error" + JSON.stringify(errorJusti) + errorJusti)
+        console.error("error" + JSON.stringify(justiReponse.error) + justiReponse.error)
         console.log(dataJusti)
 
         if (evidence_file_url) {
@@ -109,7 +109,11 @@ export async function POST(request) {
 
         if (linkedResponse.error) {
             await supabase.storage.from('evidences').remove([`${evidence_file_path}`])
-            console.error("error linkeando tablas en justi_and_req" + JSON.stringify(errorJusti))
+            console.log(justiReponse.data[0].id)
+            console.log(request_id)
+            console.log(userId)
+            console.log(linkedResponse.data)
+            console.error("error linkeando tablas en justi_and_req" + JSON.stringify(linkedResponse.error))
             return NextResponse.json({msg: "Error Sending"}, {status: 500});
         }
 

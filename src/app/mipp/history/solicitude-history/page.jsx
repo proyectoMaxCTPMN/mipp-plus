@@ -11,7 +11,7 @@ export default async function Page(){
          <div className={style.container}>
             <div className={style.historyContainer}>
                 <h1 className={style.titleText}>Historial de Solicitudes de Ausencias y Tardias</h1>
-                <SolicitudeHistory userAbsence_parameter={userAbsence}/>
+                <SolicitudeHistory userAbsence_parameter={userAbsence} justifiedRequests_parameter={justifiedRequests}/>
             </div>
          </div>
     )
