@@ -162,7 +162,8 @@ export async function getUserAllDocuments(userId) {
 
     let { data: justi, error_justi } = await supabase
     .from('justifications')
-    .select('user_id', userId)
+    .select('')
+    .eq('user_id', userId)
 
     if (error_justi) {
       console.error("No se pudo obtener el registro de justificaciones" + JSON.stringify(error))
@@ -177,7 +178,9 @@ export async function getUserAllDocuments(userId) {
     if (error_omission) {
       console.error("No se pudo obtener el registro de omisiones de marca" + JSON.stringify(error))
       return
+
     }
+    console.log(justi)
     return {infra, absences, justi, omissions}
 }
 

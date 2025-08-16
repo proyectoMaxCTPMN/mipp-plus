@@ -46,10 +46,6 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
         router.push(`/mipp/solicitude/justification-formulary/${id}`)
     }
 
-
-
-
-
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
     return (
         <>

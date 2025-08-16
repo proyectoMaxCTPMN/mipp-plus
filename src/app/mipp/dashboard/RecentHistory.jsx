@@ -60,6 +60,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                                             absence.is_approved ? 
                                             <div className={style.clockcontainer}>
                                                 <p>Just.:</p>
+                                                
                                                 <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' className={style.clockicon}/>
                                                 <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
                                             </div>
