@@ -9,7 +9,7 @@ export default async function Justification_Formulary({params}){
     const prohibitedIds = await getUserJustifiedRequestsId(userId);
     const {id} = await params;
 
-    if (typeof prohibitedIds.find(element => element == id) != undefined) {
+    if (typeof prohibitedIds.find(element => element == id) != typeof undefined) {
         redirect('/') 
     }
 
