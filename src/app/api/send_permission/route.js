@@ -25,7 +25,7 @@ export async function POST(request) {
     let evidence_file_path = null;
     let evidence_file_url = null;
 
-    if (evidence_file) {
+    if (typeof evidence_file == File) {
         const allowedTypes = [
         "application/pdf",
         "image/jpeg",

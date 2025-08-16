@@ -8,7 +8,6 @@ export async function POST(request) {
     const cookieStore = await cookies()
     const supabase = createClient(cookieStore)
     const formData = await request.formData();
-
     
     const evidence_file = formData.get('evidence_file')
 
@@ -21,8 +20,7 @@ export async function POST(request) {
 
     let evidence_file_path = null;
     let evidence_file_url = null;
-
-    if (evidence_file) {
+    if (typeof evidence_file == File) {
         const allowedTypes = [
         "application/pdf",
         "image/jpeg",
@@ -67,6 +65,7 @@ export async function POST(request) {
         evidence_file_url = publicUrl + "?download"
 
     }
+    
 
     const toSend = { 
         user_id: userId,
