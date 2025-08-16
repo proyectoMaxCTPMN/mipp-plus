@@ -129,7 +129,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
                                                     {
                                                         absence.is_justified && 
                                                         <>
-                                                            <p style={{color: "green"}}>Justificado</p>
+                                                            <p style={{color: "#DEAA00"}}>Enviada</p>
                                                         </>
                                                     }
 
