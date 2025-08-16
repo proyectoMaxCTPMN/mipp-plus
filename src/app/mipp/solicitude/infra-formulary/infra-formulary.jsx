@@ -46,8 +46,6 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
             data.append(key, value)
         })
 
-        console.log(formData)
-
 
         const response = await fetch(`/api/save_infra_report`, {
             method: "POST",
