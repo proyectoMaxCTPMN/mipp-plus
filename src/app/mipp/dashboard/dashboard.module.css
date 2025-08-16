@@ -94,6 +94,7 @@
 }
 .information_lowerpart p{
     font-weight: 600;
+    font-size: 1.1rem;
 }
 .clockcontainer{
     display: flex;
@@ -107,6 +108,12 @@
     color: #616161;
     font-weight: 600;
 }
+.typeofomissioncontainer, .reportdetailcontainer{
+    font-weight: 600;
+    color: #616161;
+    font-size: 1.1rem;
+}
+/* #region Estilo del hover*/
 .hovercontainer {
     position: absolute;
     top: 0;
@@ -148,7 +155,7 @@
     width: 1.8rem;
     height: auto;
 }
-
+/* #endregion */
 /* #region Historial vacio estilo*/
 .null_informationcontainer p{
     color: #616161;

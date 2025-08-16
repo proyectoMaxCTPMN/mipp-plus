@@ -29,7 +29,7 @@ function getTimeLeft(expired_date) {
 
 export default function RecentHistory({AllDocuments_parameter}){
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
-    console.log(AllDocuments_parameter)
+    const typeofomission = ["","Entrada","Salida","Todo el día","Salida Anticipada"]
     return(
         <div className={style.cardsContainer}>
             <div className={style.soliCard}>
@@ -37,20 +37,22 @@ export default function RecentHistory({AllDocuments_parameter}){
                     {!AllDocuments_parameter.absences.length <= 0 ? 
                         AllDocuments_parameter.absences.map((absence)=>(
                             <div className={style.informationcontainer} key={absence.id}>
+
                                 <div className={style.information_upperpart}>
                                     <p>{reasons[absence.reason]}</p>
                                     <span>{new Date(absence.request_date).toLocaleDateString('es-CR')}</span>
                                 </div>
+
                                 <div className={style.information_lowerpart}>
                                     <p>
                                         {
-                                            absence.is_pending && <span className={style.pendingText} style={{color: '#DEAA00'}}>Pendiente</span>
+                                            absence.is_pending && <span  style={{color: '#DEAA00'}}>Pendiente</span>
                                         }
                                         {
-                                            absence.is_approved && <span className={style.approvedText} style={{color: '#0B8300'}}>Aprobado</span>
+                                            absence.is_approved && <span  style={{color: '#0B8300'}}>Aprobado</span>
                                         }
                                         {
-                                            absence.is_denied && <span className={style.deniedText} style={{color: '#940202'}}>Denegado</span>
+                                            absence.is_denied && <span  style={{color: '#940202'}}>Denegado</span>
                                         }
                                     </p>
                                     <span>
@@ -69,12 +71,14 @@ export default function RecentHistory({AllDocuments_parameter}){
                                         }
                                     </span>
                                 </div>
+
                                 <div className={style.hovercontainer}>
                                     <div className={style.hover_informationcontainer}>
                                         <span className={style.verMasText}>Ver Más</span>
                                         <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
                                     </div>
                                 </div>
+
                             </div>
                         ))
                         
@@ -97,15 +101,43 @@ export default function RecentHistory({AllDocuments_parameter}){
             <div className={style.omiCard}>
                 <div className={style.omiContent} style={AllDocuments_parameter.omissions.length <= 0 ? {display: 'flex',alignItems: 'center', justifyContent: 'center'} : {}}>
                     {!AllDocuments_parameter.omissions.length <= 0 ? 
-                        <div className={style.informationcontainer}>
+                        AllDocuments_parameter.omissions.map((omission)=>(
+                            <div className={style.informationcontainer} key={omission.id}>
 
-                            <div className={style.hovercontainer}>
+                                <div className={style.information_upperpart}>
+                                    <p>
+                                        {omission.omission_reason.length > 21
+                                        ? omission.omission_reason.slice(0, 21) + "..."
+                                        : omission.omission_reason}
+                                    </p>
+                                    <span>{new Date(omission.omission_date).toLocaleDateString('es-CR')}</span>
+                                </div>
+
+                                <div className={style.information_lowerpart}>
+                                    <p>
+                                        {
+                                            omission.omission_state == "Pendiente" && <span  style={{color: '#DEAA00'}}>Pendiente</span>
+                                        }
+                                        {
+                                            omission.omission_state == "Aprobado" && <span  style={{color: '#0B8300'}}>Aprobado</span>
+                                        }
+                                        {
+                                            omission.omission_state == "Denegado" && <span  style={{color: '#940202'}}>Denegado</span>
+                                        }
+                                    </p>
+                                    <p className={style.typeofomissioncontainer}>Omisión: {typeofomission[omission.omission_type]}</p>
+                                </div>
+
+                                <div className={style.hovercontainer}>
                                     <div className={style.hover_informationcontainer}>
                                         <span className={style.verMasText}>Ver Más</span>
                                         <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
                                     </div>
                                 </div>
-                        </div>
+
+                            </div>
+                        ))
+                        
                     :(
                         
                         <div className={style.null_informationcontainer}>
@@ -113,6 +145,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                             <Image src={"/null.svg"} width={30} height={30} alt='null_icon' className={style.nullicon}></Image>
                         </div>
                     )}
+                    
                 </div>
                 <Link href="/mipp/solicitude/omission-formulary">
                 <div className={style.omiFooter}>
@@ -125,7 +158,40 @@ export default function RecentHistory({AllDocuments_parameter}){
             <div className={style.reportCard}>
                 <div className={style.reportContent} style={AllDocuments_parameter.infra.length <= 0 ? {display: 'flex',alignItems: 'center', justifyContent: 'center'} : {}}>
                     {!AllDocuments_parameter.infra.length <= 0 ? 
-                        <></>
+                        AllDocuments_parameter.infra.map((report) =>(
+                            <div className={style.informationcontainer} key={report.id}>
+
+                                <div className={style.information_upperpart}>
+                                    <p>{report.report_building}</p>
+                                    <span>{new Date(report.report_date).toLocaleDateString('es-CR')}</span>
+                                </div>
+
+                                <div className={style.information_lowerpart}>
+                                    {
+                                        report.is_revised ? (
+                                            <p style={{color: '#1D2958'}}>Gestionado</p>
+                                        ):(
+                                            <p style={{color: '#DEAA00'}}>Pendiente</p>
+                                        )
+                                    }
+                                    <span className={style.reportdetailcontainer}>
+                                        {
+                                            report.report_detail.length > 15
+                                            ? report.report_detail.slice(0, 15) + "..."
+                                            : report.report_detail
+                                        }
+                                    </span>
+                                </div>
+                                
+                                <div className={style.hovercontainer}>
+                                    <div className={style.hover_informationcontainer}>
+                                        <span className={style.verMasText}>Ver Más</span>
+                                        <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
+                                    </div>
+                                </div>
+
+                            </div>
+                        ))
                     :(
                         
                         <div className={style.null_informationcontainer}>
