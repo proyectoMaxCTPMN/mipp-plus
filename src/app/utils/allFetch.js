@@ -115,3 +115,19 @@ export async function getPreviewData() {
     return unifiedData;
 
 }
+
+export async function getAbsenceById(absence_id){
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('absence_requests')
+    .select('')
+    .eq('id', absence_id)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
