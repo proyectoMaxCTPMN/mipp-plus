@@ -6,7 +6,6 @@ import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-
 export default function Permission_Formulary_Page({userId_parameter, fullName_parameter, title_parameter, position_parameter}){
     const router = useRouter()
     const [fecha, setFecha] = useState('');
@@ -77,6 +76,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
     useEffect(() => {
         const hoy = new Date(); // Obtener la fecha actual y Sumar 3 días a la fecha actual
         hoy.setDate(hoy.getDate() + 3);
+        console.log(hoy)
         setFormData(prev => ({
             ...prev,
             absence_date: hoy.toISOString()

@@ -99,7 +99,7 @@ export async function getPreviewData() {
 
     const omissions = await fetchData(
       "mark_omissions",
-      "id, omission_date, user_id(id, first_name, last_name)",
+      "id, omission_date, user_id(id, first_name, last_name), is_revised",
       "Omision de Marca",
       "omission"
     );

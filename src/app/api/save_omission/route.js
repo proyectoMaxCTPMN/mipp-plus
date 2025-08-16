@@ -24,8 +24,6 @@ export async function POST(request) {
         omission_type: parseInt(omission_type)
     }
 
-    console.log(toSend)
-
     const { data, error } = await supabase
     .from('mark_omissions')
     .insert([toSend])

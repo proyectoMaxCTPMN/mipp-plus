@@ -86,7 +86,7 @@
 }
 .inputdate_container input{
     font-weight: bold;
-    color: var(--primary)c5;
+    color: var(--primary);
 }
 .inputdate_container input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;

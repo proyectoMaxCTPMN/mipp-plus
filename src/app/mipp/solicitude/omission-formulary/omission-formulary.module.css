@@ -55,7 +55,7 @@
     margin: 0 auto;
 }
 
-.inputdatecontainer input, .justification{ /*Estilo general inputs*/
+.inputdatecontainer input, .justification, .hourSelect{ /*Estilo general inputs*/
     font-family: 'Karla',sans-serif;
     border: none;
     outline: 1px solid #ccc;
@@ -66,7 +66,19 @@
     box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
     position: relative;
 }
-
+.hourSelect{
+    appearance: none; /* Quita la flecha por defecto */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='darkred' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right -.3rem center;
+    background-size: 2.5em;
+    font-weight: 600;
+    margin: 0 .6em;
+    padding-right: 2.5rem;
+    width: auto;
+}
 .inputdatecontainer label{
     font-weight: 600;
     margin-right: .5rem;
@@ -97,16 +109,6 @@
     align-items: center;
     gap: 0.5rem;
     margin-top: 1.2rem;
-}
-
-.hourSelect{
-    font-family: 'Karla',sans-serif;
-    border: none;
-    font-size: 1rem;
-    background: #fff;
-    padding: 0.2rem 0.2rem;
-    padding-right: 1.5rem;
-    box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
 }
 
 .reasonofomissioncontainer{

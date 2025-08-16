@@ -46,8 +46,6 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
             data.append(key, value)
         })
 
-        console.log(formData)
-
 
         const response = await fetch(`/api/save_infra_report`, {
             method: "POST",
@@ -101,11 +99,11 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
-                                    <option value="gym">Gimnasio</option>
-                                    <option value="principal">Dirección</option>
-                                    <option value="cafeteria">Comedor</option>
-                                    <option value="lab">Lab. Electro</option>
-                                    <option value="other">Otro (Especificar)</option>
+                                    <option value="Gimnasio">Gimnasio</option>
+                                    <option value="Dirección">Dirección</option>
+                                    <option value="Comedor">Comedor</option>
+                                    <option value="Lab. Electro">Lab. Electro</option>
+                                    <option value="Otro">Otro (Especificar)</option>
                                 </select>
                             </div>
                             <div className={style.floor}>
