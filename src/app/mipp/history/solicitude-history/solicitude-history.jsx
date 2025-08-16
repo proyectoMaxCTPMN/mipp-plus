@@ -8,10 +8,6 @@ function getTimeLeft(expired_date) {
     const now = new Date();
     const expire = new Date(expired_date);
 
-    // Format both dates for display
-    const nowStr = now.toLocaleDateString('es-CR');
-    const expireStr = expire.toLocaleDateString('es-CR');
-
     const diffMs = expire - now;
 
     if (diffMs <= 0) return (<span className={style.isExpiredText}>0d 0min</span>);
@@ -123,6 +119,12 @@ export default function SolicitudeHistory({userAbsence_parameter}){
                                                         <>
                                                             <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' />
                                                             <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
+                                                        </>
+                                                    }
+                                                    {
+                                                        absence.is_justified && 
+                                                        <>
+                                                            <p style={{color: "green"}}>Justificado</p>
                                                         </>
                                                     }
 

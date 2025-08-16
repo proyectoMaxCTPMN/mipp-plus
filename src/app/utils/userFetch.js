@@ -225,7 +225,7 @@ export async function getUserAbsence_soli(userId) {
     return absenceResponse.data
 }
 
-export async function getUserProhibitedIds(userId) {
+export async function getUserJustifiedRequestsId(userId) {
     const supabase = await createSupabase()
 
     const linkedResponse = await supabase

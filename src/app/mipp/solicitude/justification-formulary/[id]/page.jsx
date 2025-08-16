@@ -1,12 +1,12 @@
 import Justification_Formulary_Page from './justification-formulary'
 import { redirect } from 'next/navigation'
-import { getUserAbsence_id, getUserFullName, getUserPosition, getUserProhibitedIds, getUserTitle } from '@/app/utils/userFetch';
+import { getUserAbsence_id, getUserFullName, getUserPosition, getUserJustifiedRequestsId, getUserTitle } from '@/app/utils/userFetch';
 import { getCurrentUser } from '@/app/utils/auth';
 
 export default async function Justification_Formulary({params}){
     
     const userId = await getCurrentUser()
-    const prohibitedIds = await getUserProhibitedIds(userId);
+    const prohibitedIds = await getUserJustifiedRequestsId(userId);
     const {id} = await params;
 
     if (typeof prohibitedIds.find(element => element == id) != undefined) {
