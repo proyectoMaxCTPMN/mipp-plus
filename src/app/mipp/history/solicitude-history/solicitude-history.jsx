@@ -73,7 +73,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
                 </div>
 
                 <div className={style.timeLeftHeader}>
-                    <p>Justificado</p>
+                    <p>Justificación</p>
                     <Image src={"/order_by_icon.svg"} width={10} height={10} alt='' className={style.orderIcon} />
                 </div>
 
@@ -129,7 +129,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
                                                     {
                                                         absence.is_justified && 
                                                         <>
-                                                            <p style={{color: "green"}}>Justificado</p>
+                                                            <p style={{color: "#DEAA00"}}>Enviada</p>
                                                         </>
                                                     }
 

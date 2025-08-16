@@ -180,7 +180,7 @@ export async function getUserAllDocuments(userId) {
       return
 
     }
-    console.log(justi)
+    console.log(absences)
     return {infra, absences, justi, omissions}
 }
 
