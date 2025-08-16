@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import style from './soliHistory.module.css'
 import { useState } from 'react';
+import Link from 'next/link';
 
 
 function getTimeLeft(expired_date) {
@@ -40,7 +41,7 @@ export default function SolicitudeHistory({userAbsence_parameter}){
 
 
 
-    console.log(data)
+
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
     return (
         <>
@@ -129,13 +130,14 @@ export default function SolicitudeHistory({userAbsence_parameter}){
                                                     }
 
                                                 </div>
-
+                                                
                                                 <div className={style.goTo}>
+                                                    <Link href={`/mipp/history/solicitude-detail/${absence.id}`}>
                                                     <div className={style.infoContainer}>
                                                         <Image src={"/goToInfo.svg"} width={20} height={20} alt='go to icon' />
                                                         <p className={style.goToInfoText}>Info</p>
                                                     </div>
-
+                                                    </Link>
                                                     {
                                                         (absence.is_approved && !absence.is_justified) &&
                                                         (

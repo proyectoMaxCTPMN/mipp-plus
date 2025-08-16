@@ -1,0 +1,149 @@
+/* #region Estilo general*/
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+.body{
+    background-color: #E8E8E8;
+    min-height: 100vh;
+    font-family: "Martel Sans", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5dvw;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.cardcontainer{
+    background-color: #ffffff;
+    border: 1px solid #E9E9E9;
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+    padding: 2dvw 4dvw;
+    border-radius: 5px;
+}
+
+.cardheaderimg{
+    width: 58rem;
+    height: 5rem;
+    margin-top: 1.6rem;
+    margin-left: 0.3rem;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+.form_container h1{
+    color: #434343;
+    -webkit-text-stroke: 1px #000; /* Para Chrome, Safari, Edge */
+    text-stroke: 1px #000;         /* Para otros navegadores (soporte limitado) */
+    font-size: 1.9rem;
+    padding: 1.3rem 0;
+    text-align: center;
+}
+.form_container p{
+    text-align:justify;
+}
+.form_container p span{
+    font-weight: 600;
+}
+/*#endregion*/
+
+/* #region Estilo del switch*/
+
+.switchcontainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    margin: 0 auto;
+}
+.activeLabel, .inactiveLabel{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.activeLabel {
+    color: var(--primary);
+}
+
+.inactiveLabel {
+    color: #757575;
+}
+
+.switch  {
+    width: 3.5rem;
+    height: 28px;
+    background: var(--primary);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    position: relative;
+    cursor: pointer;
+}
+
+.toggleCircle {
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+/*#endregion*/
+
+.titleofformulary{
+    color: #011D3C;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.permission_formularycontainer, .justification_formularycontainer{
+    padding-bottom: 3rem;
+    border-bottom: #D9D9D9 5px solid;
+}
+
+.cardname{
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: .9rem 2rem;
+    border-radius: 6px;
+    width: max-content;
+    position: relative;
+    right: 1.5rem;
+}
+.formulary_upperinformationcontainer{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 1.5em;
+}
+.previewcard{
+    background-color: var(--primary);
+    padding: .5rem;
+    width: max-content;
+    border-radius: 6px;
+    padding-bottom: .2rem;
+    position: relative;
+    left: 1.1em;
+}
+.searchicon{
+    width: 2rem;
+    height: auto;
+}
+.inputdate_container input{                                  /*Estilo general inputs*/
+    font-family: 'Karla',sans-serif;
+    border: none;
+    outline: 1px solid #ccc;
+    font-size: 1rem;
+    background: #fff;
+    padding: 0.2rem 0.2rem;
+    padding-right: 1.5rem;
+    box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
+    position: relative;
+    bottom: .3rem;
+}
+.inputdate_container input{
+    font-weight: bold;
+    color: #616161;
+    width: max-content;
+}

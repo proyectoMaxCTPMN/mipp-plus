@@ -178,7 +178,6 @@ export async function getUserAllDocuments(userId) {
       console.error("No se pudo obtener el registro de omisiones de marca" + JSON.stringify(error))
       return
     }
-    console.log(infra)
     return {infra, absences, justi, omissions}
 }
 
