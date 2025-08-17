@@ -74,12 +74,14 @@ export default function Justification_Formulary_Page({userId_parameter, request_
                             
                             <div className={style.justificationcontainer}>
                                 <span>JUSTIFICO:</span>
-
-                                <select name="justification_category" id="justification_category" defaultValue={formData.justification_category} disabled>
-                                    <option value="Ausencia">Ausencia</option>
-                                    <option value="Tardía">Tardía</option>
-                                </select>
-
+                                <label>
+                                    <input type="radio" name="is_absence" onChange={(e) => changeRadio(e, true)}/>
+                                    Ausencia
+                                </label>
+                                <label>
+                                    <input type="radio" name="is_absence" onChange={(e) => changeRadio(e, false)}/>
+                                    Tardía
+                                </label>
                             </div>
 
                             <div className={style.inputdatecontainer}>
