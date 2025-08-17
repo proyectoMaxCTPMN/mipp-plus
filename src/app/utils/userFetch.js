@@ -180,7 +180,6 @@ export async function getUserAllDocuments(userId) {
       return
 
     }
-    console.log(justi)
     return {infra, absences, justi, omissions}
 }
 
@@ -189,7 +188,7 @@ export async function getUserAbsence(userId) {
 
     let { data: data, error } = await supabase
     .from('absence_requests')
-    .select('')
+    .select('*, justifications!absence_requests_justification_id_fkey(justification_response_state)')
     .eq('user_id', userId)
 
     if (error) {
@@ -203,21 +202,13 @@ export async function getUserAbsence(userId) {
 export async function getUserAbsence_soli(userId) {
     const supabase = await createSupabase()
 
-    const linkedResponse = await supabase
-    .from('justi_and_req')
-    .select()
-    .eq('user_id', userId)
-
-    let prohibited_ids = [];
-    linkedResponse.data.map(row => prohibited_ids.push(row.request_id))
-
     let absenceResponse = await supabase
     .from('absence_requests')
     .select('id, absence_date, reason')
     .eq('user_id', userId)
     .eq('is_approved', true)
     .eq('is_expired', false)
-    .not("id", "in", "(" + prohibited_ids + ")")
+    .filter("justification_id", "is", null)
 
     if (absenceResponse.error) {
       console.error("No se pudo obtener el registro" + JSON.stringify(absenceResponse.error))
@@ -231,15 +222,39 @@ export async function getUserJustifiedRequestsId(userId) {
     const supabase = await createSupabase()
 
     const linkedResponse = await supabase
-    .from('justi_and_req')
-    .select()
+    .from('absence_requests')
+    .select('id')
     .eq('user_id', userId)
+    .not('justification_id', 'is', null)
 
+
+    if (linkedResponse.error) {
+      console.log(linkedResponse.error)
+    }
+    
     let prohibited_ids = [];
-    linkedResponse.data.map(row => prohibited_ids.push(row.request_id))
-
+    linkedResponse.data.map(row => prohibited_ids.push(row.id))
+    console.log(prohibited_ids)
 
     return prohibited_ids
+}
+
+export async function getUserJustifications_noRequest(userId) {
+    const supabase = await createSupabase()
+
+    const justifications = await supabase
+    .from('justifications')
+    .select('')
+    .filter('request_id', 'is', null)
+
+
+    if (justifications.error) {
+      console.log(justifications.error)
+    }
+
+  
+
+    return justifications.data
 }
 
 export async function getUserAbsence_id(userId, id) {

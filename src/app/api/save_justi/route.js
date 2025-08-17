@@ -83,6 +83,7 @@ export async function POST(request) {
       absent_time: parseInt(absent_time),
       assembly_type: (assembly_type == 'null' || assembly_type == '') ? null : parseInt(assembly_type),
       justification_text: justification_text == 'null' ? null : justification_text,
+      request_id: request_id
     }
 
 
@@ -101,21 +102,19 @@ export async function POST(request) {
         return NextResponse.json({msg: "Error Sending"}, {status: 500});
 
     }else{
-
-        const linkedResponse = await supabase
-        .from('justi_and_req')
-        .insert([{justification_id: justiReponse.data[0].id, request_id:request_id, user_id: userId}])
+        const absenceResponse = await supabase
+        .from('absence_requests')
+        .update({is_justified: true, justification_id: justiReponse.data[0].id})
+        .eq('id', request_id)
         .select()
 
-        if (linkedResponse.error) {
-            await supabase.storage.from('evidences').remove([`${evidence_file_path}`])
-            console.log(justiReponse.data[0].id)
-            console.log(request_id)
-            console.log(userId)
-            console.log(linkedResponse.data)
-            console.error("error linkeando tablas en justi_and_req" + JSON.stringify(linkedResponse.error))
+        if (absenceResponse.error) {
+            if (evidence_file_url) {
+                await supabase.storage.from('evidences').remove([`${evidence_file_path}`])
+            }
             return NextResponse.json({msg: "Error Sending"}, {status: 500});
         }
+
 
         return NextResponse.json({msg: "Succesfully Sent"}, {status: 200});
     }

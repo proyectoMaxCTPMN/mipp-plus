@@ -22,7 +22,7 @@ export default function ManageDashboard({allDocs_parameter}) {
         setSearch(value)
     }
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
-
+    const statuses = ['Pendiente', 'Rebajo salarial parcial', 'Rebajo salarial total', "Sin rebajo salarial", "Denegado", "Acogió convocatoria"]
     useEffect(() => {
         console.log(search)
         if (search != '') {
@@ -156,14 +156,7 @@ export default function ManageDashboard({allDocs_parameter}) {
                             <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
                             <h2 className={style.docType}>{doc.label}</h2>
 
-                            <p>Estado: {
-                                !doc.data.has_response
-                                ?
-                                    "Sin respuesta"
-                                :
-                                "Respondido"
-                                
-                            }
+                            <p>Estado: {statuses[doc.data.justification_response_state]}
                             </p>
 
                             <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>

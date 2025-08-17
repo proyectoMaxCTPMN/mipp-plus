@@ -40,7 +40,7 @@ export default function RecentHistory({AllDocuments_parameter}){
 
                                 <div className={style.information_upperpart}>
                                     <p>{reasons[absence.reason]}</p>
-                                    <span>{new Date(absence.request_date).toLocaleDateString('es-CR')}</span>
+                                    <span>{new Date(absence.absence_date).toLocaleDateString('es-CR')}</span>
                                 </div>
 
                                 <div className={style.information_lowerpart}>
@@ -60,9 +60,16 @@ export default function RecentHistory({AllDocuments_parameter}){
                                             absence.is_approved ? 
                                             <div className={style.clockcontainer}>
                                                 <p>Just.:</p>
-                                                
-                                                <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' className={style.clockicon}/>
-                                                <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
+                                                {
+                                                    absence.is_justified ?(
+                                                        <p style={{color: '#DEAA00'}}>Enviada</p>
+                                                    ):(
+                                                        <>
+                                                        <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' className={style.clockicon}/>
+                                                        <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
+                                                        </>
+                                                    )
+                                                }
                                             </div>
                                             :(
                                                 <div className={style.clockcontainer}>
@@ -72,14 +79,14 @@ export default function RecentHistory({AllDocuments_parameter}){
                                         }
                                     </span>
                                 </div>
-
+                                <Link href={`/mipp/history/solicitude-detail/${absence.id}`}>
                                 <div className={style.hovercontainer}>
                                     <div className={style.hover_informationcontainer}>
                                         <span className={style.verMasText}>Ver Más</span>
                                         <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
                                     </div>
                                 </div>
-
+                                </Link>
                             </div>
                         ))
                         

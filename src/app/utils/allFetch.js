@@ -92,7 +92,7 @@ export async function getPreviewData() {
 
     const justifications = await fetchData(
       "justifications",
-      "id, justification_date, has_response, justification_response_state, user_id(id, first_name, last_name)",
+      "id, justification_date, justification_response_state, user_id(id, first_name, last_name)",
       "Justificacion de Aus/Tar",
       "justi"
     );
@@ -114,4 +114,20 @@ export async function getPreviewData() {
 
     return unifiedData;
 
+}
+
+export async function getAbsenceById(absence_id){
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('absence_requests')
+    .select('')
+    .eq('id', absence_id)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
 }

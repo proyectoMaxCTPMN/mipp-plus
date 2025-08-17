@@ -63,7 +63,6 @@
     justify-content: space-between;
 }
 /*#endregion */
-
 .inputdate_container{
     position: relative;
     display: flex;  
@@ -101,13 +100,17 @@
     right: 0.4rem;
     bottom: .5rem;
 }
-.inputradio_container{
+.inputradio_container, .worktimeabsence_container{
     display: flex;
     gap: 1.8rem;
 }
-.inputradio_container input, .typeconvocatorycontainer input{
+.inputradio_container input, .typeconvocatorycontainer input, .worktimeabsence_container input{
     accent-color: var(--primary);
     margin-right: .6rem;
+}
+.worktimeabsence_container{
+    font-weight: bold;
+    margin-top: 1rem;
 }
 .hourcontainer select, .reasoncontainer select{
     appearance: none; /* Quita la flecha por defecto */
@@ -115,18 +118,29 @@
     -moz-appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg fill='darkred' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     background-repeat: no-repeat;
-    background-position: left 2rem center;
+    background-position: left 2.4rem center;
     background-size: 2.5em;
     font-weight: 600;
     margin: 0 .6em;
     position: relative;
-    top: .04em;
+}
+.hourcontainer select{
+    width: 4.5rem;
 }
 .hourcontainer , .absencescontainer, .explanationcontainer, .explanation, .evidence, .buttonscontainer, .reasoncontainer{ /*Espaciado entre filas en el form*/
     margin-top: 1.3rem;
 }
-.absencescontainer input {
-    width: 30px;
+.reasoncontainer, .hourcontainer, .leavinghour_container{
+    display: flex;
+}
+.leavinghour_container{
+    margin-left: 1.5em;
+    gap: .3em;
+}
+.absencescontainer input, .leavinghour_container input{
+    font-family: 'Karla',sans-serif;
+    font-size: 1rem;
+    width: 40px;
     border: none;
     border-bottom: 2px solid #222;
     text-align: center;
@@ -134,8 +148,9 @@
     outline: none;
     margin: 0 .3rem;
 }
-.reasoncontainer{
-    display: flex;
+.leavinghour_container input{
+    position: relative;
+    bottom: .3em;
 }
 .typeconvocatorycontainer{
     margin-left: 3dvw;

@@ -31,11 +31,12 @@ function getTimeLeft(expired_date) {
 
 
 
-export default function SolicitudeHistory({userAbsence_parameter, justifiedRequests_parameter}){
+export default function SolicitudeHistory({userAbsence_parameter, justifications_noRequest}){
+
     const router = useRouter()
     const [data, setData] = useState(userAbsence_parameter)
+    const [justi, setJusti] = useState(justifications_noRequest)
     const [search, setSearch] = useState('')
-    const [dataLength, setDataLength] = useState(-1)
 
     const handleSearch = (e) => {
         const {value} = e.target;
@@ -47,6 +48,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
     }
 
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
+    const statuses = ['Pendiente', 'Rebajo salarial parcial', 'Rebajo salarial total', "Sin rebajo salarial", "Denegado", "Acogió convocatoria"]
     return (
         <>
             <div className={style.searchContainer}>
@@ -73,7 +75,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
                 </div>
 
                 <div className={style.timeLeftHeader}>
-                    <p>Justificado</p>
+                    <p>Justificación</p>
                     <Image src={"/order_by_icon.svg"} width={10} height={10} alt='' className={style.orderIcon} />
                 </div>
 
@@ -84,7 +86,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
 
             <div className={style.main}>
                 {
-                    data?.length > 0 
+                    (data?.length > 0 || justi?.length > 0)
                     ?
                         <>
                             {
@@ -93,7 +95,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
                                         (reasons[absence.reason].toLowerCase().startsWith(search.toLowerCase()))
                                         &&(
                                             
-                                            <div className={style.registerContainer} key={absence.id} onLoad={() => setDataLength(dataLength + 1)}>
+                                            <div className={style.registerContainer} key={absence.id}>
 
                                                 <div className={style.date}>
                                                     <p className={style.dateText}>
@@ -126,12 +128,34 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
                                                             <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
                                                         </>
                                                     }
+
                                                     {
-                                                        absence.is_justified && 
+                                                        (absence.justification_id != null && absence.is_justified) &&
                                                         <>
-                                                            <p style={{color: "green"}}>Justificado</p>
+                                                            {
+                                                                (absence.justifications?.justification_response_state == 0 || absence.justifications.justification_response_state == 5) && 
+                                                                <>
+                                                                    <p style={{color: "#DEAA00"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                                </>
+                                                            }
+
+                                                            {
+                                                                ([1,2,3].includes(absence.justifications?.justification_response_state)) && 
+                                                                <>
+                                                                    <p style={{color: "#0B8300"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                                </>
+                                                            }
+
+                                                            {
+                                                                (absence.justifications?.justification_response_state == 4) && 
+                                                                <>
+                                                                    <p style={{color: "#830000"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                                </>
+                                                            }
                                                         </>
                                                     }
+
+                                                    
 
                                                 </div>
                                                 
@@ -164,7 +188,74 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
                             }
 
                             {
-                                data.filter((absence) => reasons[absence.reason].toLowerCase().startsWith(search.toLowerCase())).length == 0 &&
+                                justi.map((justification) => 
+                                    (
+                                        (reasons[justification.justification_reason].toLowerCase().startsWith(search.toLowerCase()))
+                                        &&(
+                                            
+                                            <div className={style.registerContainer} key={justification.id} >
+
+                                                <div className={style.date}>
+                                                    <p className={style.dateText}>
+                                                        {new Date(justification.absence_date).toLocaleDateString('es-CR')}
+                                                    </p>
+                                                </div>
+
+                                                <div className={style.reason}>
+                                                    <div className={style.square} />
+                                                    <p className={style.reasonText}>{reasons[justification.justification_reason]}</p>
+                                                </div>
+
+                                                <div className={style.state}>
+                                                </div>
+
+                                                <div className={style.timeLeft}>
+
+                                                    {
+                                                        (justification.justification_response_state == 0 || justification.justification_response_state == 5) && 
+                                                        <>
+                                                            <p style={{color: "#DEAA00"}}>{statuses[justification.justification_response_state]}</p>
+                                                        </>
+                                                    }
+
+                                                    {
+                                                        ([1,2,3].includes(justification.justification_response_state)) && 
+                                                        <>
+                                                            <p style={{color: "#0B8300"}}>{statuses[justification.justification_response_state]}</p>
+                                                        </>
+                                                    }
+
+                                                    {
+                                                        (justification.justification_response_state == 4) && 
+                                                        <>
+                                                            <p style={{color: "#830000"}}>{statuses[justification.justification_response_state]}</p>
+                                                        </>
+                                                    }
+
+                                                </div>
+                                                
+                                                <div className={style.goTo}>
+                                                    <Link href={`/mipp/history/solicitude-detail/${justification.id}`}>
+                                                    <div className={style.infoContainer}>
+                                                        <Image src={"/goToInfo.svg"} width={20} height={20} alt='go to icon' />
+                                                        <p className={style.goToInfoText}>Info</p>
+                                                    </div>
+                                                    </Link>
+                                                </div>
+
+                                            </div>
+                                        )
+                                    )
+
+                                )
+                                
+                            }
+
+                            
+
+                            {
+                                (data.filter((absence) => reasons[absence.reason].toLowerCase().startsWith(search.toLowerCase())).length == 0 &&
+                                justi.filter((justification) => reasons[justification.justification_reason].toLowerCase().startsWith(search.toLowerCase())).length == 0) &&
                                     <div className={style.notRegisterContainer}>
                                         <h3>No se encontraron registros con "{search}"</h3>
                                         <Image src={"/not_found.webp"} width={100} height={100} alt='not found image' />
@@ -172,7 +263,6 @@ export default function SolicitudeHistory({userAbsence_parameter, justifiedReque
                                 
                             }
                         </>
-                        
                     :
                     <div className={style.notRegisterContainer}>
                         <h3>Nada que mostrar por aquí</h3>
