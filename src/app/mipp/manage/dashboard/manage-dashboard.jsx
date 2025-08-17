@@ -2,13 +2,15 @@
 import Image from 'next/image';
 import style from './manage-dashboard.module.css'
 import {useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 
 
 
 
 
 export default function ManageDashboard({allDocs_parameter}) {
-    
+    const router = useRouter()
     const [data, setData] = useState(allDocs_parameter)
     const [unfilteredData, setUnfilteredData] = useState(allDocs_parameter)
     const [search, setSearch] = useState('')
@@ -86,68 +88,68 @@ export default function ManageDashboard({allDocs_parameter}) {
                 data.map((doc, index) => (
 
                     (doc.type == 'absence' && showRequest) ?
-                    <div className={style.docSquare} key={index}>
+                        <div className={style.docSquare} key={index} onClick={() => router.push(`/mipp/manage/${doc.type}/${doc.data.id}`)}>
 
-                        <div className={style.docContent}>
-                            <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
-                            <h2 className={style.docType}>{doc.label}</h2>
+                            <div className={style.docContent}>
+                                <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
+                                <h2 className={style.docType}>{doc.label}</h2>
 
-                            <p>Estado: {
-                                !doc.data.is_pending
-                                ?
-                                    !doc.data.is_denied
+                                <p>Estado: {
+                                    !doc.data.is_pending
                                     ?
-                                        !doc.data.is_justified
+                                        !doc.data.is_denied
                                         ?
-                                            "Aprobado"
+                                            !doc.data.is_justified
+                                            ?
+                                                "Aprobado"
+                                            :
+                                            "Justificado"
+
                                         :
-                                        "Justificado"
+                                        "Denegado"
 
                                     :
-                                    "Denegado"
+                                    "Pendiente"
+                                    
+                                }
+                                </p>
 
-                                :
-                                "Pendiente"
-                                
-                            }
-                            </p>
+                                <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
 
-                            <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
-
+                            </div>
+                            
+                            <div className={style.squareFooter}>
+                                <p>Manejar</p>
+                                <Image src={'/manage_icon.svg'} height={20} width={20} alt='goTo icon'></Image>
+                            </div>
                         </div>
-                        
-                        <div className={style.squareFooter}>
-                            <p>Manejar</p>
-                            <Image src={'/manage_icon.svg'} height={20} width={20} alt='goTo icon'></Image>
-                        </div>
-                    </div>
                     :
                     (doc.type == 'infra' && showInfra) ?
-                    <div className={style.docSquare} key={index}>
+                        <div className={style.docSquare} key={index}>
 
-                        <div className={style.docContent}>
-                            <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
-                            <h2 className={style.docType}>{doc.label}</h2>
+                            <div className={style.docContent}>
+                                <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
+                                <h2 className={style.docType}>{doc.label}</h2>
 
-                            <p>Estado: {
-                                !doc.data.is_revised
-                                ?
-                                    "Sin revisar"
-                                :
-                                "Revisado"
-                                
-                            }
-                            </p>
+                                <p>Estado: {
+                                    !doc.data.is_revised
+                                    ?
+                                        "Sin revisar"
+                                    :
+                                    "Revisado"
+                                    
+                                }
+                                </p>
 
-                            <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
+                                <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
 
+                            </div>
+                            
+                            <div className={style.squareFooter}>
+                                <p>Manejar</p>
+                                <Image src={'/manage_icon.svg'} height={20} width={20} alt='goTo icon'></Image>
+                            </div>
                         </div>
-                        
-                        <div className={style.squareFooter}>
-                            <p>Manejar</p>
-                            <Image src={'/manage_icon.svg'} height={20} width={20} alt='goTo icon'></Image>
-                        </div>
-                    </div>
                     :
                     (doc.type == 'justi' && showJustify) ?
                     <div className={style.docSquare} key={index}>
