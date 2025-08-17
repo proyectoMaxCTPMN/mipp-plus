@@ -203,21 +203,13 @@ export async function getUserAbsence(userId) {
 export async function getUserAbsence_soli(userId) {
     const supabase = await createSupabase()
 
-    const linkedResponse = await supabase
-    .from('justi_and_req')
-    .select()
-    .eq('user_id', userId)
-
-    let prohibited_ids = [];
-    linkedResponse.data.map(row => prohibited_ids.push(row.request_id))
-
     let absenceResponse = await supabase
     .from('absence_requests')
     .select('id, absence_date, reason')
     .eq('user_id', userId)
     .eq('is_approved', true)
     .eq('is_expired', false)
-    .not("id", "in", "(" + prohibited_ids + ")")
+    .filter("justification_id", "is", null)
 
     if (absenceResponse.error) {
       console.error("No se pudo obtener el registro" + JSON.stringify(absenceResponse.error))
