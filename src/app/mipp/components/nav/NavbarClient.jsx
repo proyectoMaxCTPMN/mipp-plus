@@ -63,10 +63,11 @@ const historyArray = [
 
 const othersArray = [
     {
-        "id": 0,
-        "text": "Solicitudes, justificaciones de ausencias y tardías", 
-        "link": "/mipp/manage/solicitudes",
-        "icon": "/menuIcons/mobile/user-clock.svg"
+        "id": 3,
+        "text": "Todos los documentos", 
+        "link": "/mipp/manage/dashboard",
+        "icon": "/menuIcons/mobile/infra-broken.svg"
+
     },
     {
         "id": 1,
@@ -81,10 +82,10 @@ const othersArray = [
         "icon": "/menuIcons/mobile/infra-broken.svg"
     },
     {
-        "id": 3,
-        "text": "Todos los documentos", 
-        "link": "/mipp/manage/dashboard",
-        "icon": "/menuIcons/mobile/infra-broken.svg"
+        "id": 0,
+        "text": "Solicitudes, justificaciones de ausencias y tardías", 
+        "link": "/mipp/manage/solicitudes",
+        "icon": "/menuIcons/mobile/user-clock.svg"
     },
 ]
 
@@ -278,7 +279,7 @@ export default function NavbarClient({userRoles_parameter}) {
                                 onMouseEnter={(e) => setHoverIndex(e.currentTarget.dataset.childId)} 
                                 onMouseLeave={() => {setHoverIndex(0);}}
                                 >
-                                    <p className={style.subText}>Docs</p>
+                                    <p className={style.subText}>Manejar</p>
                                 </div>
                             }
 
