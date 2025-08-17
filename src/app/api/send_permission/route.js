@@ -26,6 +26,7 @@ export async function POST(request) {
     let evidence_file_url = null;
 
     if (typeof evidence_file == File) {
+        console.log("entro al subir archivo")
         const allowedTypes = [
         "application/pdf",
         "image/jpeg",
