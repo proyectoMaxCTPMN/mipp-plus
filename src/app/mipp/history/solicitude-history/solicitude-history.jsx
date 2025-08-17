@@ -77,7 +77,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
                 </div>
 
                 <div className={style.timeLeftHeader}>
-                    <p>Justificado</p>
+                    <p>Justificación</p>
                     <Image src={"/order_by_icon.svg"} width={10} height={10} alt='' className={style.orderIcon} />
                 </div>
 
