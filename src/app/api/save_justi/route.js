@@ -102,6 +102,18 @@ export async function POST(request) {
         return NextResponse.json({msg: "Error Sending"}, {status: 500});
 
     }else{
+        const absenceResponse = await supabase
+        .from('absence_requests')
+        .update({is_justified: true, justification_id: justiReponse.data[0].id})
+        .select()
+
+        if (absenceResponse.error) {
+            if (evidence_file_url) {
+                await supabase.storage.from('evidences').remove([`${evidence_file_path}`])
+            }
+            return NextResponse.json({msg: "Error Sending"}, {status: 500});
+        }
+
 
         return NextResponse.json({msg: "Succesfully Sent"}, {status: 200});
     }
