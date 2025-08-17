@@ -293,3 +293,21 @@ export async function getUserRoles(userId) {
 
   return roles
 }
+
+export async function getUserInfo(userId) {
+  const supabase = await createSupabase()
+
+  const { data, error } = await supabase
+  .from('users')
+  .select("id, first_name, last_name, second_last_name, has_ownership, positions(position)")
+  .eq("id", userId)
+
+  if (error) {
+    console.error("Error fetching info:", error)
+    return null
+  }
+  
+  
+
+  return data[0]
+}
