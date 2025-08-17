@@ -105,6 +105,7 @@ export async function POST(request) {
         const absenceResponse = await supabase
         .from('absence_requests')
         .update({is_justified: true, justification_id: justiReponse.data[0].id})
+        .eq('id', request_id)
         .select()
 
         if (absenceResponse.error) {
