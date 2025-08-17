@@ -190,7 +190,6 @@ export async function getUserAbsence(userId) {
     .from('absence_requests')
     .select('*, justifications!absence_requests_justification_id_fkey(justification_response_state)')
     .eq('user_id', userId)
-    .filter('justification_id', 'not.is', null)
 
     if (error) {
       console.error("No se pudo obtener el registro" + JSON.stringify(error))

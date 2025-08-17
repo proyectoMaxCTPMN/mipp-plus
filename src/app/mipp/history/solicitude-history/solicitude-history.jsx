@@ -38,8 +38,6 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
     const [justi, setJusti] = useState(justifications_noRequest)
     const [search, setSearch] = useState('')
 
-    console.log(justi.length)
-
     const handleSearch = (e) => {
         const {value} = e.target;
         setSearch(value)
@@ -94,7 +92,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
                             {
                                 data.map((absence) => 
                                     (
-                                        (reasons[absence.reason].toLowerCase().startsWith(search.toLowerCase()) && absence.justifications == typeof null)
+                                        (reasons[absence.reason].toLowerCase().startsWith(search.toLowerCase()))
                                         &&(
                                             
                                             <div className={style.registerContainer} key={absence.id}>
@@ -132,25 +130,32 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
                                                     }
 
                                                     {
-                                                        (absence.is_justified && absence.justifications.justification_response_state == 0 || absence.justifications.justification_response_state == 5) && 
+                                                        (absence.justification_id != null && absence.is_justified) &&
                                                         <>
-                                                            <p style={{color: "#DEAA00"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                            {
+                                                                (absence.justifications?.justification_response_state == 0 || absence.justifications.justification_response_state == 5) && 
+                                                                <>
+                                                                    <p style={{color: "#DEAA00"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                                </>
+                                                            }
+
+                                                            {
+                                                                ([1,2,3].includes(absence.justifications?.justification_response_state)) && 
+                                                                <>
+                                                                    <p style={{color: "#0B8300"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                                </>
+                                                            }
+
+                                                            {
+                                                                (absence.justifications?.justification_response_state == 4) && 
+                                                                <>
+                                                                    <p style={{color: "#830000"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                                </>
+                                                            }
                                                         </>
                                                     }
 
-                                                    {
-                                                        (absence.is_justified && [1,2,3].includes(absence.justifications.justification_response_state)) && 
-                                                        <>
-                                                            <p style={{color: "#0B8300"}}>{statuses[absence.justifications.justification_response_state]}</p>
-                                                        </>
-                                                    }
-
-                                                    {
-                                                        (absence.is_justified && absence.justifications.justification_response_state == 4) && 
-                                                        <>
-                                                            <p style={{color: "#830000"}}>{statuses[absence.justifications.justification_response_state]}</p>
-                                                        </>
-                                                    }
+                                                    
 
                                                 </div>
                                                 
