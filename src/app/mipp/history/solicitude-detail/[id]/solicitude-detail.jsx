@@ -134,8 +134,8 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                         <div className={style.evidence}>
                                             <span>Adjunte comprobante o evidencia:</span>
                                             {
-                                                !absencef_parameter.evidence_file_url == null ?(
-                                                    <Link href={absencef_parameter.evidence_file_url}>
+                                                absencef_parameter.evidence_file_url != null ?(
+                                                    <Link href={absencef_parameter.evidence_file_url} style={{width: '100%', fontStyle:'italic', color: '#616161'}}>
                                                         <div className={style.evidence_input}>
                                                             <p>Ver Archivo...</p>
                                                         </div>
