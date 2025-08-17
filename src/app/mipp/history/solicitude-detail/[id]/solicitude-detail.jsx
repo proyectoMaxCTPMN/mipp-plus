@@ -126,7 +126,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                                 absencef_parameter.reason== 3 &&(
                                                     <div className={style.explanationcontainer}>
                                                         <span>Explique:</span>  
-                                                        <textarea name="personal_reason" id="personal_reason" className={style.explanation} disabled>{absencef_parameter.personal_reason}</textarea>
+                                                        <textarea name="personal_reason" id="personal_reason" defaultValue={absencef_parameter.personal_reason} className={style.explanation} disabled></textarea>
                                                     </div>
                                                 )
                                             }
