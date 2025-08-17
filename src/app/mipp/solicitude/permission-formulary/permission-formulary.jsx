@@ -225,13 +225,13 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                                     Circuital
                                 </label>
                                 <label>
-                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 3)}/>
+                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 4)}/>
                                     Sindical
                                 </label>
                             </div>
                             )}
                         </div>
-                        {formData.reason === "3" &&(
+                        {formData.reason == "3" &&(
                             <div className={style.explanationcontainer}>
                                 <span>Explique:</span>  
                                 <textarea name="personal_reason" id="personal_reason" className={style.explanation} onChange={handleInputChange}></textarea>

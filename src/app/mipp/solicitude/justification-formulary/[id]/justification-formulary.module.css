@@ -1,3 +1,4 @@
+/*#region*/
 .body{
     background-color: #E8E8E8;
     min-height: 100vh;
@@ -56,7 +57,7 @@
     text-align:justify;
 }
 
-.form_container p span, .justificationcontainer span{
+.form_container p span{
     font-weight: 600;
 }
 
@@ -69,12 +70,15 @@
     justify-content: space-between;
     width: 100%;
 }
+/*#endregion*/
 
-.justificationcontainer, .absent_timecontainer{
+.justificationcontainer{
     display: flex;
+    gap: 1.8rem;
+    font-weight: bold;
 }
 
-.justificationcontainer select, .inputdatecontainer input, .reasoncontainer select, .explanation{ /*Estilo general inputs*/
+.inputdatecontainer input, .reasoncontainer select, .explanation{ /*Estilo general inputs*/
     font-family: 'Karla',sans-serif;
     border: none;
     outline: 1px solid #ccc;
@@ -87,16 +91,11 @@
     bottom: .3rem;
 }
 
-.justificationcontainer select, .reasoncontainer select{ /*Estilo general selects*/
+.reasoncontainer select{ /*Estilo general selects*/
     appearance: none; /* Quita la flecha por defecto */
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg fill='darkred' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right -.5em center;
-    background-size: 2.5em;
     margin: 0 .6em;
-    position: relative;
 }
 
 .inputdatecontainer{
@@ -111,7 +110,6 @@
 
 .inputdatecontainer input{
     font-weight: bold;
-    color: var(--primary)c5;
 }
 
 .inputdatecontainer input[type="date"]::-webkit-calendar-picker-indicator {
@@ -127,18 +125,15 @@
 .inputdate_calendar{
     position: absolute;
     right: 0.4rem;
-    bottom: .5rem;
+    bottom: 0.55rem;
 }
 
 .absent_timecontainer{
     display: flex;
-    flex-direction: row;
-    place-content: center;
-    place-items: center;
     gap: 1.5rem;
 }
 
-.isThere_attachement, .absent_timecontainer input{
+.isThere_attachement, .absencescontainer, .leavinghour_container{
     margin: .8em 0;
     display: flex;
     gap: .8rem;
@@ -147,8 +142,11 @@
 .isThere_attachement input, .absent_timecontainer input{
     accent-color: var(--primary);
 }
-.isThere_attachement input{
+.isThere_attachement input, .justificationcontainer input{
     margin-right: 5px;
+}
+.form_timecontainer, .reasoncontainer{
+    display: flex;
 }
 .absent_time_inputcontainer{
     gap: 5px;
@@ -157,7 +155,7 @@
     vertical-align: baseline;
     place-items: baseline;
 }
-.absencescontainer input {
+.absencescontainer input, .leavinghour_container input{
     width: 30px;
     border: none;
     border-bottom: 2px solid #222;
@@ -166,14 +164,14 @@
     outline: none;
     margin: 0 .3rem;
 }
-
+.leavinghour_container{
+    display: flex;
+    margin-left: 1.5em;
+    gap: .3em;
+}
 .reasoncontainer, .explanationcontainer{
     margin: .8em 0;
 }
-.reasoncontainer select{
-    top: .1em;
-}
-
 .typeconvocatorycontainer{
     display: flex;
     gap: .8em;
@@ -186,12 +184,10 @@
 
 .evidence{
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
     gap: 0.6em;
-    place-content: center;
-    place-items: center;
     font-weight: bold;
+    font-style: italic;
+    color: #616161;
 }
 
 .evidence input{
@@ -204,6 +200,8 @@
     padding: 5px;
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
+    position: relative;
+    bottom: 0.35rem;
 
     &:hover{
         cursor: pointer;
