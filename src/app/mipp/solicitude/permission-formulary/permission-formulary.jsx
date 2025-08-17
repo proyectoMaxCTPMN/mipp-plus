@@ -14,8 +14,10 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
         userId: userId_parameter,
         absence_date: '',
         is_whole_day: false,
+        is_absence: '',
         from_hour: '',
         to_hour: '',
+        leaving_at: '',
         absent_time: '',
         reason: '',
         assembly_type: null,
@@ -120,6 +122,17 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                             </div>
                         </div>
 
+                        <div className={style.worktimeabsence_container}>
+                            <p>Solicito permiso para:</p>
+                            <label>
+                                <input type="radio" name="is_absence" onChange={(e) => changeRadio(e, true)}/>
+                                Ausencia
+                            </label>
+                            <label>
+                                <input type="radio" name="is_absence" onChange={(e) => changeRadio(e, false)}/>
+                                Tardía
+                            </label>
+                        </div>
                         <div className={style.hourcontainer}>
 
                             <span>Hora: Desde las</span>
@@ -163,6 +176,15 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                                 <option value="4:30">4:30</option>
                             </select>
 
+                            {
+                                formData.is_absence &&(
+                                    <div className={style.leavinghour_container}>
+                                        <p>Saliendo del centro educativo a las</p>
+                                        <input type="text" name="leaving_at" value={formData.leaving_at} onChange={handleInputChange}/>
+                                        
+                                    </div>
+                                )
+                            }
                         </div>
 
                         <div className={style.absencescontainer}>
@@ -192,15 +214,19 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                                 <span>Tipo de Convocatoria:</span>
                                 <label>
                                     <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 1)}/>
-                                    Sindical
-                                </label>
-                                <label>
-                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 2)}/>
                                     Regional
                                 </label>
                                 <label>
-                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 3)}/>
+                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 2)}/>
                                     Nacional
+                                </label>
+                                <label>
+                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 3)}/>
+                                    Circuital
+                                </label>
+                                <label>
+                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 3)}/>
+                                    Sindical
                                 </label>
                             </div>
                             )}
@@ -209,7 +235,6 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                             <div className={style.explanationcontainer}>
                                 <span>Explique:</span>  
                                 <textarea name="personal_reason" id="personal_reason" className={style.explanation} onChange={handleInputChange}></textarea>
-                                
                             </div>
                         )}
                         <div className={style.evidence}>
