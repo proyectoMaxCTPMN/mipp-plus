@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 .container * {
-    font-family: "Merriweather Sans", sans-serif;
+    font-family: var(--font-merriweather), "Merriweather Sans", sans-serif;
 }
 
 .container{
@@ -74,7 +73,7 @@
     align-items: flex-start;
 }
 .information_upperpart p, .information_upperpart span{
-    font-family: 'Karla',sans-serif;
+    font-family: var(--font-karla),'Karla',sans-serif;
     font-weight: bold;
     font-size: 1.2em;
 }

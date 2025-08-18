@@ -8,7 +8,7 @@
 }
 
 .cardcontainer{
-    font-family: "Martel Sans", sans-serif;
+    font-family: var(--font-martel), "Martel Sans", sans-serif;
     background-color: #ffffff;
     text-align: center;
     width: 80%;
@@ -51,7 +51,7 @@
 }
 
 .idcontainer label{
-    font-family: "Martel Sans", sans-serif;
+    font-family: var(--font-martel), "Martel Sans", sans-serif;
     color: #2c2c2c;
     font-size: 1.1em;
 }
