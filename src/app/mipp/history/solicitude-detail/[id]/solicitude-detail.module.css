@@ -1,9 +1,8 @@
 /* #region Estilo general*/
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 .body{
     background-color: #E8E8E8;
     min-height: 100vh;
-    font-family: "Martel Sans", sans-serif;
+    font-family: var(--font-martel), "Martel Sans", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -147,7 +146,7 @@
     margin-right: 1rem;
 }
 .inputdate_container input, .hourcontainer select, .reasoncontainer select, .explanation{                                  /*Estilo general inputs*/
-    font-family: 'Karla',sans-serif;
+    font-family: var(--font-karla),'Karla',sans-serif;
     border: none;
     outline: 1px solid #ccc;
     font-size: 1rem;

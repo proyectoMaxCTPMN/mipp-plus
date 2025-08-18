@@ -11,7 +11,28 @@ import { Suspense, useEffect, useState } from "react";
 import { getCurrentUser } from "../utils/auth";
 import { getUserRoles } from "../utils/userFetch";
 
+import { Merriweather_Sans, Karla, Martel_Sans } from 'next/font/google'
 
+const merriweather_sans = Merriweather_Sans({
+    weight: ['300', '400', '500', '600', '700', '800'],
+    subsets: ['latin'],
+    display: 'swap', // Optional: optimizes font loading
+    variable: '--font-merriweather', // Optional: defines a CSS variable
+});
+
+const karla = Karla({
+    weight: ['300', '400', '500', '600', '700', '800'],
+    subsets: ['latin'],
+    display: 'swap', // Optional: optimizes font loading
+    variable: '--font-karla', // Optional: defines a CSS variable
+});
+
+const martel_sans = Martel_Sans({
+    weight: ['200', '300', '400', '600', '700', '800', '900'],
+    subsets: ['latin'],
+    display: 'swap', // Optional: optimizes font loading
+    variable: '--font-martel', // Optional: defines a CSS variable
+});
 
 
 
@@ -44,7 +65,7 @@ export default function MippLayout({children}) {
     }
 
     return (
-        <>
+        <div className={`${merriweather_sans.variable} ${karla.variable} ${martel_sans.variable} `}>
             <Navbar userRoles_parameter={userRoles}/>
             <PopUpContainer />
             <Suspense fallback={                
@@ -53,6 +74,6 @@ export default function MippLayout({children}) {
             >
                 {children}
             </Suspense>
-        </>
+        </div>
     );
 }

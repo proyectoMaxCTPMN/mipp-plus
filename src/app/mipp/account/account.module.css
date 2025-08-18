@@ -7,7 +7,7 @@
     margin-left: 5dvw;
 }
 .cardcontainer{
-    font-family: "Martel Sans", sans-serif;
+    font-family: var(--font-martel), "Martel Sans", sans-serif;
     background-color: #ffffff;
     text-align: center;
     width: 80%;
@@ -68,7 +68,7 @@
     width: 100%;
 }
 .namecontainer label, .firstlastnamecontainer label, .secondlastnamecontainer label, .idcontainer label, .emailcontainer label, .titlecontainer label, .positioncontainer label, .conditioncontainer label, .methodcontainer, .currentpasscontainer label, .newpasscontainer label, .confirmpasscontainer label{
-    font-family: "Martel Sans", sans-serif;
+    font-family: var(--font-martel), "Martel Sans", sans-serif;
     color: #2c2c2c;
     font-size: 1.1em;
 }
