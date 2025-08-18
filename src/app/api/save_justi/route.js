@@ -15,7 +15,7 @@ export async function POST(request) {
     const request_id = formData.get('request_id')
     const userId = formData.get('userId')
     const absence_date = formData.get('absence_date')
-    const justification_category = formData.get('justification_category')
+    const is_absence = formData.get('is_absence')
     const is_all_day = formData.get('is_all_day')
     const attachment_url = formData.get('attachment_url')
     const justification_reason = formData.get('justification_reason')
@@ -76,7 +76,7 @@ export async function POST(request) {
     const toSend = { 
       user_id: userId,
       absence_date: absence_date,
-      justification_category,
+      is_absence,
       is_all_day,
       attachment_url: changed_input ? evidence_file_url : attachment_url,
       justification_reason,
