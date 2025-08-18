@@ -40,7 +40,7 @@ export default function RecentHistory({AllDocuments_parameter}){
 
                                 <div className={style.information_upperpart}>
                                     <p>{reasons[absence.reason]}</p>
-                                    <span>{new Date(absence.request_date).toLocaleDateString('es-CR')}</span>
+                                    <span>{new Date(absence.absence_date).toLocaleDateString('es-CR')}</span>
                                 </div>
 
                                 <div className={style.information_lowerpart}>
