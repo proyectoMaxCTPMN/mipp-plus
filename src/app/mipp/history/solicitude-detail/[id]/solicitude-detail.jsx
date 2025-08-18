@@ -4,7 +4,7 @@ import style from './solicitude-detail.module.css'
 import { useState } from 'react';
 import Link from 'next/link'
 
-export default function Solicitude_Detail({fullName_parameter, absencef_parameter,title_parameter,position_parameter}){
+export default function Solicitude_Detail({fullName_parameter, absencef_parameter,title_parameter,position_parameter,justificationf_parameter}){
     const [isSolicitudes, setIsSolicitudes] = useState(true);
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
     return (
@@ -29,13 +29,13 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                 <Image src={"/Card-header.svg"} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
                                 <div className={style.form_container}>
                                     <h1>Formulario de solicitud de permiso salida/ausencia/tardía/incapacidad</h1>
-                                    <p style={{fontSize: '1rem'}}><span>Importante:</span> Todo permiso de ausencia laboral está sujeto a cumplimiento de requisitos y copia adjunta de documento pertinente de cita, convocatoria o licencia, de ser posible con tres días de anticipación. Posterior a la ausencia, el funcionario debe hacer entrega del comprobante pertinente de asistencia en el plazo de 48 (cuarenta y ocho horas). Las licencias dependen de requisitos  previos para su goce. De no presentar el comprobante se transmitirá lo que corresponda.</p>
+                                    <p style={{fontSize: '.9rem'}}><span>Importante:</span> Todo permiso de ausencia laboral está sujeto a cumplimiento de requisitos y copia adjunta de documento pertinente de cita, convocatoria o licencia, de ser posible con tres días de anticipación. Posterior a la ausencia, el funcionario debe hacer entrega del comprobante pertinente de asistencia en el plazo de 48 (cuarenta y ocho horas). Las licencias dependen de requisitos  previos para su goce. De no presentar el comprobante se transmitirá lo que corresponda.</p>
                                 
                                     <form className={style.form}>
                                         <div className={style.form_row}>
 
                                             <div className={style.inputdate_container}>
-                                                <label>PERMISO PARA AUSENTARSE EN LA FECHA:</label>
+                                                <label style={{position: 'relative', top: '.2rem'}}>PERMISO PARA AUSENTARSE EN LA FECHA:</label>
                                                 <input type="text" name="absence_date" disabled defaultValue={new Date(absencef_parameter.absence_date).toLocaleDateString('es-CR')}/>
                                             </div>
 
@@ -62,11 +62,11 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                             </label>
                                         </div>
                                         <div className={style.hourcontainer}>
-                                            <span>Hora: Desde las</span>
+                                            <span style={{position: 'relative', top: '.2rem'}}>Hora: Desde las</span>
                                             <select name="from_hour" id="from_hour" disabled>
                                                     <option>{absencef_parameter.from_hour}</option>
                                             </select>
-                                            <span>hasta las</span>
+                                            <span style={{position: 'relative', top: '.2rem'}}>hasta las</span>
                                             <select name="to_hour" id="to_hour" disabled>
                                                 <option value="">{absencef_parameter.to_hour}</option>
                                             </select>
@@ -74,7 +74,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                             {
                                                 absencef_parameter.is_absence &&(
                                                     <div className={style.leavinghour_container}>
-                                                        <p>Saliendo del centro educativo a las<span>{absencef_parameter.leaving_at}</span></p>
+                                                        <p style={{position: 'relative', top: '.2rem'}}>Saliendo del centro educativo a las<span>{absencef_parameter.leaving_at}</span></p>
                                                     </div>
                                                 )
                                             }
@@ -92,7 +92,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                         </div>
 
                                         <div className={style.reasoncontainer}>
-                                            <span>Motivo:</span>
+                                            <span style={{position: 'relative', top: '.2rem'}}>Motivo:</span>
                                             <select name="reason" id="reason" disabled>
                                                 <option value="">{reasons[absencef_parameter.reason]}</option>
                                             </select>
@@ -159,20 +159,19 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                 <div className={style.formulary_upperinformationcontainer}>
                                     <div className={style.cardname}>{fullName_parameter.full_name}</div>
                                     <div className={style.previewcard}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>
-                                    
+
                                     <div className={style.cardcontainer}>
                                         <Image src={'/Card-header.svg'} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
                                         <div className={style.form_container}>
                                             <h1>Formulario de justificación de permiso salida/ausencia/tardía/incapacidad</h1>
                                             <p><span>Importante:</span> Todo permiso de ausencia laboral está sujeto a cumplimiento de requisitos y copia adjunta de documento pertinente de cita, convocatoria o licencia, de ser posible con tres días de anticipación. Posterior a la ausencia, el funcionario debe hacer entrega del comprobante pertinente de asistencia en el plazo de 48 (cuarenta y ocho horas). Las licencias dependen de requisitos  previos para su goce. De no presentar el comprobante se transmitirá lo que corresponda.</p>
 
-                                            <form className={style.form} onSubmit={handleSubmit}>
-
+                                            <form className={style.form}>
                                                 <div className={style.form_row}>
                                                     <div className={style.justificationcontainer}>
                                                         <span>JUSTIFICO:</span>
                                                         <label>
-                                                            <input type="radio" name="is_absence" defaultChecked={formData.is_absence} disabled/>
+                                                            <input type="radio" name="is_absence" defaultChecked={justificationf_parameter} disabled/>
                                                             Ausencia
                                                         </label>
                                                         <label>
@@ -229,12 +228,8 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                                 
                                                 <div className={style.reasoncontainer}>
                                                     <span>Motivo:</span>
-                                                    <select name="reasons" id="reasons" disabled value={formData.justification_reason} onChange={e => setSelectedreason(e.target.value)}>
-                                                        <option value="">Elija el motivo</option>
-                                                        <option value="1">Cita Médica</option>
-                                                        <option value="2">Convocatoria asamblea</option>
-                                                        <option value="3">Asuntos personales</option>
-                                                        <option value="4">Enfermedad</option>
+                                                    <select name="reasons" id="reasons" disabled value={formData.justification_reason}>
+                                                        <option value="">{reasons[absencef_parameter.reason]}</option>
                                                     </select>
 
                                                     {formData.justification_reason == "2" &&(
@@ -273,11 +268,11 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                                 <div className={style.isThere_attachement}>
                                                         <span>Adjunto comprobante:</span>
                                                         <label>
-                                                            <input type="radio" name="attachment_url" defaultChecked={hasAttachment} onClick={() => setHasAttachment(true)} />
+                                                            <input type="radio" name="attachment_url" defaultChecked={hasAttachment}/>
                                                             Si
                                                         </label>
                                                         <label>
-                                                            <input type="radio" name="attachment_url" defaultChecked={!hasAttachment} onClick={() => setHasAttachment(false)} />
+                                                            <input type="radio" name="attachment_url" defaultChecked={!hasAttachment}/>
                                                             No
                                                         </label>
                                                 </div>
