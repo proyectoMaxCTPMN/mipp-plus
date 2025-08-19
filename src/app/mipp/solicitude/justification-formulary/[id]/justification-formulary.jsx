@@ -164,7 +164,6 @@ export default function Justification_Formulary_Page({userId_parameter, request_
                                     </label>
                                 </div>
                             )}
-
                         </div>
 
                             {

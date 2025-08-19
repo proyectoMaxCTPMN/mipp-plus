@@ -12,6 +12,7 @@
     display: flex;
     flex-direction: column;
     width: 80%;
+    padding: 2rem;
 }
 .cardcontainer{
     background-color: #ffffff;
@@ -22,22 +23,25 @@
 }
 
 .cardheaderimg{
-    width: 58rem;
+    width: 100%;
     height: 5rem;
-    margin-top: 1.6rem;
+    margin-top: 1rem;
     margin-left: 0.3rem;
     position: relative;
     left: 50%;
     transform: translate(-50%);
 }
 .form{
-    margin-top: 1.2rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
 }   
 .form_container h1{
     color: #434343;
     -webkit-text-stroke: 1px #000; /* Para Chrome, Safari, Edge */
     text-stroke: 1px #000;         /* Para otros navegadores (soporte limitado) */
-    font-size: 1.9rem;
+    font-size: 1.7rem;
     padding: 1.3rem 0;
     text-align: center;
 }
@@ -51,6 +55,45 @@
     display: flex;
     justify-content: space-between;
 }
+
+.cardname{
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: .8rem 2rem;
+    border-radius: 6px;
+    width: max-content;
+    position: relative;
+    right: 1.5rem;
+}
+.formulary_upperinformationcontainer{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 1.5em;
+    height: 3.2rem;
+}
+.previewcard{
+    background-color: var(--primary);
+    padding: .5rem;
+    width: max-content;
+    border-radius: 6px;
+    position: relative;
+    left: 1.1em;
+}
+.searchicon{
+    width: 2rem;
+    height: auto;
+}
+
+.titleofformulary{
+    color: #011D3C;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+.permission_formularycontainer, .justification_formularycontainer{
+    padding-bottom: 3rem;
+    border-bottom: #D9D9D9 5px solid;
+}
 /*#endregion*/
 
 /* #region Estilo del switch*/
@@ -59,7 +102,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 2rem;
     margin: 0 auto;
 }
 .activeLabel, .inactiveLabel{
@@ -97,54 +139,16 @@
 
 /*#endregion*/
 
-.titleofformulary{
-    color: #011D3C;
-    font-weight: bold;
-    font-size: 1.3rem;
-}
-
-.permission_formularycontainer, .justification_formularycontainer{
-    padding-bottom: 3rem;
-    border-bottom: #D9D9D9 5px solid;
-}
-
-.cardname{
-    background-color: var(--primary);
-    color: #ffffff;
-    padding: .9rem 2rem;
-    border-radius: 6px;
-    width: max-content;
-    position: relative;
-    right: 1.5rem;
-}
-.formulary_upperinformationcontainer{
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    top: 1.5em;
-}
-.previewcard{
-    background-color: var(--primary);
-    padding: .5rem;
-    width: max-content;
-    border-radius: 6px;
-    padding-bottom: .2rem;
-    position: relative;
-    left: 1.1em;
-}
-.searchicon{
-    width: 2rem;
-    height: auto;
-}
+/* #region Estilo de solicitud*/
 .inputdate_container{
     position: relative;
     display: flex;  
 }
-.inputdate_container label{
+.inputdate_container label, .inputdatecontainer label{
     font-weight: 600;
     margin-right: 1rem;
 }
-.inputdate_container input, .hourcontainer select, .reasoncontainer select, .explanation{                                  /*Estilo general inputs*/
+.inputdate_container input, .inputdatecontainer input, .hourcontainer select, .reasoncontainer select, .reasoncontainer2 select, .explanation{                                  /*Estilo general inputs*/
     font-family: var(--font-karla),'Karla',sans-serif;
     border: none;
     outline: 1px solid #ccc;
@@ -153,9 +157,8 @@
     padding: 0.4rem;
     box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
     position: relative;
-    bottom: .5rem;
 }
-.hourcontainer select, .reasoncontainer select{
+.hourcontainer select, .reasoncontainer select, .reasoncontainer2 select{
     appearance: none; /* Quita la flecha por defecto */
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -164,13 +167,10 @@
     position: relative;
     color: #616161;
 }
-.absencescontainer, .hourcontainer ,.reasoncontainer, .evidence, .explanationcontainer{ /*Espaciado entre filas en el form*/
-    margin-top: 1rem;
-}
-.inputdate_container input{
+.inputdate_container input, .inputdatecontainer input{
     font-weight: bold;
     color: #616161;
-    width: 5.5rem;
+    width: 6rem;
 }
 .inputradio_container, .worktimeabsence_container{
     display: flex;
@@ -182,11 +182,9 @@
 }
 .worktimeabsence_container{
     font-weight: bold;
-    margin-top: .5rem;
 }
 .hourcontainer, .reasoncontainer{
     display: flex;
-    margin-top: 1.6rem;
 }
 .leavinghour_container{
     margin-left: .6rem;
@@ -205,7 +203,6 @@
 }
 .explanation{
     width: 100%;
-    margin-top: 1em;
 }
 .evidence{
     display: flex;
@@ -222,3 +219,95 @@
     background: #fff;
     width: 40%;
 }
+/*#endregion*/
+
+/* #region Estilo de justification*/
+.justificationcontainer{
+    display: flex;
+    gap: 1.8rem;
+    font-weight: bold;
+}
+.form_row2{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.inputdatecontainer{
+    position: relative;
+    display: flex;  
+}
+.inputdatecontainer input{
+    position: relative;
+    bottom: .2rem;
+    width: 8.3rem;
+}
+.inputdatecontainer input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    display: none;
+}
+
+.inputdatecontainer input[type="date"]::-moz-calendar-picker-indicator { /*otros navegadores*/
+    opacity: 0;
+    display: none;
+}
+
+.inputdate_calendar{
+    position: absolute;
+    right: 0.3rem;
+    bottom: 0.7rem;
+}
+.absent_timecontainer{
+    display: flex;
+    gap: 1.5rem;
+}
+.absent_timecontainer input, .justificationcontainer input, .isThere_attachement input{
+    margin-right: 10px;
+}
+.form_timecontainer, .absencescontainer, .leavinghour_container{
+    display: flex;
+    gap: 2rem;
+}
+.leavinghour_container, .absencescontainer{
+    gap: .6rem;
+}
+.absencescontainer p, .leavinghour_container span{
+    color: #616161;
+    font-weight: bold;
+}
+.reasoncontainer2{
+    display: flex;
+}
+.isThere_attachement{
+    display: flex;
+    gap: .8rem;
+}
+.evidence2{
+    display: flex;
+    gap: 0.6em;
+    font-weight: bold;
+    font-style: italic;
+    color: #616161;
+    justify-content: space-between;
+}
+.evidence2 span{
+    position: relative;
+    top: 0.5rem;
+}
+.evidence2 .evidence_input{
+    width: 8rem;
+}
+.buttonscontainer button{
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 2.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.buttonscontainer button:hover, .submitpass:hover{
+    background-color: var(--primary-selected);
+}
+/*#endregion*/

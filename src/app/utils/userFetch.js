@@ -311,3 +311,19 @@ export async function getUserInfo(userId) {
 
   return data[0]
 }
+export async function getUserJustify_request_id(userId, id) {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('justifications')
+    .select('')
+    .eq('user_id', userId)
+    .eq('request_id', id)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
