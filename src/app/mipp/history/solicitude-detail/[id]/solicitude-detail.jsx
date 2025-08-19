@@ -278,7 +278,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                             
                                             <div className={style.explanationcontainer}>
                                                 <span>Comentarios:</span>  
-                                                <textarea className={style.explanation} disabled>{justificationf_parameter.justification_response_comment}</textarea>
+                                                <textarea className={style.explanation} disabled defaultValue={justificationf_parameter.justification_comment}></textarea>
                                             </div>
 
                                             <div className={style.evidence2}>
