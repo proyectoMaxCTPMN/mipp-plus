@@ -62,7 +62,7 @@ export async function POST(request) {
 
         new_attachment.name = new_attachment.name.replace(/ /g, "_")
 
-        const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/justificaciones/${Date.now()}_${new_attachment.name}`, new_attachment)
+        const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/justificaciones/${Date.now()}_${new_attachment.name.replace(/ /g, "_")}`, new_attachment)
 
         if (error) {
             console.error(JSON.stringify(error))
