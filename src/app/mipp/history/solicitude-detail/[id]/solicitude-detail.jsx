@@ -159,7 +159,9 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                 <p className={style.titleofformulary}>{!showresolution ? "Justificación:" : "Resolución"}</p>
                                 <div className={style.formulary_upperinformationcontainer}>
                                     <div className={style.cardname}>{fullName_parameter.full_name}</div>
-                                    <div className={style.previewcard}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>
+                                    {
+                                        !showresolution &&
+                                        <div className={style.previewcard}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>}
                                 </div>
                                 <div className={style.cardcontainer}>
                                     <Image src={'/Card-header.svg'} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
@@ -303,19 +305,65 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                         </form>
                                     </div>
                                     ):(
-                                        <div className={style.form_container}>
-                                            <h1>Resolución de Justificación de permiso</h1>
+                                        <>
+                                        {
+                                            justificationf_parameter.justification_response_state != 0 ?(
+                                            
+                                            <div className={style.form_container}>
+                                                <h1>Resolución de Justificación de permiso</h1>
+                                                <p>Quien suscribe, <span>M.SC. Laura Ramón Elizondo</span> en calidad de <span>Directora</span>, con base a las leyes y reglamentos vigentes, responde a solicitud de justificación de permiso; bajo la resolución de:</p>
+                                                <div className={style.radioContainerPopUp}>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="approve_partial" disabled defaultChecked={justificationf_parameter.justification_response_state == 1}/>
+                                                        <label htmlFor="approve_partial">Aceptado con rebajo salarial parcial.</label>
+                                                    </div>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="approve_total" disabled defaultChecked={justificationf_parameter.justification_response_state == 2}/>
+                                                        <label htmlFor="approve_total">Aceptado con rebajo salarial total.</label>
+                                                    </div>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="approve" disabled defaultChecked={justificationf_parameter.justification_response_state == 3}/>
+                                                        <label htmlFor="approve">Aceptado sin rebajo salarial.</label>
+                                                    </div>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="deny" disabled defaultChecked={justificationf_parameter.justification_response_state == 4}/>
+                                                        <label htmlFor="deny">Denegó lo solicitado.</label>
+                                                    </div>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="convocatory" disabled defaultChecked={justificationf_parameter.justification_response_state == 5}/>
+                                                        <label htmlFor="convocatory">Acoger convocatoria.</label>
+                                                    </div>
+                                                </div>
 
-                                            <div className={style.buttonscontainer}>
-                                                <button type="button" onClick={()=> setShowresolution(false)}>Volver</button>
+                                                <div className={style.commentResponse}>
+                                                    <label htmlFor="justification_response_comment">Comentario</label>
+                                                    <textarea name="justification_response_comment" id="justification_response_comment" defaultValue={justificationf_parameter.justification_response_comment} disabled></textarea>
+                                                </div>
+
+                                                <div className={style.buttonscontainer2}>
+                                                    <button type="button" onClick={()=> setShowresolution(false)}>Volver</button>
+                                                </div>
                                             </div>
-                                        
-                                        </div>
+                                        ):(
+                                            <div className={style.form_container}>
+                                                <h1>Resolución de Justificación de permiso</h1>
+                                                <h2>Su justificación no ha sido gestionada aún.</h2>
+
+                                                <div className={style.buttonscontainer2}>
+                                                    <button type="button" onClick={()=> setShowresolution(false)}>Volver</button>
+                                                </div>
+
+                                            </div>
+                                        )}
+                                        </>
                                     )}
                                 </div>
                             </div>
                         ):(
-                            <></>
+                            <div className={style.form_container}>
+                                <h1>Resolución de Justificación de permiso</h1>
+                                <h2>No se ha realizado una justificación</h2>
+                            </div>
                         )
                     )
                 }
