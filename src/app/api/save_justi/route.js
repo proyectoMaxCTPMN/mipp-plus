@@ -10,7 +10,7 @@ export async function POST(request) {
 
     
     const changed_input = formData.get('changed_input')
-    const new_attachment = formData.get('new_attachment')
+    let new_attachment = formData.get('new_attachment')
 
     const request_id = formData.get('request_id')
     const userId = formData.get('userId')
@@ -59,6 +59,8 @@ export async function POST(request) {
                 { status: 400 },
             )
         }
+
+        new_attachment.name = new_attachment.name.replace(/ /g, "_")
 
         const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/justificaciones/${Date.now()}_${new_attachment.name}`, new_attachment)
 
