@@ -3,6 +3,14 @@ import { createClient } from '../../utils/supabase/server'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server';
 
+function normalizeFileName(name) {
+  return name
+    .normalize("NFD") // quita acentos
+    .replace(/[\u0300-\u036f]/g, "") // elimina diacríticos
+    .replace(/\s+/g, "_") // espacios a guion bajo
+    .replace(/[^a-zA-Z0-9._-]/g, ""); // solo caracteres seguros
+}
+
 export async function POST(request) {
     const cookieStore = await cookies()
     const supabase = createClient(cookieStore)
@@ -62,7 +70,7 @@ export async function POST(request) {
 
         new_attachment.name = new_attachment.name.replace(/ /g, "_")
 
-        const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/justificaciones/${Date.now()}_${new_attachment.name.replace(/ /g, "_")}`, new_attachment)
+        const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/justificaciones/${Date.now()}_${normalizeFileName(new_attachment.name)}`, new_attachment)
 
         if (error) {
             console.error(JSON.stringify(error))
