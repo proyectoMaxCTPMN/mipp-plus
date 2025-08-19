@@ -83,7 +83,7 @@ export async function getPreviewData() {
     // Fetch all data
     const absences = await fetchData(
       "absence_requests",
-      "id, request_date, is_pending, is_denied, is_approved, is_justified, user_id(id, first_name, last_name)",
+      "id, request_date, absence_date, is_pending, is_denied, is_approved, is_justified, reason, user_id(id, first_name, last_name)",
       "Solicitud de Aus/Tar/Sal",
       "absence"
     );
@@ -97,7 +97,7 @@ export async function getPreviewData() {
 
     const justifications = await fetchData(
       "justifications",
-      "id, justification_date, justification_response_state, user_id(id, first_name, last_name)",
+      "id, justification_date, absence_date, justification_response_state, justification_reason, user_id(id, first_name, last_name)",
       "Justificacion de Aus/Tar",
       "justi"
     );
