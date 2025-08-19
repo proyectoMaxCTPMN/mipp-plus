@@ -154,18 +154,19 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                         </div>
                     ):(
                         absencef_parameter.is_justified ?(
+                            
                             <div className={style.permission_formularycontainer}>
-                                <p className={style.titleofformulary}>Justificación:</p>
+                                <p className={style.titleofformulary}>{!showresolution ? "Justificación:" : "Resolución"}</p>
                                 <div className={style.formulary_upperinformationcontainer}>
                                     <div className={style.cardname}>{fullName_parameter.full_name}</div>
                                     <div className={style.previewcard}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>
                                 </div>
                                 <div className={style.cardcontainer}>
                                     <Image src={'/Card-header.svg'} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
-                                    <div className={style.form_container}>
+                                    {!showresolution ? (
+                                        <div className={style.form_container}>
                                         <h1>Formulario de justificación de permiso salida/ausencia/tardía/incapacidad</h1>
                                         <p style={{fontSize: '.9rem'}}><span>Importante:</span> Todo permiso de ausencia laboral está sujeto a cumplimiento de requisitos y copia adjunta de documento pertinente de cita, convocatoria o licencia, de ser posible con tres días de anticipación. Posterior a la ausencia, el funcionario debe hacer entrega del comprobante pertinente de asistencia en el plazo de 48 (cuarenta y ocho horas). Las licencias dependen de requisitos  previos para su goce. De no presentar el comprobante se transmitirá lo que corresponda.</p>
-                                        
                                         <form className={style.form}>
                                             <div className={style.form_row2}>
                                                 <div className={style.justificationcontainer}>
@@ -301,6 +302,16 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                             </div>
                                         </form>
                                     </div>
+                                    ):(
+                                        <div className={style.form_container}>
+                                            <h1>Resolución de Justificación de permiso</h1>
+
+                                            <div className={style.buttonscontainer}>
+                                                <button type="button" onClick={()=> setShowresolution(false)}>Volver</button>
+                                            </div>
+                                        
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ):(
