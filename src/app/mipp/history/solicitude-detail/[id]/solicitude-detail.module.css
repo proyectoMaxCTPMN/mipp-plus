@@ -311,6 +311,13 @@
     background-color: var(--primary-selected);
 }
 
+.datePopUp{
+    display: flex;
+    gap: 6px;
+    place-self: center;
+    place-items: center;
+}
+
 .radioContainerPopUp{
     display: flex;
     flex-direction: column;

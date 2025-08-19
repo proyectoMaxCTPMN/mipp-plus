@@ -311,6 +311,10 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                             
                                             <div className={style.form_container}>
                                                 <h1>Resolución de Justificación de permiso</h1>
+                                                <div className={style.datePopUp}>
+                                                    <label htmlFor="date">Fecha:</label>
+                                                    <input type="date" name="date" id="date" defaultValue={new Date().toLocaleDateString('en-CA')} disabled/>
+                                                </div>
                                                 <p>Quien suscribe, <span>M.SC. Laura Ramón Elizondo</span> en calidad de <span>Directora</span>, con base a las leyes y reglamentos vigentes, responde a solicitud de justificación de permiso; bajo la resolución de:</p>
                                                 <div className={style.radioContainerPopUp}>
                                                     <div className={style.radioPopUp}>
