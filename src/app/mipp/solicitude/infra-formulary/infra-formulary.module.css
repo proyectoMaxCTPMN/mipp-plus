@@ -19,6 +19,7 @@
     box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
     padding: 2dvw 4dvw;
     border-radius: 5px;
+    width: 100%;
 }
 .cardname{
     background-color: var(--primary);
@@ -31,7 +32,7 @@
     right: 1.5rem;
 }
 .cardheaderimg{
-    width: 58rem;
+    width: 100%;
     height: 5rem;
     margin-top: 1.6rem;
     margin-left: 0.3rem;
@@ -39,6 +40,7 @@
     left: 50%;
     transform: translate(-50%);
 }
+
 
 .form_container h1{
     color: #434343;
@@ -59,7 +61,7 @@
 }
 /*#endregion*/
 .form_container{
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -73,14 +75,29 @@
 }
 
 .exactlocationcontainer{
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.2rem;
+    place-content: center;
+    place-items: start;
+    height: auto;
 }
 
 .building, .floor, .classroom{
     display: flex;
-    gap: .6rem;
+    flex-direction: column;
+    height: auto;
+    place-items: baseline;
 }
+
+.building, .floor, .classroom{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+}
+
 
 .building select, .floor select, .classroom input, .report{ /*Estilo general inputs*/
     font-family: var(--font-karla),'Karla',sans-serif;
@@ -91,7 +108,6 @@
     padding: 0.2rem 0.2rem;
     box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
     position: relative;
-    bottom: .3rem;
 }
 .building select, .floor select{
     appearance: none; /* Quita la flecha por defecto */
@@ -102,7 +118,6 @@
     background-position: right -.3rem center;
     background-size: 2.5em;
     font-weight: 600;
-    margin: 0 .6em;
     padding-right: 2.5rem;
     width: auto;
 }
@@ -150,4 +165,60 @@
 }
 .buttonscontainer button:hover, .submitpass:hover{
     background-color: var(--primary-selected);
+}
+
+@media screen and (max-width: 800px) {
+    .form_container h1{
+        font-size: 1.5rem;
+    }
+
+    .exactlocationcontainer{
+        grid-template-columns: none;
+        grid-template-rows: repeat(3, 1fr);
+        place-content: start;
+    }
+    
+    .buttonscontainer *{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .body{
+        width: 100dvw;
+        height: 92dvh;
+        margin: 0;
+        background-color: transparent;
+        overflow: hidden scroll;
+        display: flex;
+        place-content: start;
+        place-items: start;
+    }
+
+    .container{
+        width: 100%;
+        height: 100%;
+        overflow: hidden scroll;
+        display: flex;
+        flex-direction: column;
+        place-content: start;
+        place-items: start;
+    }
+
+    .cardcontainer{
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        place-content: start;
+        place-items: start;
+        padding-bottom: 10dvh;
+    }
+
+    .cardname{
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
 }

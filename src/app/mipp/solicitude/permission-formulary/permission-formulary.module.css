@@ -79,8 +79,7 @@
     padding: 0.2rem 0.2rem;
     padding-right: 1.5rem;
     box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
-    position: relative;
-    bottom: .3rem;
+    position: relative
 }
 .inputdate_container input{
     font-weight: bold;
@@ -210,6 +209,11 @@
 }
 
 @media (max-width: 1100px) {
+
+    .cardheaderimg{
+        width: 100%;
+    }
+
     .body{
         height: 100dvh;
     }
@@ -219,14 +223,24 @@
         position: relative;
     }
 
+    .form_container h1{
+        font-size: 1.5rem;
+    }
+
+    .form_container p{
+        font-size: 0.7rem;
+    }
+
     .cardname{
         position: absolute;
         top: 1.5rem;
-        left: 1.5rem;
+        left: 50%;
+        transform: translate(-50%,0);
+        padding: 0.5rem;
     }
     .cardcontainer{
         height: 100%;
-        padding-top: 2.5rem;
+        padding-top: 4.5rem;
         padding-bottom: 0;
         place-content: center;
         border: 0;
@@ -249,7 +263,165 @@
     .inputdate_container{
         width: max-content;
     }
-    .buttonscontainer{
+
+    .buttonscontainer *{
         align-items: center;
+        width: 100%;
+    }
+
+    .evidence{
+        text-align: center;
+        place-content: center;
+        place-items: center;
+    }
+    .reasoncontainer{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .reasoncontainer select{
+        width: 100%;
+        margin: 0;
+        padding: .5rem;
+    }
+    .evidence input{
+        width: 100%;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .inputdate_container{
+        height: max-content;
+        place-items: center;
+    }
+
+    .inputdate_container label, .inputdate_container input{
+        font-size: 0.85rem;
+        bottom: 0;
+    }
+
+    .inputdate_container span img{
+        bottom: .2rem;
+        width: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .body{
+        width: 100dvw;
+        margin: 0;
+        min-height: auto;
+        height: 92dvh ;
+        overflow: hidden scroll;
+        background-color: #ffffff;
+    }
+
+    .container{
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .evidence input{
+        height: 40rem;
+    }
+
+    .form_container h1{
+        padding: 0.5rem 0;
+        font-size: 1.2rem;
+    }
+
+    .form{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .inputdate_container{
+        display: flex;
+        flex-direction: column;
+        place-self: center;
+    }
+
+
+    .inputdate_container, .inputdate_container label, .inputdate_container input{
+        font-size: 1rem;
+    }
+
+    .inputdate_container{
+        gap: 6px;
+    }
+
+    .inputdate_container span{
+        position: relative;
+    }
+
+    .inputdate_container span img{
+        bottom: .4rem;
+    }
+
+    .inputradio_container{
+        width: 100%;
+        font-size: .9rem;
+        place-self: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        place-content: space-around;
+    }
+
+    .inputradio_container label{
+        display: flex;
+        place-content: center;
+        place-items: center;
+    }
+
+    .worktimeabsence_container{
+        display: flex;
+        margin-top: 0;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .worktimeabsence_container label, .worktimeabsence_container p{
+        font-size: 0.83rem;
+        align-items: center;
+        display: flex;
+        place-content: center;
+        place-items: center;
+        gap: 6px;
+    }
+
+
+    .worktimeabsence_container input{
+        margin: 0;
+    }
+
+    .hourcontainer{
+        margin-top: 0;
+        font-size: 0.85rem;
+    }
+
+    .hourcontainer select{
+        font-size: 0.85rem;
+        bottom: 0;
+        height: min-content;
+    }
+
+    .absencescontainer{
+        margin-top: 0;
+    }
+
+    .reasoncontainer{
+        gap: 6px;
+        margin-top: 0;
+    }
+
+    .evidence{
+        gap: 6px;
+        margin-top: 0;
     }
 }

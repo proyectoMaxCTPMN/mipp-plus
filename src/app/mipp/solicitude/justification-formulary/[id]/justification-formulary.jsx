@@ -86,9 +86,11 @@ export default function Justification_Formulary_Page({userId_parameter, request_
                             </div>
 
                             <div className={style.inputdatecontainer}>
-                                <label>DE LA FECHA:</label>
-                                <input type="date" name="absence_date" id="absence_date" defaultValue={new Date(formData.absence_date).toLocaleDateString('af-za')} disabled/>
-                                <span><Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image></span>
+                                <label>DE LA FECHA:</label>       
+                                <span>
+                                    <input type="date" name="absence_date" id="absence_date" defaultValue={new Date(formData.absence_date).toLocaleDateString('af-za')} disabled/>
+                                    <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image>
+                                </span>
                             </div>
 
                             <div className={style.absent_timecontainer}>
