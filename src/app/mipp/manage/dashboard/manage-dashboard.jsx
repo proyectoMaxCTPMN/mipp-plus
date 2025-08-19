@@ -125,7 +125,7 @@ export default function ManageDashboard({allDocs_parameter}) {
                         </div>
                     :
                     (doc.type == 'infra' && showInfra) ?
-                        <div className={style.docSquare} key={index}>
+                        <div className={style.docSquare} key={index} onClick={() => router.push(`/mipp/manage/${doc.type}/${doc.data.id}`)}>
 
                             <div className={style.docContent}>
                                 <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
@@ -152,14 +152,32 @@ export default function ManageDashboard({allDocs_parameter}) {
                         </div>
                     :
                     (doc.type == 'justi' && showJustify) ?
-                    <div className={style.docSquare} key={index}>
+                    <div className={style.docSquare} key={index} onClick={() => router.push(`/mipp/manage/${doc.type}/${doc.data.id}`)}>
 
                         <div className={style.docContent}>
                             <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
                             <h2 className={style.docType}>{doc.label}</h2>
 
-                            <p>Estado: {statuses[doc.data.justification_response_state]}
-                            </p>
+                                                    {
+                                                        (doc.data.justification_response_state == 0 || doc.data.justification_response_state == 5) && 
+                                                        <>
+                                                            <p>Estado: {statuses[doc.data.justification_response_state]}</p>
+                                                        </>
+                                                    }
+
+                                                    {
+                                                        ([1,2,3].includes(doc.data.justification_response_state)) && 
+                                                        <>
+                                                            <p>Estado: {statuses[doc.data.justification_response_state]}</p>
+                                                        </>
+                                                    }
+
+                                                    {
+                                                        (doc.data.justification_response_state == 4) && 
+                                                        <>
+                                                            <p>Estado: {statuses[doc.data.justification_response_state]}</p>
+                                                        </>
+                                                    }
 
                             <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
 
@@ -172,7 +190,7 @@ export default function ManageDashboard({allDocs_parameter}) {
                     </div>
                     :
                     (doc.type == 'omission' && showOmission) &&
-                    <div className={style.docSquare} key={index}>
+                    <div className={style.docSquare} key={index} onClick={() => router.push(`/mipp/manage/${doc.type}/${doc.data.id}`)}>
 
                         <div className={style.docContent}>
                             <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
