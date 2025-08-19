@@ -105,8 +105,11 @@ export default function Omission_Formulary_Page({fullName_parameter, userId_para
                     <form className={style.form} onSubmit={handleSubmit}>
                         <div className={style.inputdatecontainer}>
                                 <label>Fecha de la omisión:</label>
-                                <input type="date" name="omission_date" id="omission_date" defaultValue={fecha} ref={inputRef} min={fecha} onChange={handleInputChange}/>
-                                <span onClick={handleCalendarClick}><Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image></span>
+                                
+                                <span onClick={handleCalendarClick}>
+                                    <input type="date" name="omission_date" id="omission_date" defaultValue={fecha} ref={inputRef} min={fecha} onChange={handleInputChange}/>
+                                    <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image>
+                                </span>
                         </div>
                         <div className={style.reasonofomissioncontainer}>
                             <label>
@@ -121,12 +124,12 @@ export default function Omission_Formulary_Page({fullName_parameter, userId_para
                                 <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 3)}/>
                                 Todo el día
                             </label>
-                            <span>
-                                <label>
+
+                            <label>
                                 <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 4)}/>
                                 Salida anticipada
                             </label>
-                            </span>
+
                         </div>
                         <div className={style.timeContainer}>
                             <label>Hora de entrada:</label>

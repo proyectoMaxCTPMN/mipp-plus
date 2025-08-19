@@ -1,6 +1,6 @@
 
 .container * {
-    font-family: var(--font-merriweather), "Merriweather Sans", sans-serif;
+    font-family: var(--font-karla), "Karla", sans-serif;
 }
 
 .container{
@@ -64,18 +64,23 @@
 }
 .informationcontainer{
     border-bottom: 1px solid rgba(0, 0, 0, 0.33);
-    padding: .8rem 1.3rem .2rem .7rem;
+    padding: 12px;
     position: relative;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 .information_upperpart{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    
 }
 .information_upperpart p, .information_upperpart span{
     font-family: var(--font-karla),'Karla',sans-serif;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1rem;
 }
 .information_upperpart p{
     color: var(--primary);
@@ -89,7 +94,6 @@
 .information_lowerpart{
     display: flex;
     justify-content: space-between;
-    margin-top: 1.1rem;
 }
 .information_lowerpart p{
     font-weight: 600;
@@ -98,10 +102,8 @@
 .clockcontainer{
     display: flex;
     gap: .25rem;
-}
-.clockicon{
-    position: relative;
-    bottom: .18rem;
+    align-items: center;
+    height: auto;
 }
 .clockcontainer p{
     color: #616161;
@@ -168,3 +170,47 @@
 }
 /*#endregion*/
 
+@media (max-width: 1120px){
+    .soliCard, .reportCard, .omiCard{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 900px){
+    .dashboardContainer{
+        place-content: start;
+        overflow-y: scroll;
+    }
+
+    .cardsContainer{
+        flex-direction: column;
+        height: auto;
+    }
+
+    .soliCard, .reportCard, .omiCard{
+        width: 100%;
+        height: 44dvh;
+    }
+
+    .soliContent, .justiContent, .reportContent, .omiContent{
+        overflow: hidden scroll;
+        height: 85%;
+    }
+
+    .soliFooter, .justiFooter, .reportFooter, .omiFooter{
+        height: 15%;
+    }
+
+    .footerText{
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px){
+    .container{
+        margin-left: 0;
+        padding-bottom: 8dvh;
+        width: 100dvw;
+    }
+}

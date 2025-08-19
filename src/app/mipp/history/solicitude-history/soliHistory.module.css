@@ -9,6 +9,9 @@
     font-family: var(--font-karla), "Karla", sans-serif;
 }
 
+.titleText{
+    text-align: center;
+}
 
 
 .historyContainer{
@@ -200,6 +203,18 @@
     }
 }
 
+@media (min-width: 480px) and (max-width: 800px){
+    
+
+    .main, .headerContainer{
+        width: 95%;
+    }
+
+    .registerContainer, .headerContainer{
+        font-size: 0.8rem;
+    }
+}
+
 @media (min-width: 320px) and (max-width: 480px){
     .container{
         padding: 0;
@@ -228,6 +243,15 @@
         grid-row-gap: 0px;
         padding: 10px 20px;
         position: relative;
+        border-bottom: 1px solid #000;
+    }
+
+    .searchContainer{
+        width: 90%;
+    }
+
+    .headerContainer{
+        display: none;
     }
 
     .reason { 

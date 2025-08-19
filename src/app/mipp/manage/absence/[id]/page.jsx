@@ -9,9 +9,10 @@ export default async function Page({params}){
     const request_id = paramsStore.id;
     const absencef = await getAbsenceById(request_id);
     const userId = await getCurrentUser()
-    const userInfo = await getUserInfo(userId)
+    const userInfo = await getUserInfo(absencef[0].user_id);
     const title = await getUserPosition(userId)
     const position = await getUserTitle(userId)
+    
     return(
         <>
         {
