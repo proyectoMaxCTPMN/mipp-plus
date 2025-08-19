@@ -92,7 +92,10 @@ export default function ManageDashboard({allDocs_parameter}) {
 
                             <div className={style.docContent}>
                                 <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
+                                <h1 className={style.docType}>{new Date(doc.date).toLocaleDateString('es-CR')} </h1>
                                 <h2 className={style.docType}>{doc.label}</h2>
+
+                                <p>Razón: {reasons[doc.data.reason]}</p>
 
                                 <p>Estado: {
                                     !doc.data.is_pending
@@ -114,7 +117,7 @@ export default function ManageDashboard({allDocs_parameter}) {
                                 }
                                 </p>
 
-                                <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
+                                <p>Se ausenta el: {new Date(new Date(doc.data.absence_date).getTime() + 24 * 60 * 60 * 1000).toLocaleDateString('es-CR')}</p>
 
                             </div>
                             
@@ -129,6 +132,7 @@ export default function ManageDashboard({allDocs_parameter}) {
 
                             <div className={style.docContent}>
                                 <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
+                                <h1 className={style.docType}>{new Date(doc.date).toLocaleDateString('es-CR')} </h1>
                                 <h2 className={style.docType}>{doc.label}</h2>
 
                                 <p>Estado: {
@@ -155,8 +159,12 @@ export default function ManageDashboard({allDocs_parameter}) {
                     <div className={style.docSquare} key={index} onClick={() => router.push(`/mipp/manage/${doc.type}/${doc.data.id}`)}>
 
                         <div className={style.docContent}>
-                            <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
-                            <h2 className={style.docType}>{doc.label}</h2>
+                            <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name} </h1>
+                            <h1 className={style.docType}>{new Date(doc.date).toLocaleDateString('es-CR')} </h1>
+                            <h2 className={style.docType}>{doc.label} </h2>
+
+                                                    <p>Razón: {reasons[doc.data.justification_reason]}</p>
+
 
                                                     {
                                                         (doc.data.justification_response_state == 0 || doc.data.justification_response_state == 5) && 
@@ -179,7 +187,7 @@ export default function ManageDashboard({allDocs_parameter}) {
                                                         </>
                                                     }
 
-                            <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
+                            <p>Se ausenta el: {new Date(new Date(doc.data.absence_date).getTime() + 24 * 60 * 60 * 1000).toLocaleDateString('es-CR')}</p>
 
                         </div>
                         
