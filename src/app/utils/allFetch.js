@@ -66,13 +66,18 @@ export async function getPreviewData() {
         return [];
       }
 
-      // Map to unified format
-      return data.map((item, index) => ({
+      const dataUnfiltered = data.map((item, index) => ({
         type,
         label,
         data: item,
-        date: item?.request_date || item?.report_date || item?.justification_date || item?.omission_date
+        date: item?.request_date || item?.report_date || item?.justification_date || item?.omission_date,
+        created_at: item.created_at,
       }));
+
+      const dataOrdered = dataUnfiltered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+      // Map to unified format
+      return dataOrdered
     };
 
     // Fetch all data
@@ -123,6 +128,22 @@ export async function getAbsenceById(absence_id){
     .from('absence_requests')
     .select('')
     .eq('id', absence_id)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
+
+export async function getJustiById(justify_id){
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('justifications')
+    .select('')
+    .eq('id', justify_id)
 
     if (error) {
       console.error("No se pudo obtener el registro" + JSON.stringify(error))

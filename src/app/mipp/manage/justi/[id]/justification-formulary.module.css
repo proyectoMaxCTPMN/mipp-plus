@@ -1,7 +1,8 @@
 /*#region*/
 .body{
     background-color: #E8E8E8;
-    min-height: 100vh;
+    min-height: 100dvh;
+    height: 100dvh;
     font-family: var(--font-martel), "Martel Sans", sans-serif;
     display: flex;
     justify-content: center;
@@ -13,14 +14,17 @@
     display: flex;
     flex-direction: column;
     width: 80%;
+    height: auto;
 }
 
 .cardcontainer{
     background-color: #ffffff;
     border: 1px solid #E9E9E9;
     box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
-    padding: 2dvw 4dvw;
+    padding: 2dvw;
     border-radius: 5px;
+    width: 100%;
+    height: 100%;
 }
 
 .cardname{
@@ -35,26 +39,34 @@
 }
 
 .cardheaderimg{
-    width: 58rem;
+    width: 100%;
     height: 5rem;
-    margin-top: 1.6rem;
     margin-left: 0.3rem;
     position: relative;
     left: 50%;
     transform: translate(-50%);
 }
 
+.form_container{
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .form_container h1{
     color: #434343;
     -webkit-text-stroke: 1px #000; /* Para Chrome, Safari, Edge */
     text-stroke: 1px #000;         /* Para otros navegadores (soporte limitado) */
-    font-size: 1.9rem;
-    padding: 1.3rem 0;
+    font-size: 1.5rem;
+    padding: 0.7rem 0;
     text-align: center;
 }
 
 .form_container p{
     text-align:justify;
+    font-size: 0.8rem;
 }
 
 .form_container p span{
@@ -62,7 +74,9 @@
 }
 
 .form{
-    margin-top: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .form_row{
@@ -88,7 +102,6 @@
     padding-right: 1.5rem;
     box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
     position: relative;
-    bottom: .3rem;
 }
 
 .reasoncontainer select{ /*Estilo general selects*/
@@ -99,6 +112,11 @@
 }
 
 .inputdatecontainer{
+    position: relative;
+    display: flex;  
+}
+
+.inputdatecontainer span{
     position: relative;
     display: flex;  
 }
@@ -125,7 +143,8 @@
 .inputdate_calendar{
     position: absolute;
     right: 0.4rem;
-    bottom: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .absent_timecontainer{
@@ -134,7 +153,6 @@
 }
 
 .isThere_attachement, .absencescontainer, .leavinghour_container{
-    margin: .8em 0;
     display: flex;
     gap: .8rem;
 }
@@ -145,8 +163,15 @@
 .isThere_attachement input, .justificationcontainer input{
     margin-right: 5px;
 }
+
+
 .form_timecontainer, .reasoncontainer{
     display: flex;
+    
+}
+
+.form_timecontainer{
+    place-items: center;
 }
 .absent_time_inputcontainer{
     gap: 5px;
@@ -168,9 +193,6 @@
     display: flex;
     margin-left: 1.5em;
     gap: .3em;
-}
-.reasoncontainer, .explanationcontainer{
-    margin: .8em 0;
 }
 .typeconvocatorycontainer{
     display: flex;
@@ -230,7 +252,6 @@
 
 .explanation{
     width: 100%;
-    margin-top: .8em;
 }
 
 .buttonscontainer{
@@ -252,6 +273,109 @@
 .buttonscontainer button:hover, .submitpass:hover{
     background-color: var(--primary-selected);
 }
+
+/*#region PopUp Manejar*/
+
+.popUpContainer{
+    width: 100dvw;
+    height: 100dvh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.226);
+    left: 0;
+    top: 0;
+    z-index: 200;
+    display: flex;
+    place-content: center;
+    place-items: center;
+}
+
+.popUpCard{
+    max-width: 1100px;
+    background-color: #fff;
+    width: 80dvw;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -webkit-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    font-size: 16px;
+    place-content: space-between;
+    gap: 36px;
+
+}
+
+.popUpCard span{
+    font-weight: bold;
+}
+
+.datePopUp{
+    display: flex;
+    gap: 6px;
+    place-self: center;
+    place-items: center;
+}
+
+.radioContainerPopUp{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    place-content: center;
+    flex-wrap: wrap;
+}
+
+.radioPopUp{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    gap: 6px;
+    flex: 1;
+}
+
+.btnPopUp{
+    width: 15%;
+    font-size: 1.2rem;
+    background-color: var(--primary);
+    color: #fff;
+    border-radius: 5px;
+    border: 0;
+    padding: 5px;
+    place-self: center;
+    box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -webkit-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    transition: all 0.2s ease-in-out;
+
+    &:hover{
+        background-color: var(--primary-selected);
+        cursor: pointer;
+    }
+}
+
+.inputContainer{
+    display: flex;
+    place-content: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.commentResponse{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.commentResponse textarea{
+    font-size: 1rem;
+    padding: 6px;
+}
+
+/*#endregion*/
 
 @media (max-width: 1390px) {
     .body{
@@ -366,6 +490,10 @@
     .explanationcontainer
     {
         margin: 0;
+    }
+
+    .inputContainer > *{
+        width: 100%;
     }
 }
 

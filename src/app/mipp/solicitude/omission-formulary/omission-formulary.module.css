@@ -1,10 +1,9 @@
 /* #region Estilo general del formulario*/
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 
 .body{
     background-color: #E8E8E8;
-    min-height: 100vh;
-    font-family: "Martel Sans", sans-serif;
+    min-height: 100dvh;
+    font-family: var(--font-martel), "Martel Sans", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,7 +55,7 @@
 }
 
 .inputdatecontainer input, .justification, .hourSelect{ /*Estilo general inputs*/
-    font-family: 'Karla',sans-serif;
+    font-family: var(--font-karla),'Karla',sans-serif;
     border: none;
     outline: 1px solid #ccc;
     font-size: 1rem;
@@ -150,4 +149,226 @@
 }
 .buttonscontainer button:hover, .submitpass:hover{
     background-color: var(--primary-selected);
+}
+
+@media screen and (max-width: 1300px) {
+
+    .cardheaderimg{
+        width: 100%;
+    }
+    .container{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .cardname{
+        padding: .5rem 1rem;
+        right: .5em;
+    }
+    .form_container h1{
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    .form_container{
+        width: 90%;
+    }
+
+    .form_container h1{
+        margin: 0;
+        padding: 0;
+        padding-bottom: 1rem;
+    }
+    .form_container form{
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    .body{
+        min-height: auto;
+        height: 100dvh;
+        width: 100dvw;
+        background-color: #fff;
+    }
+
+    .cardname{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .container{
+        width: 100%;
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+        overflow-y: scroll;
+    }
+
+    .cardcontainer{
+        width: 100%;
+        border: 0;
+        border-radius: none;
+        place-items: center;
+        place-content: center;
+        margin-bottom: 3rem;
+    }
+    .buttonscontainer{
+        justify-content: center;
+    }
+
+    .container h1{
+        font-size: 100%;
+    }
+
+    .reasonofomissioncontainer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .inputdatecontainer{
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+        place-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+        
+    }
+
+    .inputdatecontainer label{
+        margin:0;
+        margin-left: -1rem;
+    }
+
+    .justificationcontainer{
+        width: 100%;
+    }
+    
+    .justification{
+        width: 100%;
+    }
+
+    .timeContainer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .buttonscontainer{
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .buttonscontainer *{
+        width: 100%;
+        font-size: 1.2rem;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .form_container{
+        width: 90%;
+    }
+
+    .form_container h1{
+        margin: 0;
+        padding: 0;
+        padding-bottom: 1rem;
+    }
+    .form_container form{
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    .body{
+        min-height: auto;
+        height: 92dvh;
+        margin: 0;
+        width: 100dvw;
+        background-color: #fff;
+    }
+
+    .cardname{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .container{
+        width: 100%;
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+        overflow-y: scroll;
+    }
+
+    .cardcontainer{
+        width: 100%;
+        border: 0;
+        border-radius: none;
+        place-items: center;
+        place-content: center;
+        margin-bottom: 3rem;
+    }
+    .buttonscontainer{
+        justify-content: center;
+    }
+
+    .container h1{
+        font-size: 100%;
+    }
+
+    .reasonofomissioncontainer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .inputdatecontainer{
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+        place-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+        
+    }
+
+    .inputdatecontainer label{
+        margin:0;
+        margin-left: -1rem;
+    }
+
+    .justificationcontainer{
+        width: 100%;
+    }
+    
+    .justification{
+        width: 100%;
+    }
+
+    .timeContainer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .buttonscontainer{
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .buttonscontainer *{
+        width: 100%;
+        font-size: 1.2rem;
+        padding: 0;
+    }
 }

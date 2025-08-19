@@ -42,12 +42,10 @@ export default function Login(){
         console.log(response)
 
         if (response.ok) {
-            setIsLoading(false)
             router.push(data.redirectUrl)
         }else{
             setIsLoading(false)
             toast.error("Usuario o contraseña incorrectos...")
-            
         }
     }
 

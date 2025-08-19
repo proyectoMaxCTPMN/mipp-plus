@@ -245,8 +245,8 @@ function SendPopup({requestId_parameter, router, setShowPopup}){
                 </div>
 
                 <div className={style.inputContainer}>
-                    <input type="button" value="Aceptar" className={style.btnPopUp} onClick={handleSubmit}/>
                     <input type="button" value="Cancelar" className={style.btnPopUp} onClick={() => setShowPopup(false)}/>
+                    <input type="button" value="Aceptar" className={style.btnPopUp} onClick={handleSubmit}/>
                 </div>
                 
             </div>

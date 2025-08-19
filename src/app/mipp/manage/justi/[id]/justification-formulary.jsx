@@ -8,68 +8,41 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 
 
-export default function Justification_Formulary_Page({userId_parameter, request_id_parameter, fullName_parameter, title_parameter, position_parameter, absenceData_parameter}){
+export default function Justification_Formulary_Page({userId_parameter, justif_parameter, userInfo_parameter, title_parameter, position_parameter}){
     const router = useRouter();
     const [formData, setFormData] = useState({
         userId: userId_parameter,
-        request_id: request_id_parameter,
-        absence_date: absenceData_parameter.absence_date,
-        is_absence: absenceData_parameter.is_absence,
-        is_all_day: absenceData_parameter.is_whole_day,
-        attachment_url: absenceData_parameter.evidence_file_url || null,
-        justification_reason: absenceData_parameter.reason,
-        absent_time: absenceData_parameter.absent_time,
-        justification_text: absenceData_parameter.personal_reason || '',
-        assembly_type: absenceData_parameter.assembly_type || '',
-        leaving_at: absenceData_parameter.leaving_at,
-        justification_comment: ''
+        id: justif_parameter.id,
+        absence_date: justif_parameter.absence_date,
+        is_absence: justif_parameter.is_absence,
+        is_all_day: justif_parameter.is_whole_day,
+        attachment_url: justif_parameter.attachment_url || null,
+        justification_reason: justif_parameter.justification_reason,
+        absent_time: justif_parameter.absent_time,
+        justification_text: justif_parameter.justification_text || '',
+        assembly_type: justif_parameter.assembly_type || '',
+        leaving_at: justif_parameter.leaving_at,
+        justification_comment: justif_parameter.justification_comment || ''
     })
 
-    const [hasAttachment, setHasAttachment] = useState(absenceData_parameter.evidence_file_url ? true : false)
-    const [changedInput, setChangedInput] = useState(false)
-    const [inputFile, setInputFile] = useState();
+    const [hasAttachment, setHasAttachment] = useState(justif_parameter.attachment_url ? true : false)
+    const [showPopup, setShowPopup] = useState(false)
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const data = new FormData()
-        Object.entries(formData).forEach(([key, value]) => {
-            data.append(key, value)
-        })
-
-        if (changedInput) {
-            data.append("changed_input", true)
-            data.append("new_attachment", inputFile)
-        }
-
-        const response = await fetch(`/api/save_justi`, {
-            method: "POST",
-            body: data
-        })
-
-        const dataResponse = await response.json()
-
-        if (response.ok) {
-            toast.success("Solicitud enviada exitosamente...!")
-            router.refresh()
-        }else{
-            toast.error("Hubo un error al enviar la solicitud")
-            console.error(dataResponse)
-            
-        }
+        e.preventDefault()
+        setShowPopup(true)
     }
 
     return(
 
     <div className={style.body}>
         <div className={style.container}>
-            <div className={style.cardname}>{fullName_parameter.full_name}</div>
-
             <div className={style.cardcontainer}>
                 <Image src={'/Card-header.svg'} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
                 <div className={style.form_container}>
                     <h1>Formulario de justificación de permiso salida/ausencia/tardía/incapacidad</h1>
                     <p><span>Importante:</span> Todo permiso de ausencia laboral está sujeto a cumplimiento de requisitos y copia adjunta de documento pertinente de cita, convocatoria o licencia, de ser posible con tres días de anticipación. Posterior a la ausencia, el funcionario debe hacer entrega del comprobante pertinente de asistencia en el plazo de 48 (cuarenta y ocho horas). Las licencias dependen de requisitos  previos para su goce. De no presentar el comprobante se transmitirá lo que corresponda.</p>
-
+                    <p>Quien se suscribe, <span>{userInfo_parameter.first_name + " " + userInfo_parameter.last_name + " " + userInfo_parameter?.second_last_name}</span>, con cédula de identidad <span>{userInfo_parameter.id}</span>, quien labora en la institución educativa <span>CTP Mercedes Norte</span>, en el puesto de <span>{userInfo_parameter.positions.position}</span>, en condición de <span>{userInfo_parameter.has_ownership ? "Propietario" : "Interino"}</span> </p>
                     <form className={style.form} onSubmit={handleSubmit}>
 
                         <div className={style.form_row}>
@@ -116,8 +89,8 @@ export default function Justification_Formulary_Page({userId_parameter, request_
                                     </>
                                 ):(
                                     <> 
-                                        <input type="text" name="absent_time" id="absent_time" defaultValue={formData.absent_time} disabled className={style.absencesinput}/>
                                         <span>Cantidad Horas</span>
+                                        <input type="text" name="absent_time" id="absent_time" defaultValue={formData.absent_time} disabled className={style.absencesinput}/>
                                     </>
                                 )}
                             </div>
@@ -179,11 +152,11 @@ export default function Justification_Formulary_Page({userId_parameter, request_
                         <div className={style.isThere_attachement}>
                                 <span>Adjunto comprobante:</span>
                                 <label>
-                                    <input type="radio" name="attachment_url" defaultChecked={hasAttachment} onClick={() => setHasAttachment(true)} />
+                                    <input type="radio" name="attachment_url" defaultChecked={hasAttachment} disabled />
                                     Si
                                 </label>
                                 <label>
-                                    <input type="radio" name="attachment_url" defaultChecked={!hasAttachment} onClick={() => setHasAttachment(false)} />
+                                    <input type="radio" name="attachment_url" defaultChecked={!hasAttachment} disabled />
                                     No
                                 </label>
                         </div>
@@ -193,8 +166,8 @@ export default function Justification_Formulary_Page({userId_parameter, request_
                             <textarea 
                                 name="justification_comment" 
                                 id="justification_comment" 
-                                value={formData.justification_comment}
-                                onChange={(e) => setFormData((prev) => ({...prev, justification_comment: e.target.value}))} 
+                                defaultValue={formData.justification_comment}
+                                disabled
                                 className={style.explanation}
                             />
                         </div>
@@ -202,54 +175,105 @@ export default function Justification_Formulary_Page({userId_parameter, request_
                             {hasAttachment &&(
                             <div className={style.evidence}>
                                 {
-                                    (hasAttachment && !changedInput && !inputFile) && (<><p>Utilizando archivo anterior</p> <Link className={style.evidence_link} href={formData.attachment_url}>Ver</Link> </>)
-                                }
-
-                                {
-                                    !hasAttachment && <p></p>
-                                }
-
-                                {
-                                    (hasAttachment && changedInput && inputFile) && <p>Utilizando {inputFile.name}</p>
-                                }
-
-                                {
-                                    (hasAttachment && changedInput && !inputFile) && <p>Sin Archivo (Recarga para reiniciar)</p>
+                                    (hasAttachment ) ? 
+                                        (<><Link className={style.evidence_link} href={ formData.attachment_url}>Ver archivo adjunto</Link> </>)
+                                    :
+                                        (<><p>Sin archivo adjunto</p></>)
                                 }
                                 
-                                
-                                <label htmlFor="attachment_url" className={style.evidence_label}>
-                                    {
-                                        hasAttachment
-                                        ?
-                                            "Cambiar archivo"
-                                        :
-                                            "Añadir nueva archivo"
-                                    }
-                                </label>
-                                    
-                                {(changedInput && inputFile) && <p className={style.input_name} onClick={() => setInputFile('')}>Eliminar Archivo</p>}
-                                    
-                                <input 
-                                    type="file" 
-                                    name="attachment_url" 
-                                    id="attachment_url" 
-                                    onChange={(e) => {setChangedInput(true); setInputFile(e.target.files[0])}}
-                                    className={style.inputFile}
-                                />
                             </div>
                         )}
 
                         <div className={style.buttonscontainer}>
-                            <button type="button">Cancelar</button>
-                            <button type="submit">Enviar</button>
+                            <button type="submit">Manejar</button>
                         </div>
-
                     </form>
-
-
                 </div>
             </div>
         </div>
+            {
+                showPopup && <SendPopup justiId_parameter={formData.id} router={router} setShowPopup={setShowPopup}/>
+            }
         </div>
 )}
+
+
+function SendPopup({justiId_parameter, router, setShowPopup}){
+    const [form, setForm] = useState('')
+    const [comment, setComment] = useState('')
+
+    const handleSubmit = async () => {
+        const data = new FormData()
+        data.append('justification_response_state', form)
+        data.append('justification_id', justiId_parameter)
+        data.append('justification_response_comment', comment)
+
+        const response = await fetch(`/api/manage_justi`, {
+            method: "POST",
+            body: data
+        })
+
+        if (response.ok) {
+            toast.success("Justificacion manejada exitosamente...!")
+            router.back()
+            router.refresh()
+        }else{
+            toast.error("Hubo un error al manejar la solicitud")
+            router.refresh()
+            
+        }
+    }
+
+    return(
+        <div className={style.popUpContainer}>
+            <div className={style.popUpCard}>
+                
+                <Image src={"/Card-header.svg"} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
+                <div className={style.datePopUp}>
+                    <label htmlFor="date">Fecha:</label>
+                    <input type="date" name="date" id="date" defaultValue={new Date().toLocaleDateString('en-CA')} disabled/>
+                </div>
+                <p>Quien suscribe, <span>M.SC. Laura Ramón Elizondo</span> en calidad de <span>Directora</span>, con base a las leyes y reglamentos vigentes, responde a solicitud de justificación de permiso; bajo la resolución de:</p>
+
+                <div className={style.radioContainerPopUp}>
+                    <div className={style.radioPopUp}>
+                        <input type="radio" name="resolution" id="approve_partial" onClick={() => setForm("1")}/>
+                        <label htmlFor="approve_partial">Aceptar con rebajo salarial parcial.</label>
+                    </div>
+
+                    <div className={style.radioPopUp}>
+                        <input type="radio" name="resolution" id="approve_total" onClick={() => setForm("2")}/>
+                        <label htmlFor="approve_total">Aceptar con rebajo salarial total.</label>
+                    </div>
+
+                    <div className={style.radioPopUp}>
+                        <input type="radio" name="resolution" id="approve" onClick={() => setForm("3")}/>
+                        <label htmlFor="approve">Aceptar sin rebajo salarial.</label>
+                    </div>
+
+                    <div className={style.radioPopUp}>
+                        <input type="radio" name="resolution" id="deny" onClick={() => setForm("4")}/>
+                        <label htmlFor="deny">Denegar lo solicitado.</label>
+                    </div>
+
+                    <div className={style.radioPopUp}>
+                        <input type="radio" name="resolution" id="convocatory" onClick={() => setForm("5")}/>
+                        <label htmlFor="convocatory">Acoger convocatoria.</label>
+                    </div>
+                </div>
+
+                <div className={style.commentResponse}>
+                    <label htmlFor="justification_response_comment">Comentario</label>
+                    <textarea name="justification_response_comment" id="justification_response_comment" value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
+                </div>
+
+                <div className={style.inputContainer}>
+                    <input type="button" value="Cancelar" className={style.btnPopUp} onClick={() => setShowPopup(false)}/>
+                    <input type="button" value="Aceptar" className={style.btnPopUp} onClick={handleSubmit}/>
+                    
+                </div>
+                
+            </div>
+        </div>
+    )
+}
