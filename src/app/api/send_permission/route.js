@@ -9,7 +9,7 @@ export async function POST(request) {
     const formData = await request.formData();
 
     
-    const evidence_file = formData.get('evidence_file')
+    let evidence_file = formData.get('evidence_file')
 
     const userId = formData.get('userId')
     const absence_date = formData.get('absence_date')
@@ -59,6 +59,7 @@ export async function POST(request) {
                 { status: 400 },
             )
         }
+        evidence_file.name = evidence_file.name.replace(/ /g, "_")
 
         const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/solicitudes/${Date.now()}_${evidence_file.name}`, evidence_file)
 

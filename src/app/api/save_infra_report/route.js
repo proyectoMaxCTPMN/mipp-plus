@@ -9,7 +9,7 @@ export async function POST(request) {
     const supabase = createClient(cookieStore)
     const formData = await request.formData();
     
-    const evidence_file = formData.get('evidence_file')
+    let evidence_file = formData.get('evidence_file')
 
     const userId = formData.get('userId')
     const report_place = formData.get('report_place')
@@ -52,6 +52,8 @@ export async function POST(request) {
                 { status: 400 },
             )
         }
+
+        evidence_file.name = evidence_file.name.replace(/ /g, "_")
 
         const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/reportes_infra/${Date.now()}_${evidence_file.name}`, evidence_file)
 
