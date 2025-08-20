@@ -219,6 +219,13 @@
     background: #fff;
     width: 40%;
 }
+.solicitudestatus{
+    display: flex;
+    gap: .6em;
+    justify-content: flex-end;
+    font-size: 1.35rem;
+    font-weight: bold;
+}
 /*#endregion*/
 
 /* #region Estilo de justification*/
@@ -358,5 +365,21 @@
     font-size: 1.2rem;
     padding: 0.7rem 0;
     text-align: center;
+}
+.clockcontainer{
+    justify-content: center;
+    display: flex;
+    gap: .25rem;
+    height: auto;
+    font-size: 1.2rem;
+}
+.clockcontainer p{
+    color: #616161;
+    font-weight: 600;
+}
+.clockicon{
+    height: auto;
+    position: relative;
+    bottom: .1rem;
 }
 /*#endregion*/

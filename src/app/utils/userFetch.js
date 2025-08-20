@@ -142,7 +142,7 @@ export async function getUserAllDocuments(userId) {
 
     let { data: absences, error_absences } = await supabase
     .from('absence_requests')
-    .select('')
+    .select('*,justifications!absence_requests_justification_id_fkey(justification_response_state)')
     .eq('user_id', userId)
 
     if (error_absences) {
