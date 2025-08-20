@@ -441,11 +441,12 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                             </div>
 
                             <div className={style.logoff} onClick={handleLogout}>
-                            <Image src={"/menuIcons/logoff.svg"} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
-                            <p className={style.logOffText}>Salir</p>
+                                <Image src={"/menuIcons/logoff.svg"} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
+                                <p className={style.logOffText}>Salir</p>
+                            </div>
 
-
-                            <div className={style.alternateOptions} style={optionsHistory ? {opacity: 1} : {opacity: 0}} >
+                            
+                            <div className={style.alternateOptions} style={optionsHistory ? {opacity: 1, visibility: 'visible'} : {opacity: 0, visibility: 'hidden'}} >
                                 {
                                     historyArray.map((item) => (
                                         <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link); setShowNav(false)}}> 
@@ -456,7 +457,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                 }
                             </div>
 
-                            <div className={style.alternateOptions} style={optionsSoli ? {opacity: 1} : {opacity: 0}} >
+                            <div className={style.alternateOptions} style={optionsSoli ? {opacity: 1, visibility: 'visible'} : {opacity: 0, visibility: 'hidden'}} >
                                 {
                                     solicitudeArray.map((item) => (
                                         <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link); setShowNav(false)}}> 
@@ -467,7 +468,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                 }
                             </div>
 
-                            <div className={style.alternateOptions} style={optionsOthers ? {opacity: 1} : {opacity: 0}} >
+                            <div className={style.alternateOptions} style={optionsOthers ? {opacity: 1, visibility: 'visible'} : {opacity: 0, visibility: 'hidden'}} >
                                 {
                                     othersArray.map((item) => (
                                         <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link); setShowNav(false)}}> 
@@ -477,9 +478,6 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                     ))
                                 }
                             </div>
-
-
-                        </div>
                         </div>
 
 
