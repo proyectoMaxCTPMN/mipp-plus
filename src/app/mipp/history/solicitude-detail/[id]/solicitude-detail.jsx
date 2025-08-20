@@ -3,11 +3,39 @@ import Image from 'next/image';
 import style from './solicitude-detail.module.css'
 import { useState } from 'react';
 import Link from 'next/link'
+import { formatDate } from '@/app/utils/formatDate';
 
 export default function Solicitude_Detail({fullName_parameter, absencef_parameter,title_parameter,position_parameter,justificationf_parameter}){
     const [isSolicitudes, setIsSolicitudes] = useState(true);
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
     const [showresolution, setShowresolution] = useState(false);
+
+    function getTimeLeft(expired_date) {
+    const now = new Date();
+    const expire = new Date(expired_date);
+
+    // Format both dates for display
+    const nowStr = now.toLocaleDateString('es-CR');
+    const expireStr = expire.toLocaleDateString('es-CR');
+
+    const diffMs = expire - now;
+
+    if (diffMs <= 0) return (<span className={style.isExpiredText}>0d 0min</span>);
+
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = "";
+    if (diffDays > 0) result += `${diffDays}d`;
+    if (diffHours > 0) result += ` ${diffHours}h `;
+    if (diffDays === 0 && diffHours === 0 && diffMinutes > 0) result += `${diffMinutes} min`;
+    if (!result) result = "> 1min";
+    return (<span className={style.notExpiredText}>{result.trim()}</span>);
+}
+
+
+    console.log(absencef_parameter)
     return (
         <div className={style.body}>
             <div className={style.container}>
@@ -37,7 +65,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
 
                                             <div className={style.inputdate_container}>
                                                 <label style={{position: 'relative', top: '.2rem'}}>PERMISO PARA AUSENTARSE EN LA FECHA:</label>
-                                                <input type="text" name="absence_date" disabled defaultValue={new Date(absencef_parameter.absence_date).toLocaleDateString('es-CR')}/>
+                                                <input type="text" name="absence_date" disabled defaultValue={formatDate(absencef_parameter.absence_date)}/>
                                             </div>
 
                                             <div className={style.inputradio_container}>
@@ -148,6 +176,20 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                                 )
                                             }
                                         </div>
+                                        <div className={style.solicitudestatus}>
+                                            <p>Estado:</p>
+                                            <>
+                                                {absencef_parameter.is_pending && (
+                                                    <span style={{ color: '#DEAA00'}}>Pendiente</span>
+                                                )}
+                                                {absencef_parameter.is_approved && (
+                                                    <span style={{ color: '#0B8300'}}>Aprobado</span>
+                                                )}
+                                                {absencef_parameter.is_denied && (
+                                                    <span style={{ color: '#940202'}}>Denegado</span>
+                                                )}
+                                            </>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -159,7 +201,9 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                 <p className={style.titleofformulary}>{!showresolution ? "Justificación:" : "Resolución"}</p>
                                 <div className={style.formulary_upperinformationcontainer}>
                                     <div className={style.cardname}>{fullName_parameter.full_name}</div>
-                                    <div className={style.previewcard}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>
+                                    {
+                                        !showresolution &&
+                                        <div className={style.previewcard}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>}
                                 </div>
                                 <div className={style.cardcontainer}>
                                     <Image src={'/Card-header.svg'} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
@@ -183,7 +227,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
 
                                                 <div className={style.inputdatecontainer}>
                                                     <label>DE LA FECHA:</label>
-                                                    <input type="date" name="absence_date" id="absence_date" defaultValue={new Date(justificationf_parameter.absence_date).toLocaleDateString('af-za')} disabled/>
+                                                    <input type="text" name="absence_date" id="absence_date" defaultValue={formatDate(justificationf_parameter.absence_date)} disabled/>
                                                     <span><Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image></span>
                                                 </div>
 
@@ -276,7 +320,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                             
                                             <div className={style.explanationcontainer}>
                                                 <span>Comentarios:</span>  
-                                                <textarea className={style.explanation} disabled>{justificationf_parameter.justification_response_comment}</textarea>
+                                                <textarea className={style.explanation} disabled defaultValue={justificationf_parameter.justification_comment}></textarea>
                                             </div>
 
                                             <div className={style.evidence2}>
@@ -297,25 +341,109 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                                     }
                                                 </div>
                                                 <div className={style.buttonscontainer}>
-                                                    <button type="button" onClick={()=> setShowresolution(true)}>Revisar Resolución</button>
+                                                    <button type="button" onClick={()=> setShowresolution(true)} disabled={justificationf_parameter.justification_response_state == 0} style={justificationf_parameter.justification_response_state == 0 ? {color: 'var(--primary-disabled)'}:null}>{justificationf_parameter.justification_response_state != 0 ? "Revisar Resolución" : "No ha sido gestionada aún"}</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                     ):(
-                                        <div className={style.form_container}>
-                                            <h1>Resolución de Justificación de permiso</h1>
-
-                                            <div className={style.buttonscontainer}>
-                                                <button type="button" onClick={()=> setShowresolution(false)}>Volver</button>
-                                            </div>
+                                        <>
                                         
-                                        </div>
+                                            
+                                            <div className={style.form_container}>
+                                                <h1>Resolución de Justificación de permiso</h1>
+                                                <div className={style.datePopUp}>
+                                                    <label htmlFor="date">Fecha:</label>
+                                                    <input type="date" name="date" id="date" defaultValue={new Date().toLocaleDateString('en-CA')} disabled/>
+                                                </div>
+                                                <p>Quien suscribe, <span>M.SC. Laura Ramón Elizondo</span> en calidad de <span>Directora</span>, con base a las leyes y reglamentos vigentes, responde a solicitud de justificación de permiso; bajo la resolución de:</p>
+                                                <div className={style.radioContainerPopUp}>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="approve_partial" disabled defaultChecked={justificationf_parameter.justification_response_state == 1}/>
+                                                        <label htmlFor="approve_partial">Aceptado con rebajo salarial parcial.</label>
+                                                    </div>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="approve_total" disabled defaultChecked={justificationf_parameter.justification_response_state == 2}/>
+                                                        <label htmlFor="approve_total">Aceptado con rebajo salarial total.</label>
+                                                    </div>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="approve" disabled defaultChecked={justificationf_parameter.justification_response_state == 3}/>
+                                                        <label htmlFor="approve">Aceptado sin rebajo salarial.</label>
+                                                    </div>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="deny" disabled defaultChecked={justificationf_parameter.justification_response_state == 4}/>
+                                                        <label htmlFor="deny">Denegó lo solicitado.</label>
+                                                    </div>
+                                                    <div className={style.radioPopUp}>
+                                                        <input type="radio" name="resolution" id="convocatory" disabled defaultChecked={justificationf_parameter.justification_response_state == 5}/>
+                                                        <label htmlFor="convocatory">Acoger convocatoria.</label>
+                                                    </div>
+                                                </div>
+
+                                                <div className={style.commentResponse}>
+                                                    <label htmlFor="justification_response_comment">Comentario</label>
+                                                    <textarea name="justification_response_comment" id="justification_response_comment" defaultValue={justificationf_parameter.justification_response_comment} disabled></textarea>
+                                                </div>
+
+                                                <div className={style.buttonscontainer2}>
+                                                    <button type="button" onClick={()=> setShowresolution(false)}>Volver</button>
+                                                </div>
+                                            </div>
+                                        </>
                                     )}
                                 </div>
                             </div>
                         ):(
-                            <></>
+                            <div className={style.permission_formularycontainer}>
+                                <p className={style.titleofformulary}>{!showresolution ? "Justificación:" : "Resolución"}</p>
+                                <div className={style.formulary_upperinformationcontainer}>
+                                    <div className={style.cardname}>{fullName_parameter.full_name}</div>
+                                    {
+                                        (!showresolution && absencef_parameter.is_justified) &&
+                                        <div className={style.previewcard}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>}
+                                </div>
+                                    <div className={style.cardcontainer}>
+                                    <Image src={'/Card-header.svg'} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
+                                    <div className={style.form_container}>
+                                        <h1>Formulario de justificación de permiso salida/ausencia/tardía/incapacidad</h1>
+                                        {absencef_parameter.is_pending &&
+                                            <>
+                                            <h2>Su solicitud de permiso aún no ha sido revisada.</h2>
+                                            <Link href={'/mipp/dashboard/'}>
+                                            <div className={style.buttonscontainer2}>
+                                                <button type="button">Volver a Inicio</button>
+                                            </div>
+                                            </Link>
+                                            </>
+                                        }
+                                        {absencef_parameter.is_denied &&
+                                            <>
+                                            <h2>Su solicitud de permiso ha sido rechazada.</h2>
+                                            <Link href={'/mipp/dashboard/'}>
+                                            <div className={style.buttonscontainer2}>
+                                                <button type="button">Volver a Inicio</button>
+                                            </div>
+                                            </Link>
+                                            </>
+                                        }
+                                        {absencef_parameter.is_approved &&
+                                            <>
+                                            <h2>No se ha realizado una justificación</h2>
+                                            <div className={style.clockcontainer}>
+                                                <p>Tiempo restante:</p>
+                                                <Image src={absencef_parameter.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={23} height={20} alt='clock icon' className={style.clockicon}/>
+                                                <p style={!absencef_parameter ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absencef_parameter.expire_date)}</p>
+                                            </div>
+                                            <Link href={`/mipp/solicitude/justification-formulary/${absencef_parameter.id}`}>
+                                            <div className={style.buttonscontainer2}>
+                                                <button type="button" disabled={absencef_parameter.is_expired}>{!absencef_parameter.is_expired ? "Ir a justificar":"La solicitud ha expirado"}</button>
+                                            </div>
+                                            </Link>
+                                            </>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         )
                     )
                 }

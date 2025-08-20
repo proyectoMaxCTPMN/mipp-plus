@@ -10,8 +10,9 @@ import { useTheme } from "next-themes";
 import { Suspense, useEffect, useState } from "react";
 import { getCurrentUser } from "../utils/auth";
 import { getUserRoles } from "../utils/userFetch";
-
 import { Merriweather_Sans, Karla, Martel_Sans } from 'next/font/google'
+import { usePathname } from "next/navigation";
+
 
 const merriweather_sans = Merriweather_Sans({
     weight: ['300', '400', '500', '600', '700', '800'],
@@ -38,7 +39,21 @@ const martel_sans = Martel_Sans({
 
 export default function MippLayout({children}) {
     const mounted = useMounted()
+    const pathname = usePathname();
+    console.log(pathname)
     const {theme, setTheme} = useTheme()
+
+    let defaultSelected; // Default value
+
+    if (pathname.startsWith('/mipp/dashboard')) {
+        defaultSelected = 'dashboard';
+    } else if (pathname.startsWith('/mipp/history')) {
+        defaultSelected = 'history';
+    } else if (pathname.startsWith('/mipp/solicitude')) {
+        defaultSelected = 'solicitude';
+    } else if (pathname.startsWith('/mipp/account')) {
+        defaultSelected = 'account';
+    }
 
     const [userRoles, setUserRoles] = useState(null);
 
@@ -66,7 +81,7 @@ export default function MippLayout({children}) {
 
     return (
         <div className={`${merriweather_sans.variable} ${karla.variable} ${martel_sans.variable} `}>
-            <Navbar userRoles_parameter={userRoles}/>
+            <Navbar userRoles_parameter={userRoles} defaultSelected={defaultSelected}/>
             <PopUpContainer />
             <Suspense fallback={                
                 <LoadingSkeleton />

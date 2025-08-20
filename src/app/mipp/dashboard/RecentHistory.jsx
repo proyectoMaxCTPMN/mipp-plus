@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import style from './dashboard.module.css'
 import Image from 'next/image'
+import { formatDate } from '@/app/utils/formatDate';
 
 function getTimeLeft(expired_date) {
     const now = new Date();
@@ -40,7 +41,7 @@ export default function RecentHistory({AllDocuments_parameter}){
 
                                 <div className={style.information_upperpart}>
                                     <p>{reasons[absence.reason]}</p>
-                                    <span>{new Date(absence.absence_date).toLocaleDateString('es-CR')}</span>
+                                    <span>{formatDate(absence.absence_date)}</span>
                                 </div>
 
                                 <div className={style.information_lowerpart}>
@@ -60,15 +61,18 @@ export default function RecentHistory({AllDocuments_parameter}){
                                             absence.is_approved ? 
                                             <div className={style.clockcontainer}>
                                                 <p>Just.:</p>
-                                                {
-                                                    absence.is_justified ?(
-                                                        <p style={{color: '#DEAA00'}}>Enviada</p>
-                                                    ):(
-                                                        <>
+                                                {(absence.is_justified && absence.justifications.justification_response_state == 0) &&
+                                                    <p style={{color: '#DEAA00'}}>Enviada</p>
+                                                }
+                                                
+                                                {(absence.is_justified && absence.justifications.justification_response_state != 0) &&
+                                                    <p style={{color: '#1D2958'}}>Gestionada</p>
+                                                }
+                                                {!absence.is_justified &&
+                                                    <>
                                                         <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' className={style.clockicon}/>
-                                                        <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
-                                                        </>
-                                                    )
+                                                        <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : {}}>{getTimeLeft(absence.expire_date)}</p>
+                                                    </>
                                                 }
                                             </div>
                                             :(

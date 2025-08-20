@@ -1,5 +1,6 @@
 'use client'
 
+import { formatDate } from '@/app/utils/formatDate'
 import style from './justification-formulary.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,12 +8,20 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
+function getLocalDateString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`; // siempre YYYY-MM-DD correcto en local
+}
+
 
 export default function Justification_Formulary_Page({userId_parameter, request_id_parameter, fullName_parameter, title_parameter, position_parameter, absenceData_parameter}){
     const router = useRouter();
     const [formData, setFormData] = useState({
         userId: userId_parameter,
         request_id: request_id_parameter,
+        justification_date: getLocalDateString(new Date()),
         absence_date: absenceData_parameter.absence_date,
         is_absence: absenceData_parameter.is_absence,
         is_all_day: absenceData_parameter.is_whole_day,
@@ -88,7 +97,7 @@ export default function Justification_Formulary_Page({userId_parameter, request_
                             <div className={style.inputdatecontainer}>
                                 <label>DE LA FECHA:</label>       
                                 <span>
-                                    <input type="date" name="absence_date" id="absence_date" defaultValue={new Date(formData.absence_date).toLocaleDateString('af-za')} disabled/>
+                                    <input type="text" name="absence_date" id="absence_date" defaultValue={formatDate(formData.absence_date)} disabled/>
                                     <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image>
                                 </span>
                             </div>
@@ -201,15 +210,16 @@ export default function Justification_Formulary_Page({userId_parameter, request_
                             {hasAttachment &&(
                             <div className={style.evidence}>
                                 {
-                                    (hasAttachment && !changedInput && !inputFile) && (<><p>Utilizando archivo anterior</p> <Link className={style.evidence_link} href={formData.attachment_url}>Ver</Link> </>)
+                                    (!changedInput && !inputFile && formData.attachment_url) && (<><p>Utilizando archivo anterior</p> <Link className={style.evidence_link} href={formData.attachment_url}>Ver</Link></>)
+                                            
                                 }
 
                                 {
-                                    !hasAttachment && <p></p>
+                                    (!changedInput && !inputFile && !formData.attachment_url) &&(<p>Sin archivo anterior</p>)
                                 }
-
+                                
                                 {
-                                    (hasAttachment && changedInput && inputFile) && <p>Utilizando {inputFile.name}</p>
+                                    (hasAttachment && changedInput && inputFile) && <p className={style.utilizing}>Utilizando {inputFile.name}</p>
                                 }
 
                                 {

@@ -104,6 +104,10 @@
     position: relative;
 }
 
+.inputdatecontainer input{
+    width: 8.5rem;
+}
+
 .reasoncontainer select{ /*Estilo general selects*/
     appearance: none; /* Quita la flecha por defecto */
     -webkit-appearance: none;
@@ -253,7 +257,11 @@
 .explanation{
     width: 100%;
 }
-
+.request_datecontainer span{
+    color: #616161;
+    font-weight: bold;
+    text-decoration: underline;
+}
 .buttonscontainer{
     display: flex;
     gap: 2.5em;

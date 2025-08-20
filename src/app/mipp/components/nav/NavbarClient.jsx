@@ -90,20 +90,24 @@ const othersArray = [
 ]
 
 
-export default function NavbarClient({userRoles_parameter}) {
+export default function NavbarClient({userRoles_parameter, defaultSelected}) {
+
     const mounted = useMounted()
     const router = useRouter()
     const [hoverIndex, setHoverIndex] = useState()
     const [pageIndex, setPageIndex] = useState(1)
-    const [currentName, setCurrentName] = useState("dashboard")
+    const [currentName, setCurrentName] = useState(defaultSelected || 'dashboard');
     //Solicitude Sidebar State
     const [solicitudeShow, setSolicitudeShow] = useState(false)
     const [optionsArray, setOptionsArray] = useState(solicitudeArray);
     const [width, setWitdth] = useState(0);
     const [gotWidth, setGotWidth] = useState(false)
 
-    const [mobileHist, setMobileHist] = useState(false)
-    const [mobileSoli, setMobileSoli] = useState(false)
+    const [optionsHistory, setOptionsHistory] = useState(false);
+    const [optionsSoli, setOptionsSoli] = useState(false);
+    const [optionsOthers, setOptionsOthers] = useState(false);
+
+    const [showNav, setShowNav] = useState(false);
 
     const optionsRef = useRef(null);
 
@@ -113,6 +117,12 @@ export default function NavbarClient({userRoles_parameter}) {
     let barHeight = 12.5 + ((pageIndex - 1) * 11.25);
 
     const componentRef = useRef(null);
+
+    const hideAll = () => {
+        setOptionsHistory(false);
+        setOptionsSoli(false);
+        setOptionsOthers(false);
+    }
 
     useEffect(() => {
         const updateWidth = () => {setWitdth(window.innerWidth)};
@@ -125,15 +135,12 @@ export default function NavbarClient({userRoles_parameter}) {
 
     useEffect(() => {
         setSolicitudeShow(false)
-        setMobileHist(false)
-        setMobileSoli(false)
+
 
         function handleClickOutside(event) {
             if (componentRef.current && !componentRef.current.contains(event.target)) {
             // This code runs when a click occurs outside the component
             setSolicitudeShow(false)
-            setMobileHist(false)
-            setMobileSoli(false)
             // Perform actions like closing a modal, dropdown, etc.
             }
         }
@@ -151,15 +158,32 @@ export default function NavbarClient({userRoles_parameter}) {
         if (optionsRef.current) {
             for (let i = 0; i < optionsRef.current.children.length; i++) {
                 optionsRef.current.children[i].setAttribute("data-child-id", i + 1);
+                if (optionsRef.current.children[i].id == currentName) {
+                    setPageIndex(i + 1);
+                }
             }
         }
+
+        
     }, [mounted]);
+
+    useEffect(() => {
+        setCurrentName(defaultSelected || 'dashboard');
+
+        if (optionsRef.current) {
+            for (let i = 0; i < optionsRef.current.children.length; i++) {
+                if (optionsRef.current.children[i].id == defaultSelected) {
+                    setPageIndex(i + 1);
+                }
+            }
+        }
+
+        
+    }, [mounted, defaultSelected]);
 
     const handleLogout = async () => {
         await logout()
     }
-
-    const setBothMobile = (bool) => {setMobileHist(bool); setMobileSoli(bool)};
 
     const handleRedirect = (link) => {
         router.push(link)
@@ -170,8 +194,8 @@ export default function NavbarClient({userRoles_parameter}) {
     }
 
     return(
-        <div ref={componentRef}>
-            <div className={style.sidebarContainer} ref={componentRef}>
+        <>
+            <div className={style.sidebarContainer} ref={componentRef} style={isMobile ? showNav ? {top: 0} : {top: '-380px'} : {}}>
                 {
                     !isMobile ?
                      <>
@@ -195,6 +219,7 @@ export default function NavbarClient({userRoles_parameter}) {
                         <div className={style.optionsContainer} ref={optionsRef}>
                             <div 
                             className={style.dashboard} 
+                            id='dashboard'
                             onClick={(e) => {
                                 setPageIndex(e.currentTarget.dataset.childId); 
                                 setCurrentName("dashboard");
@@ -222,6 +247,7 @@ export default function NavbarClient({userRoles_parameter}) {
                                 <>
                                     <div 
                                     className={style.history} 
+                                    id='history'
                                     onClick={(e) => {
                                         setPageIndex(e.currentTarget.dataset.childId); 
                                         setCurrentName("history");
@@ -246,6 +272,7 @@ export default function NavbarClient({userRoles_parameter}) {
 
                                     <div 
                                     className={style.soli} 
+                                    id='solicitude'
                                     onClick={(e) => {
                                         setPageIndex(e.currentTarget.dataset.childId); 
                                         setCurrentName("solicitude");
@@ -275,6 +302,7 @@ export default function NavbarClient({userRoles_parameter}) {
                                 (userRoles_parameter.read_documents == true || userRoles_parameter.manage_documents || userRoles_parameter.root) &&
                                 <div 
                                 className={style.soli} 
+                                id='manage'
                                 onClick={(e) => {setPageIndex(e.currentTarget.dataset.childId); setOptionsArray(othersArray); setSolicitudeShow(true);}} 
                                 onMouseEnter={(e) => setHoverIndex(e.currentTarget.dataset.childId)} 
                                 onMouseLeave={() => {setHoverIndex(0);}}
@@ -287,6 +315,7 @@ export default function NavbarClient({userRoles_parameter}) {
                                 (userRoles_parameter.create_users == true || userRoles_parameter.root) &&
                                 <div 
                                 className={style.soli} 
+                                id='create_account'
                                 onClick={(e) => {setPageIndex(e.currentTarget.dataset.childId); setSolicitudeShow(false); handleRedirect("/mipp/create_account");}} 
                                 onMouseEnter={(e) => setHoverIndex(e.currentTarget.dataset.childId)} 
                                 onMouseLeave={() => {setHoverIndex(0);}}
@@ -298,6 +327,7 @@ export default function NavbarClient({userRoles_parameter}) {
 
                             <div 
                             className={style.account} 
+                            id='account'
                             onClick={(e) => {
                                 setPageIndex(e.currentTarget.dataset.childId); 
                                 setCurrentName("account");
@@ -327,68 +357,143 @@ export default function NavbarClient({userRoles_parameter}) {
                         
                      </>
                     :
-                     <>
-                        <div className={style.dashboard} onClick={() => {setPageIndex(1); setBothMobile(false); redirect("/mipp/dashboard");}}>
-                            <Image src={"/menuIcons/mobile/home.svg"} height={20} width={20} alt='Home' className={style.iconImage}/>
-                        </div>
+                    <>
+                        <Image src={'/hamburger.svg'} width={20} height={20} alt='ham' className={style.menuIcon}
+                        onClick={() => {setShowNav(!showNav); hideAll()}}
+                        ></Image>
 
-                        <div className={style.history} onClick={() => {setPageIndex(2);setOptionsArray(historyArray); setBothMobile(false); setMobileHist(!mobileHist);}}>
-                            <Image src={"/menuIcons/mobile/history.svg"} height={20} width={20} alt='History' className={style.iconImage}/>
-                            <div className={style.mobileHistoryBox} style={mobileHist ? {opacity: 1} : {opacity: 0}}>
-                                {historyArray.map(item  => (
-                                    <div className={style.mobileHistItem} key={item.id} onClick={() => redirect(item.link)}>
+
+
+                        <div className={style.optionsContainer} ref={optionsRef}>
+
+                            <div 
+                            className={style.dashboard} 
+                            id='dashboard'
+                            onClick={(e) => {handleRedirect("/mipp/dashboard"); hideAll()}}                            
+                            >
+                                <Image 
+                                    src={"/menuIcons/home_unselected.svg"} height={20} width={20} alt='Logo' className={style.iconImage}
+                                />
+                                <p className={style.subText}>Inicio</p>
+                            </div>
+
+                            {
+                                (userRoles_parameter.basic_user || userRoles_parameter.root) &&
+                                <>
+                                    <div 
+                                    className={style.history} 
+                                    id='history'
+                                    onClick={() => {setOptionsHistory(true); setOptionsSoli(false); setOptionsOthers(false);}} 
+                                    >
                                         <Image 
-                                            className={style.mobileHistContent}    
-                                            src={item.icon}
-                                            height={20} 
-                                            width={20} 
-                                            alt='Solicitude' 
+                                            src={"/menuIcons/hist_unselected.svg"} height={20} width={20} alt='Logo' className={style.iconImage}
                                         />
+                                        <p className={style.subText}>Historial</p>
                                     </div>
 
-                                ))
+                                    <div 
+                                    className={style.soli} 
+                                    id='solicitude'
+                                    onClick={() => {{setOptionsHistory(false); setOptionsSoli(true); setOptionsOthers(false);}}} 
+                                    >
+                                        <Image 
+                                            src={"/menuIcons/soli_unselected.svg"} height={20} width={20} alt='Logo' className={style.iconImage}
+                                        />
+                                            <p className={style.subText}>Solicitud</p>
+                                    </div>
+                                
+                                </>
+                            }
+
+                            {
+                                (userRoles_parameter.read_documents == true || userRoles_parameter.manage_documents || userRoles_parameter.root) &&
+                                <div 
+                                className={style.manage} 
+                                id='manage'
+                                onClick={() => {{setOptionsHistory(false); setOptionsSoli(false); setOptionsOthers(true);}}} 
+                                >
+                                    <p className={style.subText}>Manejar</p>
+                                </div>
+                            }
+
+                            {
+                                (userRoles_parameter.create_users == true || userRoles_parameter.root) &&
+                                <div 
+                                className={style.create} 
+                                id='create_account'
+                                onClick={() => {handleRedirect("/mipp/create_account"); hideAll()}} 
+                                >
+                                    <p className={style.subText}>Añadir cuenta</p>
+                                </div>
+                            }
+
+
+                            <div 
+                            className={style.account} 
+                            id='account'
+                            onClick={() => {
+                            handleRedirect("/mipp/account"); hideAll()}}
+                            >
+                                <Image 
+                                    src={ "/menuIcons/account_unselected.svg"} height={20} width={20} alt='Logo' className={style.iconImage}
+                                />
+                                <p className={style.subText}>Cuenta</p>
+                            </div>
+
+                            <div className={style.logoff} onClick={handleLogout}>
+                            <Image src={"/menuIcons/logoff.svg"} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
+                            <p className={style.logOffText}>Salir</p>
+
+
+                            <div className={style.alternateOptions} style={optionsHistory ? {opacity: 1} : {opacity: 0}} >
+                                {
+                                    historyArray.map((item) => (
+                                        <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link)}}> 
+                                             <Image src={item.icon} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
+                                            {item.text}
+                                        </p>
+                                    ))
                                 }
                             </div>
 
-                        </div>
-
-                        <div className={style.soli} onClick={() => {setPageIndex(3); setOptionsArray(solicitudeArray); setBothMobile(false); setMobileSoli(!mobileSoli);}}>
-                            <Image src={"/menuIcons/mobile/soli.svg"} height={20} width={20} alt='Solicitude' className={style.iconImage}/>
-
-                            <div className={style.mobileSoliBox} style={mobileSoli ? {opacity: 1} : {opacity: 0}}>
-                                {solicitudeArray.map(item  => (
-                                    <div className={style.mobileSoliItem} key={item.id} onClick={() => redirect(item.link)}>
-                                        <Image 
-                                            className={style.mobileSoliContent}    
-                                            src={item.icon}
-                                            height={20} 
-                                            width={20} 
-                                            alt='History' 
-                                        />
-                                    </div>
-
-                                ))
+                            <div className={style.alternateOptions} style={optionsSoli ? {opacity: 1} : {opacity: 0}} >
+                                {
+                                    solicitudeArray.map((item) => (
+                                        <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link)}}> 
+                                            <Image src={item.icon} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
+                                            {item.text}
+                                        </p>
+                                    ))
                                 }
                             </div>
+
+                            <div className={style.alternateOptions} style={optionsOthers ? {opacity: 1} : {opacity: 0}} >
+                                {
+                                    othersArray.map((item) => (
+                                        <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link)}}> 
+                                            <Image src={item.icon} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
+                                            {item.text}
+                                        </p>
+                                    ))
+                                }
+                            </div>
+
+
+                        </div>
                         </div>
 
-                        <div className={style.account} onClick={() => {setPageIndex(4); setBothMobile(false); redirect("/mipp/account");}} >
-                            <Image src={"/menuIcons/mobile/account.svg"} height={20} width={20} alt='Account' className={style.iconImage}/>
-                        </div>
 
-                        <div className={style.logoff} onClick={handleLogout}>
-                            <Image src={"/menuIcons/mobile/logoff.svg"} height={20} width={20} alt='Logoff' className={style.iconImage}/>
-
-                        </div>
-                     </>
+                    </>
                 }
 
             </div>
-                {
-                    !isMobile && <SolicitudeBar solicitudeShow={solicitudeShow} setSolicitudeShow={setSolicitudeShow} optionsArray={optionsArray} handleRedirect={handleRedirect} userRoles_parameter={userRoles_parameter}/>
-                }
+
+
+            {
+                !isMobile && <SolicitudeBar solicitudeShow={solicitudeShow} setSolicitudeShow={setSolicitudeShow} optionsArray={optionsArray} handleRedirect={handleRedirect} userRoles_parameter={userRoles_parameter}/>
+            }
             
-        </div>
+        </>
 
     )
 }

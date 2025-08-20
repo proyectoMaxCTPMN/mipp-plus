@@ -6,12 +6,20 @@ import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
+function getLocalDateString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`; // siempre YYYY-MM-DD correcto en local
+}
+
 export default function Permission_Formulary_Page({userId_parameter, fullName_parameter, title_parameter, position_parameter}){
     const router = useRouter()
     const [fecha, setFecha] = useState('');
     const inputRef = useRef(null);
     const [formData, setFormData] = useState({
         userId: userId_parameter,
+        request_date: getLocalDateString(new Date()),
         absence_date: '',
         is_whole_day: false,
         is_absence: '',
@@ -50,6 +58,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
     }
 
     const handleCalendarClick = () => {
+        console.log(formData.absence_date)
         if (inputRef.current) {
             if (inputRef.current.showPicker) {
                 inputRef.current.showPicker(); // Navegadores modernos
@@ -78,14 +87,14 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
     useEffect(() => {
         const hoy = new Date(); // Obtener la fecha actual y Sumar 3 días a la fecha actual
         hoy.setDate(hoy.getDate() + 3);
-        console.log(hoy)
-        setFormData(prev => ({
-            ...prev,
-            absence_date: hoy.toISOString()
-        }));
         const yyyy = hoy.getFullYear();
         const mm = String(hoy.getMonth() + 1).padStart(2, '0');
         const dd = String(hoy.getDate()).padStart(2, '0');
+        setFormData(prev => ({
+            ...prev,
+            absence_date: `${yyyy}-${mm}-${dd}`
+        }));
+        
         setFecha(`${yyyy}-${mm}-${dd}`);
     }, []);
 

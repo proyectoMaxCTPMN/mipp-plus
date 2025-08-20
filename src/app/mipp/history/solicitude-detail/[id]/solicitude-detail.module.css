@@ -170,7 +170,7 @@
 .inputdate_container input, .inputdatecontainer input{
     font-weight: bold;
     color: #616161;
-    width: 6rem;
+    width: 8.5rem;
 }
 .inputradio_container, .worktimeabsence_container{
     display: flex;
@@ -218,6 +218,13 @@
     border-radius: 4px;
     background: #fff;
     width: 40%;
+}
+.solicitudestatus{
+    display: flex;
+    gap: .6em;
+    justify-content: flex-end;
+    font-size: 1.35rem;
+    font-weight: bold;
 }
 /*#endregion*/
 
@@ -296,18 +303,83 @@
 .evidence2 .evidence_input{
     width: 8rem;
 }
-.buttonscontainer button{
+
+.buttonscontainer button ,.buttonscontainer2 button{
     background-color: var(--primary);
     color: #fff;
     border: none;
     border-radius: 8px;
     padding: 0.7rem 2.8rem;
     font-size: 1rem;
-    font-weight: 500;
     cursor: pointer;
     transition: background 0.2s;
 }
-.buttonscontainer button:hover, .submitpass:hover{
+.buttonscontainer button:hover,.buttonscontainer2 button:hover, .submitpass:hover{
     background-color: var(--primary-selected);
+}
+
+.datePopUp{
+    display: flex;
+    gap: 6px;
+    place-self: center;
+    place-items: center;
+}
+
+.radioContainerPopUp{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    place-content: center;
+    flex-wrap: wrap;
+}
+.radioPopUp{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    gap: 6px;
+    flex: 1;
+}
+.commentResponse{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.commentResponse textarea{
+    font-size: 1rem;
+    padding: 6px;
+}
+.buttonscontainer2{
+    margin-top: 1.3rem;
+    text-align: center;
+}
+.buttonscontainer2 button{
+    width: 25%;
+    font-weight: bold;
+}
+.form_container h2{
+    color: var(--primary);
+    -webkit-text-stroke: 1px #000; /* Para Chrome, Safari, Edge */
+    text-stroke: 1px #000;         /* Para otros navegadores (soporte limitado) */
+    font-size: 1.2rem;
+    padding: 0.7rem 0;
+    text-align: center;
+}
+.clockcontainer{
+    justify-content: center;
+    display: flex;
+    gap: .25rem;
+    height: auto;
+    font-size: 1.2rem;
+}
+.clockcontainer p{
+    color: #616161;
+    font-weight: 600;
+}
+.clockicon{
+    height: auto;
+    position: relative;
+    bottom: .1rem;
 }
 /*#endregion*/

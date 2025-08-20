@@ -66,7 +66,7 @@ export async function getPreviewData() {
         return [];
       }
 
-      const dataUnfiltered = data.map((item, index) => ({
+      const response = data.map((item, index) => ({
         type,
         label,
         data: item,
@@ -74,37 +74,36 @@ export async function getPreviewData() {
         created_at: item.created_at,
       }));
 
-      const dataOrdered = dataUnfiltered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
       // Map to unified format
-      return dataOrdered
+      return response
     };
 
     // Fetch all data
     const absences = await fetchData(
       "absence_requests",
-      "id, request_date, is_pending, is_denied, is_approved, is_justified, user_id(id, first_name, last_name)",
+      "id, request_date, absence_date, is_pending, is_denied, is_approved, is_justified, reason, user_id(id, first_name, last_name), created_at",
       "Solicitud de Aus/Tar/Sal",
       "absence"
     );
 
     const infra = await fetchData(
       "infraestructure_reports",
-      "id, report_date, report_place, is_revised, user_id(id, first_name, last_name)",
+      "id, report_date, created_at, report_place, is_revised, user_id(id, first_name, last_name)",
       "Reporte de Infraestructura",
       "infra"
     );
 
     const justifications = await fetchData(
       "justifications",
-      "id, justification_date, justification_response_state, user_id(id, first_name, last_name)",
+      "id, justification_date, created_at, absence_date, justification_response_state, justification_reason, user_id(id, first_name, last_name)",
       "Justificacion de Aus/Tar",
       "justi"
     );
 
     const omissions = await fetchData(
       "mark_omissions",
-      "id, omission_date, user_id(id, first_name, last_name), is_revised",
+      "id, omission_date, created_at, user_id(id, first_name, last_name), is_revised",
       "Omision de Marca",
       "omission"
     );
@@ -116,6 +115,8 @@ export async function getPreviewData() {
       ...justifications,
       ...omissions
     ];
+
+    console.log("Unified Data:", unifiedData);
 
     return unifiedData;
 

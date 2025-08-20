@@ -3,6 +3,21 @@ import { createClient } from '../../utils/supabase/server'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server';
 
+function getLocalDateString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`; // siempre YYYY-MM-DD correcto en local
+}
+
+function normalizeFileName(name) {
+  return name
+    .normalize("NFD") // quita acentos
+    .replace(/[\u0300-\u036f]/g, "") // elimina diacríticos
+    .replace(/\s+/g, "_") // espacios a guion bajo
+    .replace(/[^a-zA-Z0-9._-]/g, ""); // solo caracteres seguros
+}
+
 export async function POST(request) {
     const cookieStore = await cookies()
     const supabase = createClient(cookieStore)
@@ -10,10 +25,11 @@ export async function POST(request) {
 
     
     const changed_input = formData.get('changed_input')
-    const new_attachment = formData.get('new_attachment')
+    let new_attachment = formData.get('new_attachment')
 
     const request_id = formData.get('request_id')
     const userId = formData.get('userId')
+    const justification_date = formData.get('justification_date')
     const absence_date = formData.get('absence_date')
     const is_absence = formData.get('is_absence')
     const is_all_day = formData.get('is_all_day')
@@ -60,7 +76,9 @@ export async function POST(request) {
             )
         }
 
-        const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/justificaciones/${Date.now()}_${new_attachment.name}`, new_attachment)
+        new_attachment.name = new_attachment.name.replace(/ /g, "_")
+
+        const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/justificaciones/${Date.now()}_${normalizeFileName(new_attachment.name)}`, new_attachment)
 
         if (error) {
             console.error(JSON.stringify(error))
@@ -75,6 +93,7 @@ export async function POST(request) {
 
     const toSend = { 
       user_id: userId,
+      justification_date: justification_date,
       absence_date: absence_date,
       is_absence,
       is_all_day,
@@ -86,6 +105,7 @@ export async function POST(request) {
       request_id: request_id
     }
 
+    console.log("toSend", toSend)   
 
     const justiReponse = await supabase
     .from('justifications')

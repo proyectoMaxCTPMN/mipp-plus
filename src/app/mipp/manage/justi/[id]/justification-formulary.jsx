@@ -1,5 +1,6 @@
 'use client'
 
+import { formatDate, formatDateandHour } from '@/app/utils/formatDate'
 import style from './justification-formulary.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -61,7 +62,7 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
                             <div className={style.inputdatecontainer}>
                                 <label>DE LA FECHA:</label>       
                                 <span>
-                                    <input type="date" name="absence_date" id="absence_date" defaultValue={new Date(formData.absence_date).toLocaleDateString('af-za')} disabled/>
+                                    <input type="text" name="absence_date" id="absence_date" defaultValue={formatDate(formData.absence_date)} disabled/>
                                     <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image>
                                 </span>
                             </div>
@@ -171,7 +172,6 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
                                 className={style.explanation}
                             />
                         </div>
-                            
                             {hasAttachment &&(
                             <div className={style.evidence}>
                                 {
@@ -183,7 +183,9 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
                                 
                             </div>
                         )}
-
+                        <div className={style.request_datecontainer}>
+                            <p>Presento la solicitud a las <span>{formatDateandHour(justif_parameter.created_at).time}</span> del día <span>{formatDateandHour(justif_parameter.created_at).day}</span> del mes <span>{formatDateandHour(justif_parameter.created_at).month}</span> del año <span>{formatDateandHour(justif_parameter.created_at).year}</span></p>
+                        </div>
                         <div className={style.buttonscontainer}>
                             <button type="submit">Manejar</button>
                         </div>
@@ -215,8 +217,7 @@ function SendPopup({justiId_parameter, router, setShowPopup}){
 
         if (response.ok) {
             toast.success("Justificacion manejada exitosamente...!")
-            router.back()
-            router.refresh()
+            router.push('/mipp/manage/dashboard')
         }else{
             toast.error("Hubo un error al manejar la solicitud")
             router.refresh()
