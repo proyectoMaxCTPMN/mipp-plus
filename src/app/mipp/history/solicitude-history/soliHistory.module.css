@@ -216,6 +216,15 @@
 }
 
 @media (min-width: 320px) and (max-width: 480px){
+
+    .pendingText::before, .approvedText::before, .deniedText::before{
+        content: "Estado: ";
+    }
+
+    .notTime::before{
+        content: "Justif.: ";
+    }
+
     .container{
         padding: 0;
         padding-bottom: 8dvh;

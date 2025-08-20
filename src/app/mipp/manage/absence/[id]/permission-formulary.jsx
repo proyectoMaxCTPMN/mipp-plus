@@ -205,7 +205,7 @@ function SendPopup({requestId_parameter, router, setShowPopup}){
 
         if (response.ok) {
             toast.success("Solicitud manejada exitosamente...!")
-            router.back()
+            router.push('/mipp/manage/dashboard')
             router.refresh()
         }else{
             toast.error("Hubo un error al manejar la solicitud")

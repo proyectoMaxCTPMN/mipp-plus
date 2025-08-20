@@ -105,7 +105,7 @@
     place-content: start !important;
 }
 
-.dashboard, .history, .soli, .account{
+.dashboard, .history, .soli .account{
     height: 15%;
     display: flex;
     place-content: center;
