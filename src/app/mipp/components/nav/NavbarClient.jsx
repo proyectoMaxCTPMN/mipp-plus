@@ -195,7 +195,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
 
     return(
         <>
-            <div className={style.sidebarContainer} ref={componentRef} style={isMobile ? showNav ? {top: 0} : {top: '-380px'} : ''}>
+            <div className={style.sidebarContainer} ref={componentRef} style={isMobile ? showNav ? {top: 0} : {top: '-380px'} : {}}>
                 {
                     !isMobile ?
                      <>
