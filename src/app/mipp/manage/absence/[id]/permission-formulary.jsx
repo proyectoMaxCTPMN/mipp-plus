@@ -6,13 +6,11 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { formatDate } from '@/app/utils/formatDate'
 
 export default function Permission_Formulary_Page({userInfo_parameter, title_parameter, position_parameter, absencef_parameter}){
     const router = useRouter()
     const formData = absencef_parameter[0]
-    const formattedDate = new Date(formData.absence_date).toLocaleDateString('es-CR')
-    const dateForInpt = formattedDate.split('/')[2] + "-" + (formattedDate.split('/')[1].length == 1 ? ("0" + formattedDate.split('/')[1]) : formattedDate.split('/')[1].length) + "-" + (formattedDate.split('/')[0].length == 1 ? ("0" + formattedDate.split('/')[0]) : formattedDate.split('/')[0])
-    
     const [showPopup, setShowPopup] = useState(false)
 
     const handleSubmit = async (e) => {
@@ -35,7 +33,7 @@ export default function Permission_Formulary_Page({userInfo_parameter, title_par
 
                                 <div className={style.inputdate_container}>
                                     <label>PERMISO PARA AUSENTARSE EN LA FECHA:</label>
-                                    <input type="date" name="absence_date" defaultValue={dateForInpt} disabled/>
+                                    <input type="text" name="absence_date" defaultValue={formatDate(formData.absence_date)} disabled/>
                                     <span ><Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image></span>
                                 </div>
 
@@ -223,7 +221,7 @@ function SendPopup({requestId_parameter, router, setShowPopup}){
                 <Image src={"/Card-header.svg"} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
                 <div className={style.datePopUp}>
                     <label htmlFor="date">Fecha:</label>
-                    <input type="date" name="date" id="date" defaultValue={new Date().toLocaleDateString('en-CA')} disabled/>
+                    <input type="text" name="date" id="date" defaultValue={new Date().toLocaleDateString() } disabled/>
                 </div>
                 <p>Quien suscribe, <span>M.SC. Laura Ramón Elizondo</span> en calidad de <span>Directora</span>, con base a las leyes y reglamentos vigentes, responde a solicitud de justificación de permiso; bajo la resolución de:</p>
 

@@ -1,5 +1,6 @@
 'use client'
 
+import { formatDate } from '@/app/utils/formatDate'
 import style from './justification-formulary.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -61,7 +62,7 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
                             <div className={style.inputdatecontainer}>
                                 <label>DE LA FECHA:</label>       
                                 <span>
-                                    <input type="date" name="absence_date" id="absence_date" defaultValue={new Date(formData.absence_date).toLocaleDateString('af-za')} disabled/>
+                                    <input type="text" name="absence_date" id="absence_date" defaultValue={formatDate(formData.absence_date)} disabled/>
                                     <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image>
                                 </span>
                             </div>

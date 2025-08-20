@@ -170,7 +170,7 @@
 .inputdate_container input, .inputdatecontainer input{
     font-weight: bold;
     color: #616161;
-    width: 6rem;
+    width: 8.5rem;
 }
 .inputradio_container, .worktimeabsence_container{
     display: flex;

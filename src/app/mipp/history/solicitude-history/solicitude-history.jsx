@@ -4,6 +4,7 @@ import style from './soliHistory.module.css'
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { formatDate } from '@/app/utils/formatDate';
 
 
 function getTimeLeft(expired_date) {
@@ -59,7 +60,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
             <div className={style.headerContainer}>
 
                 <div className={style.dateHeader}>
-                    <p>Fecha</p>
+                    <p>Ausencia</p>
                     <Image src={"/order_by_icon.svg"} width={10} height={10} alt='' className={style.orderIcon} />
                 </div>
 
@@ -99,7 +100,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
 
                                                 <div className={style.date}>
                                                     <p className={style.dateText}>
-                                                        {new Date(absence.absence_date).toLocaleDateString('es-CR')}
+                                                        {formatDate(absence.absence_date)}
                                                     </p>
                                                 </div>
 

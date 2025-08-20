@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import style from './dashboard.module.css'
 import Image from 'next/image'
+import { formatDate } from '@/app/utils/formatDate';
 
 function getTimeLeft(expired_date) {
     const now = new Date();
@@ -40,7 +41,7 @@ export default function RecentHistory({AllDocuments_parameter}){
 
                                 <div className={style.information_upperpart}>
                                     <p>{reasons[absence.reason]}</p>
-                                    <span>{new Date(absence.absence_date).toLocaleDateString('es-CR')}</span>
+                                    <span>{formatDate(absence.absence_date)}</span>
                                 </div>
 
                                 <div className={style.information_lowerpart}>

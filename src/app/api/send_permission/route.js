@@ -3,6 +3,9 @@ import { createClient } from '../../utils/supabase/server'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server';
 
+
+
+
 function normalizeFileName(name) {
   return name
     .normalize("NFD") // quita acentos
@@ -21,6 +24,7 @@ export async function POST(request) {
 
     const userId = formData.get('userId')
     const absence_date = formData.get('absence_date')
+    const request_date = formData.get('request_date')
     const is_whole_day = formData.get('is_whole_day')
     const is_absence = formData.get('is_absence')
     const from_hour = formData.get('from_hour')
@@ -83,6 +87,7 @@ export async function POST(request) {
 
     const toSend = { 
       user_id: userId,
+      request_date: request_date,
       absence_date: absence_date,
       is_whole_day: is_whole_day,
       is_absence: is_absence,

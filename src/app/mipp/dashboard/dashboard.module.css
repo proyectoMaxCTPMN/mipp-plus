@@ -32,9 +32,8 @@
 }
 
 .soliCard, .reportCard, .omiCard{
-    width: 23.5%;
+    width: 28%;
     height: 100%;
-
 }
 
 .soliContent, .justiContent, .reportContent, .omiContent{
@@ -163,6 +162,7 @@
     font-weight: bold;
     font-size: 2.5rem;
     margin-bottom: 2rem;
+    padding: 8px;
 }
 .nullicon{
     width: 6rem;

@@ -88,7 +88,6 @@
     padding-right: 1.5rem;
     box-shadow: inset 6px 10px 16px -10px rgba(0, 0, 0, 0.357); /* Sombra arriba */
     position: relative;
-    bottom: .3rem;
 }
 
 .reasoncontainer select{ /*Estilo general selects*/
@@ -110,22 +109,13 @@
 
 .inputdatecontainer input{
     font-weight: bold;
-}
-
-.inputdatecontainer input[type="date"]::-webkit-calendar-picker-indicator {
-    opacity: 0;
-    display: none;
-}
-
-.inputdatecontainer input[type="date"]::-moz-calendar-picker-indicator { /*otros navegadores*/
-    opacity: 0;
-    display: none;
+    width: 8.5rem;
 }
 
 .inputdate_calendar{
     position: absolute;
     right: 0.4rem;
-    bottom: 0.75rem;
+    top: 0.17rem;
 }
 
 .absent_timecontainer{
@@ -188,6 +178,16 @@
     font-weight: bold;
     font-style: italic;
     color: #616161;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.evidence .utilizing{
+    width: 30ch;
+    max-width: 30ch;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .evidence input{
@@ -201,7 +201,6 @@
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
     position: relative;
-    bottom: 0.35rem;
 
     &:hover{
         cursor: pointer;

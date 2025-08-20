@@ -3,6 +3,7 @@ import Image from 'next/image';
 import style from './manage-dashboard.module.css'
 import {useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { formatDate } from '@/app/utils/formatDate';
 
 
 
@@ -92,7 +93,7 @@ export default function ManageDashboard({allDocs_parameter}) {
 
                             <div className={style.docContent}>
                                 <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
-                                <h1 className={style.docType}>{new Date(doc.date).toLocaleDateString('es-CR')} </h1>
+                                <h1 className={style.docType}>{formatDate(doc.date)} </h1>
                                 <h2 className={style.docType}>{doc.label}</h2>
 
                                 <p>Razón: {reasons[doc.data.reason]}</p>
@@ -117,7 +118,7 @@ export default function ManageDashboard({allDocs_parameter}) {
                                 }
                                 </p>
 
-                                <p>Se ausenta el: {new Date(new Date(doc.data.absence_date).getTime() + 24 * 60 * 60 * 1000).toLocaleDateString('es-CR')}</p>
+                                <p>Se ausenta el: {formatDate(doc.data.absence_date)}</p>
 
                             </div>
                             
@@ -132,7 +133,7 @@ export default function ManageDashboard({allDocs_parameter}) {
 
                             <div className={style.docContent}>
                                 <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
-                                <h1 className={style.docType}>{new Date(doc.date).toLocaleDateString('es-CR')} </h1>
+                                <h1 className={style.docType}>{formatDate(doc.date)} </h1>
                                 <h2 className={style.docType}>{doc.label}</h2>
 
                                 <p>Estado: {
@@ -156,73 +157,73 @@ export default function ManageDashboard({allDocs_parameter}) {
                         </div>
                     :
                     (doc.type == 'justi' && showJustify) ?
-                    <div className={style.docSquare} key={index} onClick={() => router.push(`/mipp/manage/${doc.type}/${doc.data.id}`)}>
+                        <div className={style.docSquare} key={index} onClick={() => router.push(`/mipp/manage/${doc.type}/${doc.data.id}`)}>
 
-                        <div className={style.docContent}>
-                            <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name} </h1>
-                            <h1 className={style.docType}>{new Date(doc.date).toLocaleDateString('es-CR')} </h1>
-                            <h2 className={style.docType}>{doc.label} </h2>
+                            <div className={style.docContent}>
+                                <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name} </h1>
+                                <h1 className={style.docType}>{formatDate(doc.date)} </h1>
+                                <h2 className={style.docType}>{doc.label} </h2>
 
-                                                    <p>Razón: {reasons[doc.data.justification_reason]}</p>
+                                                        <p>Razón: {reasons[doc.data.justification_reason]}</p>
 
 
-                                                    {
-                                                        (doc.data.justification_response_state == 0 || doc.data.justification_response_state == 5) && 
-                                                        <>
-                                                            <p>Estado: {statuses[doc.data.justification_response_state]}</p>
-                                                        </>
-                                                    }
+                                                        {
+                                                            (doc.data.justification_response_state == 0 || doc.data.justification_response_state == 5) && 
+                                                            <>
+                                                                <p>Estado: {statuses[doc.data.justification_response_state]}</p>
+                                                            </>
+                                                        }
 
-                                                    {
-                                                        ([1,2,3].includes(doc.data.justification_response_state)) && 
-                                                        <>
-                                                            <p>Estado: {statuses[doc.data.justification_response_state]}</p>
-                                                        </>
-                                                    }
+                                                        {
+                                                            ([1,2,3].includes(doc.data.justification_response_state)) && 
+                                                            <>
+                                                                <p>Estado: {statuses[doc.data.justification_response_state]}</p>
+                                                            </>
+                                                        }
 
-                                                    {
-                                                        (doc.data.justification_response_state == 4) && 
-                                                        <>
-                                                            <p>Estado: {statuses[doc.data.justification_response_state]}</p>
-                                                        </>
-                                                    }
+                                                        {
+                                                            (doc.data.justification_response_state == 4) && 
+                                                            <>
+                                                                <p>Estado: {statuses[doc.data.justification_response_state]}</p>
+                                                            </>
+                                                        }
 
-                            <p>Se ausenta el: {new Date(new Date(doc.data.absence_date).getTime() + 24 * 60 * 60 * 1000).toLocaleDateString('es-CR')}</p>
+                                <p>Se ausenta el: {formatDate(doc.data.absence_date)}</p>
 
+                            </div>
+                            
+                            <div className={style.squareFooter}>
+                                <p>Manejar</p>
+                                <Image src={'/manage_icon.svg'} height={20} width={20} alt='goTo icon'></Image>
+                            </div>
                         </div>
-                        
-                        <div className={style.squareFooter}>
-                            <p>Manejar</p>
-                            <Image src={'/manage_icon.svg'} height={20} width={20} alt='goTo icon'></Image>
-                        </div>
-                    </div>
                     :
                     (doc.type == 'omission' && showOmission) &&
-                    <div className={style.docSquare} key={index} onClick={() => router.push(`/mipp/manage/${doc.type}/${doc.data.id}`)}>
+                        <div className={style.docSquare} key={index} onClick={() => router.push(`/mipp/manage/${doc.type}/${doc.data.id}`)}>
 
-                        <div className={style.docContent}>
-                            <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
-                            <h2 className={style.docType}>{doc.label}</h2>
+                            <div className={style.docContent}>
+                                <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
+                                <h2 className={style.docType}>{doc.label}</h2>
 
-                            <p>Estado: {
-                                !doc.data.is_revised
-                                ?
-                                    "Sin revisar"
-                                :
-                                "Revisado"
-                                
-                            }
-                            </p>
+                                <p>Estado: {
+                                    !doc.data.is_revised
+                                    ?
+                                        "Sin revisar"
+                                    :
+                                    "Revisado"
+                                    
+                                }
+                                </p>
 
-                            <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
+                                <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
 
+                            </div>
+                            
+                            <div className={style.squareFooter}>
+                                <p>Manejar</p>
+                                <Image src={'/manage_icon.svg'} height={20} width={20} alt='goTo icon'></Image>
+                            </div>
                         </div>
-                        
-                        <div className={style.squareFooter}>
-                            <p>Manejar</p>
-                            <Image src={'/manage_icon.svg'} height={20} width={20} alt='goTo icon'></Image>
-                        </div>
-                    </div>
                 ))
                 :
                 data.map((doc, index) => (
