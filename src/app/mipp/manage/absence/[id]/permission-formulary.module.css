@@ -56,6 +56,9 @@
     font-weight: 600;
 }
 .form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
     margin-top: 1.2rem;
 }
 .form_row{
@@ -113,7 +116,6 @@
 }
 .worktimeabsence_container{
     font-weight: bold;
-    margin-top: 1rem;
 }
 .hourcontainer select, .reasoncontainer select{
     appearance: none; /* Quita la flecha por defecto */
@@ -129,9 +131,6 @@
 }
 .hourcontainer select{
     width: 4.5rem;
-}
-.hourcontainer , .absencescontainer, .explanationcontainer, .explanation, .evidence, .buttonscontainer, .reasoncontainer{ /*Espaciado entre filas en el form*/
-    margin-top: 1.3rem;
 }
 .reasoncontainer, .hourcontainer, .leavinghour_container{
     display: flex;
@@ -183,7 +182,11 @@
     background: #fff;
     width: 40%;
 }
-
+.request_datecontainer span{
+    color: #616161;
+    font-weight: bold;
+    text-decoration: underline;
+}
 .buttonscontainer{
     display: flex;
     gap: 2.5em;

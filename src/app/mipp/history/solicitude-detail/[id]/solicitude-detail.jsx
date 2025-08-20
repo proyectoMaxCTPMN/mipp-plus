@@ -341,7 +341,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                                     }
                                                 </div>
                                                 <div className={style.buttonscontainer}>
-                                                    <button type="button" onClick={()=> setShowresolution(true)} disabled={justificationf_parameter.justification_response_state == 0} style={justificationf_parameter.justification_response_state == 0 && {color: 'var(--primary-disabled)'}}>{justificationf_parameter.justification_response_state != 0 ? "Revisar Resolución" : "No ha sido gestionada aún"}</button>
+                                                    <button type="button" onClick={()=> setShowresolution(true)} disabled={justificationf_parameter.justification_response_state == 0} style={justificationf_parameter.justification_response_state == 0 ? {color: 'var(--primary-disabled)'}:null}>{justificationf_parameter.justification_response_state != 0 ? "Revisar Resolución" : "No ha sido gestionada aún"}</button>
                                                 </div>
                                             </div>
                                         </form>

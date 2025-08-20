@@ -1,6 +1,6 @@
 'use client'
 
-import { formatDate } from '@/app/utils/formatDate'
+import { formatDate, formatDateandHour } from '@/app/utils/formatDate'
 import style from './justification-formulary.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -172,7 +172,6 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
                                 className={style.explanation}
                             />
                         </div>
-                            
                             {hasAttachment &&(
                             <div className={style.evidence}>
                                 {
@@ -184,7 +183,9 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
                                 
                             </div>
                         )}
-
+                        <div className={style.request_datecontainer}>
+                            <p>Presento la solicitud a las <span>{formatDateandHour(justif_parameter.created_at).time}</span> del día <span>{formatDateandHour(justif_parameter.created_at).day}</span> del mes <span>{formatDateandHour(justif_parameter.created_at).month}</span> del año <span>{formatDateandHour(justif_parameter.created_at).year}</span></p>
+                        </div>
                         <div className={style.buttonscontainer}>
                             <button type="submit">Manejar</button>
                         </div>
