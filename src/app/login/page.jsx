@@ -16,10 +16,6 @@ export default function Login(){
     })
     const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(() => {
-        router.prefetch('/mipp/dashboard')
-    }, [])
-
     const handleLoginChange = (event) => {
         
         const { name, value, type, checked } = event.target;
@@ -42,6 +38,7 @@ export default function Login(){
         console.log(response)
 
         if (response.ok) {
+            console.log(data)
             router.push(data.redirectUrl)
         }else{
             setIsLoading(false)
