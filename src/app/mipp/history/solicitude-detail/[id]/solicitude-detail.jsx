@@ -364,9 +364,26 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                 </div>
                             </div>
                         ):(
-                            <div className={style.form_container}>
-                                <h1>Resolución de Justificación de permiso</h1>
-                                <h2>No se ha realizado una justificación</h2>
+                            <div className={style.permission_formularycontainer}>
+                                <p className={style.titleofformulary}>{!showresolution ? "Justificación:" : "Resolución"}</p>
+                                <div className={style.formulary_upperinformationcontainer}>
+                                    <div className={style.cardname}>{fullName_parameter.full_name}</div>
+                                    {
+                                        (!showresolution && absencef_parameter.is_justified) &&
+                                        <div className={style.previewcard}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>}
+                                </div>
+                                    <div className={style.cardcontainer}>
+                                    <Image src={'/Card-header.svg'} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
+                                    <div className={style.form_container}>
+                                        <h1>Resolución de Justificación de permiso</h1>
+                                        <h2>No se ha realizado una justificación</h2>
+                                        <Link href={`/mipp/history/solicitude-detail/${absencef_parameter.id}`}>
+                                        <div className={style.buttonscontainer2}>
+                                            <button type="button">Ir a justificar</button>
+                                        </div>
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         )
                     )
