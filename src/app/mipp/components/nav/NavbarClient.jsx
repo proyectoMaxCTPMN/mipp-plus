@@ -369,7 +369,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                             <div 
                             className={style.dashboard} 
                             id='dashboard'
-                            onClick={(e) => {handleRedirect("/mipp/dashboard"); hideAll()}}                            
+                            onClick={(e) => {handleRedirect("/mipp/dashboard"); hideAll(); setShowNav(false)}}                            
                             >
                                 <Image 
                                     src={"/menuIcons/home_unselected.svg"} height={20} width={20} alt='Logo' className={style.iconImage}
@@ -421,7 +421,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                 <div 
                                 className={style.create} 
                                 id='create_account'
-                                onClick={() => {handleRedirect("/mipp/create_account"); hideAll()}} 
+                                onClick={() => {handleRedirect("/mipp/create_account"); hideAll();  setShowNav(false)}} 
                                 >
                                     <p className={style.subText}>Añadir cuenta</p>
                                 </div>
@@ -432,7 +432,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                             className={style.account} 
                             id='account'
                             onClick={() => {
-                            handleRedirect("/mipp/account"); hideAll()}}
+                            handleRedirect("/mipp/account"); hideAll();  setShowNav(false)}}
                             >
                                 <Image 
                                     src={ "/menuIcons/account_unselected.svg"} height={20} width={20} alt='Logo' className={style.iconImage}
@@ -448,7 +448,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                             <div className={style.alternateOptions} style={optionsHistory ? {opacity: 1} : {opacity: 0}} >
                                 {
                                     historyArray.map((item) => (
-                                        <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link)}}> 
+                                        <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link); setShowNav(false)}}> 
                                              <Image src={item.icon} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
                                             {item.text}
                                         </p>
@@ -459,7 +459,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                             <div className={style.alternateOptions} style={optionsSoli ? {opacity: 1} : {opacity: 0}} >
                                 {
                                     solicitudeArray.map((item) => (
-                                        <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link)}}> 
+                                        <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link); setShowNav(false)}}> 
                                             <Image src={item.icon} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
                                             {item.text}
                                         </p>
@@ -470,7 +470,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                             <div className={style.alternateOptions} style={optionsOthers ? {opacity: 1} : {opacity: 0}} >
                                 {
                                     othersArray.map((item) => (
-                                        <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link)}}> 
+                                        <p className={style.alternateOption} key={item.id} onClick={() => {handleRedirect(item.link); setShowNav(false)}}> 
                                             <Image src={item.icon} height={20} width={20} alt='Logo' className={style.logOffLogo}/>
                                             {item.text}
                                         </p>
