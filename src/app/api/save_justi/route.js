@@ -3,6 +3,13 @@ import { createClient } from '../../utils/supabase/server'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server';
 
+function getLocalDateString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`; // siempre YYYY-MM-DD correcto en local
+}
+
 function normalizeFileName(name) {
   return name
     .normalize("NFD") // quita acentos
@@ -22,6 +29,7 @@ export async function POST(request) {
 
     const request_id = formData.get('request_id')
     const userId = formData.get('userId')
+    const justification_date = formData.get('justification_date')
     const absence_date = formData.get('absence_date')
     const is_absence = formData.get('is_absence')
     const is_all_day = formData.get('is_all_day')
@@ -85,6 +93,7 @@ export async function POST(request) {
 
     const toSend = { 
       user_id: userId,
+      justification_date: justification_date,
       absence_date: absence_date,
       is_absence,
       is_all_day,
@@ -96,6 +105,7 @@ export async function POST(request) {
       request_id: request_id
     }
 
+    console.log("toSend", toSend)   
 
     const justiReponse = await supabase
     .from('justifications')

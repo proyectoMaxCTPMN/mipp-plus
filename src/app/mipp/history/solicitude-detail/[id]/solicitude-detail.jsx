@@ -3,6 +3,7 @@ import Image from 'next/image';
 import style from './solicitude-detail.module.css'
 import { useState } from 'react';
 import Link from 'next/link'
+import { formatDate } from '@/app/utils/formatDate';
 
 export default function Solicitude_Detail({fullName_parameter, absencef_parameter,title_parameter,position_parameter,justificationf_parameter}){
     const [isSolicitudes, setIsSolicitudes] = useState(true);
@@ -37,7 +38,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
 
                                             <div className={style.inputdate_container}>
                                                 <label style={{position: 'relative', top: '.2rem'}}>PERMISO PARA AUSENTARSE EN LA FECHA:</label>
-                                                <input type="text" name="absence_date" disabled defaultValue={new Date(absencef_parameter.absence_date).toLocaleDateString('es-CR')}/>
+                                                <input type="text" name="absence_date" disabled defaultValue={formatDate(absencef_parameter.absence_date)}/>
                                             </div>
 
                                             <div className={style.inputradio_container}>
@@ -183,7 +184,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
 
                                                 <div className={style.inputdatecontainer}>
                                                     <label>DE LA FECHA:</label>
-                                                    <input type="date" name="absence_date" id="absence_date" defaultValue={new Date(justificationf_parameter.absence_date).toLocaleDateString('af-za')} disabled/>
+                                                    <input type="text" name="absence_date" id="absence_date" defaultValue={formatDate(justificationf_parameter.absence_date)} disabled/>
                                                     <span><Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image></span>
                                                 </div>
 

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import style from './justi-menu.module.css'
 import { useRouter } from 'next/navigation'
+import { formatDate } from '@/app/utils/formatDate'
 
 const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
 
@@ -23,7 +24,7 @@ export default function JustiMenu({soli_data}){
                     <option value=''>Seleccione una opcion</option>
                     {
                         soli_data && soli_data.map((soli) => (
-                            <option key={soli.id} value={soli.id}>{new Date(soli.absence_date).toLocaleDateString()} - {reasons[soli.reason]}</option>
+                            <option key={soli.id} value={soli.id}>{formatDate(soli.absence_date)} - {reasons[soli.reason]}</option>
                         ))
                     }
                 </select>
