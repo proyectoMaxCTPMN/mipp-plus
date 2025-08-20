@@ -13,7 +13,7 @@ export async function POST(request) {
     const request_id = formData.get('request_id')
 
     let query
-    if (isAccept) {
+    if (isAccept == 'true' || isAccept == true) {
         query = {is_approved: true}
     } else{
         query = {is_denied: true}

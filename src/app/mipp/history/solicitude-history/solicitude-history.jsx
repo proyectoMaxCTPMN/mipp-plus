@@ -1,11 +1,10 @@
 'use client'
 import Image from 'next/image';
 import style from './soliHistory.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { formatDate } from '@/app/utils/formatDate';
-
 
 function getTimeLeft(expired_date) {
 
@@ -38,6 +37,9 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
     const [data, setData] = useState(userAbsence_parameter)
     const [justi, setJusti] = useState(justifications_noRequest)
     const [search, setSearch] = useState('')
+    const [orderActive, setOrderActive] = useState('fecha')
+
+    const [orderBy, setOrderBy] = useState('descDate')
 
     const handleSearch = (e) => {
         const {value} = e.target;
@@ -47,6 +49,19 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
     const redirectJustify = (id) => {
         router.push(`/mipp/solicitude/justification-formulary/${id}`)
     }
+
+    useEffect(() => {
+        if (orderBy == 'type') {
+            setData([...data].sort((a, b) => a.type.localeCompare(b.type)));
+        } else if (orderBy == 'ascDate'){
+            setData([...data].sort((a, b) => new Date(a.created_at) - new Date(b.created_at)));
+            console.log(data)
+        } else if (orderBy == 'descDate') {
+            console.log("here")
+            setData([...data].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+        }
+        return
+    }, [orderBy]);
 
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
     const statuses = ['Pendiente', 'Rebajo salarial parcial', 'Rebajo salarial total', "Sin rebajo salarial", "Denegado", "Acogió convocatoria"]
@@ -136,21 +151,21 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
                                                             {
                                                                 (absence.justifications?.justification_response_state == 0 || absence.justifications.justification_response_state == 5) && 
                                                                 <>
-                                                                    <p style={{color: "#DEAA00"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                                    <p className={style.notTime} style={{color: "#DEAA00"}}>{statuses[absence.justifications.justification_response_state]}</p>
                                                                 </>
                                                             }
 
                                                             {
                                                                 ([1,2,3].includes(absence.justifications?.justification_response_state)) && 
                                                                 <>
-                                                                    <p style={{color: "#0B8300"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                                    <p className={style.notTime} style={{color: "#0B8300"}}>{statuses[absence.justifications.justification_response_state]}</p>
                                                                 </>
                                                             }
 
                                                             {
                                                                 (absence.justifications?.justification_response_state == 4) && 
                                                                 <>
-                                                                    <p style={{color: "#830000"}}>{statuses[absence.justifications.justification_response_state]}</p>
+                                                                    <p className={style.notTime} style={{color: "#830000"}}>{statuses[absence.justifications.justification_response_state]}</p>
                                                                 </>
                                                             }
                                                         </>

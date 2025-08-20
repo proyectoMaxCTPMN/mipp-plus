@@ -216,8 +216,7 @@ function SendPopup({justiId_parameter, router, setShowPopup}){
 
         if (response.ok) {
             toast.success("Justificacion manejada exitosamente...!")
-            router.back()
-            router.refresh()
+            router.push('/mipp/manage/dashboard')
         }else{
             toast.error("Hubo un error al manejar la solicitud")
             router.refresh()
