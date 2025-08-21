@@ -228,6 +228,7 @@
     .container{
         padding: 0;
         padding-bottom: 8dvh;
+        padding-top: 70px;
     }
     .titleText{
         font-size: 24px;

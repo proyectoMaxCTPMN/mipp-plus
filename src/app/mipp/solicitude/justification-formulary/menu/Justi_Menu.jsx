@@ -18,7 +18,7 @@ export default function JustiMenu({soli_data}){
     return(
         <div className={style.container}>
             <div className={style.justiContainer}>
-                <h1 className={style.justiTitle}>Nueva Justificacin de Permiso de Salida</h1>
+                <h1 className={style.justiTitle}>Nueva Justificación de Permiso de Salida</h1>
                 <label htmlFor="soli_select" className={style.justiLabel}>Seleccione la Solicitud de Permiso de Salida (Fecha de la ausencia)</label>
                 <select name="soli_select" id="soli_select" className={style.justiSelect} value={soliSel} onChange={(e) => setSoliSel(e.target.value)}>
                     <option value=''>Seleccione una opcion</option>
