@@ -91,4 +91,25 @@
     }
 }
 
+@media screen and (max-width: 800px) {
+    .justiContainer{
+        width: 90%;
+        min-width: 90%;
+        height: auto;
+        gap: 24px;
+    }
+
+    .justiBtn{
+        width: 100%;
+    }
+
+    .newContainer{
+        width: 90%;
+        min-width: 90%;
+    }
+
+    .newContainer{
+        font-size: 1rem;
+    }
+}
 

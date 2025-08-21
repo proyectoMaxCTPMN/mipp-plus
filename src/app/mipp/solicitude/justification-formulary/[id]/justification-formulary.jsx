@@ -18,6 +18,7 @@ function getLocalDateString(date) {
 
 export default function Justification_Formulary_Page({userId_parameter, request_id_parameter, fullName_parameter, title_parameter, position_parameter, absenceData_parameter}){
     const router = useRouter();
+    
     const [formData, setFormData] = useState({
         userId: userId_parameter,
         request_id: request_id_parameter,
