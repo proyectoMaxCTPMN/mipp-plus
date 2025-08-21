@@ -276,6 +276,23 @@ export async function getUserAbsence_id(userId, id) {
     return data
 }
 
+export async function getUserJustification_id(userId, id) {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('justifications')
+    .select('')
+    .eq('user_id', userId)
+    .eq('id', id)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
+
 export async function getUserRoles(userId) {
   const supabase = await createSupabase()
 

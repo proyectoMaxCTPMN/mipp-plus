@@ -125,14 +125,14 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
             <div className={style.cardcontainer}>
                 <Image src={"/Card-header.svg"} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
                 <div className={style.form_container}>
-                    <h1>Formulario de solicitud de permiso salida/ausencia/tardía/incapacidad</h1>
+                    <h1>Formulario de justificación de permiso salida/ausencia/tardía/incapacidad</h1>
                     <p><span>Importante:</span> Todo permiso de ausencia laboral está sujeto a cumplimiento de requisitos y copia adjunta de documento pertinente de cita, convocatoria o licencia, de ser posible con tres días de anticipación. Posterior a la ausencia, el funcionario debe hacer entrega del comprobante pertinente de asistencia en el plazo de 48 (cuarenta y ocho horas). Las licencias dependen de requisitos  previos para su goce. De no presentar el comprobante se transmitirá lo que corresponda.</p>
 
                     <form className={style.form} onSubmit={handleSubmit}>
                         <div className={style.form_row}>
 
                             <div className={style.inputdate_container}>
-                                <label>PERMISO PARA AUSENTARSE EN LA FECHA:</label>
+                                <label>FECHA DE LA AUSENCIA:</label>
                                 
                                 <span onClick={handleCalendarClick}>
                                     <input type="date" name="absence_date"  defaultValue={formData.absence_date} ref={inputRef} min={fecha} onChange={handleInputChange}/>
@@ -153,7 +153,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                         </div>
 
                         <div className={style.worktimeabsence_container}>
-                            <p>Solicito permiso para:</p>
+                            <p>Justifico:</p>
                             <label>
                                 <input type="radio" name="is_absence" onChange={(e) => changeRadio(e, true)}/>
                                 Ausencia
@@ -209,7 +209,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                             {
                                 formData.is_absence &&(
                                     <div className={style.leavinghour_container}>
-                                        <p>Saliendo del centro educativo a las</p>
+                                        <p>Salí del centro educativo a las</p>
                                         <input type="text" name="leaving_at" value={formData.leaving_at} onChange={handleInputChange}/>
                                         
                                     </div>
@@ -218,7 +218,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                         </div>
 
                         <div className={style.absencescontainer}>
-                            <span>Se ausentará: </span>
+                            <span>Se ausentó: </span>
                             {(title_parameter.title_id === 2 && position_parameter === "Docente Academico") ?(
                                 <>
                                     <input type="text" name="absent_time" id="absent_time" className={style.absencesinput} value={formData.absent_time} onChange={handleInputChange}/>
