@@ -31,7 +31,7 @@ export default function JustiMenu({soli_data}){
                 <input type="button" className={style.justiBtn} value={'Crear nueva justificación'} onClick={() => handleRedirect(soliSel)}/>
             </div>
 
-            <div className={style.newContainer} onClick={() => handleRedirect("new")}>
+            <div className={style.newContainer} onClick={() => router.push("/mipp/solicitude/justification-formulary/new")}>
                 Nueva Justificación sin Solicitud Previa
             </div>
         </div>

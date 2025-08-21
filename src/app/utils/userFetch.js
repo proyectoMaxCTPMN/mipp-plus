@@ -311,6 +311,7 @@ export async function getUserInfo(userId) {
 
   return data[0]
 }
+
 export async function getUserJustify_request_id(userId, id) {
     const supabase = await createSupabase()
 
@@ -326,4 +327,55 @@ export async function getUserJustify_request_id(userId, id) {
     }
 
     return data
+}
+
+export async function getUserAbsencesAndJustifications(userId){
+  const supabase = await createSupabase();
+
+    // Helper function to handle queries
+    const fetchData = async (table, select, label, type) => {
+      let { data, error } = await supabase.from(table).select(select);
+
+      if (error) {
+        console.error(`No se pudo obtener el registro de ${type}:`, error);
+        return [];
+      }
+
+      const response = data.map((item, index) => ({
+        type,
+        label,
+        data: item,
+        date: item?.request_date || item?.report_date || item?.justification_date || item?.omission_date,
+        created_at: item.created_at,
+      }));
+
+
+      // Map to unified format
+      return response
+    };
+
+    // Fetch all data
+    const absences = await fetchData(
+      "absence_requests",
+      "id, request_date, absence_date, is_pending, is_denied, is_approved, is_justified, reason, user_id(id, first_name, last_name), created_at",
+      "Solicitud de Aus/Tar/Sal",
+      "absence"
+    );
+
+    const justifications = await fetchData(
+      "justifications",
+      "id, justification_date, created_at, absence_date, justification_response_state, justification_reason, user_id(id, first_name, last_name)",
+      "Justificacion de Aus/Tar",
+      "justi"
+    );
+
+    // Merge everything
+    const unifiedData = [
+      ...absences,
+      ...justifications,
+    ];
+
+    console.log("Unified Data:", unifiedData);
+
+    return unifiedData;
 }
