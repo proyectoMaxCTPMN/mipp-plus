@@ -109,6 +109,21 @@
     gap: 0.5rem;
     margin-top: 1.2rem;
 }
+.anticipated_exitcontainer label{
+    position: relative;
+    top: .3rem;
+}
+.anticipated_exitinput{
+    font-family: var(--font-karla),'Karla',sans-serif;
+    font-size: 1rem;
+    width: 40px;
+    border: none;
+    border-bottom: 2px solid #222;
+    text-align: center;
+    background: transparent;
+    outline: none;
+    margin: 0 .6rem;
+}
 
 .reasonofomissioncontainer{
     margin-top: 1.2rem;

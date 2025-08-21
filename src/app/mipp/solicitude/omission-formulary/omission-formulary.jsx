@@ -15,8 +15,8 @@ export default function Omission_Formulary_Page({fullName_parameter, userId_para
         userId: userId_parameter,
         omission_date: fecha,
         omission_reason: '',
-        entry_time: '7:00',
-        exit_time: '7:40',
+        entry_time: '',
+        exit_time: '',
         omission_type: 0,
     });
     const inputRef = useRef(null);
@@ -131,45 +131,61 @@ export default function Omission_Formulary_Page({fullName_parameter, userId_para
                             </label>
 
                         </div>
+                        
                         <div className={style.timeContainer}>
-                            <label>Hora de entrada:</label>
-                            <select name="entry_time" id="entry_time" className={style.hourSelect} value={formData.entry_time} onChange={handleInputChange}>
-                                <option value="7:00">7:00</option>
-                                <option value="7:40">7:40</option>
-                                <option value="8:20">8:20</option>
-                                <option value="9:00">9:00</option>
-                                <option value="9:20">9:20</option>
-                                <option value="10:00">10:00</option>
-                                <option value="10:40">10:40</option>
-                                <option value="11:20">11:20</option>
-                                <option value="12:10">12:10</option>
-                                <option value="12:50">12:50</option>
-                                <option value="1:30">1:30</option>
-                                <option value="2:10">2:10</option>
-                                <option value="2:30">2:30</option>
-                                <option value="3:10">3:10</option>
-                                <option value="3:50">3:50</option>
-                                <option value="4:30">4:30</option>
-                            </select>
-
-                            <label>Hora de salida:</label>
-                            <select name="exit_time" id="exit_time" className={style.hourSelect} value={formData.exit_time} onChange={handleInputChange}>
-                                <option value="7:40">7:40</option>
-                                <option value="8:20">8:20</option>
-                                <option value="9:00">9:00</option>
-                                <option value="9:20">9:20</option>
-                                <option value="10:00">10:00</option>
-                                <option value="10:40">10:40</option>
-                                <option value="11:20">11:20</option>
-                                <option value="12:10">12:10</option>
-                                <option value="12:50">12:50</option>
-                                <option value="1:30">1:30</option>
-                                <option value="2:10">2:10</option>
-                                <option value="2:30">2:30</option>
-                                <option value="3:10">3:10</option>
-                                <option value="3:50">3:50</option>
-                                <option value="4:30">4:30</option>
-                            </select>
+                            {(formData.omission_type == 1 || formData.omission_type == 3) && 
+                                <>
+                                    <label>Hora de entrada:</label>
+                                    <select name="entry_time" id="entry_time" className={style.hourSelect} value={formData.entry_time} onChange={handleInputChange}>
+                                        <option value="" disabled>Seleccione</option>
+                                        <option value="7:00">7:00</option>
+                                        <option value="7:40">7:40</option>
+                                        <option value="8:20">8:20</option>
+                                        <option value="9:00">9:00</option>
+                                        <option value="9:20">9:20</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:40">10:40</option>
+                                        <option value="11:20">11:20</option>
+                                        <option value="12:10">12:10</option>
+                                        <option value="12:50">12:50</option>
+                                        <option value="1:30">1:30</option>
+                                        <option value="2:10">2:10</option>
+                                        <option value="2:30">2:30</option>
+                                        <option value="3:10">3:10</option>
+                                        <option value="3:50">3:50</option>
+                                        <option value="4:30">4:30</option>
+                                    </select>
+                                </>
+                            }
+                            {(formData.omission_type == 2 || formData.omission_type == 3) &&
+                                <>
+                                    <label>Hora de salida:</label>
+                                    <select name="exit_time" id="exit_time" className={style.hourSelect} value={formData.exit_time} onChange={handleInputChange}>
+                                        <option value="" disabled>Seleccione</option>
+                                        <option value="7:40">7:40</option>
+                                        <option value="8:20">8:20</option>
+                                        <option value="9:00">9:00</option>
+                                        <option value="9:20">9:20</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:40">10:40</option>
+                                        <option value="11:20">11:20</option>
+                                        <option value="12:10">12:10</option>
+                                        <option value="12:50">12:50</option>
+                                        <option value="1:30">1:30</option>
+                                        <option value="2:10">2:10</option>
+                                        <option value="2:30">2:30</option>
+                                        <option value="3:10">3:10</option>
+                                        <option value="3:50">3:50</option>
+                                        <option value="4:30">4:30</option>
+                                    </select>
+                                </>
+                            }
+                            {formData.omission_type == 4 &&
+                                <div className={style.anticipated_exitcontainer}>
+                                    <label>Hora de salida:</label>
+                                    <input type="text" name='exit_time' id='exit_time' className={style.anticipated_exitinput}/>
+                                </div>
+                            }
                         </div>
 
                         <div className={style.justificationcontainer}>
