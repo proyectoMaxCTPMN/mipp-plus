@@ -79,6 +79,10 @@
     border-radius: 6px;
     position: relative;
     left: 1.1em;
+    cursor: pointer;
+}
+.previewcard:hover{
+    background-color: var(--primary-selected);
 }
 .searchicon{
     width: 2rem;
@@ -270,14 +274,14 @@
 .absent_timecontainer input, .justificationcontainer input, .isThere_attachement input{
     margin-right: 10px;
 }
-.form_timecontainer, .absencescontainer, .leavinghour_container{
+.form_timecontainer, .absencescontainer,.absencescontainer2, .leavinghour_container{
     display: flex;
     gap: 2rem;
 }
-.leavinghour_container, .absencescontainer{
+.leavinghour_container, .absencescontainer,.absencescontainer2{
     gap: .6rem;
 }
-.absencescontainer p, .leavinghour_container span{
+.absencescontainer2 p, .leavinghour_container span{
     color: #616161;
     font-weight: bold;
 }
@@ -382,4 +386,69 @@
     position: relative;
     bottom: .1rem;
 }
+/*#endregion*/
+/*#region PopUp*/
+
+.popUpContainer{
+    width: 100dvw;
+    height: 100dvh;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.226);
+    left: 0;
+    top: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+}
+.popUpExit{
+    background-color: var(--primary);
+    width: max-content;
+    padding: .5rem;
+    border-radius: 6px;
+    position: relative;
+    top: 1.8rem;
+    left: 39.8%;
+    cursor: pointer;
+    height: 3rem;
+}
+.popUpExit:hover{
+    background-color: var(--primary-selected);
+}
+.Exit_icon{
+    width: 2rem;
+    height: auto;
+}
+.popUpCard{
+    max-width: 80%;
+    background-color: #fff;
+    width: fit-content;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -webkit-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    font-size: 16px;
+    place-content: space-between;
+
+}
+
+.personal_info span{
+    color: #616161;
+    text-decoration: underline;
+}
+.request_datecontainer{
+    margin-top: 1rem;
+}
+.request_datecontainer span{
+    color: #616161;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 /*#endregion*/
