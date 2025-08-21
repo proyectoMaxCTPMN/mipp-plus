@@ -334,37 +334,65 @@ export async function getUserAbsencesAndJustifications(userId){
 
     // Helper function to handle queries
     const fetchData = async (table, select, label, type) => {
-      let { data, error } = await supabase.from(table).select(select);
+      if (type == 'justi') {
+        let { data, error } = await supabase.from(table).select(select).eq('user_id', userId).filter('request_id', 'is', 'null');
+        if (error) {
+          console.error(`No se pudo obtener el registro de ${type}:`, error);
+          return [];
+        }
 
-      if (error) {
-        console.error(`No se pudo obtener el registro de ${type}:`, error);
-        return [];
+        const response = data.map((item, index) => ({
+          type,
+          label,
+          data: item,
+          date: item?.absence_date,
+          created_at: item.created_at,
+          reason: item?.reason || item?.justification_reason,
+          is_expired: item.is_expired != null ? item.is_expired : null,
+          justi_state: 
+          item?.justifications?.justification_response_state != null ? item.justifications.justification_response_state : item?.justification_response_state != null ? item.justification_response_state : item.expire_date
+        }));
+
+
+        // Map to unified format
+        return response
+      } else {
+        let { data, error } = await supabase.from(table).select(select).eq('user_id', userId)
+        if (error) {
+          console.error(`No se pudo obtener el registro de ${type}:`, error);
+          return [];
+        }
+
+        const response = data.map((item, index) => ({
+          type,
+          label,
+          data: item,
+          date: item?.absence_date,
+          created_at: item.created_at,
+          reason: item?.reason || item?.justification_reason,
+          is_expired: item.is_expired != null ? item.is_expired : null,
+          justi_state: 
+          item?.justifications?.justification_response_state != null ? item.justifications.justification_response_state : item?.justification_response_state != null ? item.justification_response_state : item.expire_date
+        }));
+
+
+        // Map to unified format
+        return response
       }
 
-      const response = data.map((item, index) => ({
-        type,
-        label,
-        data: item,
-        date: item?.request_date || item?.report_date || item?.justification_date || item?.omission_date,
-        created_at: item.created_at,
-      }));
-
-
-      // Map to unified format
-      return response
     };
 
     // Fetch all data
     const absences = await fetchData(
       "absence_requests",
-      "id, request_date, absence_date, is_pending, is_denied, is_approved, is_justified, reason, user_id(id, first_name, last_name), created_at",
+      "id, absence_date, is_pending, is_denied, is_approved, is_justified, reason, expire_date, is_expired, justifications!absence_requests_justification_id_fkey(justification_response_state), justification_id",
       "Solicitud de Aus/Tar/Sal",
       "absence"
     );
 
     const justifications = await fetchData(
       "justifications",
-      "id, justification_date, created_at, absence_date, justification_response_state, justification_reason, user_id(id, first_name, last_name)",
+      "id, absence_date, request_id, justification_response_state, justification_reason",
       "Justificacion de Aus/Tar",
       "justi"
     );
