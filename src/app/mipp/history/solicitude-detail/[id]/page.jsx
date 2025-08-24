@@ -15,7 +15,8 @@ export default async function Page({params}){
     const position = await getUserTitle(userId)
     let justificationf = {}
     if (absencef[0] && absencef[0]?.justification_id != null){
-        justificationf = await getUserJustify_request_id(userId, absencef[0].justification_id)
+        justificationf = await getUserJustify_request_id(absencef[0].id)
+        console.log(justificationf)
     }else{
         justificationf = await getUserJustification_id(userId, requestid)
     }
