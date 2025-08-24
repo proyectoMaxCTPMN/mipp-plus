@@ -36,6 +36,8 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
     const router = useRouter()
     const [data, setData] = useState(userAbsence_parameter)
     const [justi, setJusti] = useState(justifications_noRequest)
+    const [combinedData, setCombinedData] = useState([...data, ...justi])
+    console.log(combinedData)
     const [search, setSearch] = useState('')
     const [orderActive, setOrderActive] = useState('fecha')
 
@@ -102,7 +104,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
 
             <div className={style.main}>
                 {
-                    (data?.length > 0 || justi?.length > 0)
+                    (combinedData?.length > 0 || justi?.length > 0)
                     ?
                         <>
                             {
@@ -213,7 +215,7 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
 
                                                 <div className={style.date}>
                                                     <p className={style.dateText}>
-                                                        {new Date(justification.absence_date).toLocaleDateString('es-CR')}
+                                                        {formatDate(justification.absence_date)}
                                                     </p>
                                                 </div>
 

@@ -18,7 +18,7 @@ export default function JustiMenu({soli_data}){
     return(
         <div className={style.container}>
             <div className={style.justiContainer}>
-                <h1 className={style.justiTitle}>Nueva Justificacin de Permiso de Salida</h1>
+                <h1 className={style.justiTitle}>Nueva Justificación de Permiso de Salida</h1>
                 <label htmlFor="soli_select" className={style.justiLabel}>Seleccione la Solicitud de Permiso de Salida (Fecha de la ausencia)</label>
                 <select name="soli_select" id="soli_select" className={style.justiSelect} value={soliSel} onChange={(e) => setSoliSel(e.target.value)}>
                     <option value=''>Seleccione una opcion</option>
@@ -31,7 +31,7 @@ export default function JustiMenu({soli_data}){
                 <input type="button" className={style.justiBtn} value={'Crear nueva justificación'} onClick={() => handleRedirect(soliSel)}/>
             </div>
 
-            <div className={style.newContainer} onClick={() => handleRedirect("new")}>
+            <div className={style.newContainer} onClick={() => router.push("/mipp/solicitude/justification-formulary/new")}>
                 Nueva Justificación sin Solicitud Previa
             </div>
         </div>

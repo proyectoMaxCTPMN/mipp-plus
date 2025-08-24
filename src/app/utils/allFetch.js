@@ -153,3 +153,19 @@ export async function getJustiById(justify_id){
 
     return data
 }
+
+export async function getUserOmission(omiId) {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('mark_omissions')
+    .select('')
+    .eq('id', omiId)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}

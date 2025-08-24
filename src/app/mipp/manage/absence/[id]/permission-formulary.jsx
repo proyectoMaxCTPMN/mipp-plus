@@ -17,7 +17,6 @@ export default function Permission_Formulary_Page({userInfo_parameter, title_par
         e.preventDefault()
         setShowPopup(true)
     }
-    console.log(absencef_parameter)
     return(
         <div className={style.body}>
             <div className={style.container}>
