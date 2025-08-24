@@ -29,8 +29,10 @@ function getTimeLeft(expired_date) {
 }
 
 export default function RecentHistory({AllDocuments_parameter}){
+    console.log(AllDocuments_parameter)
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
     const typeofomission = ["","Entrada","Salida","Todo el día","Salida Anticipada"]
+    const statuses = ['Pendiente', 'Rebajo salarial parcial', 'Rebajo salarial total', "Sin rebajo salarial", "Denegado", "Acogió convocatoria"]
     return(
         <div className={style.cardsContainer}>
             <div className={style.soliCard}>
@@ -108,6 +110,82 @@ export default function RecentHistory({AllDocuments_parameter}){
                     </div>
                 </Link>
             </div>
+
+            <div className={style.soliCard}> {/*Estas son las justificaciones pero utilizan los mismos estilos que las solicitudes */}
+                <div className={style.soliContent} style={AllDocuments_parameter.absences.length <= 0 ? {display: 'flex',alignItems: 'center', justifyContent: 'center'} : {}}>
+                    {!AllDocuments_parameter.justifications.length <= 0 ? 
+                        AllDocuments_parameter.justifications.map((justification)=>(
+                            <div className={style.informationcontainer} key={justification.id}>
+
+                                <div className={style.information_upperpart}>
+                                    <p>{reasons[justification.reason]}</p>
+                                    <span>{formatDate(justification.absence_date)}</span>
+                                </div>
+
+                                <div className={style.information_lowerpart}>
+                                    <p>
+                                        {
+                                            justification.request_id && <span  style={{color: '#0B8300'}}>Con solicitud</span>
+                                        }
+                                        {
+                                            (!justification.request_id) && <span  style={{color: '#940202'}}>Sin solicitud</span>
+                                        }
+                                    </p>
+                                    <span>
+
+                                        <div className={style.clockcontainer}>
+                                            <p>Just.:</p>
+                                            {
+                                                (justification.justification_response_state == 0 || justification.justification_response_state == 5) && 
+                                                <>
+                                                    <p style={{color: "#DEAA00"}}>{statuses[justification.justification_response_state]}</p>
+                                                </>
+                                            }
+
+                                            {
+                                                ([1,2,3].includes(justification.justification_response_state)) && 
+                                                <>
+                                                    <p style={{color: "#0B8300"}}>{statuses[justification.justification_response_state]}</p>
+                                                </>
+                                            }
+
+                                            {
+                                                (justification.justification_response_state == 4) && 
+                                                <>
+                                                    <p style={{color: "#830000"}}>{statuses[justification.justification_response_state]}</p>
+                                                </>
+                                            }
+                                        </div>
+                                        
+                                    </span>
+                                </div>
+
+                                <Link href={`/mipp/history/solicitude-detail/${absence.id}`} className={style.hovercontainer}>
+                                    <div className={style.hover_informationcontainer}>
+                                        <span className={style.verMasText}>Ver Más</span>
+                                        <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))
+                        
+                    :(
+                        
+                        <div className={style.null_informationcontainer}>
+                            <p>Sin solicitudes recientes</p>
+                            <Image src={"/null.svg"} width={30} height={30} alt='null_icon' className={style.nullicon}></Image>
+                        </div>
+                    )}
+                    
+                </div>
+                <Link href="/mipp/solicitude/justification-formulary">
+                    <div className={style.soliFooter}>
+                        <p className={style.footerText}>Nuevo Justificación</p>
+                        <Image src={"/plus.svg"} width={30} height={30} alt='plus' className={style.plus}/>
+                    </div>
+                </Link>
+            </div>
+
             <div className={style.omiCard}>
                 <div className={style.omiContent} style={AllDocuments_parameter.omissions.length <= 0 ? {display: 'flex',alignItems: 'center', justifyContent: 'center'} : {}}>
                     {!AllDocuments_parameter.omissions.length <= 0 ? 
@@ -165,58 +243,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                 </Link>
             </div>
 
-            <div className={style.reportCard}>
-                <div className={style.reportContent} style={AllDocuments_parameter.infra.length <= 0 ? {display: 'flex',alignItems: 'center', justifyContent: 'center'} : {}}>
-                    {!AllDocuments_parameter.infra.length <= 0 ? 
-                        AllDocuments_parameter.infra.map((report) =>(
-                            <div className={style.informationcontainer} key={report.id}>
 
-                                <div className={style.information_upperpart}>
-                                    <p>{report.report_building}</p>
-                                    <span>{new Date(report.report_date).toLocaleDateString('es-CR')}</span>
-                                </div>
-
-                                <div className={style.information_lowerpart}>
-                                    {
-                                        report.is_revised ? (
-                                            <p style={{color: '#1D2958'}}>Gestionado</p>
-                                        ):(
-                                            <p style={{color: '#DEAA00'}}>Pendiente</p>
-                                        )
-                                    }
-                                    <span className={style.reportdetailcontainer}>
-                                        {
-                                            report.report_detail.length > 15
-                                            ? report.report_detail.slice(0, 15) + "..."
-                                            : report.report_detail
-                                        }
-                                    </span>
-                                </div>
-                                
-                                <div className={style.hovercontainer}>
-                                    <div className={style.hover_informationcontainer}>
-                                        <span className={style.verMasText}>Ver Más</span>
-                                        <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
-                                    </div>
-                                </div>
-
-                            </div>
-                        ))
-                    :(
-                        
-                        <div className={style.null_informationcontainer}>
-                            <p>Sin solicitudes recientes</p>
-                            <Image src={"/null.svg"} width={30} height={30} alt='null_icon' className={style.nullicon}></Image>
-                        </div>
-                    )}
-                </div>
-                <Link href="/mipp/solicitude/infra-formulary">
-                <div className={style.reportFooter}>
-                    <p className={style.footerText}>Nuevo Reporte</p>
-                    <Image src={"/plus.svg"} width={30} height={30} alt='plus' className={style.plus}/>
-                </div>
-                </Link>
-            </div>
         </div>
     )
 }
