@@ -24,24 +24,36 @@ function getTimeLeft(expired_date) {
     let result = "";
     if (diffDays > 0) result += `${diffDays}d`;
     if (diffHours > 0) result += ` ${diffHours}h `;
-    if (diffDays === 0 && diffHours === 0 && diffMinutes > 0) result += `${diffMinutes} min`;
+    if (diffDays == 0 && diffHours == 0 && diffMinutes > 0) result += `${diffMinutes} min`;
     if (!result) result = "> 1min";
     return (<span className={style.notExpiredText}>{result.trim()}</span>);
 }
 
 
 
-export default function SolicitudeHistory({userAbsence_parameter, justifications_noRequest}){
-
+export default function SolicitudeHistory({allData_parameter}){
     const router = useRouter()
-    const [data, setData] = useState(userAbsence_parameter)
-    const [justi, setJusti] = useState(justifications_noRequest)
-    const [combinedData, setCombinedData] = useState([...data, ...justi])
-    console.log(combinedData)
+    const [data, setData] = useState(allData_parameter)
     const [search, setSearch] = useState('')
-    const [orderActive, setOrderActive] = useState('fecha')
-
     const [orderBy, setOrderBy] = useState('descDate')
+    const [reasonIndex, setReasonIndex] = useState(0)
+    const [statusIndex, setStatusIndex] = useState(0)
+    const [justiIndex, setJustiIndex] = useState(0)
+
+    const setNextReasonIndex = () => {
+        setOrderBy('reason');
+        setReasonIndex((prevIndex) => (prevIndex + 1) % 3); // Ciclo 0 → 1 → 2 → 0
+    };
+
+    const setNextStatusIndex = () => {
+        setOrderBy('status');
+        setStatusIndex((prevIndex) => (prevIndex + 1) % 4); // Ciclo 0 → 1 → 2 → 0
+    }
+
+    const setNextJustiIndex = () => {
+        setOrderBy('justi');
+        setJustiIndex((prevIndex) => (prevIndex + 1) % 7); // Ciclo 0 → 1 → 2 → 3 → 4 → 5 → 6 → 0
+    }
 
     const handleSearch = (e) => {
         const {value} = e.target;
@@ -52,21 +64,188 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
         router.push(`/mipp/solicitude/justification-formulary/${id}`)
     }
 
-    useEffect(() => {
-        if (orderBy == 'type') {
-            setData([...data].sort((a, b) => a.type.localeCompare(b.type)));
-        } else if (orderBy == 'ascDate'){
-            setData([...data].sort((a, b) => new Date(a.created_at) - new Date(b.created_at)));
-            console.log(data)
-        } else if (orderBy == 'descDate') {
-            console.log("here")
-            setData([...data].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
-        }
-        return
-    }, [orderBy]);
 
     const reasons = ["", "Cita médica", "Convocatoria Asamblea", "Asuntos Personales"]
     const statuses = ['Pendiente', 'Rebajo salarial parcial', 'Rebajo salarial total', "Sin rebajo salarial", "Denegado", "Acogió convocatoria"]
+
+    useEffect(() => {
+        let sortedData = [...allData_parameter];
+
+        if (orderBy == 'descDate') {
+            sortedData.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } else if (orderBy == 'ascDate') {
+            sortedData.sort((a, b) => new Date(a.date) - new Date(b.date));
+        } else if (orderBy == 'reason') {      
+            switch (reasonIndex) {
+                case 0: // Cita médica primero
+                    sortedData.sort((a, b) => {
+                        if (a.reason == 1 && b.reason != 1) return -1;
+                        if (a.reason != 1 && b.reason == 1) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 1: // Convocatoria Asamblea primero
+                    sortedData.sort((a, b) => {
+                        if (a.reason == 2 && b.reason != 2) return -1;
+                        if (a.reason != 2 && b.reason == 2) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 2: // Asuntos Personales primero
+                    sortedData.sort((a, b) => {
+                        if (a.reason == 3 && b.reason != 3) return -1;
+                        if (a.reason != 3 && b.reason == 3) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                default:
+                    break;
+            }
+        } else if (orderBy == 'status'){
+            switch (statusIndex) {
+                case 0: // Aprobados primero (is_approved)
+                    console.log('aprobado')
+                    sortedData.sort((a, b) => {
+                        const aApproved = a.data?.is_approved || a.absence_requests?.is_approved;
+                        const bApproved = b.data?.is_approved || b.absence_requests?.is_approved;
+                        
+                        if (aApproved && !bApproved) return -1;
+                        if (!aApproved && bApproved) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 1: // Pendientes primero (is_pending)
+                    console.log('pendiente')
+                    sortedData.sort((a, b) => {
+                        const aPending = a.data?.is_pending;
+                        const bPending = b.data?.is_pending;
+                        
+                        if (aPending && !bPending) return -1;
+                        if (!aPending && bPending) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 2: // Denegados primero (is_denied)
+                    console.log('denegado')
+                    sortedData.sort((a, b) => {
+                        const aDenied = a.data?.is_denied;
+                        const bDenied = b.data?.is_denied;
+                        
+                        if (aDenied && !bDenied) return -1;
+                        if (!aDenied && bDenied) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 3: // Sin estado definido primero
+                    sortedData.sort((a, b) => {
+                        const aHasStatus = a.data?.is_approved || a.data?.is_pending || a.data?.is_denied
+                        const bHasStatus = b.data?.is_approved || b.data?.is_pending || b.data?.is_denied 
+                        
+                        if (!aHasStatus && bHasStatus) return -1;
+                        if (aHasStatus && !bHasStatus) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+
+                default:
+                    break;
+            }
+        } else if (orderBy == 'justi') {
+            console.log('entro?')
+            switch (justiIndex) {
+                case 1: // is_approved == true && is_expired == false primero
+                    sortedData.sort((a, b) => {
+                        const aCondition = (a.data?.is_approved == true || a.data.absence_requests?.is_approved == true) && 
+                                        (a.data?.is_expired == false || a.data.absence_requests?.is_expired == false) &&
+                                        (a.data?.justification_id == null);
+                        const bCondition = (b.data?.is_approved == true || b.data.absence_requests?.is_approved == true) && 
+                                        (b.data?.is_expired == false || b.data.absence_requests?.is_expired == false) &&
+                                        (b.data?.justification_id == null);
+                        
+                        if (aCondition && !bCondition) return -1;
+                        if (!aCondition && bCondition) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 2: // justification_response_state == 0 primero
+                    sortedData.sort((a, b) => {
+                        const aState = a.data.justification?.justification_response_state || a.data.justification_response_state;
+                        const bState = b.data.justification?.justification_response_state || b.data.justification_response_state;
+                        
+                        if (aState == 0 && bState != 0) return -1;
+                        if (aState != 0 && bState == 0) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 3: // justification_response_state == 1 primero
+                    sortedData.sort((a, b) => {
+                        const aState = a.data.justification?.justification_response_state || a.data.justification_response_state;
+                        const bState = b.data.justification?.justification_response_state || b.data.justification_response_state;
+                        
+                        if (aState == 1 && bState != 1) return -1;
+                        if (aState != 1 && bState == 1) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 4: // justification_response_state == 2 primero
+                    sortedData.sort((a, b) => {
+                        const aState = a.data.justification?.justification_response_state || a.data.justification_response_state;
+                        const bState = b.data.justification?.justification_response_state || b.data.justification_response_state;
+                        
+                        if (aState == 2 && bState != 2) return -1;
+                        if (aState != 2 && bState == 2) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 5: // justification_response_state == 3 primero
+                    sortedData.sort((a, b) => {
+                        const aState = a.data.justification?.justification_response_state || a.data.justification_response_state;
+                        const bState = b.data.justification?.justification_response_state || b.data.justification_response_state;
+                        
+                        if (aState == 3 && bState != 3) return -1;
+                        if (aState != 3 && bState == 3) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                case 6: // justification_response_state == 4 primero
+                    sortedData.sort((a, b) => {
+                        const aState = a.data.justification?.justification_response_state || a.data.justification_response_state;
+                        const bState = b.data.justification?.justification_response_state || b.data.justification_response_state;
+                        
+                        if (aState == 4 && bState != 4) return -1;
+                        if (aState != 4 && bState == 4) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                case 0: // justification_response_state == 4 primero
+                    sortedData.sort((a, b) => {
+                        const aState = a.data.justification?.justification_response_state || a.data.justification_response_state;
+                        const bState = b.data.justification?.justification_response_state || b.data.justification_response_state;
+                        
+                        if (aState == 5 && bState != 5) return -1;
+                        if (aState != 5 && bState == 5) return 1;
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+
+        setData(sortedData);
+    }, [orderBy, reasonIndex, statusIndex, justiIndex, allData_parameter])
     return (
         <>
             <div className={style.searchContainer}>
@@ -76,23 +255,23 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
 
             <div className={style.headerContainer}>
 
-                <div className={style.dateHeader}>
+                <div className={style.dateHeader} onClick={() => {orderBy == 'descDate' ? setOrderBy('ascDate') : setOrderBy('descDate')}}>
                     <p>Ausencia</p>
                     <Image src={"/order_by_icon.svg"} width={10} height={10} alt='' className={style.orderIcon} />
                 </div>
 
-                <div className={style.reasonHeader}>
+                <div className={style.reasonHeader} onClick={setNextReasonIndex}>
                     <p>Motivo</p>
                     <Image src={"/order_by_icon.svg"} width={10} height={10} alt='' className={style.orderIcon} />
                 </div>
 
                 
-                <div className={style.stateHeader}>
+                <div className={style.stateHeader} onClick={setNextStatusIndex}>
                     <p>Estado</p>
                     <Image src={"/order_by_icon.svg"} width={10} height={10} alt='' className={style.orderIcon} />
                 </div>
 
-                <div className={style.timeLeftHeader}>
+                <div className={style.timeLeftHeader} onClick={setNextJustiIndex}>
                     <p>Justificación</p>
                     <Image src={"/order_by_icon.svg"} width={10} height={10} alt='' className={style.orderIcon} />
                 </div>
@@ -104,108 +283,166 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
 
             <div className={style.main}>
                 {
-                    (combinedData?.length > 0 || justi?.length > 0)
+                    (data?.length > 0)
                     ?
                         <>
                             {
-                                data.map((absence) => 
-                                    (
-                                        (reasons[absence.reason].toLowerCase().startsWith(search.toLowerCase()))
-                                        &&(
+                                data.map((doc) => 
+
+                                    reasons[doc.reason].toLowerCase().startsWith(search.toLowerCase())
+                                    &&(
+                                        (doc.type == 'absence')?(
+                                        <div className={style.registerContainer} key={doc.data.id}>
+
+                                            <div className={style.date}>
+                                                <p className={style.dateText}>
+                                                    {formatDate(doc.data.absence_date)}
+                                                </p>
+                                            </div>
+
+                                            <div className={style.reason}>
+                                                <div className={style.square} />
+                                                <p className={style.reasonText}>{reasons[doc.data.reason]}</p>
+                                            </div>
+
+                                            <div className={style.state}>
+                                                {
+                                                    doc.data.is_pending && <p className={style.pendingText}>Pendiente</p>
+                                                }
+                                                {
+                                                    doc.data.is_approved && <p className={style.approvedText}>Aprobado</p>
+                                                }
+                                                {
+                                                    doc.data.is_denied && <p className={style.deniedText}>Denegado</p>
+                                                }
+                                            </div>
+
+                                            <div className={style.timeLeft}>
+                                                {
+                                                    (doc.data.is_approved && !doc.data.is_justified) && 
+                                                    <>
+                                                        <Image src={doc.data.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' />
+                                                        <p style={doc.data.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(doc.data.expire_date)}</p>
+                                                    </>
+                                                }
+
+                                                {
+                                                    (doc.data.justification_id != null && doc.data.is_justified) &&
+                                                    <>
+                                                        {
+                                                            (doc.data.justifications?.justification_response_state == 0 || doc.data.justifications.justification_response_state == 5) && 
+                                                            <>
+                                                                <p className={style.notTime} style={{color: "#DEAA00"}}>{statuses[doc.data.justifications.justification_response_state]}</p>
+                                                            </>
+                                                        }
+
+                                                        {
+                                                            ([1,2,3].includes(doc.data.justifications?.justification_response_state)) && 
+                                                            <>
+                                                                <p className={style.notTime} style={{color: "#0B8300"}}>{statuses[doc.data.justifications.justification_response_state]}</p>
+                                                            </>
+                                                        }
+
+                                                        {
+                                                            (doc.data.justifications?.justification_response_state == 4) && 
+                                                            <>
+                                                                <p className={style.notTime} style={{color: "#830000"}}>{statuses[doc.data.justifications.justification_response_state]}</p>
+                                                            </>
+                                                        }
+                                                    </>
+                                                }
+
+                                                
+
+                                            </div>
                                             
-                                            <div className={style.registerContainer} key={absence.id}>
+                                            <div className={style.goTo}>
+                                                <Link href={`/mipp/history/solicitude-detail/${doc.data.id}`}>
+                                                <div className={style.infoContainer}>
+                                                    <Image src={"/goToInfo.svg"} width={20} height={20} alt='go to icon' />
+                                                    <p className={style.goToInfoText}>Info</p>
+                                                </div>
+                                                </Link>
+                                                {
+                                                    (doc.data.is_approved && !doc.data.is_justified && !doc.data.is_expired) &&
+                                                    (
+                                                        <div className={style.justiContainer}>
+                                                            <Image src={"/goToJust.svg"} width={20} height={20} alt='go to icon' />
+                                                            <p className={style.goToJustifyText} onClick={() => redirectJustify(doc.data.id)}>Justificar</p>
+                                                        </div>
+                                                    )
+
+                                                    
+                                                }
+                                            </div>
+
+                                        </div>
+                                        )
+                                        :
+                                        (doc.type == 'justi')&&(
+                                        <div className={style.registerContainer} key={doc.data.id} >
 
                                                 <div className={style.date}>
                                                     <p className={style.dateText}>
-                                                        {formatDate(absence.absence_date)}
+                                                        {formatDate(doc.data.absence_date)}
                                                     </p>
                                                 </div>
 
                                                 <div className={style.reason}>
                                                     <div className={style.square} />
-                                                    <p className={style.reasonText}>{reasons[absence.reason]}</p>
+                                                    <p className={style.reasonText}>{reasons[doc.data.justification_reason]}</p>
                                                 </div>
 
                                                 <div className={style.state}>
                                                     {
-                                                        absence.is_pending && <p className={style.pendingText}>Pendiente</p>
-                                                    }
-                                                    {
-                                                        absence.is_approved && <p className={style.approvedText}>Aprobado</p>
-                                                    }
-                                                    {
-                                                        absence.is_denied && <p className={style.deniedText}>Denegado</p>
+                                                        <p>N/A</p>
                                                     }
                                                 </div>
 
                                                 <div className={style.timeLeft}>
+
                                                     {
-                                                        (absence.is_approved && !absence.is_justified) && 
+                                                        (doc.data.justification_response_state == 0 || doc.data.justification_response_state == 5) && 
                                                         <>
-                                                            <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' />
-                                                            <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : null}>{getTimeLeft(absence.expire_date)}</p>
+                                                            <p style={{color: "#DEAA00"}}>{statuses[doc.data.justification_response_state]}</p>
                                                         </>
                                                     }
 
                                                     {
-                                                        (absence.justification_id != null && absence.is_justified) &&
+                                                        ([1,2,3].includes(doc.data.justification_response_state)) && 
                                                         <>
-                                                            {
-                                                                (absence.justifications?.justification_response_state == 0 || absence.justifications.justification_response_state == 5) && 
-                                                                <>
-                                                                    <p className={style.notTime} style={{color: "#DEAA00"}}>{statuses[absence.justifications.justification_response_state]}</p>
-                                                                </>
-                                                            }
-
-                                                            {
-                                                                ([1,2,3].includes(absence.justifications?.justification_response_state)) && 
-                                                                <>
-                                                                    <p className={style.notTime} style={{color: "#0B8300"}}>{statuses[absence.justifications.justification_response_state]}</p>
-                                                                </>
-                                                            }
-
-                                                            {
-                                                                (absence.justifications?.justification_response_state == 4) && 
-                                                                <>
-                                                                    <p className={style.notTime} style={{color: "#830000"}}>{statuses[absence.justifications.justification_response_state]}</p>
-                                                                </>
-                                                            }
+                                                            <p style={{color: "#0B8300"}}>{statuses[doc.data.justification_response_state]}</p>
                                                         </>
                                                     }
 
-                                                    
+                                                    {
+                                                        (doc.data.justification_response_state == 4) && 
+                                                        <>
+                                                            <p style={{color: "#830000"}}>{statuses[doc.data.justification_response_state]}</p>
+                                                        </>
+                                                    }
 
                                                 </div>
                                                 
                                                 <div className={style.goTo}>
-                                                    <Link href={`/mipp/history/solicitude-detail/${absence.id}`}>
+                                                    <Link href={`/mipp/history/solicitude-detail/${doc.data.id}`}>
                                                     <div className={style.infoContainer}>
                                                         <Image src={"/goToInfo.svg"} width={20} height={20} alt='go to icon' />
                                                         <p className={style.goToInfoText}>Info</p>
                                                     </div>
                                                     </Link>
-                                                    {
-                                                        (absence.is_approved && !absence.is_justified && !absence.is_expired) &&
-                                                        (
-                                                            <div className={style.justiContainer}>
-                                                                <Image src={"/goToJust.svg"} width={20} height={20} alt='go to icon' />
-                                                                <p className={style.goToJustifyText} onClick={() => redirectJustify(absence.id)}>Justificar</p>
-                                                            </div>
-                                                        )
-
-                                                        
-                                                    }
                                                 </div>
 
-                                            </div>
-                                        )
+                                        </div>
+                                        )    
                                     )
+
 
                                 )
                                 
                             }
 
-                            {
+                            {/*
                                 justi.map((justification) => 
                                     (
                                         (reasons[justification.justification_reason].toLowerCase().startsWith(search.toLowerCase()))
@@ -267,13 +504,13 @@ export default function SolicitudeHistory({userAbsence_parameter, justifications
 
                                 )
                                 
-                            }
+                            */}
 
                             
 
                             {
-                                (data.filter((absence) => reasons[absence.reason].toLowerCase().startsWith(search.toLowerCase())).length == 0 &&
-                                justi.filter((justification) => reasons[justification.justification_reason].toLowerCase().startsWith(search.toLowerCase())).length == 0) &&
+                                (data.filter((doc) => reasons[doc.reason].toLowerCase().startsWith(search.toLowerCase())).length == 0) &&
+                               
                                     <div className={style.notRegisterContainer}>
                                         <h3>No se encontraron registros con "{search}"</h3>
                                         <Image src={"/not_found.webp"} width={100} height={100} alt='not found image' />

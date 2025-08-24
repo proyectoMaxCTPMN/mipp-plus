@@ -47,7 +47,6 @@ export default function ManageDashboard({allDocs_parameter}) {
             setData([...data].sort((a, b) => new Date(a.created_at) - new Date(b.created_at)));
             console.log(data)
         } else if (orderBy == 'descDate') {
-            console.log("here")
             setData([...data].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
         }
         return
