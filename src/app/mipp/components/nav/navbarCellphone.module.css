@@ -77,7 +77,7 @@
 
 .alternateOption{
     font-size: 12px;
-    background-color: var(--primary-selected);
+    background-color: var(--primary-selecteds);
     padding: 10px;
     display: flex;
     flex-direction: row;
