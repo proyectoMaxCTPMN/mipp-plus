@@ -13,6 +13,6 @@ export default async function Omission_Detail({params}){
     const omissionf = await getUserOmission(omissionid)
     console.log(omissionf)
     return(
-        <Omission_Formulary_Detail_Page/>
+        <Omission_Formulary_Detail_Page omissionf_parameter={omissionf}/>
     )
 }

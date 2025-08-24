@@ -1,7 +1,7 @@
 import style from './omission-detail.module.css'
 
 
-export default function Omission_Formulary_Detail_Page() {
+export default function Omission_Formulary_Detail_Page({omissionf_parameter}) {
 
     return(
         <div className={style.body}>
@@ -18,52 +18,52 @@ export default function Omission_Formulary_Detail_Page() {
                                 <label>Fecha de la omisión:</label>
                                 
                                 <span onClick={handleCalendarClick}>
-                                    <input type="date" name="omission_date" id="omission_date"/>
+                                    <input type="date" name="omission_date" id="omission_date" disabled defaultValue={omissionf_parameter.omission_date}/>
                                     <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image>
                                 </span>
                         </div>
                         <div className={style.reasonofomissioncontainer}>
                             <label>
-                                <input type="radio" name="omission_type"/>
+                                <input type="radio" name="omission_type" defaultChecked={omission_type == 1} disabled/>
                                 Entrada
                             </label>
                             <label>
-                                <input type="radio" name="omission_type"/>
+                                <input type="radio" name="omission_type" defaultChecked={omission_type == 2} disabled/>
                                 Salida
                             </label>
                             <label>
-                                <input type="radio" name="omission_type"/>
+                                <input type="radio" name="omission_type" defaultChecked={omission_type == 3} disabled/>
                                 Todo el día
                             </label>
 
                             <label>
-                                <input type="radio" name="omission_type"/>
+                                <input type="radio" name="omission_type" defaultChecked={omission_type == 4} disabled/>
                                 Salida anticipada
                             </label>
 
                         </div>
                         
                         <div className={style.timeContainer}>
-                            {(formData.omission_type == 1 || formData.omission_type == 3) && 
+                            {(omissionf_parameter.omission_type == 1 || omissionf_parameter.omission_type == 3) && 
                                 <>
                                     <label>Hora de entrada:</label>
-                                    <select name="entry_time" id="entry_time" className={style.hourSelect} value={formData.entry_time} onChange={handleInputChange}>
+                                    <select name="entry_time" id="entry_time" className={style.hourSelect} defaultValue={omissionf_parameter.entry_time} disabled>
                                         <option value="" disabled>Seleccione</option>
                                     </select>
                                 </>
                             }
-                            {(formData.omission_type == 2 || formData.omission_type == 3) &&
+                            {(omissionf_parameter.omission_type == 2 || omissionf_parameter.omission_type == 3) &&
                                 <>
                                     <label>Hora de salida:</label>
-                                    <select name="exit_time" id="exit_time" className={style.hourSelect} value={formData.exit_time} onChange={handleInputChange}>
+                                    <select name="exit_time" id="exit_time" className={style.hourSelect} defaultValue={omissionf_parameter.exit_time} disabled>
                                         <option value="" disabled>Seleccione</option>
                                     </select>
                                 </>
                             }
-                            {formData.omission_type == 4 &&
+                            {omissionf_parameter.omission_type == 4 &&
                                 <div className={style.anticipated_exitcontainer}>
                                     <label>Hora de salida:</label>
-                                    <input type="text" name='exit_time' id='exit_time' className={style.anticipated_exitinput}/>
+                                    <input type="text" name='exit_time' id='exit_time' className={style.anticipated_exitinput} defaultValue={omissionf_parameter.exit_time}/>
                                 </div>
                             }
                         </div>
