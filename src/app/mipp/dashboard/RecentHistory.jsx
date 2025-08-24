@@ -113,8 +113,8 @@ export default function RecentHistory({AllDocuments_parameter}){
 
             <div className={style.soliCard}> {/*Estas son las justificaciones pero utilizan los mismos estilos que las solicitudes */}
                 <div className={style.soliContent} style={AllDocuments_parameter.absences.length <= 0 ? {display: 'flex',alignItems: 'center', justifyContent: 'center'} : {}}>
-                    {!AllDocuments_parameter.justifications.length <= 0 ? 
-                        AllDocuments_parameter.justifications.map((justification)=>(
+                    {!AllDocuments_parameter.justi.length <= 0 ? 
+                        AllDocuments_parameter.justi.map((justification)=>(
                             <div className={style.informationcontainer} key={justification.id}>
 
                                 <div className={style.information_upperpart}>
@@ -160,7 +160,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                                     </span>
                                 </div>
 
-                                <Link href={`/mipp/history/solicitude-detail/${absence.id}`} className={style.hovercontainer}>
+                                <Link href={`/mipp/history/solicitude-detail/${justification.id}`} className={style.hovercontainer}>
                                     <div className={style.hover_informationcontainer}>
                                         <span className={style.verMasText}>Ver Más</span>
                                         <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
