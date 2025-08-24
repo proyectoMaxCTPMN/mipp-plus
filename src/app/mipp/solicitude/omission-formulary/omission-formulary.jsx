@@ -202,5 +202,5 @@ export default function Omission_Formulary_Page({fullName_parameter, userId_para
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 )}
