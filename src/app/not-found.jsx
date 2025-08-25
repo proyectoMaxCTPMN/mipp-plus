@@ -3,12 +3,14 @@ import Link from 'next/link';
 import style from './not-found.module.css'
 import Image from 'next/image';
 import { useEffect } from 'react';
+import * as Sentry from '@sentry/nextjs';
 
 
 
 export default function NotFound() {
     useEffect(() => {
         console.error('Página no encontrada')
+        Sentry.captureException('Página no encontrada')
     }, [])
     return (
     <div className={style.container}>
