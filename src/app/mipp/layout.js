@@ -70,6 +70,10 @@ export default function MippLayout({children}) {
         }
         fetchUserRoles();
 
+        import("@sentry/nextjs").then((lazyLoadedSentry) => {
+            Sentry.addIntegration(lazyLoadedSentry.replayIntegration());
+        });
+
         return
     }, [])
 

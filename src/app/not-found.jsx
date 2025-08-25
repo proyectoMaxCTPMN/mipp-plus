@@ -9,7 +9,9 @@ import * as Sentry from '@sentry/nextjs';
 
 export default function NotFound() {
     useEffect(() => {
+        console.error('No se pudo encontrar la página')
         Sentry.captureMessage("No se pudo encontrar la página", "error");
+
     }, [])
     return (
     <div className={style.container}>
