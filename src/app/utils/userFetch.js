@@ -426,3 +426,39 @@ export async function getUserAbsencesAndJustifications(userId){
 
     return unifiedData;
 }
+
+export async function getUserOmissions(user_id) {
+    const supabase = await createSupabase()
+
+
+    let { data: data, error } = await supabase
+    .from('mark_omissions')
+    .select('')
+    .eq('user_id', user_id)
+
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
+
+export async function getUserReports(user_id) {
+    const supabase = await createSupabase()
+
+
+    let { data: data, error } = await supabase
+    .from('infraestructure_reports')
+    .select('')
+    .eq('user_id', user_id)
+
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
