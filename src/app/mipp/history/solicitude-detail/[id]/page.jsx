@@ -13,14 +13,14 @@ export default async function Page({params}){
     const absencef = await getAbsenceById(requestid)
     const title = await getUserPosition(userId)
     const position = await getUserTitle(userId)
-    let justificationf
+    let justificationf = {}
     if (absencef[0] && absencef[0]?.justification_id != null){
-        justificationf = await getUserJustify_request_id(userId, absencef[0].justification_id)
+        justificationf = await getUserJustify_request_id(absencef[0].id)
+        console.log(justificationf)
     }else{
         justificationf = await getUserJustification_id(userId, requestid)
     }
-    console.log('a')
-    console.log(justificationf + 'b')
+    
     const userInfo = await getUserInfo((absencef[0] || absencef[0]?.justification_id != null )? absencef[0].user_id : justificationf[0].user_id);
     return(
         <Solicitude_Detail userInfo_parameter={userInfo} fullName_parameter={fullName} absencef_parameter={absencef[0]} justificationf_parameter={justificationf[0]} title_parameter={title} position_parameter={position}/>

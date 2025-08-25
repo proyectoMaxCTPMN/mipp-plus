@@ -60,9 +60,33 @@
     margin-top: 1.3rem;
 }
 /*#endregion*/
+
 .form_container{
     width: 55%;
     margin: 0 auto;
+}
+.formulary_upperinformationcontainer{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    height: 3.2rem;
+}
+.previewcard{
+    background-color: var(--primary);
+    padding: .5rem;
+    width: max-content;
+    border-radius: 6px;
+    position: relative;
+    top: 1.6em;
+    left: 1.1em;
+    cursor: pointer;
+}
+.previewcard:hover{
+    background-color: var(--primary-selected);
+}
+.searchicon{
+    width: 2rem;
+    height: auto;
 }
 
 .locationcontainer{
@@ -131,94 +155,97 @@
     bottom: 0;
 }
 
-.evidencecontainer{
+.evidence{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.6em;
 }
-.evidencecontainer input{
+.evidence_input{
     flex: 1;
     margin-left: 0;
     outline: 1px solid #ccc;
     padding: 0.3em 0.6em;
     border-radius: 4px;
     background: #fff;
-    width: 100%;
+    width: 40%;
+}
+.solicitudestatus{
+    display: flex;
+    gap: .6em;
+    justify-content: flex-end;
+    font-size: 1.35rem;
+    font-weight: bold;
 }
 
-.buttonscontainer{
+/* #region Popup */
+.popUpContainer{
+    width: 100dvw;
+    height: 100dvh;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.226);
+    left: 0;
+    top: 0;
+    z-index: 200;
     display: flex;
-    gap: 2.5em;
-    justify-content: flex-end;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
 }
-.buttonscontainer button{
+.popUpExit{
     background-color: var(--primary);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.7rem 2.8rem;
-    font-size: 1rem;
-    font-weight: 500;
+    width: max-content;
+    padding: .5rem;
+    border-radius: 6px;
+    position: relative;
+    top: 1.8rem;
+    left: 27.6%;
     cursor: pointer;
-    transition: background 0.2s;
+    height: 3rem;
 }
-.buttonscontainer button:hover, .submitpass:hover{
+.popUpExit:hover{
     background-color: var(--primary-selected);
 }
-
-@media screen and (max-width: 800px) {
-    .form_container h1{
-        font-size: 1.5rem;
-    }
-
-    .exactlocationcontainer{
-        grid-template-columns: none;
-        grid-template-rows: repeat(3, 1fr);
-        place-content: start;
-    }
-    
-    .buttonscontainer *{
-        width: 100%;
-    }
+.Exit_icon{
+    width: 2rem;
+    height: auto;
+}
+.popUpCard{
+    max-width: 60%;
+    background-color: #fff;
+    width: fit-content;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -webkit-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    font-size: 16px;
+    place-content: space-between;
 }
 
-@media screen and (max-width: 480px) {
-    .body{
-        width: 100dvw;
-        height: 92dvh;
-        margin: 0;
-        background-color: transparent;
-        overflow: hidden scroll;
-        display: flex;
-        place-content: start;
-        place-items: start;
-    }
-
-    .container{
-        width: 100%;
-        height: 100%;
-        overflow: hidden scroll;
-        display: flex;
-        flex-direction: column;
-        place-content: start;
-        place-items: start;
-    }
-
-    .cardcontainer{
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
-        display: flex;
-        flex-direction: column;
-        place-content: start;
-        place-items: start;
-        padding-bottom: 10dvh;
-    }
-
-    .cardname{
-        left: 50%;
-        transform: translate(-50%, 0);
-    }
-
+.form_row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .3em;
 }
+.form_row p{
+    font-weight: bold;
+}
+.form_row p span{
+    font-weight: bold;
+    color: #616161;
+}
+
+.request_datecontainer{
+    margin-top: 1rem;
+}
+.request_datecontainer span{
+    color: #616161;
+    font-weight: bold;
+    text-decoration: underline;
+}
+/* #endregion */

@@ -193,12 +193,12 @@ export default function RecentHistory({AllDocuments_parameter}){
                                     </span>
                                 </div>
                                 
-                                <div className={style.hovercontainer}>
+                                <Link href={`/mipp/history/infra-detail/${report.id}`} className={style.hovercontainer}>
                                     <div className={style.hover_informationcontainer}>
                                         <span className={style.verMasText}>Ver Más</span>
                                         <Image src={'/circle-chevron-right-solid-full.svg'} width={20} height={20} alt='Ver mas' className={style.hover_chevronicon}></Image>
                                     </div>
-                                </div>
+                                </Link>
 
                             </div>
                         ))
