@@ -1,0 +1,124 @@
+
+.container * {
+    font-family: var(--font-karla), "Karla", sans-serif;
+}
+
+.container{
+    width: 95dvw;
+    height: 100dvh;
+    margin-left: 5dvw;
+
+}
+
+.dashboardContainer{
+    color: var(--primary);
+    padding: 2em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    gap: 1em;
+    width: 100%;
+    height: 100%;
+}
+.tabsContainer{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabsContainer *{
+    font-size: 16px;
+}
+
+.tab[data-selected='true'] span{
+    background-color: var(--primary);
+    
+
+}
+
+.tab[data-selected='true'] div{
+    color: #fff;
+}
+
+.cardsContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex-wrap: wrap;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+}
+
+.itemContainer{
+    flex-grow: 0;
+    width: 100%;
+    min-height: 270px;
+}
+
+.itemHeader{
+    background-color: var(--primary);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.absence_info{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 5px;
+
+}´
+
+.clockChipContent{
+    display: flex;
+    flex-direction: row;
+    width: min-content;
+    gap: 5px;
+}
+
+.clockcontainer{
+    display: flex;
+    gap: 5px;
+}
+
+.popFooter{
+    background-color: var(--primary);
+    color: #fff;
+    position: relative;
+    width: max-content;
+    left: 50%;
+    transform: translate(-50%);
+    border-radius: 10px;
+    height: 50%;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1150px) {
+    .cardsContainer{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .cardsContainer{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .tabs > *{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+}

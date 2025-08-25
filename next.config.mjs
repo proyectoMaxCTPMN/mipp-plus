@@ -1,6 +1,16 @@
 import {withSentryConfig} from '@sentry/nextjs';
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  webpack(config) {
+    config.cache = {
+      type: 'filesystem',
+      compression: 'gzip',
+      allowCollectingMemory: true
+    };
+
+    return config;
+  }
+};
 
 export default withSentryConfig(nextConfig, {
   // For all available options, see:

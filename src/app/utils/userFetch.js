@@ -164,6 +164,7 @@ export async function getUserAllDocuments(userId) {
     .from('justifications')
     .select('')
     .eq('user_id', userId)
+    .filter('request_id', 'is', null)
 
     if (error_justi) {
       console.error("No se pudo obtener el registro de justificaciones" + JSON.stringify(error))
