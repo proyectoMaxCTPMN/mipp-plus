@@ -107,26 +107,26 @@ export default function Omission_Formulary_Page({fullName_parameter, userId_para
                                 <label>Fecha de la omisión:</label>
                                 
                                 <span onClick={handleCalendarClick}>
-                                    <input type="date" name="omission_date" id="omission_date" defaultValue={fecha} ref={inputRef} min={fecha} onChange={handleInputChange}/>
+                                    <input type="date" name="omission_date" id="omission_date" defaultValue={fecha} ref={inputRef} min={fecha} onChange={handleInputChange} required/>
                                     <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image>
                                 </span>
                         </div>
                         <div className={style.reasonofomissioncontainer}>
                             <label>
-                                <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 1)}/>
+                                <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 1)} required/>
                                 Entrada
                             </label>
                             <label>
-                                <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 2)}/>
+                                <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 2)} required/>
                                 Salida
                             </label>
                             <label>
-                                <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 3)}/>
+                                <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 3)} required/>
                                 Todo el día
                             </label>
 
                             <label>
-                                <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 4)}/>
+                                <input type="radio" name="omission_type" onClick={(e) => changeRadio(e, 4)} required/>
                                 Salida anticipada
                             </label>
 
@@ -136,7 +136,7 @@ export default function Omission_Formulary_Page({fullName_parameter, userId_para
                             {(formData.omission_type == 1 || formData.omission_type == 3) && 
                                 <>
                                     <label>Hora de entrada:</label>
-                                    <select name="entry_time" id="entry_time" className={style.hourSelect} value={formData.entry_time} onChange={handleInputChange}>
+                                    <select name="entry_time" id="entry_time" className={style.hourSelect} value={formData.entry_time} onChange={handleInputChange} required>
                                         <option value="" disabled>Seleccione</option>
                                         <option value="7:00">7:00</option>
                                         <option value="7:40">7:40</option>
@@ -160,7 +160,7 @@ export default function Omission_Formulary_Page({fullName_parameter, userId_para
                             {(formData.omission_type == 2 || formData.omission_type == 3) &&
                                 <>
                                     <label>Hora de salida:</label>
-                                    <select name="exit_time" id="exit_time" className={style.hourSelect} value={formData.exit_time} onChange={handleInputChange}>
+                                    <select name="exit_time" id="exit_time" className={style.hourSelect} value={formData.exit_time} onChange={handleInputChange} required>
                                         <option value="" disabled>Seleccione</option>
                                         <option value="7:40">7:40</option>
                                         <option value="8:20">8:20</option>
@@ -183,14 +183,14 @@ export default function Omission_Formulary_Page({fullName_parameter, userId_para
                             {formData.omission_type == 4 &&
                                 <div className={style.anticipated_exitcontainer}>
                                     <label>Hora de salida:</label>
-                                    <input type="text" name='exit_time' id='exit_time' className={style.anticipated_exitinput}/>
+                                    <input type="text" name='exit_time' id='exit_time' className={style.anticipated_exitinput} required/>
                                 </div>
                             }
                         </div>
 
                         <div className={style.justificationcontainer}>
                             <span>Justificación:</span>  
-                            <textarea name="omission_reason" id="omission_reason" className={style.justification} value={formData.reason} onChange={handleInputChange}>
+                            <textarea name="omission_reason" id="omission_reason" className={style.justification} value={formData.reason} onChange={handleInputChange} required>
                             </textarea>
                         </div>
                         <div className={style.buttonscontainer}>

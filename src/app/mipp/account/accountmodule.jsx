@@ -3,12 +3,38 @@ import { toast } from 'react-toastify';
 import style from './account.module.css'
 import {useState } from 'react';
 import { useRouter } from 'next/navigation';
+import {
+    Card, CardBody,
+
+} from "@heroui/card";
+
+
+export default function Accountpage({userId_parameter, allInfo_parameter, titles_parameter, positions_parameter}){
+
+
+    return(
+        <div className={style.container}>
+            <Card className={style.headerContainer}>
+                <CardBody>
+                    <p>hola</p>
+                </CardBody>
+            </Card>
+
+            <Card className={style.bodyContainer}>
+                
+            </Card>
+
+        </div>
+    )
+}
+
+/*
 
 export default function Accountpage({userId_parameter, allInfo_parameter, titles_parameter, positions_parameter}){
     const router = useRouter()
-    const [selectedTitle, setSelectedTitle] = useState(allInfo_parameter.title_id); {/*Detectar titulo elegido en el formulario*/}
-    const [showPasswordForm, setShowPasswordForm] = useState(false); {/*Cambiar ventana*/}
-    const [showCurrent, setShowCurrent] = useState(false); {/*Mostrar texto o no en la contrase;a*/}
+    const [selectedTitle, setSelectedTitle] = useState(allInfo_parameter.title_id); 
+    const [showPasswordForm, setShowPasswordForm] = useState(false); 
+    const [showCurrent, setShowCurrent] = useState(false); 
     const [showNew, setShowNew] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [formData, setFormData] = useState(allInfo_parameter);
@@ -141,7 +167,7 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
                     <div className={style.currentpasscontainer}>
                         <label htmlFor='currentPassword'>Contraseña Actual</label>
                         <div className={style.passwordinputcontainer}>
-                            <input id='currentPassword' name='currentPassword' type={showCurrent ? "text" : "password"}/> {/* "v": estado booleano actual */}
+                            <input id='currentPassword' name='currentPassword' type={showCurrent ? "text" : "password"}/>
                             <span className={style.passwordicon} style={{cursor: "pointer"}} onClick={() => setShowCurrent(v => !v)}> 
                                 <img src={showCurrent ? "/eye-icon-original.svg" : "/eye-off-icon-original.svg"} alt={showCurrent ? "Ocultar" : "Mostrar"}/>
                             </span>
@@ -169,7 +195,7 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
                     <div className={style.confirmpasscontainer}>
                         <label htmlFor='confirmPassword'>Confirmar Contraseña</label>
                         <div className={style.passwordinputcontainer}>
-                            <input id='confirmPassword' name='confirmPassword' type={showConfirm ? "text" : "password"}/> {/* "v": estado booleano actual */}
+                            <input id='confirmPassword' name='confirmPassword' type={showConfirm ? "text" : "password"}/>
                             <span className={style.passwordicon} style={{cursor: "pointer"}} onClick={() => setShowConfirm(v => !v)}> 
                                 <img src={showConfirm ? "/eye-icon-original.svg" : "/eye-off-icon-original.svg"} alt={showConfirm ? "Ocultar" : "Mostrar"}/>
                             </span>
@@ -183,3 +209,5 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
         </div>
     )
 }
+
+*/

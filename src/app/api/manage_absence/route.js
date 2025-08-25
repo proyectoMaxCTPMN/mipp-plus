@@ -10,12 +10,15 @@ export async function POST(request) {
     const formData = await request.formData();
     
     const isAccept = formData.get('isAccept')
+    const isConvocatory = formData.get('isConvocatory')
     const request_id = formData.get('request_id')
 
     let query
     if (isAccept == 'true' || isAccept == true) {
         query = {is_approved: true}
-    } else{
+    } else if (isConvocatory == 'true' || isConvocatory == true){
+        query = {is_convocatory: true}
+    }else{
         query = {is_denied: true}
     }
 

@@ -41,6 +41,7 @@ export async function POST(request) {
     const leaving_at = formData.get('leaving_at')
     const from_hour = formData.get('from_hour')
     const to_hour = formData.get('to_hour')
+    const justification_comment = formData.get('justification_comment')
 
     const evidence_file = formData.get('evidence_file')
 
@@ -111,6 +112,7 @@ export async function POST(request) {
                 success: false,
                 message:
                     "Tipo de archivo no permitido. Solo se aceptan PDF, imágenes, documentos de Word y archivos de texto.",
+                err: 'fileTypeError',
                 },
                 { status: 400 },
             )
@@ -122,6 +124,7 @@ export async function POST(request) {
                 {
                     success: false,
                     message: "El archivo es demasiado grande. El tamaño máximo permitido es 10MB.",
+                    err: 'fileSizeError',
                 },
                 { status: 400 },
             )
@@ -157,9 +160,8 @@ export async function POST(request) {
       leaving_at,
       from_hour: from_hour == '' ? null : from_hour,
       to_hour: to_hour == '' ? null : to_hour,
-    }
-
-    console.log("toSend", toSend)   
+      justification_comment,
+    } 
 
     const justiReponse = await supabase
     .from('justifications')

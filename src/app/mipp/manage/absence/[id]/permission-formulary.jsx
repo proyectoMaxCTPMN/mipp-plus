@@ -3,15 +3,17 @@
 import { toast } from 'react-toastify'
 import style from './permission-formulary.module.css'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { formatDate, formatDateandHour } from '@/app/utils/formatDate'
 
-export default function Permission_Formulary_Page({userInfo_parameter, title_parameter, position_parameter, absencef_parameter}){
+
+export default function Permission_Formulary_Page({userInfo_parameter, title_parameter, position_parameter, absencef_parameter, userRoles}){
     const router = useRouter()
     const formData = absencef_parameter[0]
     const [showPopup, setShowPopup] = useState(false)
+    console.log(formData)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -181,9 +183,13 @@ export default function Permission_Formulary_Page({userInfo_parameter, title_par
                             <div className={style.request_datecontainer}>
                                 <p>Presento la solicitud a las <span>{formatDateandHour(formData.created_at).time}</span> del día <span>{formatDateandHour(formData.created_at).day}</span> del mes <span>{formatDateandHour(formData.created_at).month}</span> del año <span>{formatDateandHour(formData.created_at).year}</span></p>
                             </div>
-                            <div className={style.buttonscontainer}>
-                                <button type="submit">Manejar</button>
-                            </div>
+                            {
+                                ((userRoles.manage_documents == true || userRoles.root == true)) &&
+                                    <div className={style.buttonscontainer}>
+                                        <button type="submit">{formData.is_pending == true ? "Manejar" : "Ver Resolución"}</button>
+                                    </div>
+                            }
+  
                         </form>
 
                     </div>
@@ -191,18 +197,20 @@ export default function Permission_Formulary_Page({userInfo_parameter, title_par
             </div>
 
             {
-                showPopup && <SendPopup requestId_parameter={formData.id} router={router} setShowPopup={setShowPopup}/>
+                showPopup && <SendPopup requestId_parameter={formData.id} router={router} setShowPopup={setShowPopup} canManage={formData.is_pending == true} requestStatus={{is_pending: formData.is_pending, is_approved: formData.is_approved, is_denied: formData.is_denied, is_convocatory: formData.is_convocatory}}/>
             }
         </div>
     )
 }
 
-function SendPopup({requestId_parameter, router, setShowPopup}){
+function SendPopup({requestId_parameter, router, setShowPopup, canManage, requestStatus}){
     const [isAccept, setIsAccept] = useState(false)
+    const [isConvocatory, setIsConvocatory] = useState(false)
 
     const handleSubmit = async () => {
         const data = new FormData()
         data.append('isAccept', isAccept)
+        data.append('isConvocatory', isConvocatory)
         data.append('request_id', requestId_parameter)
 
         const response = await fetch(`/api/manage_absence`, {
@@ -234,24 +242,27 @@ function SendPopup({requestId_parameter, router, setShowPopup}){
 
                 <div className={style.radioContainerPopUp}>
                     <div className={style.radioPopUp}>
-                        <input type="radio" name="resolution" id="approve" onClick={() => setIsAccept(true)}/>
+                        <input type="radio" name="resolution" id="approve" defaultChecked={!canManage && requestStatus.is_approved} onClick={() => setIsAccept(true)}/>
                         <label htmlFor="approve">Aprobar lo solicitado</label>
                     </div>
 
                     <div className={style.radioPopUp}>
-                        <input type="radio" name="resolution" id="deny" onClick={() => setIsAccept(false)}/>
+                        <input type="radio" name="resolution" id="deny" defaultChecked={!canManage && requestStatus.is_denied} onClick={() => setIsAccept(false)}/>
                         <label htmlFor="deny">Denegar lo solicitado</label>
                     </div>
 
                     <div className={style.radioPopUp}>
-                        <input type="radio" name="resolution" id="convocatory" onClick={() => setIsAccept(true)}/>
+                        <input type="radio" name="resolution" id="convocatory" defaultChecked={!canManage && requestStatus.is_convocatory} onClick={() => setIsConvocatory(true)}/>
                         <label htmlFor="convocatory">Acoger convocatoria</label>
                     </div>
                 </div>
 
                 <div className={style.inputContainer}>
                     <input type="button" value="Cancelar" className={style.btnPopUp} onClick={() => setShowPopup(false)}/>
-                    <input type="button" value="Aceptar" className={style.btnPopUp} onClick={handleSubmit}/>
+                    {
+                        canManage == true && <input type="button" value="Aceptar" className={style.btnPopUp} onClick={handleSubmit}/>
+                    }
+                    
                 </div>
                 
             </div>

@@ -9,7 +9,8 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 
 
-export default function Justification_Formulary_Page({userId_parameter, justif_parameter, userInfo_parameter, title_parameter, position_parameter}){
+export default function Justification_Formulary_Page({userId_parameter, justif_parameter, userInfo_parameter, title_parameter, position_parameter, userRoles }){
+    console.log(justif_parameter)
     const router = useRouter();
     const [formData, setFormData] = useState({
         userId: userId_parameter,
@@ -26,7 +27,9 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
         justification_comment: justif_parameter.justification_comment || ''
     })
 
-    const [hasAttachment, setHasAttachment] = useState(justif_parameter.attachment_url ? true : false)
+    const [hasAttachment, setHasAttachment] = useState(justif_parameter.attachment_url != 'null' ? true : false)
+
+    console.log(hasAttachment)
     const [showPopup, setShowPopup] = useState(false)
 
     const handleSubmit = async (e) => {
@@ -172,37 +175,42 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
                                 className={style.explanation}
                             />
                         </div>
-                            {hasAttachment &&(
                             <div className={style.evidence}>
                                 {
-                                    (hasAttachment ) ? 
-                                        (<><Link className={style.evidence_link} href={ formData.attachment_url}>Ver archivo adjunto</Link> </>)
+                                    (hasAttachment == true ) ? 
+                                        (<Link className={style.evidence_link} href={ formData.attachment_url}>Ver archivo adjunto</Link>)
                                     :
-                                        (<><p>Sin archivo adjunto</p></>)
+                                        (<p>Sin archivo adjunto</p>)
                                 }
                                 
                             </div>
-                        )}
+
                         <div className={style.request_datecontainer}>
                             <p>Presento la solicitud a las <span>{formatDateandHour(justif_parameter.created_at).time}</span> del día <span>{formatDateandHour(justif_parameter.created_at).day}</span> del mes <span>{formatDateandHour(justif_parameter.created_at).month}</span> del año <span>{formatDateandHour(justif_parameter.created_at).year}</span></p>
                         </div>
                         <div className={style.buttonscontainer}>
-                            <button type="submit">Manejar</button>
+                            {
+                                ((userRoles.manage_documents == true || userRoles.root == true)) &&
+                                    <div className={style.buttonscontainer}>
+                                        <button type="submit">{justif_parameter.justification_response_state == 0 ? "Manejar" : "Ver Resolución"}</button>
+                                    </div>
+                            }
                         </div>
                     </form>
                 </div>
             </div>
         </div>
             {
-                showPopup && <SendPopup justiId_parameter={formData.id} router={router} setShowPopup={setShowPopup}/>
+                showPopup && <SendPopup justiId_parameter={formData.id} router={router} setShowPopup={setShowPopup} canManage={justif_parameter.justification_response_state == 0} responseState={justif_parameter.justification_response_state} justiComment={justif_parameter.justification_response_comment}/>
             }
         </div>
 )}
 
 
-function SendPopup({justiId_parameter, router, setShowPopup}){
+function SendPopup({justiId_parameter, router, setShowPopup, canManage, responseState, justiComment}){
     const [form, setForm] = useState('')
-    const [comment, setComment] = useState('')
+    const [comment, setComment] = useState(justiComment)
+    
 
     const handleSubmit = async () => {
         const data = new FormData()
@@ -238,39 +246,42 @@ function SendPopup({justiId_parameter, router, setShowPopup}){
 
                 <div className={style.radioContainerPopUp}>
                     <div className={style.radioPopUp}>
-                        <input type="radio" name="resolution" id="approve_partial" onClick={() => setForm("1")}/>
+                        <input type="radio" name="resolution" id="approve_partial" defaultChecked={responseState == 1} onClick={() => setForm("1")}/>
                         <label htmlFor="approve_partial">Aceptar con rebajo salarial parcial.</label>
                     </div>
 
                     <div className={style.radioPopUp}>
-                        <input type="radio" name="resolution" id="approve_total" onClick={() => setForm("2")}/>
+                        <input type="radio" name="resolution" id="approve_total" defaultChecked={responseState == 2} onClick={() => setForm("2")}/>
                         <label htmlFor="approve_total">Aceptar con rebajo salarial total.</label>
                     </div>
 
                     <div className={style.radioPopUp}>
-                        <input type="radio" name="resolution" id="approve" onClick={() => setForm("3")}/>
+                        <input type="radio" name="resolution" id="approve" defaultChecked={responseState == 3} onClick={() => setForm("3")}/>
                         <label htmlFor="approve">Aceptar sin rebajo salarial.</label>
                     </div>
 
                     <div className={style.radioPopUp}>
-                        <input type="radio" name="resolution" id="deny" onClick={() => setForm("4")}/>
+                        <input type="radio" name="resolution" id="deny" defaultChecked={responseState == 4} onClick={() => setForm("4")}/>
                         <label htmlFor="deny">Denegar lo solicitado.</label>
                     </div>
 
                     <div className={style.radioPopUp}>
-                        <input type="radio" name="resolution" id="convocatory" onClick={() => setForm("5")}/>
+                        <input type="radio" name="resolution" defaultChecked={responseState == 5} id="convocatory" onClick={() => setForm("5")}/>
                         <label htmlFor="convocatory">Acoger convocatoria.</label>
                     </div>
                 </div>
 
                 <div className={style.commentResponse}>
                     <label htmlFor="justification_response_comment">Comentario</label>
-                    <textarea name="justification_response_comment" id="justification_response_comment" value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
+                    <textarea name="justification_response_comment" id="justification_response_comment" value={comment}  onChange={(e) => setComment(e.target.value)}></textarea>
                 </div>
 
                 <div className={style.inputContainer}>
                     <input type="button" value="Cancelar" className={style.btnPopUp} onClick={() => setShowPopup(false)}/>
-                    <input type="button" value="Aceptar" className={style.btnPopUp} onClick={handleSubmit}/>
+                    {
+                        canManage && <input type="button" value="Aceptar" className={style.btnPopUp} onClick={handleSubmit}/>
+                    }
+                    
                     
                 </div>
                 
