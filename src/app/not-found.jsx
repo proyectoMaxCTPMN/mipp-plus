@@ -14,7 +14,7 @@ class SentryFrontendError extends Error {
 
 export default function NotFound() {
     useEffect(() => {
-        throw new SentryFrontendError(errorMessage);
+        throw new SentryFrontendError('No se pudo encontrar la página');
     }, [])
     return (
     <div className={style.container}>
