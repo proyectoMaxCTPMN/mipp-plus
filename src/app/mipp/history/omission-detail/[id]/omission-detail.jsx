@@ -82,10 +82,10 @@ export default function Omission_Formulary_Detail_Page({omissionf_parameter, ful
                             <div className={style.solicitudestatus}>
                                 <p>Estado:</p>
                                 <>
-                                    {omissionf_parameter.is_revised && (
+                                    {(omissionf_parameter.is_revised && (omissionf_parameter.omission_state === "Aprobado" || omissionf_parameter.omission_state=="Denegado")) && (
                                         <span style={{ color: '#616161'}}>Visto</span>
                                     )}
-                                    {omissionf_parameter.omission_state === "Pendiente" &&(
+                                    {(omissionf_parameter.omission_state === "Pendiente" && !omissionf_parameter.is_revised) &&(
                                         <span style={{ color: '#DEAA00'}}>Pendiente</span>
                                     )}
                                     {omissionf_parameter.omission_state === "Aprobado" &&(

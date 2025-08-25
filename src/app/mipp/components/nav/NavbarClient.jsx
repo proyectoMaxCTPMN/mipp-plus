@@ -303,10 +303,18 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                 <div 
                                 className={style.soli} 
                                 id='manage'
-                                onClick={(e) => {setPageIndex(e.currentTarget.dataset.childId); setOptionsArray(othersArray); setSolicitudeShow(true);}} 
-                                onMouseEnter={(e) => setHoverIndex(e.currentTarget.dataset.childId)} 
-                                onMouseLeave={() => {setHoverIndex(0);}}
+                                onClick={(e) => {setCurrentName("manage");setPageIndex(e.currentTarget.dataset.childId); setOptionsArray(othersArray); setSolicitudeShow(true);}} 
+                                onMouseEnter={() => setHoverIndex("manage")} 
+                                onMouseLeave={() => {setHoverIndex();}}
                                 >
+                                    <Image src={
+                                            currentName == "manage" || 
+                                            hoverIndex == "manage" 
+                                            ? 
+                                                "/menuIcons/manage_selected.svg" 
+                                            : 
+                                                "/menuIcons/manage.svg"
+                                            } height={20} width={20} alt='Logo' className={style.iconImage}/>
                                     <p className={style.subText}>Manejar</p>
                                 </div>
                             }
@@ -316,10 +324,18 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                 <div 
                                 className={style.soli} 
                                 id='create_account'
-                                onClick={(e) => {setPageIndex(e.currentTarget.dataset.childId); setSolicitudeShow(false); handleRedirect("/mipp/create_account");}} 
-                                onMouseEnter={(e) => setHoverIndex(e.currentTarget.dataset.childId)} 
-                                onMouseLeave={() => {setHoverIndex(0);}}
+                                onClick={(e) => {setCurrentName("create");setPageIndex(e.currentTarget.dataset.childId); setSolicitudeShow(false); handleRedirect("/mipp/create_account");}} 
+                                onMouseEnter={() => setHoverIndex("create")} 
+                                onMouseLeave={() => {setHoverIndex();}}
                                 >
+                                    <Image src={
+                                            currentName == "create" || 
+                                            hoverIndex == "create" 
+                                            ? 
+                                                "/menuIcons/User_plus_selected.svg" 
+                                            : 
+                                                "/menuIcons/User_plus.svg"
+                                            } height={20} width={20} alt='Logo' className={style.iconImage}/>
                                     <p className={style.subText}>Añadir cuenta</p>
                                 </div>
                             }
@@ -411,7 +427,10 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                 className={style.manage} 
                                 id='manage'
                                 onClick={() => {{setOptionsHistory(false); setOptionsSoli(false); setOptionsOthers(true);}}} 
-                                >
+                                >   
+                                    <Image
+                                        src={"/menuIcons/manage.svg"} height={20} width={20} alt='Logo' className={style.iconImage}
+                                    />
                                     <p className={style.subText}>Manejar</p>
                                 </div>
                             }
