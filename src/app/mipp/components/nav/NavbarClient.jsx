@@ -50,13 +50,13 @@ const historyArray = [
     {
         "id": 1,
         "text": "Justificaciones de omisión de marca",
-        "link": "/mipp/history/justify-history",
+        "link": "/mipp/history/omission-history",
         "icon": "/menuIcons/mobile/fingerprint.svg"
     },
     {
         "id": 2,
         "text": "Reportes de Infraestructura", 
-        "link": "/mipp/dashboard",
+        "link": "/mipp/history/infra-history",
         "icon": "/menuIcons/mobile/infra-broken.svg"
     },
 ]

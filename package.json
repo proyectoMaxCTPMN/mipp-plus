@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build && npm run sentry:sourcemaps",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mipp --project javascript-nextjs .next && sentry-cli sourcemaps upload --org mipp --project javascript-nextjs .next"
   },
   "dependencies": {
     "@heroui/react": "^2.8.2",
+    "@sentry/cli": "^2.52.0",
     "@sentry/nextjs": "^10.5.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.52.1",
