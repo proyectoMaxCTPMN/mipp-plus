@@ -12,6 +12,7 @@ import { getCurrentUser } from "../utils/auth";
 import { getUserRoles } from "../utils/userFetch";
 import { Merriweather_Sans, Karla, Martel_Sans } from 'next/font/google'
 import { usePathname } from "next/navigation";
+import { Providers } from "./providers";
 
 
 const merriweather_sans = Merriweather_Sans({
@@ -80,6 +81,8 @@ export default function MippLayout({children}) {
     }
 
     return (
+        <Providers>
+        
         <div className={`${merriweather_sans.variable} ${karla.variable} ${martel_sans.variable} `}>
             <Navbar userRoles_parameter={userRoles} defaultSelected={defaultSelected}/>
             <PopUpContainer />
@@ -90,5 +93,7 @@ export default function MippLayout({children}) {
                 {children}
             </Suspense>
         </div>
+
+        </Providers>
     );
 }

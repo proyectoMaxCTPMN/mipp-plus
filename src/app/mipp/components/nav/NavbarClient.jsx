@@ -204,10 +204,10 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
 
                         <div className={style.logo} style={solicitudeShow ? {width: "12dvw", placeContent: "start"} : {width: "5dvw", placeContent: "center"} }>
                             <Image 
-                                style={solicitudeShow ? {width: "9dvw", left: "30%"} : {width: "5dvw", left: "0"}}
+                                style={solicitudeShow ? {width: "9dvw", left: "30%", maxWidth:'none'} : {width: "5dvw", left: "0"}}
                                 src={solicitudeShow ? "/logo/logo-extended.svg" : "/logo/logo-short.svg"} 
-                                height={20} 
-                                width={20} 
+                                height={50} 
+                                width={50} 
                                 alt='Logo' 
                                 className={style.logoImage}
                                 unoptimized

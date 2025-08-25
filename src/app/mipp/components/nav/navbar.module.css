@@ -8,7 +8,7 @@
     position: fixed;
     left: 0;
     top:0;
-    z-index: 5;
+    z-index: 31;
     grid-template-areas:
     "logo"
     "options"
@@ -145,7 +145,7 @@
     top: 0;
     background-color: var(--primary);
     position: fixed;
-    z-index: 4;
+    z-index: 30;
     border-right: 1px solid #c4c4c4;
     grid-template-rows: repeat(8,1fr);
     grid-template-areas: 

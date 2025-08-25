@@ -22,195 +22,103 @@
     width: 100%;
     height: 100%;
 }
-.cardsContainer{
+.tabsContainer{
     width: 100%;
     height: 70%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 2em;
+    flex-direction: column;
 }
 
-.soliCard, .reportCard, .omiCard{
-    width: 28%;
-    height: 100%;
+.tabsContainer *{
+    font-size: 16px;
 }
 
-.soliContent, .justiContent, .reportContent, .omiContent{
-    width: 100%;
-    height: 93%;
-    border: 1px solid rgba(0, 0, 0, 0.33);
-}
-
-.soliFooter, .justiFooter, .reportFooter, .omiFooter{
-    width: 100%;
-    height: 7%;
+.tab[data-selected='true'] span{
     background-color: var(--primary);
-    border-radius: 0 0 10px 10px;
-    display: flex;
-    place-content: center;
-    place-items: center;
-    text-align: center;
-    gap: 1em;
-    cursor: pointer;
+    
+
 }
-.soliFooter:hover, .justiFooter:hover, .reportFooter:hover, .omiFooter:hover{
-    background-color: var(--primary-selected);
-} 
-.footerText{
-    font-size: 1.3dvw;
+
+.tab[data-selected='true'] div{
     color: #fff;
 }
-.informationcontainer{
-    border-bottom: 1px solid rgba(0, 0, 0, 0.33);
-    padding: 12px;
-    position: relative;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.information_upperpart{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    
-}
-.information_upperpart p, .information_upperpart span{
-    font-family: var(--font-karla),'Karla',sans-serif;
-    font-weight: bold;
-    font-size: 1rem;
-}
-.information_upperpart p{
-    color: var(--primary);
-    font-size: 1.2em;
-}
-.information_upperpart span{
-    margin-top: .2rem;
-    color: #000000;
+
+.cardsContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex-wrap: wrap;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
 }
 
-.information_lowerpart{
+.itemContainer{
+    flex-grow: 0;
+    width: 100%;
+    min-height: 270px;
+}
+
+.itemHeader{
+    background-color: var(--primary);
+    color: #fff;
     display: flex;
     justify-content: space-between;
 }
-.information_lowerpart p{
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-.clockcontainer{
-    display: flex;
-    gap: .25rem;
-    align-items: center;
-    height: auto;
-}
-.clockcontainer p{
-    color: #616161;
-    font-weight: 600;
-}
-.typeofomissioncontainer, .reportdetailcontainer{
-    font-weight: 600;
-    color: #616161;
-    font-size: 1.1rem;
-}
-/* #region Estilo del hover*/
-.hovercontainer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    background: var(--primary);
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.1em;
-    cursor: pointer;
-    z-index: 2;
-    opacity: 0;
-    pointer-events: none;
-    width: 0;
-    display: flex;                
-    align-items: center;          
-    justify-content: center; 
-    transition: 
-        opacity 0.15s,
-        width 0.3s cubic-bezier(.4,0,.2,1),
-        transform 0.3s cubic-bezier(.4,0,.2,1);
-    clip-path: polygon(40% 0, 100% 0, 100% 100%, 40% 100%, 0% 50%);
-}
-.hovercontainer:hover {
-    background: var(--primary-selected);
-}
-.hover_informationcontainer{
+
+.absence_info{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-left: 38%;
-}
-.informationcontainer:hover .hovercontainer {
-    opacity: 1;
-    pointer-events: auto;
-    width: 45%;
-}
-.hover_chevronicon{
-    width: 1.8rem;
-    height: auto;
-}
-/* #endregion */
-/* #region Historial vacio estilo*/
-.null_informationcontainer p{
-    color: #616161;
-    font-weight: bold;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    padding: 8px;
-}
-.nullicon{
-    width: 6rem;
-    height: auto;
-}
-/*#endregion*/
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 5px;
 
-@media (max-width: 1120px){
-    .soliCard, .reportCard, .omiCard{
-        width: 100%;
-        height: 100%;
-    }
+}´
+
+.clockChipContent{
+    display: flex;
+    flex-direction: row;
+    width: min-content;
+    gap: 5px;
 }
 
-@media (max-width: 900px){
-    .dashboardContainer{
-        place-content: start;
-        overflow-y: scroll;
-    }
+.clockcontainer{
+    display: flex;
+    gap: 5px;
+}
 
+.popFooter{
+    background-color: var(--primary);
+    color: #fff;
+    position: relative;
+    width: max-content;
+    left: 50%;
+    transform: translate(-50%);
+    border-radius: 10px;
+    height: 50%;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1150px) {
     .cardsContainer{
-        flex-direction: column;
-        height: auto;
+        grid-template-columns: repeat(2, 1fr);
     }
-
-    .soliCard, .reportCard, .omiCard{
-        width: 100%;
-        height: 44dvh;
-    }
-
-    .soliContent, .justiContent, .reportContent, .omiContent{
-        overflow: hidden scroll;
-        height: 85%;
-    }
-
-    .soliFooter, .justiFooter, .reportFooter, .omiFooter{
-        height: 15%;
-    }
-
-    .footerText{
-        font-size: 1.2rem;
-    }
+    
 }
 
-@media (max-width: 480px){
-    .container{
-        margin-left: 0;
-        padding-top: 70px;
-        width: 100dvw;
+@media screen and (max-width: 800px) {
+    .cardsContainer{
+        grid-template-columns: repeat(1, 1fr);
     }
+    .tabs > *{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
 }

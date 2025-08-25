@@ -35,8 +35,6 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
     return (<span className={style.notExpiredText}>{result.trim()}</span>);
 }
 
-
-    console.log(absencef_parameter)
     return (
         <div className={style.body}>
             <div className={style.container}>
