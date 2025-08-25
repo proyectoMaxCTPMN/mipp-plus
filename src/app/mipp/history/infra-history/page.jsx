@@ -10,7 +10,7 @@ export default async function Page(){
     return(
          <div className={style.container}>
             <div className={style.historyContainer}>
-                <h1 className={style.titleText}>Historial de Omisiones de Marca</h1>
+                <h1 className={style.titleText}>Historial de Reportes de Infraestructura</h1>
                 <SolicitudeHistory Reports_parameter={reports} />
             </div>
          </div>
