@@ -167,7 +167,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                                                         }
                                                         
                                                         {(justification.justification_response_state != 0) &&
-                                                            <p color='primary'>Gestionada</p>
+                                                            <Chip color='primary'>Gestionada</Chip>
                                                         }
                                                     </div>
                                                 }
