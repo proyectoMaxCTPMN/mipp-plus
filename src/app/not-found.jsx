@@ -5,16 +5,11 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import * as Sentry from '@sentry/nextjs';
 
-class SentryFrontendError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "SentryFrontendError";
-  }
-}
+
 
 export default function NotFound() {
     useEffect(() => {
-        throw new SentryFrontendError('No se pudo encontrar la página');
+        Sentry.captureMessage("No se pudo encontrar la página", "error");
     }, [])
     return (
     <div className={style.container}>
