@@ -11,8 +11,7 @@ export default async function Omission_Detail({params}){
     const position = await getUserPosition(userId)
     const title = await getUserTitle(userId)
     const omissionf = await getUserOmission(omissionid)
-    console.log(omissionf)
     return(
-        <Omission_Formulary_Detail_Page omissionf_parameter={omissionf}/>
+        <Omission_Formulary_Detail_Page omissionf_parameter={omissionf[0]} fullName_parameter={fullName} position_parameter={position} title_parameter={title}/>
     )
 }

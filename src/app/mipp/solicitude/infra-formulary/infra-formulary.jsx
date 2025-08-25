@@ -93,7 +93,7 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
                             <div className={style.building}>
                                 <label>Edificio</label>
                                 <select name="report_building" id="report_building" value={formData.report_building} onChange={handleInputChange}>
-                                    <option value="">Elija un edificio</option>
+                                    <option value="" disabled>Elija un edificio</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -109,7 +109,7 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
                             <div className={style.floor}>
                                 <label>Piso</label>
                                 <select name="report_floor" id="report_floor" value={formData.report_floor} onChange={handleInputChange}>
-                                    <option value="">Elija un piso</option>
+                                    <option value="" disabled>Elija un piso</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="n/a">N/A</option>

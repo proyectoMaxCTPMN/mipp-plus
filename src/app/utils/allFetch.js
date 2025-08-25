@@ -169,3 +169,19 @@ export async function getUserOmission(omiId) {
 
     return data
 }
+
+export async function getUserReport(infraId) {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('infraestructure_reports')
+    .select('')
+    .eq('id', infraId)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
