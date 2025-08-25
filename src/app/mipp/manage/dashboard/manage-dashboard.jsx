@@ -88,7 +88,7 @@ export default function ManageDashboard({allDocs_parameter}) {
                     <label htmlFor="order_by" className={style.selectLabel}>Ordenar por:</label>
                     <select name="order_by" id="order_by" className={style.selectInput} value={orderBy} onChange={(e) => setOrderBy(e.target.value)}>
                         <option value="descDate">Fecha (Reciente primero)</option>
-                        <option value="ascDate">Fecha (Viejo primero)</option>
+                        <option value="ascDate">Fecha (Antiguo primero)</option>
                         <option value="type">Tipo de Documento</option>
                     </select>
                     
@@ -216,6 +216,7 @@ export default function ManageDashboard({allDocs_parameter}) {
 
                                 <div className={style.docContent}>
                                     <h1 className={style.docH1}>{doc.data.user_id.first_name} {doc.data.user_id.last_name}</h1>
+                                    <h2 className={style.docType}>{new Date(doc.date).toLocaleDateString('es-CR')}</h2>
                                     <h2 className={style.docType}>{doc.label}</h2>
 
                                     <p>Estado: {
@@ -227,8 +228,6 @@ export default function ManageDashboard({allDocs_parameter}) {
                                         
                                     }
                                     </p>
-
-                                    <p>{new Date(doc.date).toLocaleDateString('es-CR')}</p>
 
                                 </div>
                                 
