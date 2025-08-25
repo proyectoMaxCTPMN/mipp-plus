@@ -211,7 +211,8 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                                 <div className={style.cardname}>{fullName_parameter.full_name}</div>
                                                 {
                                                     !showresolution &&
-                                                    <div className={style.previewcard} onClick={() => setJShowPopup(true)}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>}
+                                                    <div className={style.previewcard} onClick={() => setJShowPopup(true)}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>
+                                                }
                                             </div>
                                             <div className={style.cardcontainer}>
                                                 <Image src={'/Card-header.svg'} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
@@ -406,7 +407,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                             <div className={style.formulary_upperinformationcontainer}>
                                                 <div className={style.cardname}>{fullName_parameter.full_name}</div>
                                                 {
-                                                    (!showresolution && (absencef_parameter.is_justified && absencef_parameter != undefined)) &&
+                                                    (!showresolution && absencef_parameter.is_justified) &&
                                                     <div className={style.previewcard}><Image src={"/Search.svg"} width={20} height={20} alt='magnifying-glass-icon' className={style.searchicon}></Image></div>}
                                             </div>
                                                 <div className={style.cardcontainer}>

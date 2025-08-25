@@ -305,3 +305,4 @@ export default function RecentHistory({AllDocuments_parameter}){
     </div>
   );
 }
+
