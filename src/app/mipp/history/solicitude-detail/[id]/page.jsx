@@ -16,12 +16,12 @@ export default async function Page({params}){
     let justificationf = {}
     if (absencef[0] && absencef[0]?.justification_id != null){
         justificationf = await getUserJustify_request_id(absencef[0].id)
-        console.log(justificationf)
     }else{
         justificationf = await getUserJustification_id(userId, requestid)
     }
     
     const userInfo = await getUserInfo((absencef[0] || absencef[0]?.justification_id != null )? absencef[0].user_id : justificationf[0].user_id);
+    console.log(justificationf[0])
     return(
         <Solicitude_Detail userInfo_parameter={userInfo} fullName_parameter={fullName} absencef_parameter={absencef[0]} justificationf_parameter={justificationf[0]} title_parameter={title} position_parameter={position}/>
     )

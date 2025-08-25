@@ -287,7 +287,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                             currentName == "solicitude" || 
                                             hoverIndex == "solicitude" 
                                             ? 
-                                                "/menuIcons/file-medical-solid-full.svg" 
+                                                "/menuIcons/soli_selected.svg" 
                                             : 
                                                 "/menuIcons/soli_unselected.svg"
                                             } height={20} width={20} alt='Logo' className={style.iconImage}
@@ -303,11 +303,18 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                 <div 
                                 className={style.soli} 
                                 id='manage'
-                                onClick={(e) => {setPageIndex(e.currentTarget.dataset.childId); setOptionsArray(othersArray); setSolicitudeShow(true);}} 
-                                onMouseEnter={(e) => setHoverIndex(e.currentTarget.dataset.childId)} 
-                                onMouseLeave={() => {setHoverIndex(0);}}
+                                onClick={(e) => {setCurrentName("manage");setPageIndex(e.currentTarget.dataset.childId); setOptionsArray(othersArray); setSolicitudeShow(true);}} 
+                                onMouseEnter={() => setHoverIndex("manage")} 
+                                onMouseLeave={() => {setHoverIndex();}}
                                 >
-                                    <Image src={"/menuIcons/manage.svg"} height={20} width={20} alt='Logo' className={style.iconImage}/>
+                                    <Image src={
+                                            currentName == "manage" || 
+                                            hoverIndex == "manage" 
+                                            ? 
+                                                "/menuIcons/manage_selected.svg" 
+                                            : 
+                                                "/menuIcons/manage.svg"
+                                            } height={20} width={20} alt='Logo' className={style.iconImage}/>
                                     <p className={style.subText}>Manejar</p>
                                 </div>
                             }
