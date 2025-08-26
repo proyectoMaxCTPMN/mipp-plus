@@ -336,7 +336,7 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                                             <div style={{display: 'flex', gap: '1rem'}}>
                                                             <span>Comprobante o evidencia:</span>
                                                                 {
-                                                                    justificationf_parameter.attachment_url != null ?(
+                                                                    justificationf_parameter.attachment_url != 'null' ?(
                                                                         <Link href={justificationf_parameter.attachment_url} style={{width: '6rem', fontStyle:'italic', color: '#616161'}}>
                                                                             <div className={style.evidence_input}>
                                                                                 <p>Ver Archivo...</p>

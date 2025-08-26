@@ -13,7 +13,6 @@ import { getUserRoles } from "../utils/userFetch";
 import { Merriweather_Sans, Karla, Martel_Sans } from 'next/font/google'
 import { usePathname } from "next/navigation";
 import { Providers } from "./providers";
-import * as Sentry from '@sentry/nextjs';
 
 
 
@@ -71,11 +70,6 @@ export default function MippLayout({children}) {
             setUserRoles(roles);
         }
         fetchUserRoles();
-
-        import("@sentry/nextjs").then((lazyLoadedSentry) => {
-            Sentry.addIntegration(lazyLoadedSentry.replayIntegration());
-        });
-
         return
     }, [])
 

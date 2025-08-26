@@ -381,6 +381,8 @@
 .commentResponse textarea{
     font-size: 1rem;
     padding: 6px;
+    border: 1px solid #cacaca;
+    border-radius: 10px;
 }
 
 /*#endregion*/

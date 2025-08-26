@@ -104,7 +104,7 @@ export default function Login(){
                         <label htmlFor="remember" className={style.checkboxLabel}>Recuérdeme</label>
                     </div>
 
-                    <p>¿Olvido su contraseña?</p>
+                    <p>¿Olvidó su contraseña?</p>
                 </div>
 
                 <button type="button" className={style.loginButton} onClick={handleSubmit}>

@@ -1,5 +1,4 @@
 'use client'
-import Link from 'next/link'
 import style from './dashboard.module.css'
 import Image from 'next/image'
 import { formatDate } from '@/app/utils/formatDate';
@@ -37,7 +36,6 @@ function getTimeLeft(expired_date) {
 }
 
 export default function RecentHistory({AllDocuments_parameter}){
-    console.log(AllDocuments_parameter)
     const router = useRouter()
     return (
     <div className={style.tabsContainer}>
@@ -55,13 +53,13 @@ export default function RecentHistory({AllDocuments_parameter}){
                                     <CardHeader className={style.itemHeader}>
                                         <h1>{reasons[absence.reason]}</h1>
                                         {
-                                            absence.is_pending && <Chip color='warning' variant='bordered'>Pendiente</Chip>
+                                            absence.is_pending && <Chip color='warning' style={{color: '#fff'}}>Pendiente</Chip>
                                         }
                                         {
-                                            absence.is_approved && <Chip color='success' variant='bordered'>Aprobado</Chip>
+                                            absence.is_approved && <Chip color='success' style={{color: '#fff'}}>Aprobado</Chip>
                                         }
                                         {
-                                            absence.is_denied && <Chip color='danger' variant='bordered'>Denegado</Chip>
+                                            absence.is_denied && <Chip color='danger' style={{color: '#fff'}}>Denegado</Chip>
                                         }
                                     </CardHeader>
                                     <Divider />
@@ -128,21 +126,21 @@ export default function RecentHistory({AllDocuments_parameter}){
                                                     {
                                                         (justification.justification_response_state == 0 || justification.justification_response_state == 5) && 
                                                         <>
-                                                            <Chip color='warning' variant='bordered'>{statuses[justification.justification_response_state]}</Chip>
+                                                            <Chip color='warning' style={{color: '#fff'}}>{statuses[justification.justification_response_state]}</Chip>
                                                         </>
                                                     }
 
                                                     {
                                                         ([1,2,3].includes(justification.justification_response_state)) && 
                                                         <>
-                                                            <Chip color='success' variant='bordered'>{statuses[justification.justification_response_state]}</Chip>
+                                                            <Chip color='success' style={{color: '#fff'}}>{statuses[justification.justification_response_state]}</Chip>
                                                         </>
                                                     }
 
                                                     {
                                                         (justification.justification_response_state == 4) && 
                                                         <>
-                                                            <p color='danger' variant='bordered'>{statuses[justification.justification_response_state]}</p>
+                                                            <p color='danger' style={{color: '#fff'}}>{statuses[justification.justification_response_state]}</p>
                                                         </>
                                                     }
                                     </CardHeader>
@@ -197,7 +195,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                                 <Card  className={style.itemContainer} isPressable>
                                     <CardHeader className={style.itemHeader}>
                                         <h1>Razón: {omission.omission_reason}</h1>
-                                        <Chip color='default'>{typeofomission[omission.omission_type]}</Chip>
+                                        <Chip color='default' style={{color: '#fff'}}>{typeofomission[omission.omission_type]}</Chip>
                                     </CardHeader>
                                     <Divider />
                                     <CardBody className={style.itemBody}>
@@ -258,9 +256,9 @@ export default function RecentHistory({AllDocuments_parameter}){
 
                                         {
                                             report.is_revised ?
-                                                <Chip color='success' variant='bordered'>Revisado</Chip>
+                                                <Chip color='success' style={{color: '#fff'}}>Revisado</Chip>
                                             :
-                                                <Chip color='warning' variant='bordered'>Sin Revisar</Chip>
+                                                <Chip color='warning' style={{color: '#fff'}}>Sin Revisar</Chip>
                                         }
                                         
                                     </CardHeader>
