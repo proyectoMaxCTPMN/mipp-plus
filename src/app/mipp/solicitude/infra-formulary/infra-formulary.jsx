@@ -77,22 +77,22 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
                     <form className={style.form} onSubmit={handleSubmit}>
                         <div className={style.locationcontainer}>
                             <label>
-                                <input type="radio" name="report_place" onClick={(e) => changeRadio(e, 1)}/>
+                                <input type="radio" name="report_place" onClick={(e) => changeRadio(e, 1)} required/>
                                 Aula
                             </label>
                             <label>
-                                <input type="radio" name="report_place" onClick={(e) => changeRadio(e, 2)}/>
+                                <input type="radio" name="report_place" onClick={(e) => changeRadio(e, 2)} required/>
                                 Pasillo
                             </label>
                             <label>
-                                <input type="radio" name="report_place" onClick={(e) => changeRadio(e, 3)}/>
+                                <input type="radio" name="report_place" onClick={(e) => changeRadio(e, 3)} required/>
                                 Otro
                             </label>
                         </div>
                         <div className={style.exactlocationcontainer}>
                             <div className={style.building}>
                                 <label>Edificio</label>
-                                <select name="report_building" id="report_building" value={formData.report_building} onChange={handleInputChange}>
+                                <select name="report_building" id="report_building" value={formData.report_building} onChange={handleInputChange} required>
                                     <option value="" disabled>Elija un edificio</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -108,7 +108,7 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
                             </div>
                             <div className={style.floor}>
                                 <label>Piso</label>
-                                <select name="report_floor" id="report_floor" value={formData.report_floor} onChange={handleInputChange}>
+                                <select name="report_floor" id="report_floor" value={formData.report_floor} onChange={handleInputChange} required>
                                     <option value="" disabled>Elija un piso</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -117,7 +117,7 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
                             </div>
                             <div className={style.classroom}>
                                 <label>Aula</label>
-                                <input type="number" name="report_classroom" id="report_classroom" min="1" max="36" value={formData.report_classroom} onChange={handleInputChange}/>
+                                <input type="number" name="report_classroom" id="report_classroom" min="1" max="36" value={formData.report_classroom} onChange={handleInputChange} required/>
                             </div>
                         </div>
                         <div className={style.reportcontainer}>

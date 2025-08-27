@@ -101,6 +101,13 @@ export async function POST(request) {
       evidence_file_url: evidence_file_url
     }
 
+    
+    for (let i = 0; i < toSend.length; i++) {
+        const element = array[index];
+        
+    }
+
+
     console.log(toSend)
 
     const { data, error } = await supabase

@@ -315,7 +315,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                             : 
                                                 "/menuIcons/manage.svg"
                                             } height={20} width={20} alt='Logo' className={style.iconImage}/>
-                                    <p className={style.subText}>Manejar</p>
+                                    <p className={style.subText}>Gestionar</p>
                                 </div>
                             }
 

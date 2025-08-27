@@ -23,8 +23,8 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
         absence_date: '',
         is_whole_day: false,
         is_absence: '',
-        from_hour: '',
-        to_hour: '',
+        from_hour: '7:00',
+        to_hour: '7:40',
         leaving_at: '',
         absent_time: '',
         reason: '',
@@ -117,18 +117,18 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                                 <label>PERMISO PARA AUSENTARSE EN LA FECHA:</label>
                                 
                                 <span onClick={handleCalendarClick} style={{position: 'relative', bottom: '0.4em'}}>
-                                    <input type="date" name="absence_date" defaultValue={fecha} ref={inputRef} min={fecha} onChange={handleInputChange}/>
+                                    <input type="date" name="absence_date" defaultValue={fecha} ref={inputRef} min={fecha} onChange={handleInputChange} required/>
                                     <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar} onChange={handleInputChange} />
                                 </span>
                             </div>
 
                             <div className={style.inputradio_container}>
                                 <label>
-                                    <input type="radio" name="is_whole_day" onChange={(e) => changeRadio(e, true)}/>
+                                    <input type="radio" name="is_whole_day" onChange={(e) => changeRadio(e, true)} required/>
                                     Jornada Laboral Completa
                                 </label>
                                 <label>
-                                    <input type="radio" name="is_whole_day" onChange={(e) => changeRadio(e, false)}/>
+                                    <input type="radio" name="is_whole_day" onChange={(e) => changeRadio(e, false)} required/>
                                     Media Jornada
                                 </label>
                             </div>
@@ -137,11 +137,11 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                         <div className={style.worktimeabsence_container}>
                             <p>Solicito permiso para:</p>
                             <label>
-                                <input type="radio" name="is_absence" onChange={(e) => changeRadio(e, true)}/>
+                                <input type="radio" name="is_absence" onChange={(e) => changeRadio(e, true)} required/>
                                 Ausencia
                             </label>
                             <label>
-                                <input type="radio" name="is_absence" onChange={(e) => changeRadio(e, false)}/>
+                                <input type="radio" name="is_absence" onChange={(e) => changeRadio(e, false)} required/>
                                 Tardía
                             </label>
                         </div>
@@ -149,8 +149,8 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
 
                             <span>Hora: Desde las</span>
 
-                            <select name="from_hour" id="from_hour" value={formData.from_hour} onChange={handleInputChange}>
-                                <option value="">7:00</option>
+                            <select name="from_hour" id="from_hour" value={formData.from_hour} onChange={handleInputChange} required>
+                                <option value="7:00">7:00</option>
                                 <option value="7:40">7:40</option>
                                 <option value="8:20">8:20</option>
                                 <option value="9:00">9:00</option>
@@ -170,8 +170,8 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
 
                             <span>hasta las</span>
 
-                            <select name="to_hour" id="to_hour" value={formData.to_hour} onChange={handleInputChange}>
-                                <option value="">7:40</option>
+                            <select name="to_hour" id="to_hour" value={formData.to_hour} onChange={handleInputChange} required>
+                                <option value="7:40">7:40</option>
                                 <option value="8:20">8:20</option>
                                 <option value="9:00">9:00</option>
                                 <option value="9:20">9:20</option>
@@ -192,7 +192,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                                 formData.is_absence &&(
                                     <div className={style.leavinghour_container}>
                                         <p>Saliendo del centro educativo a las</p>
-                                        <input type="text" name="leaving_at" value={formData.leaving_at} onChange={handleInputChange}/>
+                                        <input type="text" name="leaving_at" value={formData.leaving_at} onChange={handleInputChange} required/>
                                         
                                     </div>
                                 )
@@ -203,19 +203,19 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                             <span>Se ausentará: </span>
                             {(title_parameter.title_id === 2 && position_parameter === "Docente Academico") ?(
                                 <>
-                                    <input type="text" name="absent_time" id="absent_time" className={style.absencesinput} value={formData.absent_time} onChange={handleInputChange}/>
+                                    <input type="number" name="absent_time" id="absent_time" className={style.absencesinput} value={formData.absent_time} onChange={handleInputChange} required/>
                                     <span>Lecciones</span>
                                 </>
                             ):(
                                 <> 
-                                    <input type="text" name="absent_time" id="absent_time" className={style.absencesinput} value={formData.absent_time} onChange={handleInputChange}/>
+                                    <input type="number" name="absent_time" id="absent_time" className={style.absencesinput} value={formData.absent_time} onChange={handleInputChange} required/>
                                     <span>Cantidad Horas</span>
                                 </>
                             )}
                         </div>
                         <div className={style.reasoncontainer}>
                             <span>Motivo:</span>
-                            <select name="reason" id="reason" value={formData.reason} onChange={(e) => {handleInputChange(e); changeRadio({target: {name: "assembly_type"}}, null)}}>
+                            <select name="reason" id="reason" value={formData.reason} onChange={(e) => {handleInputChange(e); changeRadio({target: {name: "assembly_type"}}, null)}} required>
                                 <option value="">Elija el motivo</option>
                                 <option value="1">Cita Médica</option>
                                 <option value="2">Convocatoria asamblea</option>
@@ -225,19 +225,19 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                                 <div className={style.typeconvocatorycontainer}>
                                 <span>Tipo de Convocatoria:</span>
                                 <label>
-                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 1)}/>
+                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 1)} required/>
                                     Regional
                                 </label>
                                 <label>
-                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 2)}/>
+                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 2)} required/>
                                     Nacional
                                 </label>
                                 <label>
-                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 3)}/>
+                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 3)} required/>
                                     Circuital
                                 </label>
                                 <label>
-                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 4)}/>
+                                    <input type="radio" name="assembly_type" onChange={(e) => changeRadio(e, 4)} required/>
                                     Sindical
                                 </label>
                             </div>
@@ -246,7 +246,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                         {formData.reason == "3" &&(
                             <div className={style.explanationcontainer}>
                                 <span>Explique:</span>  
-                                <textarea name="personal_reason" id="personal_reason" className={style.explanation} onChange={handleInputChange}></textarea>
+                                <textarea name="personal_reason" id="personal_reason" className={style.explanation} onChange={handleInputChange} required></textarea>
                             </div>
                         )}
                         <div className={style.evidence}>

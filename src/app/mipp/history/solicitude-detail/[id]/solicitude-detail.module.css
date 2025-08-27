@@ -353,6 +353,8 @@
 .commentResponse textarea{
     font-size: 1rem;
     padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
 .buttonscontainer2{
     margin-top: 1.3rem;
