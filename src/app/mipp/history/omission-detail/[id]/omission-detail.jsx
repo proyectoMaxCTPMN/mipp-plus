@@ -22,10 +22,10 @@ export default function Omission_Formulary_Detail_Page({omissionf_parameter, ful
                         <form className={style.form}>
                             <div className={style.inputdatecontainer}>
                                     <label>Fecha de la omisión:</label>
-                                    <span>
+                                    <div style={{display:'flex'}}>
                                         <input type="date" name="omission_date" id="omission_date" defaultValue={omissionf_parameter.omission_date} disabled style={{color: '#616161'}}/>
                                         <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image>
-                                    </span>
+                                    </div>
                             </div>
                             <div className={style.reasonofomissioncontainer}>
                                 <label>

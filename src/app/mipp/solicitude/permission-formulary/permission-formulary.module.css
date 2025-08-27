@@ -96,7 +96,7 @@
 .inputdate_calendar{
     position: absolute;
     right: 0.4rem;
-    bottom: .5rem;
+    bottom: 0.25em;
 }
 .inputradio_container, .worktimeabsence_container{
     display: flex;

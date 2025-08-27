@@ -14,7 +14,7 @@ export async function getAllAbsence() {
 
     let { data: data, error } = await supabase
     .from('absence_requests')
-    .select('')
+    .select('*, user_id(id, first_name, last_name, second_last_name)')
 
     if (error) {
       console.error("No se pudo obtener el registro" + JSON.stringify(error))
@@ -23,7 +23,20 @@ export async function getAllAbsence() {
 
     return data
 }
+export async function getAllJustification() {
+    const supabase = await createSupabase()
 
+    let { data: data, error } = await supabase
+    .from('justifications')
+    .select('*, user_id(id, first_name, last_name, second_last_name)')
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
 export async function getPositions() {
     const supabase = await createSupabase()
 

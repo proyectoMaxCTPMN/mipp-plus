@@ -78,7 +78,12 @@
     padding-right: 2.5rem;
     width: auto;
 }
+.inputdatecontainer{
+    display: flex;
+}
 .inputdatecontainer label{
+    position: relative;
+    top: 0.4em;
     font-weight: 600;
     margin-right: .5rem;
 }
@@ -99,8 +104,7 @@
 }
 .inputdate_calendar{
     position: relative;
-    top: .3rem;
-    right: 1.5em;
+    right: 1.8em;
 }
 
 .timeContainer{

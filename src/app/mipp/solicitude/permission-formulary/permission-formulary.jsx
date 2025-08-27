@@ -116,7 +116,7 @@ export default function Permission_Formulary_Page({userId_parameter, fullName_pa
                             <div className={style.inputdate_container}>
                                 <label>PERMISO PARA AUSENTARSE EN LA FECHA:</label>
                                 
-                                <span onClick={handleCalendarClick}>
+                                <span onClick={handleCalendarClick} style={{position: 'relative', bottom: '0.4em'}}>
                                     <input type="date" name="absence_date" defaultValue={fecha} ref={inputRef} min={fecha} onChange={handleInputChange} required/>
                                     <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar} onChange={handleInputChange} />
                                 </span>
