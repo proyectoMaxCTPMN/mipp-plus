@@ -196,7 +196,7 @@ export default function SolicitudesHistory({absencesf_parameter, justificationsf
                                                     </div>
 
                                                     <div className={style.state_justi}>
-                                                        <p className={style.pendingText} style={!doc.is_pending? {color: '#1D2958'}: doc.is_revised ? {color: '#616161'}:{color: 'rgba(148, 2, 2, 0.7)'}}>{!doc.is_pending ? "Gestionado": doc.is_revised ? "Visto":"Pendiente"}</p>
+                                                        <p className={style.pendingText} style={doc.justification_response_state != 0 ? {color: '#1D2958'}: doc.is_revised ? {color: '#616161'}:{color: 'rgba(148, 2, 2, 0.7)'}}>{doc.justification_response_state != 0 ? "Gestionado": doc.is_revised ? "Visto":"Pendiente"}</p>
                                                     </div>
 
                                                     <div className={style.goTo_justi}>
