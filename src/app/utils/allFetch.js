@@ -37,6 +37,20 @@ export async function getAllJustification() {
 
     return data
 }
+export async function getAllOmission() {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('mark_omissions')
+    .select('*, user_id(id, first_name, last_name, second_last_name)')
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
 export async function getPositions() {
     const supabase = await createSupabase()
 

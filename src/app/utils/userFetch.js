@@ -317,7 +317,7 @@ export async function getUserInfo(userId) {
 
   const { data, error } = await supabase
   .from('users')
-  .select("id, first_name, last_name, second_last_name, has_ownership, positions(position)")
+  .select("id, first_name, last_name, second_last_name, has_ownership, positions(position), titles(title)")
   .eq("id", userId)
 
   if (error) {
