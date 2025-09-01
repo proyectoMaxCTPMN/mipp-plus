@@ -11,7 +11,7 @@
 .container{
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
     padding: 2rem;
 }
 .cardcontainer{
@@ -389,11 +389,13 @@
     bottom: .1rem;
 }
 /*#endregion*/
+
+
 /*#region PopUp*/
 
 .popUpContainer{
     width: 100dvw;
-    height: 100dvh;
+    min-height: 100dvh;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.226);
     left: 0;
@@ -404,34 +406,11 @@
     place-content: center;
     place-items: center;
 }
-.popUpExit{
-    background-color: var(--primary);
-    width: max-content;
-    padding: .5rem;
-    border-radius: 6px;
-    position: relative;
-    top: 1.8rem;
-    left: 39.8%;
-    cursor: pointer;
-    height: 3rem;
-}
-.popUpExit:hover{
-    background-color: var(--primary-selected);
-}
-.Exit_icon{
-    width: 2rem;
-    height: auto;
-}
+
 .popUpCard{
     max-width: 80%;
-    background-color: #fff;
     width: fit-content;
     height: auto;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
-    -webkit-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
-    -moz-box-shadow: 0 6px 5px 0px rgba(0,0,0,0.33);
     display: flex;
     flex-direction: column;
     padding: 40px;

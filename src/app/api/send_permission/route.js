@@ -86,7 +86,7 @@ export async function POST(request) {
     }
 
     const toSend = { 
-      user_id: userId,
+      user_id: parseInt(userId),
       request_date: request_date,
       absence_date: absence_date,
       is_whole_day: is_whole_day,
@@ -94,10 +94,10 @@ export async function POST(request) {
       from_hour: from_hour == '' ? "7:00" : from_hour,
       to_hour: to_hour == '' ? "7:40" : to_hour,
       leaving_at: leaving_at == '' ? null:leaving_at,
-      absent_time: absent_time,
-      reason: reason,
-      assembly_type: assembly_type == 'null' ? null : assembly_type,
-      personal_reason: personal_reason == 'null' ? null : personal_reason,
+      absent_time: parseInt(absent_time),
+      reason: parseInt(reason),
+      assembly_type: assembly_type == '' ? null : assembly_type,
+      personal_reason: personal_reason == '' ? null : personal_reason,
       evidence_file_url: evidence_file_url
     }
 

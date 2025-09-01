@@ -1,4 +1,4 @@
-import { getAbsenceById } from '@/app/utils/allFetch';
+import { getAbsenceById, updateRevised } from '@/app/utils/allFetch';
 import Permission_Formulary_Page from './permission-formulary'
 import { getCurrentUser } from '@/app/utils/auth'
 import { getUserInfo, getUserPosition, getUserRoles, getUserTitle } from '@/app/utils/userFetch'
@@ -12,6 +12,7 @@ export default async function Page({params}){
     const title = await getUserPosition(userId)
     const position = await getUserTitle(userId)
     const roles = await getUserRoles(userId);
+    
     
     return(
         <>

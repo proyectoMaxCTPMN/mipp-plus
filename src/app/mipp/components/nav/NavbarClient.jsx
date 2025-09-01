@@ -70,8 +70,14 @@ const othersArray = [
 
     },
     {
+        "id": 0,
+        "text": "Solicitudes, justificaciones de ausencias y tardías", 
+        "link": "/mipp/manage/solicitudes",
+        "icon": "/menuIcons/mobile/user-clock.svg"
+    },
+    {
         "id": 1,
-        "text": "Justificaciones de omisión de marca",
+        "text": "Omisiones de marca",
         "link": "/mipp/manage/omissions",
         "icon": "/menuIcons/mobile/fingerprint.svg"
     },
@@ -81,12 +87,8 @@ const othersArray = [
         "link": "/mipp/manage/infra",
         "icon": "/menuIcons/mobile/infra-broken.svg"
     },
-    {
-        "id": 0,
-        "text": "Solicitudes, justificaciones de ausencias y tardías", 
-        "link": "/mipp/manage/solicitudes",
-        "icon": "/menuIcons/mobile/user-clock.svg"
-    },
+
+
 ]
 
 

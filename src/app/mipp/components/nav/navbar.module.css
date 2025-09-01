@@ -185,7 +185,8 @@
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.288);
     transition: all 0.2s ease-in-out;
-    font-size: 0.91dvw;
+    font-size: 0.81dvw;
+    padding: 10px;
         &:hover{
             cursor: pointer;
             background-color: var(--primary-selected);

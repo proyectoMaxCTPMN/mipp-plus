@@ -49,6 +49,7 @@ export async function POST(request) {
     let evidence_file_url = null;
 
     if (changed_input) {
+        console.log(new_attachment.type)
         const allowedTypes = [
         "application/pdf",
         "image/jpeg",
@@ -143,8 +144,6 @@ export async function POST(request) {
         evidence_file_url = publicUrl + "?download"
     }
 
-     
-
     const toSend = { 
       user_id: userId,
       justification_date: justification_date,
@@ -179,7 +178,6 @@ export async function POST(request) {
         return NextResponse.json({msg: "Error Sending"}, {status: 500});
 
     }else{
-        console.log("entro bien")
         if (request_id != 'null') {
             console.log('entro a request_id')
             const absenceResponse = await supabase

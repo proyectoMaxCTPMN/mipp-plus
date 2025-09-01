@@ -7,7 +7,7 @@ import FormTemplate from '@/app/mipp/components/forms/FormTemplate';
 import OmissionFormDetail from '@/app/mipp/components/forms/omission/detail/OmissionFormDetail';
 
 export default function Omission_Formulary_Detail_Page({omissionf_parameter, fullName_parameter, position_parameter, title_parameter}) {
-    console.log(omissionf_parameter)
+    console.log(position_parameter)
     
     return(
         <div className={style.body}>

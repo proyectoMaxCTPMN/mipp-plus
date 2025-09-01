@@ -14,10 +14,11 @@ export async function POST(request) {
     const entry_time = formData.get('entry_time')
     const exit_time = formData.get('exit_time')
     const omission_type = formData.get('omission_type')
+    console.log(omission_date)
 
     const toSend = { 
         user_id: parseInt(userId),
-        omission_date: new Date(omission_date).toISOString().split('T')[0],
+        omission_date: omission_date,
         omission_reason,
         entry_time,
         exit_time,

@@ -1,16 +1,16 @@
-import style from './omissions.module.css'
-import OmissionsHistory from './omissions'
-import { getAllOmission } from '@/app/utils/allFetch'
+
+import style from './soliHistory.module.css'
+import SolicitudeHistory from './solicitude-history';
+import { getAllOmissions } from '@/app/utils/allFetch';
 
 export default async function Page(){
-    const omissionsf = await getAllOmission()
-    console.log(omissionsf)
+    const omissions = await getAllOmissions()
     return(
-        <div className={style.container}>
+         <div className={style.container}>
             <div className={style.historyContainer}>
-                <h1 className={style.titleText}>Historial de Justificaciones de Omisión de Marca</h1>
-                <OmissionsHistory omissionsf_parameter = {omissionsf}/>
+                <h1 className={style.titleText}>Historial de Omisiones de Marca</h1>
+                <SolicitudeHistory Omissions_parameter={omissions} />
             </div>
-        </div>
+         </div>
     )
 }
