@@ -287,7 +287,7 @@
 .popUpContainer{
     width: 100dvw;
     height: 100dvh;
-    position: absolute;
+    position: fixed;
     background-color: rgba(0, 0, 0, 0.226);
     left: 0;
     top: 0;

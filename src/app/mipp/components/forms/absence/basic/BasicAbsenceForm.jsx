@@ -131,7 +131,7 @@ export default function BasicAbsenceForm({title_parameter, userId_parameter}){
         const day = e.day.toString().padStart(2, '0')
         const month = e.month.toString().padStart(2, '0')
         const year = e.year.toString()
-        setFormData((prev) => ({...prev, absence_date: `${day}-${month}-${year}`}))
+        setFormData((prev) => ({...prev, absence_date: `${month}-${day}-${year}`}))
         setFecha(e)
     }
 
@@ -140,7 +140,7 @@ export default function BasicAbsenceForm({title_parameter, userId_parameter}){
 
         const month = fecha.month.toString().padStart(2, '0')
         const year = fecha.year.toString()
-        setFormData((prev) => ({...prev, absence_date: `${day}-${month}-${year}`}))
+        setFormData((prev) => ({...prev, absence_date: `${month}-${day}-${year}`}))
     }, [])
 
     return(

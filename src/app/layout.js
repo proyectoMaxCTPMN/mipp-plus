@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="es" suppressHydrationWarning>
       <body>
         
-          <ThemeProvider attribute={'class'}>
+          <ThemeProvider attribute={'class'} defaultTheme="light">
             {children}
             <ToastContainer position="bottom-right" />
           </ThemeProvider>

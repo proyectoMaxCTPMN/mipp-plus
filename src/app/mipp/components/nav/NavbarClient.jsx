@@ -84,7 +84,7 @@ const othersArray = [
     {
         "id": 2,
         "text": "Reportes de Infraestructura", 
-        "link": "/mipp/manage/infra",
+        "link": "/mipp/manage/infras",
         "icon": "/menuIcons/mobile/infra-broken.svg"
     },
 

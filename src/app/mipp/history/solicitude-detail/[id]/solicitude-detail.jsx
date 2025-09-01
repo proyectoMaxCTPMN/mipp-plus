@@ -112,11 +112,11 @@ export default function Solicitude_Detail({fullName_parameter, absencef_paramete
                                                 />
                                                 
                                                 {
-                                                    justificationf_parameter.justification_comment != '' &&
+                                                    justificationf_parameter.justification_response_comment != '' &&
 
                                                     <Accordion variant='shadow' className='mt-3 '>
                                                         <AccordionItem key="1" className='justify-center' aria-label="Comment" title="Comentario del superior" startContent={<Chip color='danger' className='relative bottom-[5px]'>Importante!</Chip>}>
-                                                            {justificationf_parameter.justification_comment}
+                                                            {justificationf_parameter.justification_response_comment}
                                                         </AccordionItem>
                                                     </Accordion>
                                                 }

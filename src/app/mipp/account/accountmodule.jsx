@@ -9,26 +9,7 @@ import {
 } from "@heroui/card";
 
 
-export default function Accountpage({userId_parameter, allInfo_parameter, titles_parameter, positions_parameter}){
 
-
-    return(
-        <div className={style.container}>
-            <Card className={style.headerContainer}>
-                <CardBody>
-                    <p>hola</p>
-                </CardBody>
-            </Card>
-
-            <Card className={style.bodyContainer}>
-                
-            </Card>
-
-        </div>
-    )
-}
-
-/*
 
 export default function Accountpage({userId_parameter, allInfo_parameter, titles_parameter, positions_parameter}){
     const router = useRouter()
@@ -38,6 +19,20 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
     const [showNew, setShowNew] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [formData, setFormData] = useState(allInfo_parameter);
+    const [passwordForm, setPasswordForm] = useState({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+
+    })
+
+    const handleInputPassword = (event) => {
+        const { name, value, type, checked } = event.target;
+        setPasswordForm(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    }
 
     const handleInputChange = (event) => {
         const { name, value, type, checked } = event.target;
@@ -65,6 +60,25 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
         const response = await fetch(`/api/updateAccount`, {
             method: "POST",
             body: JSON.stringify({userID: userId_parameter, formData: formData})
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+            toast.success("Datos actualizados exitosamente...!")
+            router.refresh()
+        }else{
+            toast.error("Hubo un error al actualizar los datos")
+            console.error(data)
+            
+        }
+    }
+
+    const handlePasswordChange = async (e) => {
+        e.preventDefault();
+        const response = await fetch(`/api/changePassword`, {
+            method: "POST",
+            body: JSON.stringify({userID: userId_parameter, passwordForm: passwordForm})
         })
 
         const data = await response.json()
@@ -163,11 +177,11 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
                 </button>
                 <h1>Mi perfil</h1>
                 <h2 className={style.changepasswordtitle}>Cambio de Contraseña</h2>
-                <form>
+                <form onSubmit={handlePasswordChange}>
                     <div className={style.currentpasscontainer}>
                         <label htmlFor='currentPassword'>Contraseña Actual</label>
                         <div className={style.passwordinputcontainer}>
-                            <input id='currentPassword' name='currentPassword' type={showCurrent ? "text" : "password"}/>
+                            <input id='currentPassword' name='currentPassword' type={showCurrent ? "text" : "password"} value={passwordForm.currentPassword} onChange={handleInputPassword}/>
                             <span className={style.passwordicon} style={{cursor: "pointer"}} onClick={() => setShowCurrent(v => !v)}> 
                                 <img src={showCurrent ? "/eye-icon-original.svg" : "/eye-off-icon-original.svg"} alt={showCurrent ? "Ocultar" : "Mostrar"}/>
                             </span>
@@ -176,7 +190,7 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
                     <div className={style.newpasscontainer}>
                         <label htmlFor='newPassword'>Nueva Contraseña</label>
                         <div className={style.passwordinputcontainer}>
-                            <input id='newPassword' name='newPassword' type={showNew ? "text" : "password"}/>
+                            <input id='newPassword' name='newPassword' type={showNew ? "text" : "password"} value={passwordForm.newPassword} onChange={handleInputPassword}/>
                             <span className={style.passwordicon} style={{cursor: "pointer"}} onClick={() => setShowNew(v => !v)}>
                                 <img src={showNew ? "/eye-icon-original.svg" : "/eye-off-icon-original.svg"} alt={showNew ? "Ocultar" : "Mostrar"} />
                             </span>
@@ -195,7 +209,7 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
                     <div className={style.confirmpasscontainer}>
                         <label htmlFor='confirmPassword'>Confirmar Contraseña</label>
                         <div className={style.passwordinputcontainer}>
-                            <input id='confirmPassword' name='confirmPassword' type={showConfirm ? "text" : "password"}/>
+                            <input id='confirmPassword' name='confirmPassword' type={showConfirm ? "text" : "password"} value={passwordForm.confirmPassword} onChange={handleInputPassword}/>
                             <span className={style.passwordicon} style={{cursor: "pointer"}} onClick={() => setShowConfirm(v => !v)}> 
                                 <img src={showConfirm ? "/eye-icon-original.svg" : "/eye-off-icon-original.svg"} alt={showConfirm ? "Ocultar" : "Mostrar"}/>
                             </span>
@@ -210,4 +224,3 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
     )
 }
 
-*/

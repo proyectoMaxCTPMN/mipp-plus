@@ -36,8 +36,9 @@ export default function BasicJustiForm({
 }){
 
     const router = useRouter();
+    console.log(absenceData_parameter)
 
-    const [fecha, setFecha] = useState(parseDate(absenceData_parameter.request_date));
+    const [fecha, setFecha] = useState(parseDate(absenceData_parameter.absence_date));
     const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         userId: userId_parameter,
@@ -97,13 +98,6 @@ export default function BasicJustiForm({
         setInputName(e.target.value)
     }
     
-    const handleDateChange = (e) => {
-        const day = e.day.toString().padStart(2, '0')
-        const month = e.month.toString().padStart(2, '0')
-        const year = e.year.toString()
-        setFormData((prev) => ({...prev, absence_date: `${day}-${month}-${year}`}))
-        setFecha(e)
-    }
     
     useEffect(()=> {
         const day = fecha.day.toString().padStart(2, '0')
@@ -131,33 +125,34 @@ export default function BasicJustiForm({
                                 minValue={fecha}
                                 id="absence_date"
                                 name="absence_date"
-                                onChange={handleDateChange}
+                                isDisabled
+
                             />
                         </I18nProvider>
                     </div>
 
                     <div className={style.justify_container}>
-                        <Input label="Justifico:" labelPlacement="outside-left" variant="flat" value={formData.is_absence ? 'Ausencia' : 'Tardía'} disabled />
+                        <Input label="Justifico:" labelPlacement="outside-left" variant="flat" value={formData.is_absence ? 'Ausencia' : 'Tardía'} isDisabled />
                     </div>
 
                 </div>
 
-                <Input label="Tipo:" labelPlacement="outside-left" variant="flat" value={formData.is_whole_day ? 'Jornada Lab. Completa' : 'Media Jornada Lab.'} disabled />
+                <Input label="Tipo:" labelPlacement="outside-left" variant="flat" value={formData.is_whole_day ? 'Jornada Lab. Completa' : 'Media Jornada Lab.'} isDisabled />
 
 
 
                 <div className={style.absencescontainer}>
                     {(title_parameter.title_id === 2 && position_parameter === "Docente Academico") ?(
-                        <Input label="Cantidad de lecciones ausente: " type="number" labelPlacement="outside-left" variant="flat" value={formData.absent_time} disabled  />
+                        <Input label="Cantidad de lecciones ausente: " type="number" labelPlacement="outside-left" variant="flat" value={formData.absent_time} isDisabled  />
                     ):(
-                        <Input label="Cantidad de horas ausente: " type="number" labelPlacement="outside-left" variant="flat" value={formData.absent_time} disabled />
+                        <Input label="Cantidad de horas ausente: " type="number" labelPlacement="outside-left" variant="flat" value={formData.absent_time} isDisabled />
                     )}
                 </div>
 
                 {
                     formData.is_absence &&(
                         <div className={style.leaving_at}>
-                            <Input label="Saliendo a las:" labelPlacement="outside-left" variant="flat" value={formData.absent_time} disabled />
+                            <Input label="Saliendo a las:" labelPlacement="outside-left" variant="flat" value={formData.absent_time} isDisabled />
                         </div>
                     )
                 }
@@ -170,7 +165,7 @@ export default function BasicJustiForm({
                         className={style.reasonSelect}
                         variant="bordered"
                         labelPlacement="outside-left"
-                        disabled
+                        isDisabled
                     >
                         <SelectItem key={'1'}>Cita Medica</SelectItem>
                         <SelectItem key={'2'}>Convocatoria Asamblea</SelectItem>
@@ -195,7 +190,7 @@ export default function BasicJustiForm({
                     <div className={style.personal_reason}>
                             <Input 
                                 placeholder="Explique su situación"
-                                disabled
+                                isDisabled
                                 value={formData.justification_text}
                                 variant="faded"
                             />
@@ -215,7 +210,7 @@ export default function BasicJustiForm({
                     </div>
                 
                 {
-                    hasAttachment != '' 
+                    hasAttachment != null 
                     ?
                         <div className={style.oldFile}>
                             <p>Utilizando archivo anterior</p>
