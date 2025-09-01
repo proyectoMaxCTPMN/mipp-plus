@@ -4,6 +4,8 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { createClient } from './supabase/server'
 
+
+
 async function createSupabase(){
   const cookieStore = await cookies()
   const supabase = createClient(cookieStore)
@@ -12,7 +14,7 @@ async function createSupabase(){
 
 export async function createSession(userId, is_remember, system_color) {
     const supabase = await createSupabase()
-    const sessionId = `session_${Date.now()}`
+    const sessionId = `session_${Date.now()}_${Math.random(0, 10000)}`
 
     let expiresAt;
     if (is_remember) {
@@ -20,7 +22,7 @@ export async function createSession(userId, is_remember, system_color) {
     } else {
       expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 horas
     }
-
+    
     
 
     const { data, error } = await supabase

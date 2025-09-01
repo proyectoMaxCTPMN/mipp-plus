@@ -198,3 +198,34 @@ export async function getUserReport(infraId) {
 
     return data
 }
+
+export async function updateRevised(table, id) {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from(table)
+    .update({is_revised: true})
+    .eq('id', id)
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}
+
+export async function getAllOmissions() {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('mark_omissions')
+    .select('*, user_id(id, first_name, last_name, second_last_name)')
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}

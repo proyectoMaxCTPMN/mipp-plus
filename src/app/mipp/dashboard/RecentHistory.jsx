@@ -83,7 +83,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                                                         }
                                                         
                                                         {(absence.is_justified && absence.justifications.justification_response_state != 0) &&
-                                                            <Chip color='primary'>Gestionada</Chip>
+                                                            <Chip color='secondary'>Gestionada</Chip>
                                                         }
                                                         {!absence.is_justified &&
                                                             <Chip className={style.clockChip} variant='bordered'>
@@ -165,7 +165,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                                                         }
                                                         
                                                         {(justification.justification_response_state != 0) &&
-                                                            <Chip color='primary'>Gestionada</Chip>
+                                                            <Chip color='secondary'>Gestionada</Chip>
                                                         }
                                                     </div>
                                                 }
@@ -213,7 +213,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                                                         }
                                                         
                                                         {(!omission.is_revised) &&
-                                                            <Chip color='primary'>Sin Ver</Chip>
+                                                            <Chip color='secondary'>Sin Ver</Chip>
                                                         }
                                                     </div>
                                                 }
@@ -278,7 +278,7 @@ export default function RecentHistory({AllDocuments_parameter}){
                                                         }
                                                         
                                                         {(!report.is_managed) &&
-                                                            <Chip color='primary'>Sin Manejar</Chip>
+                                                            <Chip color='secondary'>Sin Manejar</Chip>
                                                         }
                                                     </div>
                                                 }

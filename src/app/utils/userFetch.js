@@ -49,7 +49,8 @@ export async function getUserPosition(userId) {
       return
     }
 
-    return position[0]
+
+    return position
 }
 
 export async function getUserAllInfo(userId) {

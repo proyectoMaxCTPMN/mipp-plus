@@ -1,0 +1,165 @@
+/* #region Estilo general*/
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 2rem;
+}
+
+.form_container{
+    width: 70%;
+    height: fit-content;
+    align-self: center;
+    position: relative;
+}
+
+.cardcontainer{
+    background-color: #ffffff;
+    border: 1px solid #E9E9E9;
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+    padding: 2dvw 4dvw;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardheaderimg{
+    width: 100%;
+    height: 5rem;
+    margin-top: 1rem;
+    margin-left: 0.3rem;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.cardname{
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: .8rem 2rem;
+    border-radius: 6px;
+    width: max-content;
+    position: relative;
+    right: 1.5rem;
+}
+.formulary_upperinformationcontainer{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 1.5em;
+    height: 3.2rem;
+}
+.previewcard{
+    background-color: var(--primary);
+    padding: .5rem;
+    width: max-content;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+}
+.previewcard:hover{
+    background-color: var(--primary-selected);
+}
+.searchicon{
+    width: 2rem;
+    height: auto;
+}
+
+.titleofformulary{
+    color: #011D3C;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.popUpExit{
+    background-color: var(--primary);
+    width: max-content;
+    padding: .5rem;
+    border-radius: 6px;
+    position: absolute;
+    cursor: pointer;
+    height: 3rem;
+    right: -15px;
+}
+.popUpExit:hover{
+    background-color: var(--primary-selected);
+}
+
+.buttonsContainer{
+    display: flex;
+    gap: 12px;
+    position: relative;
+    right: -15px;
+}
+
+.downloadBtn{
+    background-color: var(--primary);
+    padding: .5rem;
+    width: max-content;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+}
+
+.download_icon{
+    width: 2rem;
+    height: auto;
+}
+
+.Exit_icon{
+    width: 2rem;
+    height: auto;
+}
+/*#endregion*/
+
+
+@media screen and (max-width: 1200px) {
+   .form_container{
+    width: 90%;
+   } 
+}
+
+@media screen and (max-width: 1200px) {
+   .cardname{
+    font-size: 2vmin;
+    padding: .4rem;
+    display: flex;
+    place-content: center;
+    place-items: center;
+   } 
+
+   .form_container{
+    top: -20px;
+   }
+}
+
+@media screen and (max-width: 480px) {
+    .form_container{
+        width: 100%;
+        align-items: end;
+        top: 0;
+        min-height: 100%;
+        max-height: 100dvh;
+        overflow-y: scroll;
+    }
+    .cardname{
+        display: none;
+    }
+    .formulary_upperinformationcontainer{
+        display: none;
+    }
+
+    .cardcontainer{
+        min-height: 100dvh;
+        overflow: scroll;
+        padding: 5px;
+        padding-top: 70px;
+        padding-bottom: 30px;
+        justify-content: end;
+    }
+}
+
+
