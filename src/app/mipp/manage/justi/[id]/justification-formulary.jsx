@@ -209,7 +209,7 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
 
 function SendPopup({justiId_parameter, router, setShowPopup, canManage, responseState, justiComment}){
     const [form, setForm] = useState('')
-    const [comment, setComment] = useState(justiComment)
+    const [comment, setComment] = useState(justiComment || '')
     
 
     const handleSubmit = async () => {
