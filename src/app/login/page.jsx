@@ -15,6 +15,7 @@ export default function Login(){
         is_remember: false,
     })
     const [isLoading, setIsLoading] = useState(false)
+    const [tries, setTries] = useState(0)
 
     const handleLoginChange = (event) => {
         
@@ -28,22 +29,28 @@ export default function Login(){
 
     const handleSubmit = async () => {
         setIsLoading(true)
-        const response = await fetch(`/api/loginAuth`, {
-            method: "POST",
-            body: JSON.stringify({id: loginData.id, password: loginData.password, is_remember: loginData.is_remember})
-        })
 
-        const data = await response.json()
-
-        console.log(response)
-
-        if (response.ok) {
-            console.log(data)
-            router.push(data.redirectUrl)
-        }else{
+        if (tries == 5) {
             setIsLoading(false)
-            toast.error("Usuario o contraseña incorrectos...")
+            return toast.error('Has fallado muchas veces, recarga la página para intentar de nuevo')
+        } else {
+            const response = await fetch(`/api/loginAuth`, {
+                method: "POST",
+                body: JSON.stringify({id: loginData.id, password: loginData.password, is_remember: loginData.is_remember})
+            })
+
+            const data = await response.json()
+
+            if (response.ok) {
+                console.log(data)
+                router.push(data.redirectUrl)
+            }else{
+                setIsLoading(false)
+                toast.error("Usuario o contraseña incorrectos...")
+                setTries(tries + 1)
+            }
         }
+
     }
 
     const handleKeyDown = async (event) => {

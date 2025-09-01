@@ -151,7 +151,7 @@ export async function getPreviewData() {
 
 export async function getAbsenceById(absence_id){
     const supabase = await createSupabase()
-
+    
     let { data: data, error } = await supabase
     .from('absence_requests')
     .select('')

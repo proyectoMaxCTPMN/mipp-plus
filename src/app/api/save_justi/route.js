@@ -131,7 +131,6 @@ export async function POST(request) {
             )
         }
 
-
         const { data, error } = await supabase.storage.from('evidences').upload(`${userId}/justificaciones/${Date.now()}_${normalizeFileName(evidence_file.name)}`, evidence_file)
 
         if (error) {

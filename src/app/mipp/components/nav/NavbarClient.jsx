@@ -294,7 +294,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                                 "/menuIcons/soli_unselected.svg"
                                             } height={20} width={20} alt='Logo' className={style.iconImage}
                                             />
-                                        <p className={style.subText}>Solicitud</p>
+                                        <p className={style.subText}>Nuevo</p>
                                     </div>
                                 
                                 </>
@@ -417,7 +417,7 @@ export default function NavbarClient({userRoles_parameter, defaultSelected}) {
                                         <Image 
                                             src={"/menuIcons/soli_unselected.svg"} height={20} width={20} alt='Logo' className={style.iconImage}
                                         />
-                                            <p className={style.subText}>Solicitud</p>
+                                            <p className={style.subText}>Nuevo</p>
                                     </div>
                                 
                                 </>

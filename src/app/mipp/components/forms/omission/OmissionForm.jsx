@@ -117,8 +117,8 @@ export default function OmissionForm({ userId_parameter}){
 
     return(
         <div className={style.form_container}>
-            <h1>Formulario de solicitud de permiso salida/ausencia/tardía/incapacidad</h1>
-            <p><span>Importante:</span> Todo permiso de ausencia laboral está sujeto a cumplimiento de requisitos y copia adjunta de documento pertinente de cita, convocatoria o licencia, de ser posible con tres días de anticipación. Posterior a la ausencia, el funcionario debe hacer entrega del comprobante pertinente de asistencia en el plazo de 48 (cuarenta y ocho horas). Las licencias dependen de requisitos  previos para su goce. De no presentar el comprobante se transmitirá lo que corresponda.</p>
+            <h1>Formulario de Justificacion de Omision de Marca</h1>
+            
 
             <Form className={style.form} onSubmit={handleSubmit}>
 

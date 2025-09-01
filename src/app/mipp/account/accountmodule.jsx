@@ -8,7 +8,21 @@ import {
 
 } from "@heroui/card";
 
+export default function Accountpage({userId_parameter, allInfo_parameter, titles_parameter, positions_parameter}){
 
+
+    return(
+        <div className={style.body}>
+            <div className={style.container}>
+                
+            </div>
+        </div>
+    )
+
+
+}
+
+/*
 
 
 export default function Accountpage({userId_parameter, allInfo_parameter, titles_parameter, positions_parameter}){
@@ -224,3 +238,4 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
     )
 }
 
+*/
