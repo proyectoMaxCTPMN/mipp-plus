@@ -19,6 +19,7 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
         report_detail: '',
         evidence_file: null,
     });
+    const [loading, setLoading] = useState(false)
 
     const handleInputChange = (event) => {
         const { name, value, type, checked, files } = event.target;
@@ -39,6 +40,7 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
 
 
         const data = new FormData()
@@ -57,9 +59,11 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
         if (response.ok) {
             toast.success("Solicitud enviada exitosamente...!")
             router.refresh()
+            setLoading(false)
         }else{
             toast.error("Hubo un error al enviar la solicitud")
             console.error(dataResponse)
+            setLoading(false)
             
         }
         
@@ -130,7 +134,7 @@ export default function Infra_Formulary_Page({fullName_parameter, userId_paramet
                         </div>
                         <div className={style.buttonscontainer}>
                             <button type="button">Cancelar</button>
-                            <button type="submit">Enviar</button>
+                            <button type="submit" disabled={loading}>{loading ? 'Enviando...' : 'Enviar'}</button>
                         </div>
                     </form>
                 </div>

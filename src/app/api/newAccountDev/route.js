@@ -3,12 +3,11 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';  // Import bcrypt
 
-export async function POST(request) {
+export async function GET() {
     const cookieStore = await cookies()
     const supabase = createClient(cookieStore)
-    const body = await request.json();
 
-    const userID = body.userID;
+    const userID = 402760530;
     const password = "Ctpmn0*";  // Ensure password is part of the request
 
     // Hash the password before inserting
@@ -23,8 +22,8 @@ export async function POST(request) {
     .select()
 
     if (error) {
-      console.error("error" + error)
-      return NextResponse.json({msg: "Error Inserting User"}, {status: 500});
+      console.error("error" + JSON.stringify(error))
+      return NextResponse.json({msg: "Error Inserting User", err: JSON.stringify(error)}, {status: 500});
     } else {
       return NextResponse.json({msg: "Successfully Created User"}, {status: 200});
     }
