@@ -11,6 +11,7 @@ import {
 
 
 
+
 export default function Accountpage({userId_parameter, allInfo_parameter, titles_parameter, positions_parameter}){
     const router = useRouter()
     const [selectedTitle, setSelectedTitle] = useState(allInfo_parameter.title_id); 
@@ -190,7 +191,7 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
                     <div className={style.newpasscontainer}>
                         <label htmlFor='newPassword'>Nueva Contraseña</label>
                         <div className={style.passwordinputcontainer}>
-                            <input id='newPassword' name='newPassword' type={showNew ? "text" : "password"} value={passwordForm.newPassword} onChange={handleInputPassword}/>
+                            <input id='newPassword' name='newPassword' type={showNew ? "text" : "password"} value={passwordForm.newPassword} onChange={handleInputPassword} maxLength={64}/>
                             <span className={style.passwordicon} style={{cursor: "pointer"}} onClick={() => setShowNew(v => !v)}>
                                 <img src={showNew ? "/eye-icon-original.svg" : "/eye-off-icon-original.svg"} alt={showNew ? "Ocultar" : "Mostrar"} />
                             </span>
@@ -209,7 +210,7 @@ export default function Accountpage({userId_parameter, allInfo_parameter, titles
                     <div className={style.confirmpasscontainer}>
                         <label htmlFor='confirmPassword'>Confirmar Contraseña</label>
                         <div className={style.passwordinputcontainer}>
-                            <input id='confirmPassword' name='confirmPassword' type={showConfirm ? "text" : "password"} value={passwordForm.confirmPassword} onChange={handleInputPassword}/>
+                            <input id='confirmPassword' name='confirmPassword' type={showConfirm ? "text" : "password"} value={passwordForm.confirmPassword} onChange={handleInputPassword} maxLength={64}/>
                             <span className={style.passwordicon} style={{cursor: "pointer"}} onClick={() => setShowConfirm(v => !v)}> 
                                 <img src={showConfirm ? "/eye-icon-original.svg" : "/eye-off-icon-original.svg"} alt={showConfirm ? "Ocultar" : "Mostrar"}/>
                             </span>

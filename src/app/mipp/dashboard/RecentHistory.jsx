@@ -43,78 +43,84 @@ export default function RecentHistory({AllDocuments_parameter}){
 
       <Tabs aria-label="Options" className={style.tabs}>
         <Tab key="soli" title="Justificaciones y Solicitudes" className={style.tab}>
-          <Card>  
-            <CardBody className={style.cardsContainer} >
-                {
-                    AllDocuments_parameter.absences.map((absence) => (
-                        <Popover placement="bottom" key={absence.id}>
-                            <PopoverTrigger>
-                                <Card  className={style.itemContainer} isPressable>
-                                    <CardHeader className={style.itemHeader}>
-                                        <h1>{reasons[absence.reason]}</h1>
-                                        {
-                                            absence.is_pending && <Chip color='warning' style={{color: '#fff'}}>Pendiente</Chip>
-                                        }
-                                        {
-                                            absence.is_approved && <Chip color='success' style={{color: '#fff'}}>Aprobado</Chip>
-                                        }
-                                        {
-                                            absence.is_denied && <Chip color='danger' style={{color: '#fff'}}>Denegado</Chip>
-                                        }
-                                    </CardHeader>
-                                    <Divider />
-                                    <CardBody className={style.itemBody}>
-                                        <div className={style.absence_info}>
-                                            <div style={{display: 'flex', gap: '5px'}}>
-                                                <p>Fecha de Solicitud: </p>
-                                                <Chip>{formatDate(absence.request_date)}</Chip>
-                                            </div>
-                                            <div style={{display: 'flex', gap: '5px'}}>
-                                                <p>Fecha de Ausencia: </p>
-                                                <Chip>{formatDate(absence.absence_date)}</Chip>
-                                            </div>
-                                            
-                                                {
-                                                    absence.is_approved ? 
-                                                    <div className={style.clockcontainer}>
-                                                        <p>Justificacion:</p>
-                                                        {(absence.is_justified && absence.justifications.justification_response_state == 0) &&
-                                                            <Chip color='warning'>Enviada</Chip>
-                                                        }
-                                                        
-                                                        {(absence.is_justified && absence.justifications.justification_response_state != 0) &&
-                                                            <Chip color='secondary'>Gestionada</Chip>
-                                                        }
-                                                        {!absence.is_justified &&
-                                                            <Chip className={style.clockChip} variant='bordered'>
-                                                                <div style={{display: 'flex', gap:'5px'}}>
-                                                                    <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' className={style.clockicon}/>
-                                                                    <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : {}}>{getTimeLeft(absence.expire_date)}</p>
-                                                                </div>
-                                                            </Chip>
-                                                        }
-                                                    </div>
-                                                    :(
+          <Card>
+            {
+                !(AllDocuments_parameter.absences.length > 0 && AllDocuments_parameter.justi.length > 0) ?  
+                <CardBody className={style.cardsContainer} >
+                
+                
+                <>
+                    {
+                        AllDocuments_parameter.absences.map((absence) => (
+                            <Popover placement="bottom" key={absence.id}>
+                                <PopoverTrigger>
+                                    <Card  className={style.itemContainer} isPressable>
+                                        <CardHeader className={style.itemHeader}>
+                                            <h1>{reasons[absence.reason]}</h1>
+                                            {
+                                                absence.is_pending && <Chip color='warning' style={{color: '#fff'}}>Pendiente</Chip>
+                                            }
+                                            {
+                                                absence.is_approved && <Chip color='success' style={{color: '#fff'}}>Aprobado</Chip>
+                                            }
+                                            {
+                                                absence.is_denied && <Chip color='danger' style={{color: '#fff'}}>Denegado</Chip>
+                                            }
+                                        </CardHeader>
+                                        <Divider />
+                                        <CardBody className={style.itemBody}>
+                                            <div className={style.absence_info}>
+                                                <div style={{display: 'flex', gap: '5px'}}>
+                                                    <p>Fecha de Solicitud: </p>
+                                                    <Chip>{formatDate(absence.request_date)}</Chip>
+                                                </div>
+                                                <div style={{display: 'flex', gap: '5px'}}>
+                                                    <p>Fecha de Ausencia: </p>
+                                                    <Chip>{formatDate(absence.absence_date)}</Chip>
+                                                </div>
+                                                
+                                                    {
+                                                        absence.is_approved ? 
                                                         <div className={style.clockcontainer}>
-                                                        <p>Justificacion: </p>
-                                                        <Chip >N/A</Chip>
+                                                            <p>Justificacion:</p>
+                                                            {(absence.is_justified && absence.justifications.justification_response_state == 0) &&
+                                                                <Chip color='warning'>Enviada</Chip>
+                                                            }
+                                                            
+                                                            {(absence.is_justified && absence.justifications.justification_response_state != 0) &&
+                                                                <Chip color='secondary'>Gestionada</Chip>
+                                                            }
+                                                            {!absence.is_justified &&
+                                                                <Chip className={style.clockChip} variant='bordered'>
+                                                                    <div style={{display: 'flex', gap:'5px'}}>
+                                                                        <Image src={absence.is_expired ? '/clock_expired.svg' : '/clock.svg'} width={20} height={20} alt='clock icon' className={style.clockicon}/>
+                                                                        <p style={absence.is_expired ? {color: "red", textDecoration: "line-through"} : {}}>{getTimeLeft(absence.expire_date)}</p>
+                                                                    </div>
+                                                                </Chip>
+                                                            }
                                                         </div>
-                                                    )
-                                                }
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            </PopoverTrigger>
+                                                        :(
+                                                            <div className={style.clockcontainer}>
+                                                            <p>Justificacion: </p>
+                                                            <Chip >N/A</Chip>
+                                                            </div>
+                                                        )
+                                                    }
+                                            </div>
+                                        </CardBody>
+                                    </Card>
+                                </PopoverTrigger>
 
-                            <PopoverContent>
-                                <Listbox aria-label="Actions" onAction={(url) => router.push(url)} disabledKeys={(absence.is_justified == true || absence.is_approved == false) && [`/mipp/solicitude/justification-formulary/${absence.id}`]}>
-                                    <ListboxItem key={`/mipp/history/solicitude-detail/${absence.id}`}>Ver Detalles</ListboxItem>
-                                    <ListboxItem key={`/mipp/solicitude/justification-formulary/${absence.id}`}>Ir a Justificar</ListboxItem>
-                                </Listbox>
-                            </PopoverContent>
-                        </Popover>
-                    ))
-                }          
+                                <PopoverContent>
+                                    <Listbox aria-label="Actions" onAction={(url) => router.push(url)} disabledKeys={(absence.is_justified == true || absence.is_approved == false) && [`/mipp/solicitude/justification-formulary/${absence.id}`]}>
+                                        <ListboxItem key={`/mipp/history/solicitude-detail/${absence.id}`}>Ver Detalles</ListboxItem>
+                                        <ListboxItem key={`/mipp/solicitude/justification-formulary/${absence.id}`}>Ir a Justificar</ListboxItem>
+                                    </Listbox>
+                                </PopoverContent>
+                            </Popover>
+                            
+                        ))
+                    }
                 {
                     AllDocuments_parameter.justi.map((justification) => (
                         <Popover placement="bottom" key={justification.id} >
@@ -180,123 +186,146 @@ export default function RecentHistory({AllDocuments_parameter}){
                             </PopoverContent>
                         </Popover>
                     ))
-                }          
-            </CardBody>
+                }
+                </>  
+                </CardBody>
+            :(
+                <div className={style.notRegisterContainer}>
+                    <h3>Nada que mostrar por aquí</h3>
+                    <Image src={"/not_found.webp"} width={100} height={100} alt='not found image' />
+                </div>
+            )}  
           </Card>
         </Tab>
 
         <Tab key="omission" title="Omisiones de Marca" className={style.tab}>
-          <Card>  
-            <CardBody className={style.cardsContainer} >
-                {
-                    AllDocuments_parameter.omissions.map((omission) => (
-                        <Popover placement="bottom" key={omission.id}>
-                            <PopoverTrigger>
-                                <Card  className={style.itemContainer} isPressable>
-                                    <CardHeader className={style.itemHeader}>
-                                        <h1>Razón: {omission.omission_reason}</h1>
-                                        <Chip color='default' style={{color: '#fff'}}>{typeofomission[omission.omission_type]}</Chip>
-                                    </CardHeader>
-                                    <Divider />
-                                    <CardBody className={style.itemBody}>
-                                        <div className={style.absence_info}>
-                                            <div style={{display: 'flex', gap: '5px'}}>
-                                                <p>Fecha de Omisión: </p>
-                                                <Chip>{new Date(omission.created_at).toLocaleDateString('es-CR')}</Chip>
+          <Card>
+            {
+                AllDocuments_parameter.omissions.length > 0 ?    
+                <CardBody className={style.cardsContainer} >
+                    {
+                        AllDocuments_parameter.omissions.map((omission) => (
+                            <Popover placement="bottom" key={omission.id}>
+                                <PopoverTrigger>
+                                    <Card  className={style.itemContainer} isPressable>
+                                        <CardHeader className={style.itemHeader}>
+                                            <h1>Razón: {omission.omission_reason}</h1>
+                                            <Chip color='default' style={{color: '#fff'}}>{typeofomission[omission.omission_type]}</Chip>
+                                        </CardHeader>
+                                        <Divider />
+                                        <CardBody className={style.itemBody}>
+                                            <div className={style.absence_info}>
+                                                <div style={{display: 'flex', gap: '5px'}}>
+                                                    <p>Fecha de Omisión: </p>
+                                                    <Chip>{new Date(omission.created_at).toLocaleDateString('es-CR')}</Chip>
+                                                </div>
+                                                
+                                                    {
+                                                        <div className={style.clockcontainer}>
+                                                            <p>Visto: </p>
+                                                            {(omission.is_revised) &&
+                                                                <Chip color='success'>Vista</Chip>
+                                                            }
+                                                            
+                                                            {(!omission.is_revised) &&
+                                                                <Chip color='secondary'>Sin Ver</Chip>
+                                                            }
+                                                        </div>
+                                                    }
+
+                                                    {
+                                                        <div className={style.clockcontainer}>
+                                                            <p>Estado</p>
+                                                            <Chip color='success'>{omission.omission_state}</Chip>
+                                                        </div>
+                                                    }
+
+
                                             </div>
-                                            
-                                                {
-                                                    <div className={style.clockcontainer}>
-                                                        <p>Visto: </p>
-                                                        {(omission.is_revised) &&
-                                                            <Chip color='success'>Vista</Chip>
-                                                        }
-                                                        
-                                                        {(!omission.is_revised) &&
-                                                            <Chip color='secondary'>Sin Ver</Chip>
-                                                        }
-                                                    </div>
-                                                }
+                                        </CardBody>
+                                    </Card>
+                                </PopoverTrigger>
 
-                                                {
-                                                    <div className={style.clockcontainer}>
-                                                        <p>Estado</p>
-                                                        <Chip color='success'>{omission.omission_state}</Chip>
-                                                    </div>
-                                                }
-
-
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            </PopoverTrigger>
-
-                            <PopoverContent>
-                                <Listbox aria-label="Actions" onAction={(url) => router.push(url)}>
-                                    <ListboxItem key={`/mipp/history/omission-detail/${omission.id}`}>Ver Detalles</ListboxItem>
-                                </Listbox>
-                            </PopoverContent>
-                        </Popover>
-                    ))
-                }                 
-            </CardBody>
+                                <PopoverContent>
+                                    <Listbox aria-label="Actions" onAction={(url) => router.push(url)}>
+                                        <ListboxItem key={`/mipp/history/omission-detail/${omission.id}`}>Ver Detalles</ListboxItem>
+                                    </Listbox>
+                                </PopoverContent>
+                            </Popover>
+                        ))
+                    }                 
+                </CardBody>
+            :(
+                <div className={style.notRegisterContainer}>
+                    <h3>Nada que mostrar por aquí</h3>
+                    <Image src={"/not_found.webp"} width={100} height={100} alt='not found image' />
+                </div>
+            )}  
           </Card>
         </Tab>
 
         <Tab key="reports" title="Reporte de Infraestructura" className={style.tab}>
           <Card>
-            <CardBody className={style.cardsContainer} >
-                {
-                    AllDocuments_parameter.infra.map((report) => (
-                        <Popover placement="bottom" key={report.id}>
-                            <PopoverTrigger>
-                                <Card  className={style.itemContainer} isPressable>
-                                    <CardHeader className={style.itemHeader}>
-                                        <h1>Detalle: {report.report_detail}</h1>
+            {
+                AllDocuments_parameter.infra.length > 0 ?
+                <CardBody className={style.cardsContainer} >
+                    {
+                        AllDocuments_parameter.infra.map((report) => (
+                            <Popover placement="bottom" key={report.id}>
+                                <PopoverTrigger>
+                                    <Card  className={style.itemContainer} isPressable>
+                                        <CardHeader className={style.itemHeader}>
+                                            <h1>Detalle: {report.report_detail}</h1>
 
-                                        {
-                                            report.is_revised ?
-                                                <Chip color='success' style={{color: '#fff'}}>Revisado</Chip>
-                                            :
-                                                <Chip color='warning' style={{color: '#fff'}}>Sin Revisar</Chip>
-                                        }
-                                        
-                                    </CardHeader>
-                                    <Divider />
-                                    <CardBody className={style.itemBody}>
-                                        <div className={style.absence_info}>
-                                            <div style={{display: 'flex', gap: '5px'}}>
-                                                <p>Fecha de Reporte: </p>
-                                                <Chip>{new Date(report.report_date).toLocaleDateString('es-CR')}</Chip>
-                                            </div>
+                                            {
+                                                report.is_revised ?
+                                                    <Chip color='success' style={{color: '#fff'}}>Revisado</Chip>
+                                                :
+                                                    <Chip color='warning' style={{color: '#fff'}}>Sin Revisar</Chip>
+                                            }
                                             
-                                                {
-                                                    <div className={style.clockcontainer}>
-                                                        <p>Estado: </p>
-                                                        {(report.is_managed) &&
-                                                            <Chip color='success'>Manejado</Chip>
-                                                        }
-                                                        
-                                                        {(!report.is_managed) &&
-                                                            <Chip color='secondary'>Sin Manejar</Chip>
-                                                        }
-                                                    </div>
-                                                }
+                                        </CardHeader>
+                                        <Divider />
+                                        <CardBody className={style.itemBody}>
+                                            <div className={style.absence_info}>
+                                                <div style={{display: 'flex', gap: '5px'}}>
+                                                    <p>Fecha de Reporte: </p>
+                                                    <Chip>{new Date(report.report_date).toLocaleDateString('es-CR')}</Chip>
+                                                </div>
+                                                
+                                                    {
+                                                        <div className={style.clockcontainer}>
+                                                            <p>Estado: </p>
+                                                            {(report.is_managed) &&
+                                                                <Chip color='success'>Manejado</Chip>
+                                                            }
+                                                            
+                                                            {(!report.is_managed) &&
+                                                                <Chip color='secondary'>Sin Manejar</Chip>
+                                                            }
+                                                        </div>
+                                                    }
 
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            </PopoverTrigger>
+                                            </div>
+                                        </CardBody>
+                                    </Card>
+                                </PopoverTrigger>
 
-                            <PopoverContent>
-                                <Listbox aria-label="Actions" onAction={(url) => router.push(url)}>
-                                    <ListboxItem key={`/mipp/history/infra-detail/${report.id}`}>Ver Detalles</ListboxItem>
-                                </Listbox>
-                            </PopoverContent>
-                        </Popover>
-                    ))
-                }                 
-            </CardBody>
+                                <PopoverContent>
+                                    <Listbox aria-label="Actions" onAction={(url) => router.push(url)}>
+                                        <ListboxItem key={`/mipp/history/infra-detail/${report.id}`}>Ver Detalles</ListboxItem>
+                                    </Listbox>
+                                </PopoverContent>
+                            </Popover>
+                        ))
+                    }                 
+                </CardBody>
+            :(
+                <div className={style.notRegisterContainer}>
+                    <h3>Nada que mostrar por aquí</h3>
+                    <Image src={"/not_found.webp"} width={100} height={100} alt='not found image' />
+                </div>
+            )} 
           </Card>
         </Tab>
       </Tabs>
