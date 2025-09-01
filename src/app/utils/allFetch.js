@@ -243,3 +243,19 @@ export async function getAllOmissions() {
 
     return data
 }
+
+
+export async function getAllInfra() {
+    const supabase = await createSupabase()
+
+    let { data: data, error } = await supabase
+    .from('infraestructure_reports')
+    .select('*, user_id(id, first_name, last_name, second_last_name)')
+
+    if (error) {
+      console.error("No se pudo obtener el registro" + JSON.stringify(error))
+      return
+    }
+
+    return data
+}

@@ -91,25 +91,23 @@ export default function Infrastructure_Formulary_Detail_Page({infraf_parameter, 
             </div>
         </div>
         {
-            showPopup && <SendPopup PPinfraf_parameter={infraf_parameter} PPfullName_parameter={fullName_parameter} setShowPopup={setShowPopup} PPposition_parameter={position_parameter} PPtitle_parameter={title_parameter}/>
+            showPopup && <SendPopup PPinfraf_parameter={infraf_parameter} setShowPopup={setShowPopup}></SendPopup>
         }
         </div>
     )
 }
-function SendPopup({setShowPopup , }){
+function SendPopup({setShowPopup , PPinfraf_parameter }){
     const handleSubmit = async () => {
         const data = new FormData()
-        data.append('justification_response_state', form)
-        data.append('justification_id', justiId_parameter)
-        data.append('justification_response_comment', comment)
+        data.append('report_id', PPinfraf_parameter)
 
-        const response = await fetch(`/api/manage_justi`, {
+        const response = await fetch(`/api/manage_infra`, {
             method: "POST",
             body: data
         })
 
         if (response.ok) {
-            toast.success("Justificacion manejada exitosamente...!")
+            toast.success("Reporte manejado exitosamente...!")
             router.push('/mipp/manage/dashboard')
         }else{
             toast.error("Hubo un error al manejar la solicitud")
@@ -126,8 +124,9 @@ function SendPopup({setShowPopup , }){
                 <div className={style.form_container} style={{width: '100%'}}>
                     <h1>Resolucion de Reporte</h1>
                     <form className={style.form} onSubmit={handleSubmit}>
-                        <h1>Marcar como: Gestionado</h1>
-                        <button type="submit" className={style.manageBtn} onClick={() => setShowPopup(false)}/>
+                        <h3>¿Marcar como gestionado?</h3>
+                        <button lassName={style.manageBtn} onClick={() => setShowPopup(false)}>Cancelar</button>
+                        <button type="submit" className={style.manageBtn} onClick={() => setShowPopup(false)}>Confirmar</button>
                     </form>
                 </div>
             </div>
