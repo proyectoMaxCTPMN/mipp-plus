@@ -45,7 +45,7 @@ export default function RecentHistory({AllDocuments_parameter}){
         <Tab key="soli" title="Justificaciones y Solicitudes" className={style.tab}>
           <Card>
             {
-                !(AllDocuments_parameter.absences.length > 0 && AllDocuments_parameter.justi.length > 0) ?  
+                !(AllDocuments_parameter.absences.length == 0 && AllDocuments_parameter.justi.length == 0) ?  
                 <CardBody className={style.cardsContainer} >
                 
                 

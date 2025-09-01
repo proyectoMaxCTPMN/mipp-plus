@@ -7,26 +7,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import FormTemplate from '@/app/mipp/components/forms/FormTemplate'
+import DetailJustiForm from '@/app/mipp/components/forms/justification/detail/DetailJustiForm'
+import { Button } from '@heroui/react'
 
-
-export default function Justification_Formulary_Page({userId_parameter, justif_parameter, userInfo_parameter, title_parameter, position_parameter, userRoles }){
-    console.log(justif_parameter)
+export default function Justification_Formulary_Page({userId_parameter, justif_parameter, userInfo_parameter, title_parameter, userRoles }){
+    const fullName = userInfo_parameter.first_name + ' ' + userInfo_parameter.last_name + ' ' + userInfo_parameter.second_last_name
     const router = useRouter();
-    const [formData, setFormData] = useState({
-        userId: userId_parameter,
-        id: justif_parameter.id,
-        absence_date: justif_parameter.absence_date,
-        is_absence: justif_parameter.is_absence,
-        is_all_day: justif_parameter.is_whole_day,
-        attachment_url: justif_parameter.attachment_url || null,
-        justification_reason: justif_parameter.justification_reason,
-        absent_time: justif_parameter.absent_time,
-        justification_text: justif_parameter.justification_text || '',
-        assembly_type: justif_parameter.assembly_type || '',
-        leaving_at: justif_parameter.leaving_at,
-        justification_comment: justif_parameter.justification_comment || ''
-    })
-
+    const formData = justif_parameter[0]
+    console.log(formData)
     const [hasAttachment, setHasAttachment] = useState(justif_parameter.attachment_url != 'null' ? true : false)
 
     console.log(hasAttachment)
@@ -40,166 +29,18 @@ export default function Justification_Formulary_Page({userId_parameter, justif_p
     return(
 
     <div className={style.body}>
-        <div className={style.container}>
-            <div className={style.cardcontainer}>
-                <Image src={'/Card-header.svg'} width={20} height={20} alt='Form-header' className={style.cardheaderimg}/>
-                <div className={style.form_container}>
-                    <h1>Formulario de justificación de permiso salida/ausencia/tardía/incapacidad</h1>
-                    <p><span>Importante:</span> Todo permiso de ausencia laboral está sujeto a cumplimiento de requisitos y copia adjunta de documento pertinente de cita, convocatoria o licencia, de ser posible con tres días de anticipación. Posterior a la ausencia, el funcionario debe hacer entrega del comprobante pertinente de asistencia en el plazo de 48 (cuarenta y ocho horas). Las licencias dependen de requisitos  previos para su goce. De no presentar el comprobante se transmitirá lo que corresponda.</p>
-                    <p>Quien se suscribe, <span>{userInfo_parameter.first_name + " " + userInfo_parameter.last_name + " " + userInfo_parameter?.second_last_name}</span>, con cédula de identidad <span>{userInfo_parameter.id}</span>, quien labora en la institución educativa <span>CTP Mercedes Norte</span>, en el puesto de <span>{userInfo_parameter.positions.position}</span>, en condición de <span>{userInfo_parameter.has_ownership ? "Propietario" : "Interino"}</span> </p>
-                    <form className={style.form} onSubmit={handleSubmit}>
-
-                        <div className={style.form_row}>
-                            <div className={style.justificationcontainer}>
-                                <span>JUSTIFICO:</span>
-                                <label>
-                                    <input type="radio" name="is_absence" defaultChecked={formData.is_absence} disabled/>
-                                    Ausencia
-                                </label>
-                                <label>
-                                    <input type="radio" name="is_absence" defaultChecked={!formData.is_absence} disabled/>
-                                    Tardía
-                                </label>
-                            </div>
-
-                            <div className={style.inputdatecontainer}>
-                                <label>DE LA FECHA:</label>       
-                                <span>
-                                    <input type="text" name="absence_date" id="absence_date" defaultValue={formatDate(formData.absence_date)} disabled/>
-                                    <Image src={"/calendar-regular.svg"} width={20} height={20} alt='Calendar' className={style.inputdate_calendar}></Image>
-                                </span>
-                            </div>
-
-                            <div className={style.absent_timecontainer}>
-                                <div className={style.absent_time_inputcontainer}>
-                                    <input type="radio" name="is_all_day" disabled checked={formData.is_all_day}/>
-                                    <label htmlFor='is_all_day'>Jornada Laboral Completa</label>
-                                </div>
-
-                                <div className={style.absent_time_inputcontainer}>
-                                    <input type="radio" name="is_all_day" disabled checked={!formData.is_all_day}/>
-                                    <label htmlFor='is_all_day'> Media Jornada </label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className={style.form_timecontainer}>
-
-                            <div className={style.absencescontainer}>
-                                {(title_parameter.title_id === 2 && position_parameter === "Docente Academico") ?(
-                                    <>
-                                        <input type="text" name="absent_time" id="absent_time" defaultValue={formData.absent_time} disabled className={style.absencesinput}/>
-                                        <span>Lecciones</span>
-                                    </>
-                                ):(
-                                    <> 
-                                        <span>Cantidad Horas</span>
-                                        <input type="text" name="absent_time" id="absent_time" defaultValue={formData.absent_time} disabled className={style.absencesinput}/>
-                                    </>
-                                )}
-                            </div>
-                            
-                            {
-                                formData.is_absence &&(
-                                    <div className={style.leavinghour_container}>
-                                        <p>Saliendo del centro educativo a las</p>
-                                        <input type="text" name="leaving_at" defaultValue={formData.leaving_at} disabled/>
-                                    </div>
-                                )
-                            }
-                            
-                        </div>
-                        
-                        <div className={style.reasoncontainer}>
-                            <span>Motivo:</span>
-                            <select name="reasons" id="reasons" disabled value={formData.justification_reason} onChange={e => setSelectedreason(e.target.value)}>
-                                <option value="">Elija el motivo</option>
-                                <option value="1">Cita Médica</option>
-                                <option value="2">Convocatoria asamblea</option>
-                                <option value="3">Asuntos personales</option>
-                                <option value="4">Enfermedad</option>
-                            </select>
-
-                            {formData.justification_reason == "2" &&(
-                                <div className={style.typeconvocatorycontainer}>
-                                    <span>Tipo de Convocatoria:</span>
-                                    <label>
-                                        <input type="radio" name="assembly_type" defaultChecked={formData.assembly_type == 1} disabled/>
-                                        Regional
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="assembly_type" defaultChecked={formData.assembly_type == 2} disabled/>
-                                        Nacional
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="assembly_type" defaultChecked={formData.assembly_type == 3} disabled/>
-                                        Circuital
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="assembly_type" defaultChecked={formData.assembly_type == 4} disabled/>
-                                        Sindical
-                                    </label>
-                                </div>
-                            )}
-
-                        </div>
-
-                            {
-                                formData.justification_reason == 3 &&(
-                                    <div className={style.explanationcontainer}>
-                                        <span>Explique:</span>  
-                                        <textarea name="personal_reason" id="personal_reason" defaultValue={formData.justification_text} className={style.explanation} disabled></textarea>
-                                    </div>
-                                )
-                            }
-
-                        <div className={style.isThere_attachement}>
-                                <span>Adjunto comprobante:</span>
-                                <label>
-                                    <input type="radio" name="attachment_url" defaultChecked={hasAttachment} disabled />
-                                    Si
-                                </label>
-                                <label>
-                                    <input type="radio" name="attachment_url" defaultChecked={!hasAttachment} disabled />
-                                    No
-                                </label>
-                        </div>
-                        
-                        <div className={style.explanationcontainer}>
-                            <span>Comentarios:</span>  
-                            <textarea 
-                                name="justification_comment" 
-                                id="justification_comment" 
-                                defaultValue={formData.justification_comment}
-                                disabled
-                                className={style.explanation}
-                            />
-                        </div>
-                            <div className={style.evidence}>
-                                {
-                                    (hasAttachment == true ) ? 
-                                        (<Link className={style.evidence_link} href={ formData.attachment_url}>Ver archivo adjunto</Link>)
-                                    :
-                                        (<p>Sin archivo adjunto</p>)
-                                }
-                                
-                            </div>
-
-                        <div className={style.request_datecontainer}>
-                            <p>Presento la solicitud a las <span>{formatDateandHour(justif_parameter.created_at).time}</span> del día <span>{formatDateandHour(justif_parameter.created_at).day}</span> del mes <span>{formatDateandHour(justif_parameter.created_at).month}</span> del año <span>{formatDateandHour(justif_parameter.created_at).year}</span></p>
-                        </div>
-                        <div className={style.buttonscontainer}>
-                            {
-                                ((userRoles.manage_documents == true || userRoles.root == true)) &&
-                                    <div className={style.buttonscontainer}>
-                                        <button type="submit">{justif_parameter.justification_response_state == 0 ? "Manejar" : "Ver Resolución"}</button>
-                                    </div>
-                            }
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <FormTemplate fullName_parameter={fullName}>
+            <DetailJustiForm userRoles_parameter={userRoles}
+                title_parameter={title_parameter}
+                justification_parameter={formData}
+                PPuserInfo_parameter={userInfo_parameter}/>
+            
+            <p className='mt-3'>Presento la solicitud a las <span>{formatDateandHour(formData.created_at).time}</span> del día <span>{formatDateandHour(formData.created_at).day}</span> del mes <span>{formatDateandHour(formData.created_at).month}</span> del año <span>{formatDateandHour(formData.created_at).year}</span></p>
+            {
+                (userRoles.manage_document || userRoles.root) &&
+                <Button color='primary' className='mt-3' onPress={() => setShowPopup(true)}>{formData ? "Gestionar Solicitud" : "Revisar solicitud"}</Button>
+            }
+        </FormTemplate>
             {
                 showPopup && <SendPopup justiId_parameter={formData.id} router={router} setShowPopup={setShowPopup} canManage={justif_parameter.justification_response_state == 0} responseState={justif_parameter.justification_response_state} justiComment={justif_parameter.justification_response_comment}/>
             }

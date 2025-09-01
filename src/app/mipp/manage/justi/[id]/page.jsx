@@ -15,13 +15,11 @@ export default async function Justification_Formulary({params}){
     const position = await getUserTitle(userId)
     const roles = await getUserRoles(userId);
     
-    console.log(justif[0])
-
     return(
         <>
         {
             (justif && title && position) && (
-                <Justification_Formulary_Page userId_parameter={userId} justif_parameter={justif[0]} userInfo_parameter={userInfo} title_parameter={title} position_parameter={position} userRoles={roles}/>
+                <Justification_Formulary_Page userId_parameter={userId} justif_parameter={justif} userInfo_parameter={userInfo} title_parameter={title} position_parameter={position} userRoles={roles}/>
             )
         }
         </>

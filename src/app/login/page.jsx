@@ -111,7 +111,7 @@ export default function Login(){
                     {isLoading ? "Cargando..." : "Iniciar sesión"}
                 </button>
             </main>
-            <p className={style.footerText}>"Lo pequeño es algo más que un aso en el camino. Es un destino en sí mismo"</p>
+            <p className={style.footerText}>"Lo pequeño es algo más que un paso en el camino. Es un destino en sí mismo"</p>
             
 
         </div>

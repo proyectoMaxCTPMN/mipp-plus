@@ -11,13 +11,15 @@ import BasicAbsenceForm_Detail from '@/app/mipp/components/forms/absence/basic_d
 import generarPDF from '@/app/utils/generarPDF'
 import { Button, Input } from '@heroui/react'
 import { updateRevised } from '@/app/utils/allFetch'
+import {formatDateandHour } from '@/app/utils/formatDate'
+
 
 export default function Permission_Formulary_Page({userInfo_parameter, title_parameter, absencef_parameter, userRoles}){
     const fullName = userInfo_parameter.first_name + ' ' + userInfo_parameter.last_name + ' ' + userInfo_parameter.second_last_name
     const router = useRouter()
     const formData = absencef_parameter[0]
     const [showPopup, setShowPopup] = useState(false)
-    console.log(userRoles)
+    console.log(formData)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -49,21 +51,22 @@ export default function Permission_Formulary_Page({userInfo_parameter, title_par
                     esta_pendiente: formData.is_pending ? 'Si' : 'No'
                 }, "Formulario de solicitud de permiso salida/ausencia/tardía/incapacidad", fullName)
             }>
-                <BasicAbsenceForm_Detail  
+                <BasicAbsenceForm_Detail
+                    userRoles_parameter={userRoles}
                     title_parameter={title_parameter}
                     absencef={formData}
                     PPuserInfo_parameter={userInfo_parameter}
                 />
 
+                <p className='mt-3'>Presento la solicitud a las <span>{formatDateandHour(formData.created_at).time}</span> del día <span>{formatDateandHour(formData.created_at).day}</span> del mes <span>{formatDateandHour(formData.created_at).month}</span> del año <span>{formatDateandHour(formData.created_at).year}</span></p>
                 {
                     (userRoles.manage_document || userRoles.root) &&
-                    <Button color='primary' className='mt-3' onPress={() => setShowPopup(true)}>Manejar Solicitud</Button>
+                    <Button color='primary' className='mt-3' onPress={() => setShowPopup(true)}>{formData.is_pending ? "Gestionar Solicitud" : "Revisar solicitud"}</Button>
                 }
 
                 
-
             </FormTemplate>
-
+            
             {
                 showPopup && <SendPopup requestId_parameter={formData.id} router={router} setShowPopup={setShowPopup} canManage={formData.is_pending == true} requestStatus={{is_pending: formData.is_pending, is_approved: formData.is_approved, is_denied: formData.is_denied, is_convocatory: formData.is_convocatory}}/>
             }
@@ -114,17 +117,17 @@ function SendPopup({requestId_parameter, router, setShowPopup, canManage, reques
 
                 <div className={style.radioContainerPopUp}>
                     <div className={style.radioPopUp}>
-                        <input required type="radio" name="resolution" id="approve" defaultChecked={!canManage && requestStatus.is_approved} onClick={() => setIsAccept(true)}/>
+                        <input required type="radio" name="resolution" id="approve" defaultChecked={!canManage && requestStatus.is_approved}  disabled={!requestStatus.is_pending} onClick={() => setIsAccept(true)}/>
                         <label htmlFor="approve">Aprobar lo solicitado</label>
                     </div>
 
                     <div className={style.radioPopUp}>
-                        <input required type="radio" name="resolution" id="deny" defaultChecked={!canManage && requestStatus.is_denied} onClick={() => setIsAccept(false)}/>
+                        <input required type="radio" name="resolution" id="deny" defaultChecked={!canManage && requestStatus.is_denied} disabled={!requestStatus.is_pending} onClick={() => setIsAccept(false)}/>
                         <label htmlFor="deny">Denegar lo solicitado</label>
                     </div>
 
                     <div className={style.radioPopUp}>
-                        <input required type="radio" name="resolution" id="convocatory" defaultChecked={!canManage && requestStatus.is_convocatory} onClick={() => setIsConvocatory(true)}/>
+                        <input required type="radio" name="resolution" id="convocatory" defaultChecked={!canManage && requestStatus.is_convocatory} disabled={!requestStatus.is_pending} onClick={() => setIsConvocatory(true)}/>
                         <label htmlFor="convocatory">Acoger convocatoria</label>
                     </div>
                 </div>

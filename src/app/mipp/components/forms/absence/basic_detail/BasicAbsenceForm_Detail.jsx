@@ -13,7 +13,7 @@ import style from './basicAbsence_detail.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import {I18nProvider} from "@react-aria/i18n";
-
+import { getUserRoles } from "@/app/utils/userFetch";
 
 
 const fromHours = [
@@ -56,6 +56,7 @@ const toHours = [
 
 
 export default function BasicAbsenceForm_Detail({
+    userRoles_parameter,
     title_parameter, 
     absencef,
     PPuserInfo_parameter,
@@ -229,27 +230,27 @@ export default function BasicAbsenceForm_Detail({
                     absencef.is_justified 
                     ?
                     <h1 className="relative text-[16px]! self-end bg-success p-2 rounded-lg text-primary-foreground shadow-md align-self-end"> 
-                        Aprobado: Justificacion Enviada
+                        {!(userRoles_parameter.root || userRoles_parameter.manage_documents) ? "Aprobado: Justificacion Enviada" : "Gestionado: Justificación"}
                     </h1>
                     :
                     
                         absencef.is_approved ?
                             (<h1 className="relative text-[16px]! self-end bg-secondary p-2 rounded-lg text-primary-foreground shadow-md align-self-end"> 
-                                Aprobado: Justificacion sin Enviar
+                                {!(userRoles_parameter.root || userRoles_parameter.manage_documents) ? "Aprobado: Justificación sin Enviar": "Gestionado: Justificación en espera..."}
                             </h1>)
                         :
                         absencef.is_denied ?
                             <h1 className="relative text-[16px]! self-end bg-danger p-2 rounded-lg text-primary-foreground shadow-md align-self-end"> 
-                                Solicitud Denegada
+                                {!(userRoles_parameter.root || userRoles_parameter.manage_documents) ?'Solicitud Denegada' : 'Gestionado: Solicitud Denegada'}
                             </h1>
                         :
                         absencef.is_convocatory ?
                             <h1 className="relative text-[16px]! self-end bg-secondary p-2 rounded-lg text-primary-foreground shadow-md align-self-end"> 
-                                Acoger Convocatoria
+                                {!(userRoles_parameter.root || userRoles_parameter.manage_documents) ?'Acoger Convocatoria' : 'Gestionado: Acoger Convocatoria'}
                             </h1>
                         :
                             <h1 className="relative text-[16px]! self-end bg-warning p-2 rounded-lg text-primary-foreground shadow-md align-self-end"> 
-                                Pendiente{absencef.is_revised ? ': Revisada por superior': ': Sin revisar'}
+                                Pendiente{!(userRoles_parameter.root || userRoles_parameter.manage_documents) ? (absencef.is_revised ? ': Revisada por superior': ': Sin revisar'):(absencef.is_revised ? ': Visto anteriormente': ': Nueva')}
                             </h1>
                 }
                 
