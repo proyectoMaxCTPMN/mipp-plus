@@ -83,13 +83,6 @@
     width: 1.5em;
 }
 
-.formId, .formPsw{
-    padding: 0.5em;
-    outline: 1px solid #CFCFCF;
-    border-radius: 3px;
-    border: none;
-}
-
 .bottom{
     width: 100%;
     display: flex;

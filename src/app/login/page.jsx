@@ -1,9 +1,10 @@
 'use client'
 import Image from 'next/image'
 import style from './login.module.css'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify';
+import { Input, Button } from '@heroui/react'
 
 
 export default function Login(){
@@ -72,7 +73,7 @@ export default function Login(){
                 </div>
 
                 <div className={style.form}>
-                    <input
+                    <Input
                         name='id'
                         type="text" 
                         className={style.formId} 
@@ -80,10 +81,12 @@ export default function Login(){
                         onChange={handleLoginChange}
                         value={loginData.username}
                         autoComplete='username'
+                        maxLength={100}
+                        variant='faded'
                     />
 
                     <div className={style.passwordInput}>
-                        <input 
+                        <Input 
                             type={viewPsw ? "text" : "password"} 
                             name='password'
                             className={style.formPsw} 
@@ -91,6 +94,8 @@ export default function Login(){
                             onChange={handleLoginChange}
                             value={loginData.password}
                             autoComplete='current-password'
+                            maxLength={100}
+                            variant='faded'
                         />
 
                         <Image 
@@ -114,9 +119,9 @@ export default function Login(){
                     <p>¿Olvidó su contraseña?</p>
                 </div>
 
-                <button type="button" className={style.loginButton} onClick={handleSubmit}>
+                <Button className={style.loginButton} isLoading={isLoading} onPress={handleSubmit}>
                     {isLoading ? "Cargando..." : "Iniciar sesión"}
-                </button>
+                </Button>
             </main>
             <p className={style.footerText}>"Lo pequeño es algo más que un aso en el camino. Es un destino en sí mismo"</p>
             
